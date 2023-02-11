@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">iMius</string>
+    <string name="login">Đăng nhập</string>
+    <string name="signup">Đăng ký</string>
+    <string name="password">Mật khẩu</string>
+    <string name="signup_with_email">Đăng nhập với Email</string>
+    <string name="confirm_password">Xác nhận mật khẩu</string>
+    <string name="username">Tên tài khoản</string>
+    <string name="get_code">Lấy mã xác nhận</string>
+    <string name="forget_password">Quên mật khẩu?</string>
+    <string name="login_account">Bạn đã có tài khoản? Đăng nhập</string>
+    <string name="confirm_code">Mã xác nhận</string>
+    <string name="continue_continue">TIẾP TỤC</string>
+    <string name="create_an_account">Tạo tài khoản</string>
+</resources>

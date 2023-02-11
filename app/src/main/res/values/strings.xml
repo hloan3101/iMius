@@ -2,19 +2,20 @@
     <string name="app_name">iMius</string>
 
     <string name="login">Login</string>
-    <string name="signup">SIGN UP</string>
-    <string name="email">Email</string>
+    <string name="signup">Sign up</string>
+    <string name="email" translatable="false">Email</string>
     <string name="password">Password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="confirm_code">Confirm code</string>
     <string name="username">Username</string>
-    <string name="confirmation_code">Confirmation Code</string>
 
     <string name="get_code">Get Code</string>
-    <string name="Continue_continue">CONTINUE</string>
 
     <string name="forget_password">Forget password?</string>
     <string name="login_account">Do you already have an account? Login</string>
 
-    <string name="signup_with_gmail">Sign up with Gmail</string>
-    <string name="signup_with_fb">Sign up with Facebook</string>
+    <string name="signup_with_email">Sign up with Email</string>
+    <string name="continue_continue">CONTINUE</string>
+    <string name="create_an_account">Create an account? Sign up</string>
 
 </resources>
