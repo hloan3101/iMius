@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <fragment
+            android:name="com.example.imius.fragment.PlaylistFragment"
+            android:id="@+id/fragment_home_fragment_playlist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <fragment
+            android:name="com.example.imius.fragment.SingerFragment"
+            android:id="@+id/fragment_home_fragment_singer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <fragment
+            android:name="com.example.imius.fragment.TrendingFragment"
+            android:id="@+id/fragment_home_fragment_trending"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <fragment
+            android:name="com.example.imius.fragment.PopularityFragment"
+            android:id="@+id/fragment_home_fragment_popularity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <fragment
+            android:name="com.example.imius.fragment.ThemeFragment"
+            android:id="@+id/fragment_home_fragment_theme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <fragment
+            android:name="com.example.imius.fragment.ChartsFragment"
+            android:id="@+id/fragment_home_fragment_charts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <fragment
+            android:name="com.example.imius.fragment.TrendingFragment"
+            android:id="@+id/fragment_home_fragment_trending1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <fragment
+            android:name="com.example.imius.fragment.ThemeFragment"
+            android:id="@+id/fragment_home_fragment_theme1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <fragment
+            android:name="com.example.imius.fragment.ChartsFragment"
+            android:id="@+id/fragment_home_fragment_charts1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <fragment
+            android:name="com.example.imius.fragment.PopularityFragment"
+            android:id="@+id/fragment_home_fragment_popularity1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <fragment
+            android:name="com.example.imius.fragment.ThemeFragment"
+            android:id="@+id/fragment_home_fragment_theme2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <fragment
+            android:name="com.example.imius.fragment.ChartsFragment"
+            android:id="@+id/fragment_home_fragment_charts2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <fragment
+            android:name="com.example.imius.fragment.PopularityFragment"
+            android:id="@+id/fragment_home_fragment_popularity2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <fragment
+            android:name="com.example.imius.fragment.ThemeFragment"
+            android:id="@+id/fragment_home_fragment_theme5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <fragment
+            android:name="com.example.imius.fragment.ChartsFragment"
+            android:id="@+id/fragment_home_fragment_charts5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <fragment
+            android:name="com.example.imius.fragment.TrendingFragment"
+            android:id="@+id/fragment_home_fragment_trending4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <fragment
+            android:name="com.example.imius.fragment.ThemeFragment"
+            android:id="@+id/fragment_home_fragment_theme4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <fragment
+            android:name="com.example.imius.fragment.ChartsFragment"
+            android:id="@+id/fragment_home_fragment_charts4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <fragment
+            android:name="com.example.imius.fragment.PopularityFragment"
+            android:id="@+id/fragment_home_fragment_popularity4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <fragment
+            android:name="com.example.imius.fragment.ThemeFragment"
+            android:id="@+id/fragment_home_fragment_theme3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <fragment
+            android:name="com.example.imius.fragment.ChartsFragment"
+            android:id="@+id/fragment_home_fragment_charts3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <fragment
+            android:name="com.example.imius.fragment.PopularityFragment"
+            android:id="@+id/fragment_home_fragment_popularity3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</ScrollView>

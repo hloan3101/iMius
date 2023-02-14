@@ -18,4 +18,19 @@
     <string name="continue_continue">CONTINUE</string>
     <string name="create_an_account">Create an account? Sign up</string>
 
+    <string name="play_list">Play list</string>
+    <string name="singer">Singer</string>
+    <string name="trending">Trending</string>
+    <string name="popularity">Popularity</string>
+    <string name="theme">Theme</string>
+    <string name="charts">Charts</string>
+    <string name="song_name" translatable="false">------</string>
+    <string name="singer_name" translatable="false">----</string>
+    <string name="runtime" translatable="false">--:--</string>
+    <string name="total_time" translatable="false">--:--</string>
+    <string name="enter_name_for_your_playlist">Enter a name for your playlist</string>
+    <string name="enter_name_of_playlist">Enter a name of playlist</string>
+    <string name="enter">Enter</string>
+
+
 </resources>

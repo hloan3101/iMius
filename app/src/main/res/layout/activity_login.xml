@@ -84,18 +84,18 @@
         android:textSize="18dp" />
 
     <TextView
-        android:id="@+id/activity_login_et_newAccount"
+        android:id="@+id/activity_login_et_new_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/forget_password"
         android:padding="8dp"
         android:textStyle="italic"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_gravity="center"
         android:textColor="@color/colorPrimary"/>
 
     <TextView
-        android:id="@+id/activity_login_newAccount"
+        android:id="@+id/activity_login_tv_new_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/create_an_account"

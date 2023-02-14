@@ -1,14 +1,16 @@
-package com.example.imius;
+package com.example.imius.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class SignUpActivity extends AppCompatActivity {
+import com.example.imius.R;
+
+public class PlaylistActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
+        setContentView(R.layout.activity_playlist);
     }
 }

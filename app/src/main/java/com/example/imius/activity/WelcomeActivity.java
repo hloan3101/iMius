@@ -1,8 +1,10 @@
-package com.example.imius;
+package com.example.imius.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.imius.R;
 
 public class WelcomeActivity extends AppCompatActivity {
 

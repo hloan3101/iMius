@@ -13,4 +13,13 @@
     <string name="confirm_code">Mã xác nhận</string>
     <string name="continue_continue">TIẾP TỤC</string>
     <string name="create_an_account">Tạo tài khoản</string>
+    <string name="play_list">Danh sách phát</string>
+    <string name="singer">Nghê sĩ</string>
+    <string name="trending">Thịnh hành</string>
+    <string name="popularity">Phổ biến</string>
+    <string name="theme">Chủ đề</string>
+    <string name="charts">Bảng xếp hạng</string>
+    <string name="enter_name_for_your_playlist">Nhập tên cho danh sách nghe của bạn</string>
+    <string name="enter_name_of_playlist">Nhập tên danh sách nghe</string>
+    <string name="enter">Tạo</string>
 </resources>
