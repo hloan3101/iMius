@@ -117,7 +117,7 @@
             android:layout_marginTop="24dp"
             android:elevation="0dp"
             android:scaleType="fitXY"
-            android:src="@drawable/item_note_music"/>
+            android:src="@drawable/ic_some_item_avt"/>
 
         <TextView
             android:id="@+id/activity_playlist_tv_song_name"

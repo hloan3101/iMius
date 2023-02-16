@@ -8,7 +8,7 @@
     tools:context=".activity.HomeActivity">
 
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/activity_home_vp_view_pager"
+        android:id="@+id/activity_home_view_pager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="10">
@@ -19,7 +19,7 @@
     </androidx.viewpager.widget.ViewPager>
 
 <com.google.android.material.tabs.TabLayout
-    android:id="@+id/activity_home_tl_tab_layout"
+    android:id="@+id/activity_home_tab_layout"
     android:layout_width="match_parent"
     android:layout_height="55dp"
     android:background="#120927"

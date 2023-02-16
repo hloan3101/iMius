@@ -10,17 +10,16 @@ import android.view.ViewGroup;
 
 import com.example.imius.R;
 
-public class ThemeFragment extends Fragment {
+//This is Fragment_insert_nhac_thu_vien class in MUSIC4B
 
-    public ThemeFragment() {
+public class LibrarySearchFragment extends Fragment {
+
+    public LibrarySearchFragment() {
         // Required empty public constructor
     }
 
-
-    // TODO: Rename and change types and number of parameters
-    public static ThemeFragment newInstance() {
-        ThemeFragment fragment = new ThemeFragment();
-
+    public static LibrarySearchFragment newInstance() {
+        LibrarySearchFragment fragment = new LibrarySearchFragment();
         return fragment;
     }
 
@@ -28,6 +27,6 @@ public class ThemeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_theme, container, false);
+        return inflater.inflate(R.layout.fragment_library_search, container, false);
     }
 }

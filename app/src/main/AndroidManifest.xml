@@ -12,6 +12,13 @@
         android:theme="@style/Theme.IMius"
         tools:targetApi="31">
         <activity
+            android:name=".activity.ForgetPasswordActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".activity.AddMusicToLibraryActivity"
             android:exported="false">
             <meta-data

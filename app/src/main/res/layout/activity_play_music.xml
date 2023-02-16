@@ -131,13 +131,14 @@
             android:layout_toStartOf="@id/activity_play_music_ib_play_and_pause_song"
             android:scaleType="fitXY"
             android:src="@drawable/ic_back_song"/>
+
         <ImageButton
             android:id="@+id/activity_play_music_ib_play_and_pause_song"
             android:layout_width="85dp"
             android:layout_height="80dp"
             android:layout_centerInParent="true"
             android:scaleType="fitXY"
-            android:src="@drawable/ic_play_button"/>
+            android:src="@drawable/ic_play_button" />
 
         <ImageButton
             android:id="@+id/activity_play_music_ib_next_song"

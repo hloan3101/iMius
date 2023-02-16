@@ -10,16 +10,14 @@ import android.view.ViewGroup;
 
 import com.example.imius.R;
 
-public class ThemeFragment extends Fragment {
+public class LibraryPlaylistFragment extends Fragment {
 
-    public ThemeFragment() {
+    public LibraryPlaylistFragment() {
         // Required empty public constructor
     }
 
-
-    // TODO: Rename and change types and number of parameters
-    public static ThemeFragment newInstance() {
-        ThemeFragment fragment = new ThemeFragment();
+    public static LibraryPlaylistFragment newInstance() {
+        LibraryPlaylistFragment fragment = new LibraryPlaylistFragment();
 
         return fragment;
     }
@@ -28,6 +26,6 @@ public class ThemeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_theme, container, false);
+        return inflater.inflate(R.layout.fragment_library_playlist, container, false);
     }
 }
