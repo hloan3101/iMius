@@ -11,7 +11,7 @@
 
     <string name="get_code">Get Code</string>
 
-    <string name="forget_password">Forget password</string>
+    <string name="forget_password">Forget password?</string>
     <string name="login_account">Do you already have an account? Login</string>
 
     <string name="signup_with_email">Sign up with Email</string>
@@ -31,18 +31,6 @@
     <string name="enter_name_for_your_playlist">Enter a name for your playlist</string>
     <string name="enter_name_of_playlist">Enter a name of playlist</string>
     <string name="enter">Enter</string>
-    <string name="library">Library</string>
-    <string name="search_in_library">Enter a singer, song or podcast</string>
-    <string name="cant_find">I can not find this song :(</string>
-    <string name="change_password">Change password</string>
-    <string name="new_password">Enter a new password</string>
-    <string name="confirm_new_password">Confirm new password</string>
-    <string name="update_btn">Update</string>
-    <string name="logout">Logout</string>
-    <string name="text_view" translatable="false">textview</string>
-    <string name="profile" translatable="false">P R O F I L E</string>
-    <string name="name_of_song">Name of song</string>
-
 
 
 </resources>

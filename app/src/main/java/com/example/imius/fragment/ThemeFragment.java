@@ -18,7 +18,7 @@ public class ThemeFragment extends Fragment {
 
 
     // TODO: Rename and change types and number of parameters
-    public static ThemeFragment newInstance() {
+    public static ThemeFragment newInstance(String param1, String param2) {
         ThemeFragment fragment = new ThemeFragment();
 
         return fragment;
