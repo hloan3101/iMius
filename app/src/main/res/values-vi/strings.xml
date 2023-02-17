@@ -22,4 +22,13 @@
     <string name="enter_name_for_your_playlist">Nhập tên cho danh sách nghe của bạn</string>
     <string name="enter_name_of_playlist">Nhập tên danh sách nghe</string>
     <string name="enter">Tạo</string>
+    <string name="library">Thư viện</string>
+    <string name="search_in_library">Nhập tên nghệ sĩ, bài hát hoặc podcast</string>
+    <string name="cant_find">Tôi không tìm thấy bài hát này :(</string>
+    <string name="change_password">Đổi mật khẩu</string>
+    <string name="new_password">Nhập mật khẩu mới</string>
+    <string name="confirm_new_password">Xác nhận mật khẩu mới</string>
+    <string name="update_btn">Cập nhật</string>
+    <string name="logout">Đăng xuất</string>
+    <string name="name_of_song">Tên bài hát</string>
 </resources>

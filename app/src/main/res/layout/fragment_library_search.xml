@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.LibrarySearchFragment">
+
+    <!-- This is Fragment_insert_nhac_thu_vien class in MUSIC4B -->
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/fragment_library_search_toolbar_search"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:gravity="center_horizontal"
+        app:titleTextColor="@color/black"
+        app:title="@string/search_in_library"
+        app:titleMarginStart="60dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        android:background="#E4E1E1"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fragment_library_search_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/background_search_in_library"
+        android:layout_below="@+id/fragment_library_search_toolbar_search"/>
+
+    <TextView
+        android:id="@+id/fragment_library_search_cant_find"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:text="@string/cant_find"
+        android:gravity="center"
+        android:textSize="27sp"
+        android:textColor="@color/black"/>
+
+    <ImageView
+        android:id="@+id/fragment_library_search_tv_back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/ic_arrow_back"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:elevation="6dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+</RelativeLayout>
