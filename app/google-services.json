@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "669385417017",
-    "project_id": "imius-12976",
-    "storage_bucket": "imius-12976.appspot.com"
+    "project_number": "242301474033",
+    "project_id": "imius-fcc5f",
+    "storage_bucket": "imius-fcc5f.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:669385417017:android:2bc87514ff7445a10148e8",
+        "mobilesdk_app_id": "1:242301474033:android:1b8be497a87188d2d3c550",
         "android_client_info": {
           "package_name": "com.example.imius"
         }
       },
       "oauth_client": [
         {
-          "client_id": "669385417017-hb1inj52o02o6tpg560leqijknnic36d.apps.googleusercontent.com",
+          "client_id": "242301474033-vu0431u8mbdrge0teks79p2vo10dbl2o.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAcKN4WXgtqwqzSsag_EntYfoMrOYxWt9I"
+          "current_key": "AIzaSyB6YEt5DRsm08KyxSSVc-spNA_Ezc8PRRE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "669385417017-hb1inj52o02o6tpg560leqijknnic36d.apps.googleusercontent.com",
+              "client_id": "242301474033-vu0431u8mbdrge0teks79p2vo10dbl2o.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
