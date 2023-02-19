@@ -7,7 +7,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 
-public class songLibraryPlaylist implements Parcelable {
+public class SongLibraryPlaylist implements Parcelable {
     @SerializedName("idSongLibraryPlaylist")
     @Expose
     private int idSongLibraryPlaylist;
@@ -30,7 +30,7 @@ public class songLibraryPlaylist implements Parcelable {
     @Expose
     private String linkSong;
 
-    public songLibraryPlaylist(int idSongLibraryPlaylist, int idLibraryPlaylist, int idSong,
+    public SongLibraryPlaylist(int idSongLibraryPlaylist, int idLibraryPlaylist, int idSong,
                                String nameSong, String imgSong, String nameSinger, String linkSong) {
         this.idSongLibraryPlaylist = idSongLibraryPlaylist;
         this.idLibraryPlaylist = idLibraryPlaylist;
@@ -41,7 +41,7 @@ public class songLibraryPlaylist implements Parcelable {
         this.linkSong = linkSong;
     }
 
-    protected songLibraryPlaylist(Parcel in) {
+    protected SongLibraryPlaylist(Parcel in) {
         idSongLibraryPlaylist = in.readInt();
         idLibraryPlaylist = in.readInt();
         idSong = in.readInt();
@@ -107,15 +107,15 @@ public class songLibraryPlaylist implements Parcelable {
         this.linkSong = linkSong;
     }
 
-    public static final Creator<songLibraryPlaylist> CREATOR = new Creator<songLibraryPlaylist>() {
+    public static final Creator<SongLibraryPlaylist> CREATOR = new Creator<SongLibraryPlaylist>() {
         @Override
-        public songLibraryPlaylist createFromParcel(Parcel in) {
-            return new songLibraryPlaylist(in);
+        public SongLibraryPlaylist createFromParcel(Parcel in) {
+            return new SongLibraryPlaylist(in);
         }
 
         @Override
-        public songLibraryPlaylist[] newArray(int size) {
-            return new songLibraryPlaylist[size];
+        public SongLibraryPlaylist[] newArray(int size) {
+            return new SongLibraryPlaylist[size];
         }
     };
 

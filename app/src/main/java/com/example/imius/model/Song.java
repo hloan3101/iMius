@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class song implements Parcelable {
+public class Song implements Parcelable {
     // BAI HAT
     @SerializedName("idSong")
     @Expose
@@ -24,7 +24,7 @@ public class song implements Parcelable {
     @Expose
     private String linkSong;
 
-    public song(int idSong, String nameSong, String imgSong, String nameSinger, String linkSong) {
+    public Song(int idSong, String nameSong, String imgSong, String nameSinger, String linkSong) {
         this.idSong = idSong;
         this.nameSong = nameSong;
         this.imgSong = imgSong;
@@ -32,7 +32,7 @@ public class song implements Parcelable {
         this.linkSong = linkSong;
     }
 
-    public song(Parcel in) {
+    public Song(Parcel in) {
         idSong = in.readInt();
         nameSong = in.readString();
         imgSong = in.readString();
@@ -40,15 +40,15 @@ public class song implements Parcelable {
         linkSong = in.readString();
     }
 
-    public static final Creator<song> CREATOR = new Creator<song>() {
+    public static final Creator<Song> CREATOR = new Creator<Song>() {
         @Override
-        public song createFromParcel(Parcel in) {
-            return new song(in);
+        public Song createFromParcel(Parcel in) {
+            return new Song(in);
         }
 
         @Override
-        public song[] newArray(int size) {
-            return new song[size];
+        public Song[] newArray(int size) {
+            return new Song[size];
         }
     };
 

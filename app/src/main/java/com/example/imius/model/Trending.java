@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class trending implements Serializable {
+public class Trending implements Serializable {
     @SerializedName("idTrending")
     @Expose
     private String idTrending;
