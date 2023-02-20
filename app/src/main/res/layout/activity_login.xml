@@ -74,6 +74,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
+        android:id="@+id/activity_login_btn_login"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
@@ -84,7 +85,7 @@
         android:textSize="18dp" />
 
     <TextView
-        android:id="@+id/activity_login_et_new_account"
+        android:id="@+id/activity_login_tv_forget_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/forget_password"
