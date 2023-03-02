@@ -1,49 +1,48 @@
 package com.example.imius.model;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-
-public class User implements Serializable {
-    @SerializedName("userName")
-    @Expose
-    private String userName;
-    @SerializedName("passWord")
-    @Expose
-    private String passWord;
-    @SerializedName("nameUser")
-    @Expose
-    private String nameUser;
-    @SerializedName("email")
-    @Expose
+public class User {
+    private String username;
+    private String password;
+    private String name;
     private String email;
-    @SerializedName("image")
-    @Expose
     private String image;
 
-    public String getUserName() {
-        return userName;
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public User(String username, String password, String name, String email, String image) {
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.email = email;
+        this.image = image;
     }
 
-    public String getPassWord() {
-        return passWord;
+    public String getUsername() {
+        return username;
     }
 
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getNameUser() {
-        return nameUser;
+    public String getPassword() {
+        return password;
     }
 
-    public void setNameUser(String nameUser) {
-        this.nameUser = nameUser;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {

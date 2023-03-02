@@ -43,5 +43,8 @@
     <string name="profile" translatable="false">P R O F I L E</string>
     <string name="name_of_song">Name of song</string>
 
+    <string name="login_successfully">Login successfully</string>
+    <string name="login_failed">Login failed</string>
+    <string name="require">REQUIRE</string>
 
 </resources>

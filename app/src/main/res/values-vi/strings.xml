@@ -31,4 +31,7 @@
     <string name="update_btn">Cập nhật</string>
     <string name="logout">Đăng xuất</string>
     <string name="name_of_song">Tên bài hát</string>
+    <string name="login_successfully">Đăng nhập thành công!</string>
+    <string name="login_failed">Đăng nhập thất bại!</string>
+    <string name="require">Bắt buộc</string>
 </resources>
