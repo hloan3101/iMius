@@ -100,8 +100,7 @@ public class LoginActivity extends AppCompatActivity {
                                 getString(R.string.login_successfully), Toast.LENGTH_LONG).show();
 
                     }else {
-                        Toast.makeText(LoginActivity.this, getResources().
-                                getString(R.string.login_failed), Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this, baseResponse.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 }
             }
