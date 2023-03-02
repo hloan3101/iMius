@@ -1,13 +1,8 @@
 package com.example.imius.model;
 
-import com.google.gson.annotations.SerializedName;
-
-public class response {
+public class BaseResponse {
     // DAP TRA
-    @SerializedName("success")
     private String success;
-
-    @SerializedName("message")
     private String message;
 
     public String getSuccess() {
