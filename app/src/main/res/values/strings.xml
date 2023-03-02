@@ -39,7 +39,7 @@
     <string name="confirm_new_password">Confirm new password</string>
     <string name="update_btn">Update</string>
     <string name="logout">Logout</string>
-    <string name="text_view" translatable="false">Text view</string>
+    <string name="text_view" translatable="false">textview</string>
     <string name="profile" translatable="false">P R O F I L E</string>
     <string name="name_of_song">Name of song</string>
 

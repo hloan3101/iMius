@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class playlistLibrary implements Serializable {
+public class PlaylistLibrary implements Serializable {
     @SerializedName("idplaylistLibrary")
     @Expose
     private int idplaylistLibrary;

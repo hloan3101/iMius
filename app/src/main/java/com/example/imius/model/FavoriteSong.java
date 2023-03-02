@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class favoriteSong implements Parcelable {
+public class FavoriteSong implements Parcelable {
     // BAI HAT YEU THICH
     @SerializedName("idFavorite")
     @Expose
@@ -38,7 +38,7 @@ public class favoriteSong implements Parcelable {
     @Expose
     private String linkSong;
 
-    public favoriteSong(int idFavorite, String userName, int idSong, String nameSong,
+    public FavoriteSong(int idFavorite, String userName, int idSong, String nameSong,
                         String imgSong, String nameSinger, String linkSong){
         this.idFavorite = idFavorite;
         this.userName = userName;
@@ -105,7 +105,7 @@ public class favoriteSong implements Parcelable {
         this.linkSong = linkSong;
     }
 
-    protected favoriteSong(Parcel in){
+    protected FavoriteSong(Parcel in){
         idFavorite = in.readInt();
         userName = in.readString();
         idSong = in.readInt();
@@ -115,15 +115,15 @@ public class favoriteSong implements Parcelable {
         linkSong = in.readString();
     }
 
-    public static final Creator<favoriteSong> CREATOR = new Creator<favoriteSong>() {
+    public static final Creator<FavoriteSong> CREATOR = new Creator<FavoriteSong>() {
         @Override
-        public favoriteSong createFromParcel(Parcel in) {
-            return new favoriteSong(in);
+        public FavoriteSong createFromParcel(Parcel in) {
+            return new FavoriteSong(in);
         }
 
         @Override
-        public favoriteSong[] newArray(int size) {
-            return new favoriteSong[size];
+        public FavoriteSong[] newArray(int size) {
+            return new FavoriteSong[size];
         }
     };
 

@@ -3,7 +3,7 @@ package com.example.imius.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class theme {
+public class Theme {
     
     @SerializedName("idTheme")
     @Expose
