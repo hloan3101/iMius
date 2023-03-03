@@ -3,6 +3,7 @@ package com.example.imius.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -85,6 +86,13 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
+        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
+        progressDialog.setTitle("Please wait");
+        progressDialog.setMessage("Logging in...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+
         final User user = new User(binding.activityLoginEtUsername.getText().toString().trim(),
                                     binding.activityLoginEtPassword.getText().toString().trim());
 
@@ -101,6 +109,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     }else {
                         Toast.makeText(LoginActivity.this, baseResponse.getMessage(), Toast.LENGTH_LONG).show();
+                        progressDialog.dismiss();
                     }
                 }
             }
@@ -108,6 +117,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<BaseResponse> call, Throwable t) {
                 Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                progressDialog.dismiss();
             }
         });
     }

@@ -46,5 +46,8 @@
     <string name="login_successfully">Login successfully</string>
     <string name="login_failed">Login failed</string>
     <string name="require">REQUIRE</string>
+    <string name="progressbar_tittle">"Please wait</string>
+    <string name="progressbar_login">"Logging in...</string>
+    <string name="progressbar_signup">"Signing up...</string>
 
 </resources>
