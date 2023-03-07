@@ -24,4 +24,13 @@ public class UserViewModel extends AndroidViewModel {
     public Call<BaseResponse> login (User user){
         return userRepository.login(user);
     }
+
+    public Call<BaseResponse> checkUsername (User user) {
+        return userRepository.checkUsername(user);
+    }
+
+    public Call<BaseResponse> checkEmail(User user){
+        return userRepository.checkEmail(user);
+    }
+
 }

@@ -37,4 +37,7 @@
     <string name="progressbar_tittle">Vui lòng đợi!</string>
     <string name="progressbar_login">Đang đăng nhập...</string>
     <string name="progressbar_signup">Đang đăng ký...</string>
+    <string name="compare_password_require">Mật khẩu không trùng khớp</string>
+    <string name="email_invalidate">Email không đúng định dạng</string>
+    <string name="emai_exist">Email này đã tồn tại</string>
 </resources>

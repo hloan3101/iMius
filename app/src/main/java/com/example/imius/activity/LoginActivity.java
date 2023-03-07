@@ -87,8 +87,8 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
-        progressDialog.setTitle("Please wait");
-        progressDialog.setMessage("Logging in...");
+        progressDialog.setTitle(getResources().getString(R.string.progressbar_tittle));
+        progressDialog.setMessage(getResources().getString(R.string.progressbar_login));
         progressDialog.setCancelable(false);
         progressDialog.show();
 
