@@ -25,12 +25,12 @@ public class UserViewModel extends AndroidViewModel {
         return userRepository.login(user);
     }
 
-    public Call<BaseResponse> checkUsername (User user) {
-        return userRepository.checkUsername(user);
+    public Call<BaseResponse> checkUsername (String username) {
+        return userRepository.checkUsername(username);
     }
 
-    public Call<BaseResponse> checkEmail(User user){
-        return userRepository.checkEmail(user);
+    public Call<BaseResponse> checkEmail(String email){
+        return userRepository.checkEmail(email);
     }
 
 }

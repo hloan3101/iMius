@@ -50,8 +50,8 @@
     <string name="progressbar_login">"Logging in...</string>
     <string name="progressbar_signup">"Signing up...</string>
     <string name="compare_password_require">Passwords are not match</string>
-    <string name="">Email invalidate</string>
     <string name="email_invalidate">Email invalidate</string>
-    <string name="emai_exist">This email already exists</string>
+    <string name="email_exist">This email already exists</string>
+
 
 </resources>

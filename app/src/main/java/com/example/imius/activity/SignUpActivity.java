@@ -3,7 +3,6 @@ package com.example.imius.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -115,13 +114,13 @@ public class SignUpActivity extends AppCompatActivity {
 
     public void checkUsername(String username){
         final User user = new User(binding.activitySignupEtUsername.getText().toString().trim());
-        userViewModel.checkEmail(user).enqueue(new Callback<BaseResponse>() {
+        userViewModel.checkUsername(username).enqueue(new Callback<BaseResponse>() {
             @Override
             public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
                 BaseResponse baseResponse = response.body();
                 if (baseResponse != null){
                     if (baseResponse.getSuccess().equals(Constants.failed)){
-                        binding.activitySignupTilUsername.setError(getResources().getString(R.string.emai_exist));
+                        binding.activitySignupTilUsername.setError(getResources().getString(R.string.email_exist));
                     }
                 }
             }
@@ -135,13 +134,13 @@ public class SignUpActivity extends AppCompatActivity {
 
     public void checkEmail(String email){
         final User user = new User(binding.activitySignupEtEmail.getText().toString().trim());
-        userViewModel.checkEmail(user).enqueue(new Callback<BaseResponse>() {
+        userViewModel.checkEmail(email).enqueue(new Callback<BaseResponse>() {
             @Override
             public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
                 BaseResponse baseResponse = response.body();
                 if (baseResponse != null){
                     if (baseResponse.getSuccess().equals(Constants.failed)){
-                        binding.activitySignupTilEmail.setError(getResources().getString(R.string.emai_exist));
+                        binding.activitySignupTilEmail.setError(getResources().getString(R.string.email_exist));
                     }
                 }
             }

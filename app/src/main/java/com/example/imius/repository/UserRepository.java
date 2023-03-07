@@ -18,12 +18,12 @@ public class UserRepository {
         return userService.login(user.getUsername(), user.getPassword());
     }
 
-    public Call<BaseResponse> checkEmail(User user){
-        return userService.checkEmail(user.getEmail());
+    public Call<BaseResponse> checkEmail(String email){
+        return userService.checkEmail(email);
     }
 
-    public Call<BaseResponse> checkUsername(User user){
-        return userService.checkUsername(user.getUsername());
+    public Call<BaseResponse> checkUsername(String username){
+        return userService.checkUsername(username);
     }
 
     public UserService getUserService() {

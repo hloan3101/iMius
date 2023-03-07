@@ -1,13 +1,12 @@
-package com.example.imius.fragment;
+package com.example.imius;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.imius.R;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 public class ChangePasswordFragment extends Fragment {
 
@@ -15,7 +14,7 @@ public class ChangePasswordFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static ChangePasswordFragment newInstance() {
+    public static ChangePasswordFragment newInstance(String param1, String param2) {
         ChangePasswordFragment fragment = new ChangePasswordFragment();
 
         return fragment;
