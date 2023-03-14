@@ -14,17 +14,17 @@ import retrofit2.http.Query;
 
 public interface UserService {
 
-    @POST("login.php")
+    @GET("login.php")
     Call<BaseResponse> login(@Query("username") String username, @Query("password") String password);
 
-    @POST("sign_up.php")
+    @GET("sign_up.php")
     Call<BaseResponse> signup(@Query("username") String username, @Query("password") String password,
                               @Query("name") String name, @Query("image") String image);
 
-    @POST("check_email.php")
+    @GET("check_email.php")
     Call<BaseResponse> checkEmail(@Query("email") String email);
 
-    @POST("check_username.php")
+    @GET("check_username.php")
     Call<BaseResponse> checkUsername(@Query("username") String username);
 
 }

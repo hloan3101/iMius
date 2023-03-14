@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.imius.R;
+import com.example.imius.constants.Constants;
 import com.example.imius.databinding.ActivityLoginBinding;
 import com.example.imius.model.BaseResponse;
 import com.example.imius.model.User;
@@ -101,14 +102,15 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<BaseResponse> call, retrofit2.Response<BaseResponse> response) {
                 BaseResponse baseResponse = response.body();
                 if (baseResponse != null){
-                    if (baseResponse.getSuccess().equals("1")){
+                    if (baseResponse.getIsSuccess().equals(Constants.successfully)){
                         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                         startActivity(intent);
                         Toast.makeText(LoginActivity.this, getResources().
                                 getString(R.string.login_successfully), Toast.LENGTH_LONG).show();
 
                     }else {
-                        Toast.makeText(LoginActivity.this, baseResponse.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this, getResources().getString
+                                (R.string.login_failed), Toast.LENGTH_LONG).show();
                         progressDialog.dismiss();
                     }
                 }

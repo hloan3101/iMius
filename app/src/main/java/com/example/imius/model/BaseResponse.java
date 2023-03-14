@@ -5,11 +5,11 @@ import com.google.gson.annotations.SerializedName;
 public class BaseResponse {
     // DAP TRA
 
-    private String success;
+    private String isSuccess;
     private String message;
 
-    public String getSuccess() {
-        return success;
+    public String getIsSuccess() {
+        return isSuccess;
     }
 
     public String getMessage() {
