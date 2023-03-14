@@ -29,4 +29,12 @@ public class UserRepository {
     public UserService getUserService() {
         return API.getAccount().create(UserService.class);
     }
+
+    public Call<BaseResponse> updatePassword(User user){
+        return userService.updatePassword(user.getUsername(), user.getPassword());
+    }
+
+    public Call<BaseResponse> updateName(String name, String username){
+        return userService.updateName(username, name);
+    }
 }

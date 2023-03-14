@@ -7,35 +7,40 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.example.imius.R;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.example.imius.data.MySharedPreferences;
 
 public class SplashActivity extends AppCompatActivity {
+
+    private MySharedPreferences mySharedPreferences;
+    private static final String KEY_FIRST_INSTALL = "KEY_FIRST_INSTALL";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+        mySharedPreferences = new MySharedPreferences(this);
+
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                nextActivity();
+
+                if (mySharedPreferences.getBooleanValue(KEY_FIRST_INSTALL)){
+                    startActivity(HomeActivity.class);
+                } else {
+                    startActivity(WelcomeActivity.class);
+                    mySharedPreferences.putBoolean(KEY_FIRST_INSTALL, true);
+                }
+//                nextActivity();
             }
         }, 2000);
 
     }
 
-    private void nextActivity (){
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user == null){
-            //Chua login
-
-
-        }else {
-            Intent intent = new Intent(this, HomeActivity.class);
-            startActivity(intent);
-        }
+    private void startActivity(Class<?> cls){
+        Intent intent = new Intent(this, cls);
+        startActivity(intent);
+        finish();
     }
 }

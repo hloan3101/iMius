@@ -4,7 +4,8 @@
     android:layout_width="350dp"
     android:layout_height="500dp"
     android:layout_gravity="center"
-    app:cardCornerRadius="30dp">
+    app:cardCornerRadius="30dp"
+    android:id="@+id/dialog_update_profile_cardview">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -51,7 +52,7 @@
             android:layout_width="300dp"
             android:layout_height="60dp"
             android:layout_marginTop="40dp"
-            android:hint="@string/username"
+            android:hint="Enter your name"
             android:layout_centerHorizontal="true"
             android:textColorHint="@color/colorPrimary"
             app:boxCornerRadiusBottomEnd="30dp"

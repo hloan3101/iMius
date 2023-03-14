@@ -33,4 +33,11 @@ public class UserViewModel extends AndroidViewModel {
         return userRepository.checkEmail(email);
     }
 
+    public Call<BaseResponse> updatePassword(User user){
+        return userRepository.updatePassword(user);
+    }
+
+    public Call<BaseResponse> updateName(String name, String username){
+        return userRepository.updateName(name, username);
+    }
 }

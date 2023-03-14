@@ -21,6 +21,12 @@ public interface UserService {
     Call<BaseResponse> signup(@Query("username") String username, @Query("password") String password,
                               @Query("name") String name, @Query("image") String image);
 
+    @GET("update_password.php")
+    Call<BaseResponse> updatePassword(@Query("username") String username, @Query("password") String password);
+
+    @GET("update_name.php")
+    Call<BaseResponse> updateName(@Query("username") String username, @Query("name") String name);
+
     @GET("check_email.php")
     Call<BaseResponse> checkEmail(@Query("email") String email);
 
