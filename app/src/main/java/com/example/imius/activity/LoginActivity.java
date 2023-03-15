@@ -79,8 +79,6 @@ public class LoginActivity extends AppCompatActivity {
     private void resetError() {
         binding.activityLoginEtUsername.setError(null);
         binding.activityLoginEtPassword.setError(null);
-        binding.activityLoginTilUsername.setError(null);
-        binding.activityLoginTilPassword.setError(null);
     }
 
     private void login (){
