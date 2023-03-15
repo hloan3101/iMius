@@ -18,6 +18,9 @@ public class UserRepository {
         return userService.login(user.getUsername(), user.getPassword());
     }
 
+    public Call<BaseResponse> signup(User user){
+        return userService.signup(user.getUsername(), user.getName(), user.getPassword(), user.getEmail(), user.getImage());
+    }
     public Call<BaseResponse> checkEmail(String email){
         return userService.checkEmail(email);
     }

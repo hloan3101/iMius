@@ -52,6 +52,7 @@
     <string name="compare_password_require">Passwords are not match</string>
     <string name="email_invalidate">Email invalidate</string>
     <string name="email_exist">This email already exists</string>
+    <string name="signup_successfully">Signup Successfully</string>
 
 
 

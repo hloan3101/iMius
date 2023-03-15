@@ -18,8 +18,8 @@ public interface UserService {
     Call<BaseResponse> login(@Query("username") String username, @Query("password") String password);
 
     @GET("sign_up.php")
-    Call<BaseResponse> signup(@Query("username") String username, @Query("password") String password,
-                              @Query("name") String name, @Query("image") String image);
+    Call<BaseResponse> signup(@Query("username") String username, @Query("name") String name, @Query("password") String password,
+                              @Query("email") String email, @Query("image") String image);
 
     @GET("update_password.php")
     Call<BaseResponse> updatePassword(@Query("username") String username, @Query("password") String password);

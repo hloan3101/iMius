@@ -54,4 +54,7 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:31.2.2')
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-auth'
+
+    // GET CODE
+    implementation 'com.android.volley:volley:1.2.0'
 }
