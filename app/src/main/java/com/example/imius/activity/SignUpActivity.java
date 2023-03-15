@@ -30,8 +30,18 @@ import com.example.imius.viewmodel.UserViewModel;
 import java.lang.ref.ReferenceQueue;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Random;
 import java.util.regex.Pattern;
+
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,11 +51,8 @@ public class SignUpActivity extends AppCompatActivity {
 
     private ActivitySignUpBinding binding;
     private UserViewModel userViewModel;
-
-    private boolean accept = false, aceptEmail = false;
-
     private int code;
-
+    private boolean check = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +62,6 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(view);
 
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
-
 
         init();
     }
@@ -70,35 +76,58 @@ public class SignUpActivity extends AppCompatActivity {
 
         binding.activitySignupBtnGetCode.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Random random = new Random();
-                code = random.nextInt(8999)+1000;
-                String url = "";
-                RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                        new com.android.volley.Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                Toast.makeText(SignUpActivity.this, "" + response, Toast.LENGTH_SHORT).show();
-                            }
-                        }, new com.android.volley.Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(SignUpActivity.this, ""+error, Toast.LENGTH_SHORT).show();
-                    }
-                }){
-                    @Nullable
-                    @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        Map<String, String> params = new HashMap<>();
-                        params.put("email", binding.activitySignupEtEmail.getText().toString());
-                        params.put("code", String.valueOf(code));
+            public void onClick(View v) {
+                    checkEmail();
 
-                        return params;
+                    if (check){
+                        resetError();
+                        Random random = new Random();
+                        code = random.nextInt(8999)+1000;
+
+                        String stringHost = "smtp.gmail.com";
+
+                        Properties properties = System.getProperties();
+                        properties.put("mail.smtp.host", stringHost);
+                        properties.put("mail.smtp.port", "465");
+                        properties.put("mail.smtp.ssl.enable", "true");
+                        properties.put("mail.smtp.auth", "true");
+
+                        javax.mail.Session session = Session.getInstance(properties, new Authenticator() {
+                            @Override
+                            protected PasswordAuthentication getPasswordAuthentication() {
+                                return new PasswordAuthentication(getResources().getString(R.string.email_server),
+                                        getResources().getString(R.string.password_email_server));
+                            }
+                        });
+
+                        MimeMessage mimeMessage = new MimeMessage(session);
+
+                        try {
+                            mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(
+                                    binding.activitySignupEtEmail.getText().toString().trim()));
+
+                            mimeMessage.setSubject(getResources().getString(R.string.subject_email));
+                            mimeMessage.setText(getResources().getString(R.string.hello_email)+ "\n\n" +
+                                    getResources().getString(R.string.content_email) +  code + "\n\n" +
+                                    getResources().getString(R.string.end_email));
+
+                            Thread thread = new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        Transport.send(mimeMessage);
+                                    } catch (MessagingException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                }
+                            });
+
+                            thread.start();
+                        } catch (MessagingException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
-                };
-                requestQueue.add(stringRequest);
-            }
+                }
         });
 
         binding.activitySignupTvBack.setOnClickListener(new View.OnClickListener() {
@@ -119,88 +148,80 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public boolean checkInput(){
-        boolean check = true;
+        check = true;
         resetError();
 
-        EmailValidator validator = new EmailValidator();
-
         if (TextUtils.isEmpty(binding.activitySignupEtUsername.getText().toString().trim())){
-            binding.activitySignupTilUsername.setError(getResources().getString(R.string.require));
+            binding.activitySignupEtUsername.setError(getResources().getString(R.string.require));
             check = false;;
         }
 
         if (TextUtils.isEmpty(binding.activitySignupEtEmail.getText().toString())){
-            binding.activitySignupTilEmail.setError(getResources().getString(R.string.require));
+            binding.activitySignupEtEmail.setError(getResources().getString(R.string.require));
             check = false;
-//        } else {
-//            if (validator.validate(binding.activitySignupEtEmail.getText().toString())){
-//                checkEmail(binding.activitySignupEtEmail.getText().toString().trim());
-//                check = true;
-//
-//            } else{
-//                binding.activitySignupTilEmail.setError(getResources().getString(R.string.email));
-//                check = false;
-//            }
-
+       } else if (!Pattern.matches(getResources().getString(R.string.email_pattern),
+                binding.activitySignupEtEmail.getText().toString().trim())) {
+            binding.activitySignupEtEmail.setError(getResources().getString(R.string.email_pattern));
+            check = false;
         }
 
         if (TextUtils.isEmpty(binding.activitySignupEtPassword.getText().toString().trim())){
-            binding.activitySignupTilPassword.setError(getResources().getString(R.string.require));
+            binding.activitySignupEtPassword.setError(getResources().getString(R.string.require));
             check = false;
         }
 
         if (TextUtils.isEmpty(binding.activitySignupEtConfirmPassword.getText().toString().trim())) {
-            if (!binding.activitySignupEtConfirmPassword.getText().toString().trim()
-                    .equals(binding.activitySignupEtPassword.getText().toString().trim())) {
-
-                binding.activitySignupTilConfirmPassword.setError(getResources().getString(R.string.compare_password_require));
-                check = false;
-            }
-
-
-            binding.activitySignupTilConfirmPassword.setError(getResources().getString(R.string.require));
+            binding.activitySignupEtConfirmPassword.setError(getResources().getString(R.string.require));
             check = false;
+        }else {
+            if (binding.activitySignupEtPassword.getText().toString().trim().equals(
+                    binding.activitySignupEtConfirmPassword.getText().toString().trim())){
+                binding.activitySignupEtConfirmPassword.setError(getResources().getString(R.string.compare_password_require));
+            }
         }
 
-        if (!Pattern.matches(Constants.EMAIL_PATTERN, binding.activitySignupEtEmail.getText().toString())){
-            binding.activitySignupTilEmail.setError(getResources().getString(R.string.email_invalidate));
-
-            check = false;
+        if (TextUtils.isEmpty(binding.activitySignupEtConfirmCode.getText().toString().trim())){
+            binding.activitySignupEtConfirmCode.setError(getResources().getString(R.string.require));
+        }else{
+            if(Integer.parseInt(binding.activitySignupEtConfirmCode.getText().toString().trim()) != code) {
+                binding.activitySignupEtConfirmCode.setError(getResources().getString(R.string.code_error));
+                check = false;
+            }
         }
 
         return check;
     }
+    public void checkEmail(){
 
-    public void checkUsername(String username){
-        final User user = new User(binding.activitySignupEtUsername.getText().toString().trim());
-        userViewModel.checkUsername(username).enqueue(new Callback<BaseResponse>() {
+        check = true;
+
+        if (TextUtils.isEmpty(binding.activitySignupEtEmail.getText().toString())) {
+            binding.activitySignupEtEmail.setError(getResources().getString(R.string.require));
+            check = false;
+            return;
+        }
+
+        if (TextUtils.isEmpty(binding.activitySignupEtEmail.getText().toString())){
+            binding.activitySignupEtEmail.setError(getResources().getString(R.string.require));
+            check = false;
+            return;
+        } else if (!Pattern.matches(getResources().getString(R.string.email_pattern),
+                binding.activitySignupEtEmail.getText().toString().trim())) {
+            binding.activitySignupTilEmail.setError(getResources().getString(R.string.email_pattern));
+            check = false;
+            return;
+        }
+
+        userViewModel.checkEmail(binding.activitySignupEtEmail.getText().toString().trim()).enqueue(new Callback<BaseResponse>() {
             @Override
             public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
                 BaseResponse baseResponse = response.body();
                 if (baseResponse != null){
-                    if (baseResponse.getIsSuccess().equals(Constants.failed)){
-                        binding.activitySignupTilUsername.setError(getResources().getString(R.string.email_exist));
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<BaseResponse> call, Throwable t) {
-                Toast.makeText(SignUpActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
-
-            }
-        });
-    }
-
-    public void checkEmail(String email){
-        final User user = new User(binding.activitySignupEtEmail.getText().toString().trim());
-        userViewModel.checkEmail(email).enqueue(new Callback<BaseResponse>() {
-            @Override
-            public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
-                BaseResponse baseResponse = response.body();
-                if (baseResponse != null){
-                    if (baseResponse.getIsSuccess().equals(Constants.failed)){
-                        binding.activitySignupTilEmail.setError(getResources().getString(R.string.email_exist));
+                    if(baseResponse.getIsSuccess().equals(Constants.successfully)){
+                        binding.activitySignupEtEmail.setError(getResources().getString(R.string.email_exist));
+                        check = true;
+                    }else {
+                        check = false;
                     }
                 }
             }
@@ -254,7 +275,7 @@ public class SignUpActivity extends AppCompatActivity {
                         DataLocalManager.setEmail(binding.activitySignupEtEmail.getText().toString());
                         DataLocalManager.setPassword(binding.activitySignupEtPassword.getText().toString());
                         DataLocalManager.setCheckEdit(true);
-                        callLoginctivity();
+                        callLoginActivity();
                     }
 
                 }
@@ -267,7 +288,7 @@ public class SignUpActivity extends AppCompatActivity {
         });
 
     }
-    private void callLoginctivity(){
+    private void callLoginActivity(){
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
 

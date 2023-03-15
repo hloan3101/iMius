@@ -41,4 +41,10 @@
     <string name="email_invalidate">Email không đúng định dạng</string>
     <string name="email_exist">Email này đã tồn tại</string>
     <string name="signup_successfully">Đăng ký thành công</string>
+    <string name="subject_email">MÃ XÁC NHẬN TỪ IMIUS</string>
+    <string name="content_email">"iMius gửi cho bạn một OTP để xác minh email: "</string>
+    <string name="hello_email">Chào bạn,</string>
+    <string name="end_email">Cảm ơn!</string>
+    <string name="code_error">Mã code không đúng</string>
+    <string name="email_format_error">Email không đúng định dạng</string>
 </resources>

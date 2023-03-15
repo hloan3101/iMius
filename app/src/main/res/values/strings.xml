@@ -51,9 +51,17 @@
     <string name="progressbar_signup">"Signing up...</string>
     <string name="compare_password_require">Passwords are not match</string>
     <string name="email_invalidate">Email invalidate</string>
+    <string name="email_format_error">Email format is incorrect</string>
     <string name="email_exist">This email already exists</string>
     <string name="signup_successfully">Signup Successfully</string>
+    <string name="code_error">Code is incorrect</string>
+    <string name="email_pattern" translatable="false">[a-zA-Z][\\w-]+@([\\w]+\\.[\\w]+|[\\w]+\\.[\\w]{2,}\\.[\\w]{2,})</string>
 
-
+    <string name="email_server" translatable="false">imiusg@gmail.com</string>
+    <string name="password_email_server" translatable="false">cwoaqfrumgvhqnsz</string>
+    <string name="subject_email">IMIUS CODE VERIFICATION</string>
+    <string name="hello_email">Hello you,</string>
+    <string name="end_email">Thank you!</string>
+    <string name="content_email">"iMius sent you an OTP for email verification: "</string>
 
 </resources>
