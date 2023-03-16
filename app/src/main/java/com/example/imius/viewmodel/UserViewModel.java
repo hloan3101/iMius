@@ -25,6 +25,10 @@ public class UserViewModel extends AndroidViewModel {
         return userRepository.login(user);
     }
 
+    public Call<BaseResponse> signup (User user) {
+        return userRepository.signup(user);
+    }
+
     public Call<BaseResponse> checkUsername (String username) {
         return userRepository.checkUsername(username);
     }

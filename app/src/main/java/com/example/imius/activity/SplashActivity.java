@@ -8,6 +8,7 @@ import android.os.Handler;
 
 import com.example.imius.R;
 import com.example.imius.data.MySharedPreferences;
+import com.example.imius.databinding.ActivityWelcomeBinding;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -29,7 +30,7 @@ public class SplashActivity extends AppCompatActivity {
                 if (mySharedPreferences.getBooleanValue(KEY_FIRST_INSTALL)){
                     startActivity(HomeActivity.class);
                 } else {
-                    startActivity(WelcomeActivity.class);
+                    startActivity(ActivityWelcomeBinding.class);
                     mySharedPreferences.putBoolean(KEY_FIRST_INSTALL, true);
                 }
 //                nextActivity();

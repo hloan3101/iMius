@@ -47,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         binding.activityLoginBtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login();
+               login();
             }
         });
 
@@ -73,12 +73,12 @@ public class LoginActivity extends AppCompatActivity {
 
         boolean check = true;
         if (binding.activityLoginEtUsername.getText().toString().trim().isEmpty()){
-            binding.activityLoginTilUsername.setError(getResources().getString(R.string.require));
+            binding.activityLoginEtUsername.setError(getResources().getString(R.string.require));
             check = false;
         }
 
         if (binding.activityLoginEtPassword.getText().toString().trim().isEmpty()){
-            binding.activityLoginTilPassword.setError(getResources().getString(R.string.require));
+            binding.activityLoginEtPassword.setError(getResources().getString(R.string.require));
             check = false;
         }
 
@@ -86,8 +86,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void resetError() {
-        binding.activityLoginTilUsername.setError(null);
-        binding.activityLoginTilPassword.setError(null);
+        binding.activityLoginEtUsername.setError(null);
+        binding.activityLoginEtPassword.setError(null);
     }
 
     private void login (){
@@ -127,6 +127,8 @@ public class LoginActivity extends AppCompatActivity {
                     }else {
                         Toast.makeText(LoginActivity.this, getResources().getString
                                 (R.string.login_failed), Toast.LENGTH_LONG).show();
+                        binding.activityLoginTilUsername.setError(" ");
+                        binding.activityLoginTilPassword.setError(" ");
                         progressDialog.dismiss();
                     }
                 }
