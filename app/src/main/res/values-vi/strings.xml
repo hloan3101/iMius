@@ -47,4 +47,5 @@
     <string name="end_email">Cảm ơn!</string>
     <string name="code_error">Mã code không đúng</string>
     <string name="email_format_error">Email không đúng định dạng</string>
+    <string name="email_pattern">Định dạng Email</string>
 </resources>

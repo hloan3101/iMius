@@ -115,8 +115,9 @@ public class UpdateProfileDialog extends DialogFragment implements View.OnClickL
                     if (baseResponse.getIsSuccess().equals("1")){
                         DataLocalManager.setNameData(binding.dialogUpdateProfileEtUsername.getText().toString());
 
-                        callProfileFragment();
+//                        callProfileFragment();
                         Toast.makeText(getContext(), "Update successfully", Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
                     } else {
                         Toast.makeText(getContext(), baseResponse.getMessage(), Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();

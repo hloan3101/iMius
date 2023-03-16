@@ -52,7 +52,16 @@
     <string name="compare_password_require">Passwords are not match</string>
     <string name="email_invalidate">Email invalidate</string>
     <string name="email_exist">This email already exists</string>
-
+    <string name="signup_successfully">Signup Successfully</string>
+    <string name="subject_email">Confirmation code from IMIUS</string>
+    <string name="content_email">"iMius sent you an OTP for email verification: "</string>
+    <string name="hello_email">Hello you,</string>
+    <string name="end_email">Thank you!</string>
+    <string name="code_error">Code error</string>
+    <string name="email_format_error">Email invalidate</string>
+    <string name="email_pattern">Email pattern</string>
+    <string name="email_server" translatable="false">imiusg@gmail.com</string>
+    <string name="password_email_server" translatable="false">cwoaqfrumgvhqnsz</string>
 
 
 </resources>

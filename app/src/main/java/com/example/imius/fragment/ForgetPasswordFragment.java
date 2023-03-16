@@ -81,10 +81,10 @@ public class ForgetPasswordFragment extends Fragment implements View.OnClickList
 
                         DataLocalManager.setPassword(user.getPassword());
 
-                            callProfileFragment();
+           //                 callProfileFragment();
 
-//                        Intent intent = new Intent(getActivity(), LoginActivity.class);
-//                        startActivity(intent);
+                        Intent intent = new Intent(getActivity(), LoginActivity.class);
+                        startActivity(intent);
 
                         Toast.makeText(getContext(), "Update successfully", Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
@@ -110,6 +110,7 @@ public class ForgetPasswordFragment extends Fragment implements View.OnClickList
         transaction.commit();
 
     }
+
 
     @Override
     public void onClick(View view) {
