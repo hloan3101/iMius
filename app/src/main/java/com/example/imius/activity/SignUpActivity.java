@@ -119,7 +119,7 @@ public class SignUpActivity extends AppCompatActivity {
             public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
                 BaseResponse baseResponse = response.body();
                 if (baseResponse != null){
-                    if (baseResponse.getSuccess().equals(Constants.failed)){
+                    if (baseResponse.getIsSuccess().equals(Constants.failed)){
                         binding.activitySignupTilUsername.setError(getResources().getString(R.string.email_exist));
                     }
                 }
@@ -139,7 +139,7 @@ public class SignUpActivity extends AppCompatActivity {
             public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
                 BaseResponse baseResponse = response.body();
                 if (baseResponse != null){
-                    if (baseResponse.getSuccess().equals(Constants.failed)){
+                    if (baseResponse.getIsSuccess().equals(Constants.failed)){
                         binding.activitySignupTilEmail.setError(getResources().getString(R.string.email_exist));
                     }
                 }

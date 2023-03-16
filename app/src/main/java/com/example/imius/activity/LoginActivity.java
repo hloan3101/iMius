@@ -1,6 +1,9 @@
 package com.example.imius.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.app.ProgressDialog;
@@ -11,7 +14,10 @@ import android.widget.Toast;
 
 import com.example.imius.R;
 import com.example.imius.constants.Constants;
+import com.example.imius.data.DataLocalManager;
 import com.example.imius.databinding.ActivityLoginBinding;
+import com.example.imius.fragment.ChangePasswordFragment;
+import com.example.imius.fragment.ProfileFragment;
 import com.example.imius.model.BaseResponse;
 import com.example.imius.model.User;
 import com.example.imius.viewmodel.UserViewModel;
@@ -35,6 +41,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void initListener (){
+
+        binding.activityLoginEtUsername.setText(DataLocalManager.getUsernameData());
+
         binding.activityLoginBtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,11 +112,18 @@ public class LoginActivity extends AppCompatActivity {
                 BaseResponse baseResponse = response.body();
                 if (baseResponse != null){
                     if (baseResponse.getIsSuccess().equals(Constants.successfully)){
-                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                        startActivity(intent);
+//                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+//                        startActivity(intent);
+
                         Toast.makeText(LoginActivity.this, getResources().
                                 getString(R.string.login_successfully), Toast.LENGTH_LONG).show();
 
+                        DataLocalManager.setUsernameData(user.getUsername());
+                        DataLocalManager.setPassword(user.getPassword());
+
+                        callProfileFragment();
+                    //    callChangePasswordFragment();
+                        progressDialog.dismiss();
                     }else {
                         Toast.makeText(LoginActivity.this, getResources().getString
                                 (R.string.login_failed), Toast.LENGTH_LONG).show();
@@ -123,4 +139,25 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void callChangePasswordFragment() {
+        ChangePasswordFragment changePasswordFragment = new ChangePasswordFragment();
+        binding.activityLoginLinearlayout.setVisibility(View.GONE);
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.activity_login_frame_content, changePasswordFragment);
+        transaction.commit();
+
+    }
+
+    public void callProfileFragment() {
+        ProfileFragment profileFragment = new ProfileFragment();
+        binding.activityLoginLinearlayout.setVisibility(View.GONE);
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.activity_login_frame_content, profileFragment);
+        transaction.commit();
+
+    }
+
 }
