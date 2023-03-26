@@ -33,7 +33,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
 
         View view = binding.getRoot();
 
-        binding.fragmentProfileTvUsername.setText(DataLocalManager.getUsernameData());
+        if (DataLocalManager.getNameData() == null){
+            binding.fragmentProfileTvUsername.setText(DataLocalManager.getUsernameData());
+        } else {
+            binding.fragmentProfileTvUsername.setText(DataLocalManager.getNameData());
+        }
 
         init();
 
@@ -69,12 +73,29 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
                 startActivity(intent);
             }
         });
+
+        binding.fragmentProfileTvChangePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callChangePasswordFragment();
+            }
+        });
     }
 
     public void callUpdateProfileDialog() {
         DialogFragment updateProfileDialog = UpdateProfileDialog.newInstance();
         updateProfileDialog.show(getActivity().getSupportFragmentManager(),"Update Profile Dialog");
 
+    }
+
+    public void callChangePasswordFragment(){
+
+        ChangePasswordFragment changePasswordFragment = new ChangePasswordFragment();
+        binding.fragmentProfileConstraintLayout.setVisibility(View.GONE);
+
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_profile_frame_content, changePasswordFragment);
+        transaction.commit();
     }
 
     @Override

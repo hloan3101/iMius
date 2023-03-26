@@ -66,13 +66,6 @@ public class UpdateProfileDialog extends DialogFragment implements View.OnClickL
             }
         });
 
-        binding.dialogUpdateProfileTvChangePassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                callChangePasswordFragment();
-            }
-        });
-
         binding.dialogUpdateProfileTvCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,7 +107,6 @@ public class UpdateProfileDialog extends DialogFragment implements View.OnClickL
                 if (baseResponse != null){
                     if (baseResponse.getIsSuccess().equals("1")){
                         DataLocalManager.setNameData(binding.dialogUpdateProfileEtUsername.getText().toString());
-
 //                        callProfileFragment();
                         Toast.makeText(getContext(), "Update successfully", Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
@@ -145,16 +137,6 @@ public class UpdateProfileDialog extends DialogFragment implements View.OnClickL
 
         transaction.commit();
 
-    }
-
-    public void callChangePasswordFragment(){
-
-        ChangePasswordFragment changePasswordFragment = new ChangePasswordFragment();
-        binding.dialogUpdateProfileCardview.setVisibility(View.GONE);
-
-        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.dialog_update_profile_frame_content, changePasswordFragment);
-        transaction.commit();
     }
 
     @Override

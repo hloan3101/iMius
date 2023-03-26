@@ -37,6 +37,23 @@
             app:layout_constraintVertical_bias="0.6" />
 
         <TextView
+            android:id="@+id/fragment_profile_tv_change_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fragment_profile_btn_logout"
+            android:layout_centerHorizontal="true"
+            android:text="@string/change_password"
+            android:textColor="@color/blue_500"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.503"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_profile_btn_logout"
+            app:layout_constraintVertical_bias="0.2" />
+
+        <TextView
             android:id="@+id/fragment_profile_tv_username"
             android:layout_width="300dp"
             android:layout_height="wrap_content"

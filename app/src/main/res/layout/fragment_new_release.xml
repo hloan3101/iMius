@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragment.PopularityFragment">
+    tools:context=".fragment.NewReleaseFragment">
 
    <TextView
         android:id="@+id/fragment_popularity_tv_popularity"

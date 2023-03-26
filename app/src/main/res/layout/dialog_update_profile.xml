@@ -7,7 +7,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="350dp"
-        android:layout_height="530dp"
+        android:layout_height="480dp"
         android:layout_gravity="center"
         android:background="@drawable/custom_fb_button"
         android:id="@+id/dialog_update_profile_cardview">
@@ -94,17 +94,6 @@
                 android:layout_centerHorizontal="true"
                 android:layout_below="@id/dialog_update_profile_til_username"/>
 
-            <TextView
-                android:id="@+id/dialog_update_profile_tv_change_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/dialog_update_profile_btn_update"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="30dp"
-                android:text="@string/change_password"
-                android:textColor="@color/blue_500"
-                android:textSize="16dp"
-                android:textStyle="bold"/>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 

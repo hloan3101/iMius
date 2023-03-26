@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".activity.HomeActivity">
 
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/activity_home_vp_view_pager"
+        android:id="@+id/activity_home_view_pager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_above="@id/activity_home_bottom_navigation_view"
         android:layout_weight="10">
 
         <View
@@ -18,15 +18,16 @@
             android:layout_height="100dp"/>
     </androidx.viewpager.widget.ViewPager>
 
-<com.google.android.material.tabs.TabLayout
-    android:id="@+id/activity_home_tl_tab_layout"
-    android:layout_width="match_parent"
-    android:layout_height="55dp"
-    android:background="#120927"
-    app:tabIndicatorColor="#C3C3C3"
-    app:tabIndicatorHeight="1dp"
-    app:tabMode="fixed"
-    app:tabSelectedTextColor="#FFFFFF"
-    app:tabTextColor="#000"/>
-</LinearLayout>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/activity_home_bottom_navigation_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="2dp"
+        app:itemBackground="@color/colorPrimary"
+        app:itemIconTint="@color/custom_color_bottom_nav"
+        app:itemTextColor="@color/custom_color_bottom_nav"
+        app:menu="@menu/menu_bottom_nav" />
+
+</RelativeLayout>
 

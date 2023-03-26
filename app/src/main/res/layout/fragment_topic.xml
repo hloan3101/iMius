@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragment.ThemeFragment">
+    tools:context=".fragment.TopicFragment">
 
     <TextView
         android:id="@+id/fragment_theme_tv_theme"

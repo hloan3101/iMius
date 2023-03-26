@@ -27,13 +27,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <fragment
-            android:name="com.example.imius.fragment.PopularityFragment"
-            android:id="@+id/fragment_home_fragment_popularity"
+            android:name="com.example.imius.fragment.NewReleaseFragment"
+            android:id="@+id/fragment_home_fragment_new_release"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <fragment
-            android:name="com.example.imius.fragment.ThemeFragment"
-            android:id="@+id/fragment_home_fragment_theme"
+            android:name="com.example.imius.fragment.TopicFragment"
+            android:id="@+id/fragment_home_fragment_topic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <fragment
@@ -47,8 +47,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <fragment
-            android:name="com.example.imius.fragment.ThemeFragment"
-            android:id="@+id/fragment_home_fragment_theme1"
+            android:name="com.example.imius.fragment.TopicFragment"
+            android:id="@+id/fragment_home_fragment_topic1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -59,14 +59,14 @@
             android:layout_height="wrap_content"/>
 
         <fragment
-            android:name="com.example.imius.fragment.PopularityFragment"
-            android:id="@+id/fragment_home_fragment_popularity1"
+            android:name="com.example.imius.fragment.NewReleaseFragment"
+            android:id="@+id/fragment_home_fragment_new_release1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <fragment
-            android:name="com.example.imius.fragment.ThemeFragment"
-            android:id="@+id/fragment_home_fragment_theme2"
+            android:name="com.example.imius.fragment.TopicFragment"
+            android:id="@+id/fragment_home_fragment_topic2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -77,14 +77,14 @@
             android:layout_height="wrap_content"/>
 
         <fragment
-            android:name="com.example.imius.fragment.PopularityFragment"
-            android:id="@+id/fragment_home_fragment_popularity2"
+            android:name="com.example.imius.fragment.NewReleaseFragment"
+            android:id="@+id/fragment_home_fragment_new_release2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <fragment
-            android:name="com.example.imius.fragment.ThemeFragment"
-            android:id="@+id/fragment_home_fragment_theme5"
+            android:name="com.example.imius.fragment.TopicFragment"
+            android:id="@+id/fragment_home_fragment_topic5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -100,8 +100,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <fragment
-            android:name="com.example.imius.fragment.ThemeFragment"
-            android:id="@+id/fragment_home_fragment_theme4"
+            android:name="com.example.imius.fragment.TopicFragment"
+            android:id="@+id/fragment_home_fragment_topic4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -112,14 +112,14 @@
             android:layout_height="wrap_content"/>
 
         <fragment
-            android:name="com.example.imius.fragment.PopularityFragment"
-            android:id="@+id/fragment_home_fragment_popularity4"
+            android:name="com.example.imius.fragment.NewReleaseFragment"
+            android:id="@+id/fragment_home_fragment_new_release4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <fragment
-            android:name="com.example.imius.fragment.ThemeFragment"
-            android:id="@+id/fragment_home_fragment_theme3"
+            android:name="com.example.imius.fragment.TopicFragment"
+            android:id="@+id/fragment_home_fragment_topic3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -130,8 +130,8 @@
             android:layout_height="wrap_content"/>
 
         <fragment
-            android:name="com.example.imius.fragment.PopularityFragment"
-            android:id="@+id/fragment_home_fragment_popularity3"
+            android:name="com.example.imius.fragment.NewReleaseFragment"
+            android:id="@+id/fragment_home_fragment_new_release3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
