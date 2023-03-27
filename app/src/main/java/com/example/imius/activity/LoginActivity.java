@@ -112,16 +112,16 @@ public class LoginActivity extends AppCompatActivity {
                 BaseResponse baseResponse = response.body();
                 if (baseResponse != null){
                     if (baseResponse.getIsSuccess().equals(Constants.successfully)){
-//                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-//                        startActivity(intent);
-
                         Toast.makeText(LoginActivity.this, getResources().
                                 getString(R.string.login_successfully), Toast.LENGTH_LONG).show();
 
                         DataLocalManager.setUsernameData(user.getUsername());
                         DataLocalManager.setPassword(user.getPassword());
 
-                        callProfileFragment();
+                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                        startActivity(intent);
+
+                     //   callProfileFragment();
                     //    callChangePasswordFragment();
                         progressDialog.dismiss();
                     }else {

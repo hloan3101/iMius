@@ -1,56 +1,61 @@
 package com.example.imius.model;
 
+import androidx.dynamicanimation.animation.SpringAnimation;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class PlaylistLibrary implements Serializable {
-    @SerializedName("idplaylistLibrary")
-    @Expose
-    private int idplaylistLibrary;
+public class PlaylistLibrary {
 
-    @SerializedName("namePlaylistLibrary")
-    @Expose
-    private String namePlaylistLibrary;
+    private int idLibraryPlaylist;
+    private String nameLibraryPlaylist;
+    private String imageLibraryPlaylist;
+    private String username;
 
-    @SerializedName("imgPlaylistLibrary")
-    @Expose
-    private String imgPlaylistLibrary;
-
-    @SerializedName("userName")
-    @Expose
-    private String userName;
-
-    public int getIdplaylistLibrary() {
-        return idplaylistLibrary;
+    public PlaylistLibrary(int idLibraryPlaylist, String nameLibraryPlaylist, String imageLibraryPlaylist, String username) {
+        this.idLibraryPlaylist = idLibraryPlaylist;
+        this.nameLibraryPlaylist = nameLibraryPlaylist;
+        this.imageLibraryPlaylist = imageLibraryPlaylist;
+        this.username = username;
     }
 
-    public void setIdplaylistLibrary(int idplaylistLibrary) {
-        this.idplaylistLibrary = idplaylistLibrary;
+    public PlaylistLibrary(int idLibraryPlaylist, String nameLibraryPlaylist, String imageLibraryPlaylist) {
+        this.idLibraryPlaylist = idLibraryPlaylist;
+        this.nameLibraryPlaylist = nameLibraryPlaylist;
+        this.imageLibraryPlaylist = imageLibraryPlaylist;
     }
 
-    public String getNamePlaylistLibrary() {
-        return namePlaylistLibrary;
+    public int getIdLibraryPlaylist() {
+        return idLibraryPlaylist;
     }
 
-    public void setNamePlaylistLibrary(String namePlaylistLibrary) {
-        this.namePlaylistLibrary = namePlaylistLibrary;
+    public void setIdLibraryPlaylist(int idLibraryPlaylist) {
+        this.idLibraryPlaylist = idLibraryPlaylist;
     }
 
-    public String getImgPlaylistLibrary() {
-        return imgPlaylistLibrary;
+    public String getNameLibraryPlaylist() {
+        return nameLibraryPlaylist;
     }
 
-    public void setImgPlaylistLibrary(String imgPlaylistLibrary) {
-        this.imgPlaylistLibrary = imgPlaylistLibrary;
+    public void setNameLibraryPlaylist(String nameLibraryPlaylist) {
+        this.nameLibraryPlaylist = nameLibraryPlaylist;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getImageLibraryPlaylist() {
+        return imageLibraryPlaylist;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setImageLibraryPlaylist(String imageLibraryPlaylist) {
+        this.imageLibraryPlaylist = imageLibraryPlaylist;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
