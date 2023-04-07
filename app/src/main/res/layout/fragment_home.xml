@@ -26,11 +26,13 @@
             android:id="@+id/fragment_home_fragment_trending"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
         <fragment
-            android:name="com.example.imius.fragment.NewReleaseFragment"
             android:id="@+id/fragment_home_fragment_new_release"
+            android:name="com.example.imius.fragment.NewReleaseFragment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
+
         <fragment
             android:name="com.example.imius.fragment.TopicFragment"
             android:id="@+id/fragment_home_fragment_topic"
