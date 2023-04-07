@@ -3,7 +3,7 @@ package com.example.imius.repository;
 import com.example.imius.api.API;
 import com.example.imius.data.DataLocalManager;
 import com.example.imius.livedata.RefreshLiveData;
-import com.example.imius.model.PlaylistLibrary;
+import com.example.imius.model.LibraryPlaylist;
 import com.example.imius.service.DataService;
 
 import java.util.ArrayList;
@@ -20,16 +20,16 @@ public class MusicRepository {
         this.dataService = API.getAccount().create(DataService.class);
     }
 
-    public RefreshLiveData<List<PlaylistLibrary>> getAllPlaylistLibrary (){
-        RefreshLiveData<List<PlaylistLibrary>> data = new RefreshLiveData<>(callback -> {
-            dataService.getLibraryPlaylistList(DataLocalManager.getUsernameData()).enqueue(new Callback<List<PlaylistLibrary>>() {
+    public RefreshLiveData<List<LibraryPlaylist>> getAllLibraryPlaylist(){
+        RefreshLiveData<List<LibraryPlaylist>> data = new RefreshLiveData<>(callback -> {
+            dataService.getLibraryPlaylistList(DataLocalManager.getUsernameData()).enqueue(new Callback<List<LibraryPlaylist>>() {
                 @Override
-                public void onResponse(Call<List<PlaylistLibrary>> call, Response<List<PlaylistLibrary>> response) {
-                    callback.onDataLoaded((ArrayList<PlaylistLibrary>) response.body());
+                public void onResponse(Call<List<LibraryPlaylist>> call, Response<List<LibraryPlaylist>> response) {
+                    callback.onDataLoaded((ArrayList<LibraryPlaylist>) response.body());
                 }
 
                 @Override
-                public void onFailure(Call<List<PlaylistLibrary>> call, Throwable t) {
+                public void onFailure(Call<List<LibraryPlaylist>> call, Throwable t) {
 
                 }
             });

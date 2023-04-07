@@ -62,7 +62,6 @@
     <string name="email_pattern">Email pattern</string>
     <string name="email_server" translatable="false">imiusg@gmail.com</string>
     <string name="password_email_server" translatable="false">cwoaqfrumgvhqnsz</string>
-    <string name="length_playlist_name">Playlist name length from 1 -> 36 characters</string>
 
 
 </resources>

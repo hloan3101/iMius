@@ -11,18 +11,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.imius.R;
-import com.example.imius.model.PlaylistLibrary;
-import com.example.imius.viewmodel.PlaylistLibraryViewModel;
+import com.example.imius.model.LibraryPlaylist;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class PlaylistLibraryAdapter extends RecyclerView.Adapter<PlaylistLibraryAdapter.ViewHolder> {
+public class LibraryPlaylistAdapter extends RecyclerView.Adapter<LibraryPlaylistAdapter.ViewHolder> {
 
     private Context context;
-    private List<PlaylistLibrary> playlistLibraryList;
+    private List<LibraryPlaylist> playlistLibraryList;
 
-    public PlaylistLibraryAdapter (Context context){
+    public LibraryPlaylistAdapter(Context context){
         this.context = context;
     }
 
@@ -38,12 +37,12 @@ public class PlaylistLibraryAdapter extends RecyclerView.Adapter<PlaylistLibrary
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        PlaylistLibrary playlistLibrary = playlistLibraryList.get(position);
+        LibraryPlaylist playlistLibrary = playlistLibraryList.get(position);
 
         if (playlistLibraryList == null){
             return;
         }
-        holder.tvNamePlaylistLibrary.setText(holder.tvNamePlaylistLibrary.getText().toString());
+        holder.tvNamePlaylistLibrary.setText(playlistLibrary.getNameLibraryPlaylist());
         Picasso.get().load(playlistLibrary.getImageLibraryPlaylist()).into(holder.imgPlaylistLibrary);
     }
 
@@ -53,6 +52,15 @@ public class PlaylistLibraryAdapter extends RecyclerView.Adapter<PlaylistLibrary
             return playlistLibraryList.size();
         }
         return 0;
+    }
+
+    public List<LibraryPlaylist> getPlaylistLibraryList (){
+        return playlistLibraryList;
+    }
+
+    public void setPlaylistLibraryList(List<LibraryPlaylist> playlistLibraryList) {
+        this.playlistLibraryList = playlistLibraryList;
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
