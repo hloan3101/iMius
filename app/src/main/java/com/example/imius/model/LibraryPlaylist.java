@@ -1,27 +1,20 @@
 package com.example.imius.model;
 
-import androidx.dynamicanimation.animation.SpringAnimation;
-
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
-import java.io.Serializable;
-
-public class PlaylistLibrary {
+public class LibraryPlaylist {
 
     private int idLibraryPlaylist;
     private String nameLibraryPlaylist;
     private String imageLibraryPlaylist;
     private String username;
 
-    public PlaylistLibrary(int idLibraryPlaylist, String nameLibraryPlaylist, String imageLibraryPlaylist, String username) {
+    public LibraryPlaylist(int idLibraryPlaylist, String nameLibraryPlaylist, String imageLibraryPlaylist, String username) {
         this.idLibraryPlaylist = idLibraryPlaylist;
         this.nameLibraryPlaylist = nameLibraryPlaylist;
         this.imageLibraryPlaylist = imageLibraryPlaylist;
         this.username = username;
     }
 
-    public PlaylistLibrary(int idLibraryPlaylist, String nameLibraryPlaylist, String imageLibraryPlaylist) {
+    public LibraryPlaylist(int idLibraryPlaylist, String nameLibraryPlaylist, String imageLibraryPlaylist) {
         this.idLibraryPlaylist = idLibraryPlaylist;
         this.nameLibraryPlaylist = nameLibraryPlaylist;
         this.imageLibraryPlaylist = imageLibraryPlaylist;
