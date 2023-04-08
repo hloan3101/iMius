@@ -4,6 +4,7 @@ import android.app.Application;
 import android.support.annotation.NonNull;
 
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 
 import com.example.imius.livedata.RefreshLiveData;
 import com.example.imius.model.TopicModel;
@@ -22,6 +23,11 @@ public class TopicViewModel extends AndroidViewModel {
          repository = new TopicRepository();
          liveData = repository.getTopic();
     }
+
+    public LiveData<List<TopicModel>> getTopic(){
+        return liveData;
+    }
+
 
     public void refreshLiveData(){
         liveData.refresh();

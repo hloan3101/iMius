@@ -23,7 +23,7 @@ public class TrendingRepository {
 
     public RefreshLiveData<List<Trending>> getTrending() {
         RefreshLiveData<List<Trending>> data = new RefreshLiveData<>(callback -> {
-            dataService.trending().enqueue(new Callback<List<Trending>>() {
+            dataService.getTrending().enqueue(new Callback<List<Trending>>() {
                 @Override
                 public void onResponse(Call<List<Trending>> call, Response<List<Trending>> response) {
                     callback.onDataLoaded((ArrayList<Trending>) response.body()) ;

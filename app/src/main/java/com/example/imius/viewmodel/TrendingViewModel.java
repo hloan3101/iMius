@@ -7,7 +7,9 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.imius.livedata.RefreshLiveData;
+import com.example.imius.model.LibraryPlaylist;
 import com.example.imius.model.Trending;
+import com.example.imius.repository.MusicRepository;
 import com.example.imius.repository.TrendingRepository;
 
 import java.util.List;
@@ -29,6 +31,9 @@ public class TrendingViewModel extends AndroidViewModel {
     }
 
 
+    public LiveData<List<Trending>> getTrending() {
+        return liveData;
+    }
 
     public void refreshLiveData (){
         liveData.refresh();

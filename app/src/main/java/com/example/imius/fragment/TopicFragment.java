@@ -11,10 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.imius.adapter.TopicAdapter;
+import com.example.imius.adapter.TrendingAdapter;
 import com.example.imius.databinding.FragmentTopicBinding;
+import com.example.imius.databinding.FragmentTrendingBinding;
 import com.example.imius.model.TopicModel;
 import com.example.imius.service.DataService;
 import com.example.imius.viewmodel.TopicViewModel;
+import com.example.imius.viewmodel.TrendingViewModel;
 
 import java.util.ArrayList;
 
@@ -39,42 +42,20 @@ public class TopicFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        super.onCreate(savedInstanceState);
-        binding = FragmentTopicBinding.inflate(getLayoutInflater());
+        binding = FragmentTopicBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
+        binding.fragmentThemeRvTheme.setLayoutManager(new LinearLayoutManager(getContext()));
+        topicAdapter = new TopicAdapter(this.getContext());
+        binding.fragmentThemeRvTheme.setAdapter(topicAdapter);
+
+
         viewModel = new ViewModelProvider(getActivity()).get(TopicViewModel.class);
-
-        viewModel.getLiveData().observe(getViewLifecycleOwner(), topic ->{
-            topicAdapter.setArrayTopic((ArrayList<TopicModel>) topic);
+        viewModel.getTopic().observe(getViewLifecycleOwner(), topicModelList -> {
+            topicAdapter.setTopicModelList(topicModelList);
+            //  Toast.makeText(getContext(), String.valueOf(adapter.getPlaylistLibraryList().get(1).getNameLibraryPlaylist()), Toast.LENGTH_LONG).show();
         });
-
-        //getTopic();
-
         return view;
     }
 
-//    private void getTopic(){
-//        Call<ArrayList<TopicModel>> call = dataService.topic();
-//        call.enqueue(new Callback<ArrayList<TopicModel>>() {
-//            @Override
-//            public void onResponse(Call<ArrayList<TopicModel>> call, Response<ArrayList<TopicModel>> response) {
-//                ArrayList<TopicModel> topicModelArrayList = (ArrayList<TopicModel>) response.body();
-//
-//                topicAdapter = new TopicAdapter(getActivity(), topicModelArrayList);
-//
-//                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-//                linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-//
-//                binding.fragmentThemeRvTheme.setLayoutManager(linearLayoutManager);
-//                binding.fragmentThemeRvTheme.setAdapter(topicAdapter);
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ArrayList<TopicModel>> call, Throwable t) {
-//
-//            }
-//        });
-//
-//    }
 }

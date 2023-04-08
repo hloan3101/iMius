@@ -5,22 +5,28 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class Trending implements Serializable {
-    @SerializedName("idTrending")
-    @Expose
-    private String idTrending;
-    @SerializedName("nameTrending")
-    @Expose
-    private String nameTrending;
-    @SerializedName("imgTrending")
-    @Expose
-    private String imgTrending;
+public class Trending {
 
-    public String getIdTrending() {
+    private int idTrending;
+    private String nameTrending;
+    private String imageTrending;
+
+    public Trending(int idTrending, String nameTrending, String imageTrending) {
+        this.idTrending = idTrending;
+        this.nameTrending = nameTrending;
+        this.imageTrending = imageTrending;
+    }
+
+    public Trending(String nameTrending, String imageTrending) {
+        this.nameTrending = nameTrending;
+        this.imageTrending = imageTrending;
+    }
+
+    public int getIdTrending() {
         return idTrending;
     }
 
-    public void setIdTrending(String idTrending) {
+    public void setIdTrending(int idTrending) {
         this.idTrending = idTrending;
     }
 
@@ -32,11 +38,11 @@ public class Trending implements Serializable {
         this.nameTrending = nameTrending;
     }
 
-    public String getImgTrending() {
-        return imgTrending;
+    public String getImageTrending() {
+        return imageTrending;
     }
 
-    public void setImgTrending(String imgTrending) {
-        this.imgTrending = imgTrending;
+    public void setImageTrending(String imageTrending) {
+        this.imageTrending = imageTrending;
     }
 }

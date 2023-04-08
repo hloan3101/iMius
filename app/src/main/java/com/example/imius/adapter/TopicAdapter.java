@@ -23,21 +23,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder>{
-    Context context;
-    private FragmentTrendingBinding binding;
-    List<TopicModel> arrayTopic;
+    private Context context;
+
+    List<TopicModel> topicModelList;
     View view;
     public  TopicAdapter(Context context, ArrayList<TopicModel> arrayTopic){
         this.context = context;
-        this.arrayTopic = arrayTopic;
+        this.topicModelList = arrayTopic;
     }
 
-    public List<TopicModel> getArrayTopic() {
-        return arrayTopic;
+    public List<TopicModel> getTopicModelList() {
+        return topicModelList;
     }
 
-    public void setArrayTopic(List<TopicModel> arrayTopic) {
-        this.arrayTopic = arrayTopic;
+    public void setTopicModelList(List<TopicModel> topicModelList) {
+        this.topicModelList = topicModelList;
     }
     public TopicAdapter(Context context){
         this.context = context;
@@ -53,14 +53,14 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull TopicAdapter.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
-        TopicModel topicModel = arrayTopic.get(position);
+        TopicModel topicModel = topicModelList.get(position);
         holder.tvNameTopic.setText(topicModel.getNameTopic());
-        Picasso.get().load(topicModel.getImgTopic()).into(holder.imgTopic);
+        Picasso.get().load(topicModel.getImageTopic()).into(holder.imgTopic);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, PlaylistActivity.class);
-                intent.putExtra("intentTopic", String.valueOf(arrayTopic.get(position)));
+                intent.putExtra("intentTopic", String.valueOf(topicModelList.get(position)));
                 context.startActivity(intent);
             }
         });
@@ -68,7 +68,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder>{
 
     @Override
     public int getItemCount() {
-        return arrayTopic != null ? arrayTopic.size() : 0;
+        return topicModelList != null ? topicModelList.size() : 0;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

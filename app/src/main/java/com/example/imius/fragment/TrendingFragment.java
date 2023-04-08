@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.imius.adapter.LibraryPlaylistAdapter;
 import com.example.imius.adapter.TrendingAdapter;
 import com.example.imius.databinding.FragmentTrendingBinding;
 
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.imius.model.Trending;
 import com.example.imius.service.DataService;
+import com.example.imius.viewmodel.LibraryPlaylistViewModel;
 import com.example.imius.viewmodel.TrendingViewModel;
 
 import java.util.ArrayList;
@@ -42,43 +44,24 @@ public class TrendingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        super.onCreate(savedInstanceState);
         binding = FragmentTrendingBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        viewModel = new ViewModelProvider(getActivity()).get(TrendingViewModel.class);
+        binding.fragmentTrendingRvTrending.setLayoutManager(new LinearLayoutManager(getContext()));
+        trendingAdapter = new TrendingAdapter(this.getContext());
+        binding.fragmentTrendingRvTrending.setAdapter(trendingAdapter);
 
-        viewModel.getLiveData().observe(getViewLifecycleOwner(), trending ->{
-            trendingAdapter.setArrayTrending((List<Trending>) trending);
+
+        viewModel = new ViewModelProvider(getActivity()).get(TrendingViewModel.class);
+        viewModel.getTrending().observe(getViewLifecycleOwner(), trendingList -> {
+            trendingAdapter.setTrendingList(trendingList);
+            //  Toast.makeText(getContext(), String.valueOf(adapter.getPlaylistLibraryList().get(1).getNameLibraryPlaylist()), Toast.LENGTH_LONG).show();
         });
 
-       getTrending();
 
         return view;
 
     }
 
-    private void getTrending() {
-        Call<List<Trending>> call = dataService.trending();
-        call.enqueue(new Callback<List<Trending>>() {
-            @Override
-            public void onResponse(Call<List<Trending>> call, Response<List<Trending>> response) {
-                ArrayList<Trending> trendingArrayList = (ArrayList<Trending>) response.body();
-
-                trendingAdapter = new TrendingAdapter(getActivity(), trendingArrayList);
-
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-                linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-
-                binding.fragmentTrendingRvTrending.setLayoutManager(linearLayoutManager);
-                binding.fragmentTrendingRvTrending.setAdapter(trendingAdapter);
-            }
-
-            @Override
-            public void onFailure(Call<List<Trending>> call, Throwable t) {
-
-            }
-        });
-    }
 
 }

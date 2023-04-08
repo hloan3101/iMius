@@ -4,9 +4,11 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 
 import com.example.imius.livedata.RefreshLiveData;
 import com.example.imius.model.Singer;
+import com.example.imius.model.Trending;
 import com.example.imius.repository.SingerRepository;
 import com.example.imius.repository.TrendingRepository;
 
@@ -26,7 +28,9 @@ public class SingerViewModel extends AndroidViewModel {
         repository = new SingerRepository();
         liveData = repository.getSinger();
     }
-
+    public LiveData<List<Singer>> getSinger() {
+        return liveData;
+    }
     public void refreshLiveData(){
         liveData.refresh();
     }

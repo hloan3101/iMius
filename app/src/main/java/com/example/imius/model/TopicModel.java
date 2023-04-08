@@ -4,21 +4,26 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class TopicModel {
-    @SerializedName("IdTopic")
-    @Expose
-    private String idTopic;
-    @SerializedName("NameTopic")
-    @Expose
+    private int idTopic;
     private String nameTopic;
-    @SerializedName("imgTopic")
-    @Expose
-    private String imgTopic;
+    private String imageTopic;
 
-    public String getIdTopic() {
+    public TopicModel(int idTopic, String nameTopic, String imageTopic) {
+        this.idTopic = idTopic;
+        this.nameTopic = nameTopic;
+        this.imageTopic = imageTopic;
+    }
+
+    public TopicModel(String nameTopic, String imageTopic) {
+        this.nameTopic = nameTopic;
+        this.imageTopic = imageTopic;
+    }
+
+    public int getIdTopic() {
         return idTopic;
     }
 
-    public void setIdTopic(String idTopic) {
+    public void setIdTopic(int idTopic) {
         this.idTopic = idTopic;
     }
 
@@ -30,11 +35,11 @@ public class TopicModel {
         this.nameTopic = nameTopic;
     }
 
-    public String getImgTopic() {
-        return imgTopic;
+    public String getImageTopic() {
+        return imageTopic;
     }
 
-    public void setImgTopic(String imgTopic) {
-        this.imgTopic = imgTopic;
+    public void setImageTopic(String imageTopic) {
+        this.imageTopic = imageTopic;
     }
 }
