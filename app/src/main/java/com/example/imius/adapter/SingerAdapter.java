@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,10 +21,12 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class SingerAdapter extends RecyclerView.Adapter<SingerAdapter.ViewHolder>{
     private Context context;
 
-    List<Singer> singerList;
+    private List<Singer> singerList;
 
     public SingerAdapter(Context context) {
         this.context = context;
@@ -48,15 +51,19 @@ public class SingerAdapter extends RecyclerView.Adapter<SingerAdapter.ViewHolder
 
     public void setSingerList(List<Singer> singerList) {
         this.singerList = singerList;
+        notifyDataSetChanged();
 
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Singer singer = singerList.get(position);
+
+        if (singerList == null){
+            return;
+        }
         holder.tvNameSinger.setText(singer.getNameSinger());
         Picasso.get().load(singer.getImageSinger()).into(holder.imgSinger);
-
     }
 
     @Override
@@ -65,11 +72,11 @@ public class SingerAdapter extends RecyclerView.Adapter<SingerAdapter.ViewHolder
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        de.hdodenhof.circleimageview.CircleImageView imgSinger;
-        TextView tvNameSinger;
+        private CircleImageView imgSinger;
+        private TextView tvNameSinger;
         public ViewHolder(@NonNull View itemView){
             super(itemView);
-            imgSinger = itemView.findViewById(R.id.item_library_singer_avatar_of_singer);
+            imgSinger = itemView.findViewById(R.id.item_singer_civ_singer_image);
             tvNameSinger = itemView.findViewById(R.id.item_singer_tv_singer_name);
         }
     }

@@ -17,7 +17,7 @@ import java.util.List;
 
 public class SingerViewModel extends AndroidViewModel {
     private SingerRepository repository;
-    private RefreshLiveData<ArrayList<Singer>> liveData;
+    private RefreshLiveData<List<Singer>> liveData;
 
     public RefreshLiveData getLiveData(){
         return liveData;

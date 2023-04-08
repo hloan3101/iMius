@@ -8,6 +8,7 @@ import com.example.imius.model.Trending;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
@@ -22,7 +23,7 @@ public interface DataService {
     @POST("getTopicList.php")
     Call<List<TopicModel>> getTopic();
 
-    @POST("getSingerList.php")
+    @GET("getSingerList.php")
     Call<List<Singer>> getSinger();
 
 }

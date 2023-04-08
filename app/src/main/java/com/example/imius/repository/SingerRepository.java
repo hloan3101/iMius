@@ -20,8 +20,8 @@ public class SingerRepository {
         this.dataService = API.getAccount().create(DataService.class);
     }
 
-    public RefreshLiveData<ArrayList<Singer>> getSinger(){
-        RefreshLiveData<ArrayList<Singer>> data = new RefreshLiveData<>(callback -> {
+    public RefreshLiveData<List<Singer>> getSinger(){
+        RefreshLiveData<List<Singer>> data = new RefreshLiveData<>(callback -> {
             dataService.getSinger().enqueue(new Callback<List<Singer>>() {
                 @Override
                 public void onResponse(Call<List<Singer>> call, Response<List<Singer>> response) {
