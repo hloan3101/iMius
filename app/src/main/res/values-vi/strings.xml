@@ -48,4 +48,7 @@
     <string name="code_error">Mã code không đúng</string>
     <string name="email_format_error">Email không đúng định dạng</string>
     <string name="email_pattern">Định dạng Email</string>
+    <string name="library_playlist_name_exits">Tên danh sách phát đã tồn tại!</string>
+    <string name="library_playlist_insert_success">Thêm danh sách phát thành công!</string>
+    <string name="library_playlist_insert_failed">Thêm danh sách phát không thành công!</string>
 </resources>

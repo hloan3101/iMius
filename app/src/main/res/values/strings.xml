@@ -64,4 +64,7 @@
     <string name="password_email_server" translatable="false">cwoaqfrumgvhqnsz</string>
 
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="library_playlist_name_exits">The playlist name has been exists!</string>
+    <string name="library_playlist_insert_success">Insert playlist successfully!</string>
+    <string name="library_playlist_insert_failed">Insert playlist failed!</string>
 </resources>

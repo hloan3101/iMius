@@ -3,6 +3,7 @@ package com.example.imius.repository;
 import com.example.imius.api.API;
 import com.example.imius.data.DataLocalManager;
 import com.example.imius.livedata.RefreshLiveData;
+import com.example.imius.model.BaseResponse;
 import com.example.imius.model.LibraryPlaylist;
 import com.example.imius.service.DataService;
 
@@ -35,5 +36,9 @@ public class MusicRepository {
             });
         });
         return data;
+    }
+
+    public Call<BaseResponse> insertLibraryPlaylist (String nameLibraryPlaylist){
+        return dataService.insertLibraryPlaylist(nameLibraryPlaylist, DataLocalManager.getUsernameData());
     }
 }
