@@ -73,12 +73,12 @@ public class LoginActivity extends AppCompatActivity {
 
         boolean check = true;
         if (binding.activityLoginEtUsername.getText().toString().trim().isEmpty()){
-            binding.activityLoginEtUsername.setError(getResources().getString(R.string.require));
+            binding.activityLoginTilUsername.setError(getResources().getString(R.string.require));
             check = false;
         }
 
         if (binding.activityLoginEtPassword.getText().toString().trim().isEmpty()){
-            binding.activityLoginEtPassword.setError(getResources().getString(R.string.require));
+            binding.activityLoginTilPassword.setError(getResources().getString(R.string.require));
             check = false;
         }
 
@@ -86,8 +86,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void resetError() {
-        binding.activityLoginEtUsername.setError(null);
-        binding.activityLoginEtPassword.setError(null);
+        binding.activityLoginTilUsername.setError(null);
+        binding.activityLoginTilPassword.setError(null);
     }
 
     private void login (){

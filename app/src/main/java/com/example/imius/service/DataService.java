@@ -1,5 +1,6 @@
 package com.example.imius.service;
 
+import com.example.imius.model.BaseResponse;
 import com.example.imius.model.LibraryPlaylist;
 import com.example.imius.model.Singer;
 import com.example.imius.model.TopicModel;
@@ -25,5 +26,9 @@ public interface DataService {
 
     @GET("getSingerList.php")
     Call<List<Singer>> getSinger();
+
+    @GET("insertLibraryPlaylist.php")
+    Call<BaseResponse> insertLibraryPlaylist (@Query("nameLibraryPlaylist") String nameLibraryPlaylist,
+                                              @Query("username") String username);
 
 }

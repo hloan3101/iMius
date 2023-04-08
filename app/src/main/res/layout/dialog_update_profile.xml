@@ -63,7 +63,7 @@
                 android:id="@+id/dialog_update_profile_til_username"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="300dp"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:hint="Enter your name"
                 android:layout_centerHorizontal="true"
@@ -73,7 +73,8 @@
                 app:boxCornerRadiusTopEnd="30dp"
                 app:boxCornerRadiusTopStart="30dp"
                 app:boxStrokeWidth="2dp"
-                android:layout_below="@id/dialog_update_profile_civ_avatar">
+                android:layout_below="@id/dialog_update_profile_civ_avatar"
+                app:endIconMode="clear_text">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/dialog_update_profile_et_username"
