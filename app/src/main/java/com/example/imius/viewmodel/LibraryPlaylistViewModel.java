@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import com.example.imius.data.DataLocalManager;
 import com.example.imius.livedata.RefreshLiveData;
 import com.example.imius.model.BaseResponse;
 import com.example.imius.model.LibraryPlaylist;
@@ -35,6 +36,15 @@ public class LibraryPlaylistViewModel extends AndroidViewModel {
     public Call<BaseResponse> insertLibraryPlaylist (String nameLibraryPlaylist){
         return repository.insertLibraryPlaylist(nameLibraryPlaylist);
 
+    }
+
+    public Call<BaseResponse> deleteLibraryPlaylist (int idLibraryPlaylist){
+        return repository.deleteLibraryPlaylist(idLibraryPlaylist);
+
+    }
+
+    public Call<BaseResponse> updateLibraryPlaylistName (String nameLibraryPlaylist, String newNameLibraryPlaylist){
+        return repository.updateLibraryPlaylistName(nameLibraryPlaylist, newNameLibraryPlaylist);
     }
 
     public void refreshLiveData (){

@@ -1,5 +1,7 @@
 package com.example.imius.repository;
 
+import android.widget.Toast;
+
 import com.example.imius.api.API;
 import com.example.imius.data.DataLocalManager;
 import com.example.imius.livedata.RefreshLiveData;
@@ -31,7 +33,6 @@ public class MusicRepository {
 
                 @Override
                 public void onFailure(Call<List<LibraryPlaylist>> call, Throwable t) {
-
                 }
             });
         });
@@ -40,5 +41,13 @@ public class MusicRepository {
 
     public Call<BaseResponse> insertLibraryPlaylist (String nameLibraryPlaylist){
         return dataService.insertLibraryPlaylist(nameLibraryPlaylist, DataLocalManager.getUsernameData());
+    }
+
+    public Call<BaseResponse> deleteLibraryPlaylist (int idLibraryPlaylist){
+        return dataService.deleteLibraryPlaylist(idLibraryPlaylist);
+    }
+
+    public Call<BaseResponse> updateLibraryPlaylistName (String nameLibraryPlaylist, String newNameLibraryPlaylist){
+        return dataService.updateLibraryPlaylistName(nameLibraryPlaylist, newNameLibraryPlaylist, DataLocalManager.getUsernameData());
     }
 }
