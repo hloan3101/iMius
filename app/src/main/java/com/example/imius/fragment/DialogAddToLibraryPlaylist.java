@@ -55,6 +55,15 @@ public class DialogAddToLibraryPlaylist extends DialogFragment {
 
         viewModel = new ViewModelProvider(getActivity()).get(LibraryPlaylistViewModel.class);
 
+   //     Toast.makeText(getContext(), getArguments().getString(getString(R.string.check_update)), Toast.LENGTH_LONG).show();
+
+        if (getArguments().getString(getString(R.string.check_update)).equals(getString(R.string.update))){
+            binding.dialogAddToLibraryPlaylistTvContent.setText(getString(R.string.enter_new_name_for_your_playlist));
+            binding.dialogAddToLibraryPlaylistEtPlaylistName.setText(getArguments()
+                    .getString(getString(R.string.nameLibraryPlaylist)));
+
+        }
+
         binding.dialogAddToLibraryPlaylistIvClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,7 +75,11 @@ public class DialogAddToLibraryPlaylist extends DialogFragment {
             @Override
             public void onClick(View v) {
                 if (checkInput()){
-                    insertLibraryPlaylist();
+                    if (getArguments().getString(getString(R.string.check_update)).equals(getString(R.string.update))){
+                        updateLibraryPlaylistName();
+                    }else {
+                        insertLibraryPlaylist();
+                    }
                 }else {
                     return;
                 }
@@ -127,7 +140,44 @@ public class DialogAddToLibraryPlaylist extends DialogFragment {
 
             @Override
             public void onFailure(Call<BaseResponse> call, Throwable t) {
+                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 
+    private void updateLibraryPlaylistName (){
+
+        final ProgressDialog progressDialog = new ProgressDialog(getContext());
+        progressDialog.setTitle(getResources().getString(R.string.progressbar_tittle));
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+        viewModel.updateLibraryPlaylistName(getArguments().getString(getString(R.string.nameLibraryPlaylist)),
+                binding.dialogAddToLibraryPlaylistEtPlaylistName
+                .getText().toString().trim()).enqueue(new Callback<BaseResponse>() {
+            @Override
+            public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+                if(response.body() != null){
+                    if (response.body().getIsSuccess().equals(Constants.successfully)){
+                        Toast.makeText(getContext(), getString(R.string.library_playlist_update_success)
+                                , Toast.LENGTH_LONG).show();
+                        progressDialog.dismiss();
+                        getDialog().dismiss();
+                        viewModel.refreshLiveData();
+
+
+                    }else{
+                        Toast.makeText(getContext(), getString(R.string.library_playlist_update_failed), Toast.LENGTH_LONG).show();
+                        binding.dialogAddToLibraryPlaylistTilPlaylistName.setError(" ");
+                        progressDialog.dismiss();
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse> call, Throwable t) {
+                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }

@@ -57,8 +57,7 @@ public class SingerFragment extends Fragment {
         viewModel = new ViewModelProvider(getActivity()).get(SingerViewModel.class);
         viewModel.getSinger().observe(getViewLifecycleOwner(), singerList -> {
             singerAdapter.setSingerList(singerList);
-            Toast.makeText(getContext(), String.valueOf(singerAdapter.getSingerList().get(0).getImageSinger()), Toast.LENGTH_LONG).show();
-            //      binding.fragmentSingerTvSinger.setText(String.valueOf(singerList.size()));
+
         });
 
         return view;

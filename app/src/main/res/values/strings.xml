@@ -29,6 +29,7 @@
     <string name="runtime" translatable="false">--:--</string>
     <string name="total_time" translatable="false">--:--</string>
     <string name="enter_name_for_your_playlist">Enter a name for your playlist</string>
+    <string name="enter_new_name_for_your_playlist">Enter a new name for your playlist</string>
     <string name="enter_name_of_playlist">Enter a name of playlist</string>
     <string name="enter">Enter</string>
     <string name="library">Library</string>
@@ -66,5 +67,19 @@
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="library_playlist_name_exits">The playlist name has been exists!</string>
     <string name="library_playlist_insert_success">Insert playlist successfully!</string>
+    <string name="library_playlist_delete_success">Delete playlist successfully!</string>
+    <string name="library_playlist_update_success">Update playlist successfully!</string>
     <string name="library_playlist_insert_failed">Insert playlist failed!</string>
+    <string name="library_playlist_delete_failed">Delete playlist failed!</string>
+    <string name="library_playlist_update_failed">Update playlist failed!</string>
+
+    <string name="title_dialog_delete">Confirm</string>
+    <string name="title_dialog_delete_message">Are you sure you want to delete?</string>
+    <string name="yes_dialog">Yes</string>
+    <string name="no_dialog">No</string>
+
+    <string name="check_update" translatable="false">checkUpdate</string>
+    <string name="nameLibraryPlaylist" translatable="false">nameLibraryPlaylist</string>
+    <string name="update" translatable="false">update</string>
+    <string name="insert" translatable="false">insert</string>
 </resources>
