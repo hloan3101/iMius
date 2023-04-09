@@ -44,4 +44,5 @@ public class UserViewModel extends AndroidViewModel {
     public Call<BaseResponse> updateName(String name, String username){
         return userRepository.updateName(name, username);
     }
+
 }

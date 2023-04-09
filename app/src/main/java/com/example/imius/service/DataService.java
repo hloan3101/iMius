@@ -1,8 +1,10 @@
 package com.example.imius.service;
 
 import com.example.imius.model.BaseResponse;
+import com.example.imius.model.FavoriteSong;
 import com.example.imius.model.LibraryPlaylist;
 import com.example.imius.model.Singer;
+import com.example.imius.model.SongLibraryPlaylist;
 import com.example.imius.model.TopicModel;
 import com.example.imius.model.Trending;
 
@@ -17,6 +19,12 @@ public interface DataService {
 
     @GET("getLibraryPlaylistList.php")
     Call<List<LibraryPlaylist>> getLibraryPlaylistList(@Query("username") String username);
+
+    @GET("getFavoriteSong.php")
+    Call<List<FavoriteSong>> getFavoriteSong(@Query("username") String username);
+
+    @GET("getSongLibraryPlaylistList.php")
+    Call<List<SongLibraryPlaylist>> getSongLibraryPlaylistList (@Query("idLibraryPlaylist") int idLibraryPlaylist);
 
     @POST("getTrendingList.php")
     Call<List<Trending>> getTrending();
@@ -38,4 +46,8 @@ public interface DataService {
     Call<BaseResponse> updateLibraryPlaylistName (@Query("nameLibraryPlaylist") String nameLibraryPlaylist,
                                                   @Query("newNameLibraryPlaylist") String newNameLibraryPlaylist,
                                                   @Query("username") String username);
+
+    @GET("deleteLikeSong.php")
+    Call<BaseResponse> deleteFavoriteSong (@Query("idSong") String idSong, @Query("username") String username);
+
 }

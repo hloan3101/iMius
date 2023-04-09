@@ -7,48 +7,26 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 
-public class SongLibraryPlaylist implements Parcelable {
-    @SerializedName("idSongLibraryPlaylist")
-    @Expose
+public class SongLibraryPlaylist{
+
     private int idSongLibraryPlaylist;
-    @SerializedName("idLibraryPlaylist")
-    @Expose
     private int idLibraryPlaylist;
-    @SerializedName("idSong")
-    @Expose
     private int idSong;
-    @SerializedName("nameSong")
-    @Expose
     private String nameSong;
-    @SerializedName("imgSong")
-    @Expose
-    private String imgSong;
-    @SerializedName("nameSinger")
-    @Expose
     private String nameSinger;
-    @SerializedName("linkSong")
-    @Expose
+    private String 	imageSong;
     private String linkSong;
 
     public SongLibraryPlaylist(int idSongLibraryPlaylist, int idLibraryPlaylist, int idSong,
-                               String nameSong, String imgSong, String nameSinger, String linkSong) {
+                               String nameSong, String nameSinger, String imageSong, String linkSong) {
+
         this.idSongLibraryPlaylist = idSongLibraryPlaylist;
         this.idLibraryPlaylist = idLibraryPlaylist;
         this.idSong = idSong;
         this.nameSong = nameSong;
-        this.imgSong = imgSong;
         this.nameSinger = nameSinger;
+        this.imageSong = imageSong;
         this.linkSong = linkSong;
-    }
-
-    protected SongLibraryPlaylist(Parcel in) {
-        idSongLibraryPlaylist = in.readInt();
-        idLibraryPlaylist = in.readInt();
-        idSong = in.readInt();
-        nameSong = in.readString();
-        imgSong = in.readString();
-        nameSinger = in.readString();
-        linkSong = in.readString();
     }
 
     public int getIdSongLibraryPlaylist() {
@@ -83,14 +61,6 @@ public class SongLibraryPlaylist implements Parcelable {
         this.nameSong = nameSong;
     }
 
-    public String getImgSong() {
-        return imgSong;
-    }
-
-    public void setImgSong(String imgSong) {
-        this.imgSong = imgSong;
-    }
-
     public String getNameSinger() {
         return nameSinger;
     }
@@ -99,39 +69,19 @@ public class SongLibraryPlaylist implements Parcelable {
         this.nameSinger = nameSinger;
     }
 
+    public String getImageSong() {
+        return imageSong;
+    }
+
+    public void setImageSong(String imageSong) {
+        this.imageSong = imageSong;
+    }
+
     public String getLinkSong() {
         return linkSong;
     }
 
     public void setLinkSong(String linkSong) {
         this.linkSong = linkSong;
-    }
-
-    public static final Creator<SongLibraryPlaylist> CREATOR = new Creator<SongLibraryPlaylist>() {
-        @Override
-        public SongLibraryPlaylist createFromParcel(Parcel in) {
-            return new SongLibraryPlaylist(in);
-        }
-
-        @Override
-        public SongLibraryPlaylist[] newArray(int size) {
-            return new SongLibraryPlaylist[size];
-        }
-    };
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(idSongLibraryPlaylist);
-        dest.writeInt(idLibraryPlaylist);
-        dest.writeInt(idSong);
-        dest.writeString(nameSong);
-        dest.writeString(imgSong);
-        dest.writeString(nameSinger);
-        dest.writeString(linkSong);
     }
 }
