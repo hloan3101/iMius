@@ -15,7 +15,6 @@ import com.example.imius.repository.TrendingRepository;
 import java.util.List;
 
 public class TrendingViewModel extends AndroidViewModel {
-
     private TrendingRepository repository;
     private RefreshLiveData<List<Trending>> liveData;
 
@@ -29,12 +28,9 @@ public class TrendingViewModel extends AndroidViewModel {
         repository = new TrendingRepository();
         liveData = repository.getTrending();
     }
-
-
     public LiveData<List<Trending>> getTrending() {
         return liveData;
     }
-
     public void refreshLiveData (){
         liveData.refresh();
     }

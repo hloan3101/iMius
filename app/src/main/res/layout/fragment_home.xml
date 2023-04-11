@@ -23,38 +23,38 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:layout="@layout/fragment_singer" />
-<!--        <fragment-->
-<!--            android:name="com.example.imius.fragment.TrendingFragment"-->
-<!--            android:id="@+id/fragment_home_fragment_trending"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"/>-->
+        <fragment
+            android:name="com.example.imius.fragment.TrendingFragment"
+            android:id="@+id/fragment_home_fragment_trending"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
-<!--        <fragment-->
-<!--            android:id="@+id/fragment_home_fragment_new_release"-->
-<!--            android:name="com.example.imius.fragment.NewReleaseFragment"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content" />-->
+        <fragment
+            android:id="@+id/fragment_home_fragment_new_release"
+            android:name="com.example.imius.fragment.NewReleaseFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-<!--        <fragment-->
-<!--            android:name="com.example.imius.fragment.TopicFragment"-->
-<!--            android:id="@+id/fragment_home_fragment_topic"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"/>-->
-<!--        <fragment-->
-<!--            android:name="com.example.imius.fragment.ChartsFragment"-->
-<!--            android:id="@+id/fragment_home_fragment_charts"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"/>-->
-<!--        <fragment-->
-<!--            android:name="com.example.imius.fragment.TrendingFragment"-->
-<!--            android:id="@+id/fragment_home_fragment_trending1"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"/>-->
-<!--        <fragment-->
-<!--            android:name="com.example.imius.fragment.TopicFragment"-->
-<!--            android:id="@+id/fragment_home_fragment_topic1"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"/>-->
+        <fragment
+            android:name="com.example.imius.fragment.TopicFragment"
+            android:id="@+id/fragment_home_fragment_topic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <fragment
+            android:name="com.example.imius.fragment.ChartsFragment"
+            android:id="@+id/fragment_home_fragment_charts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <fragment
+            android:name="com.example.imius.fragment.TrendingFragment"
+            android:id="@+id/fragment_home_fragment_trending1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <fragment
+            android:name="com.example.imius.fragment.TopicFragment"
+            android:id="@+id/fragment_home_fragment_topic1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
 <!--        <fragment-->
 <!--            android:name="com.example.imius.fragment.ChartsFragment"-->
@@ -62,17 +62,17 @@
 <!--            android:layout_width="match_parent"-->
 <!--            android:layout_height="wrap_content"/>-->
 
-<!--        <fragment-->
-<!--            android:name="com.example.imius.fragment.NewReleaseFragment"-->
-<!--            android:id="@+id/fragment_home_fragment_new_release1"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"/>-->
+        <fragment
+            android:name="com.example.imius.fragment.NewReleaseFragment"
+            android:id="@+id/fragment_home_fragment_new_release1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
-<!--        <fragment-->
-<!--            android:name="com.example.imius.fragment.TopicFragment"-->
-<!--            android:id="@+id/fragment_home_fragment_topic2"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"/>-->
+        <fragment
+            android:name="com.example.imius.fragment.TopicFragment"
+            android:id="@+id/fragment_home_fragment_topic2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
 <!--        <fragment-->
 <!--            android:name="com.example.imius.fragment.ChartsFragment"-->
@@ -86,11 +86,11 @@
 <!--            android:layout_width="match_parent"-->
 <!--            android:layout_height="wrap_content"/>-->
 
-<!--        <fragment-->
-<!--            android:name="com.example.imius.fragment.TopicFragment"-->
-<!--            android:id="@+id/fragment_home_fragment_topic5"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"/>-->
+        <fragment
+            android:name="com.example.imius.fragment.TopicFragment"
+            android:id="@+id/fragment_home_fragment_topic5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
 <!--        <fragment-->
 <!--            android:name="com.example.imius.fragment.ChartsFragment"-->
@@ -98,16 +98,16 @@
 <!--            android:layout_width="match_parent"-->
 <!--            android:layout_height="wrap_content"/>-->
 
-<!--        <fragment-->
-<!--            android:name="com.example.imius.fragment.TrendingFragment"-->
-<!--            android:id="@+id/fragment_home_fragment_trending4"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"/>-->
-<!--        <fragment-->
-<!--            android:name="com.example.imius.fragment.TopicFragment"-->
-<!--            android:id="@+id/fragment_home_fragment_topic4"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"/>-->
+        <fragment
+            android:name="com.example.imius.fragment.TrendingFragment"
+            android:id="@+id/fragment_home_fragment_trending4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <fragment
+            android:name="com.example.imius.fragment.TopicFragment"
+            android:id="@+id/fragment_home_fragment_topic4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
 <!--        <fragment-->
 <!--            android:name="com.example.imius.fragment.ChartsFragment"-->
@@ -121,11 +121,11 @@
 <!--            android:layout_width="match_parent"-->
 <!--            android:layout_height="wrap_content"/>-->
 
-<!--        <fragment-->
-<!--            android:name="com.example.imius.fragment.TopicFragment"-->
-<!--            android:id="@+id/fragment_home_fragment_topic3"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"/>-->
+        <fragment
+            android:name="com.example.imius.fragment.TopicFragment"
+            android:id="@+id/fragment_home_fragment_topic3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
 <!--        <fragment-->
 <!--            android:name="com.example.imius.fragment.ChartsFragment"-->
@@ -133,11 +133,11 @@
 <!--            android:layout_width="match_parent"-->
 <!--            android:layout_height="wrap_content"/>-->
 
-<!--        <fragment-->
-<!--            android:name="com.example.imius.fragment.NewReleaseFragment"-->
-<!--            android:id="@+id/fragment_home_fragment_new_release3"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"/>-->
+        <fragment
+            android:name="com.example.imius.fragment.NewReleaseFragment"
+            android:id="@+id/fragment_home_fragment_new_release3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 

@@ -29,11 +29,8 @@ import retrofit2.Response;
 
 public class TrendingFragment extends Fragment {
     private FragmentTrendingBinding binding;
-
     private TrendingAdapter trendingAdapter;
     private TrendingViewModel viewModel;
-
-    private DataService dataService;
 
     public static TrendingFragment newInstance() {
         TrendingFragment fragment = new TrendingFragment();
@@ -47,20 +44,25 @@ public class TrendingFragment extends Fragment {
         binding = FragmentTrendingBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        binding.fragmentTrendingRvTrending.setLayoutManager(new LinearLayoutManager(getContext()));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext());
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+
+        binding.fragmentTrendingRvTrending.setLayoutManager(linearLayoutManager);
+
         trendingAdapter = new TrendingAdapter(this.getContext());
         binding.fragmentTrendingRvTrending.setAdapter(trendingAdapter);
-
 
         viewModel = new ViewModelProvider(getActivity()).get(TrendingViewModel.class);
         viewModel.getTrending().observe(getViewLifecycleOwner(), trendingList -> {
             trendingAdapter.setTrendingList(trendingList);
-            //  Toast.makeText(getContext(), String.valueOf(adapter.getPlaylistLibraryList().get(1).getNameLibraryPlaylist()), Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), String.valueOf(trendingAdapter.getTrendingList().get(1).getImageTrending()), Toast.LENGTH_LONG).show();
         });
-
-
         return view;
-
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        viewModel.refreshLiveData();
     }
 
 

@@ -27,8 +27,6 @@ public class TopicViewModel extends AndroidViewModel {
     public LiveData<List<TopicModel>> getTopic(){
         return liveData;
     }
-
-
     public void refreshLiveData(){
         liveData.refresh();
     }

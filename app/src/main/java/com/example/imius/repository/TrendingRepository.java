@@ -18,7 +18,6 @@ public class TrendingRepository {
 
     public TrendingRepository(){
         this.dataService = API.getAccount().create(DataService.class);
-
     }
 
     public RefreshLiveData<List<Trending>> getTrending() {
