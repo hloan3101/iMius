@@ -1,19 +1,35 @@
 package com.example.imius.fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.imius.R;
 import com.example.imius.adapter.LibraryPlaylistAdapter;
+import com.example.imius.constants.Constants;
+import com.example.imius.data.DataLocalManager;
 import com.example.imius.databinding.FragmentLibraryPlaylistBinding;
+import com.example.imius.model.BaseResponse;
+import com.example.imius.model.LibraryPlaylist;
 import com.example.imius.viewmodel.LibraryPlaylistViewModel;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LibraryPlaylistFragment extends Fragment {
 
@@ -32,18 +48,106 @@ public class LibraryPlaylistFragment extends Fragment {
         binding = FragmentLibraryPlaylistBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
+        initView();
+
+        return view;
+    }
+
+    private void initView (){
         binding.fragmentLibraryPlaylistRvPlaylist.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new LibraryPlaylistAdapter(this.getContext());
         binding.fragmentLibraryPlaylistRvPlaylist.setAdapter(adapter);
 
-
         viewModel = new ViewModelProvider(getActivity()).get(LibraryPlaylistViewModel.class);
         viewModel.getListLibraryPlaylist().observe(getViewLifecycleOwner(), libraryPlaylists -> {
             adapter.setPlaylistLibraryList(libraryPlaylists);
-          //  Toast.makeText(getContext(), String.valueOf(adapter.getPlaylistLibraryList().get(1).getNameLibraryPlaylist()), Toast.LENGTH_LONG).show();
+   //         Toast.makeText(getContext(), String.valueOf(adapter.getItemCount()), Toast.LENGTH_LONG).show();
         });
 
-        return view;
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
+                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView,
+                                  @NonNull RecyclerView.ViewHolder viewHolder,
+                                  @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                int position = viewHolder.getAdapterPosition();
+                List<LibraryPlaylist> libraryPlaylistList = adapter.getPlaylistLibraryList();
+                LibraryPlaylist libraryPlaylist = libraryPlaylistList.get(position);
+
+                if (direction == ItemTouchHelper.LEFT){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+                    builder.setTitle(getString(R.string.title_dialog_delete));
+                    builder.setMessage(getString(R.string.title_dialog_delete_message));
+                    builder.setCancelable(false);
+
+                    builder.setPositiveButton(getString(R.string.yes_dialog),
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    deleteLibraryPlaylist(libraryPlaylist.getIdLibraryPlaylist());
+                                }
+                            });
+
+                    builder.setNegativeButton(getString(R.string.no_dialog),
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    viewModel.refreshLiveData();
+                                    dialogInterface.cancel();
+                                }
+                            });
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+
+                }
+                else {
+                    callDialogAddToLibraryPlaylist(getString(R.string.update), libraryPlaylist.getNameLibraryPlaylist());
+                    viewModel.refreshLiveData();
+                }
+            }
+        }).attachToRecyclerView(binding.fragmentLibraryPlaylistRvPlaylist);
+    }
+
+    private void deleteLibraryPlaylist (int idLibraryPlaylist){
+        viewModel.deleteLibraryPlaylist(idLibraryPlaylist).enqueue(new Callback<BaseResponse>() {
+            @Override
+            public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+                if(response.body() != null){
+                    if (response.body().getIsSuccess().equals(Constants.successfully)){
+                        Toast.makeText(getContext(), getString(R.string.library_playlist_delete_success),
+                                Toast.LENGTH_LONG).show();
+                        viewModel.refreshLiveData();
+                    }else {
+                        Toast.makeText(getContext(), getString(R.string.library_playlist_delete_failed),
+                                Toast.LENGTH_LONG).show();
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse> call, Throwable t) {
+                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void callDialogAddToLibraryPlaylist(String str, String nameLibraryPlaylist){
+        DialogFragment dialogFragment = DialogAddToLibraryPlaylist.newInstance();
+
+        Bundle bundle =  new Bundle();
+        bundle.putString(getString(R.string.check_update),str);
+        bundle.putString(getString(R.string.nameLibraryPlaylist), nameLibraryPlaylist);
+
+        dialogFragment.setArguments(bundle);
+        dialogFragment.show(getActivity().getSupportFragmentManager(), "DialogAddToLibraryPlaylist");
     }
 
     @Override

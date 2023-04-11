@@ -33,7 +33,7 @@
                 android:id="@+id/dialog_add_to_library_playlist_til_playlist_name"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="300dp"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
                 android:hint="@string/enter_name_of_playlist"
                 android:textColorHint="@color/colorPrimary"
@@ -42,6 +42,7 @@
                 app:boxCornerRadiusTopEnd="30dp"
                 app:boxCornerRadiusTopStart="30dp"
                 app:boxStrokeWidth="2dp"
+                app:endIconMode="clear_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/dialog_add_to_library_playlist_tv_content">
