@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.imius.adapter.TopicAdapter;
 import com.example.imius.adapter.TrendingAdapter;
@@ -29,8 +30,6 @@ public class TopicFragment extends Fragment {
     private FragmentTopicBinding binding;
     private TopicAdapter topicAdapter;
     private TopicViewModel viewModel;
-    private DataService dataService;
-
 
     public static TopicFragment newInstance(String param1, String param2) {
         TopicFragment fragment = new TopicFragment();
@@ -45,7 +44,11 @@ public class TopicFragment extends Fragment {
         binding = FragmentTopicBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        binding.fragmentThemeRvTheme.setLayoutManager(new LinearLayoutManager(getContext()));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext());
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+
+        binding.fragmentThemeRvTheme.setLayoutManager(linearLayoutManager);
+
         topicAdapter = new TopicAdapter(this.getContext());
         binding.fragmentThemeRvTheme.setAdapter(topicAdapter);
 
@@ -53,9 +56,13 @@ public class TopicFragment extends Fragment {
         viewModel = new ViewModelProvider(getActivity()).get(TopicViewModel.class);
         viewModel.getTopic().observe(getViewLifecycleOwner(), topicModelList -> {
             topicAdapter.setTopicModelList(topicModelList);
-            //  Toast.makeText(getContext(), String.valueOf(adapter.getPlaylistLibraryList().get(1).getNameLibraryPlaylist()), Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), String.valueOf(topicAdapter.getTopicModelList().get(0).getImageTopic()), Toast.LENGTH_LONG).show();
         });
         return view;
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        viewModel.refreshLiveData();
+    }
 }

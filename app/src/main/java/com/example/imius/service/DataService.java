@@ -1,6 +1,8 @@
 package com.example.imius.service;
 
+import com.example.imius.model.ChartsModel;
 import com.example.imius.model.LibraryPlaylist;
+import com.example.imius.model.NewReleaseModel;
 import com.example.imius.model.Singer;
 import com.example.imius.model.TopicModel;
 import com.example.imius.model.Trending;
@@ -26,4 +28,9 @@ public interface DataService {
     @GET("getSingerList.php")
     Call<List<Singer>> getSinger();
 
+    @POST("getNewReleaseList.php")
+    Call<List<NewReleaseModel>> getNewRelease();
+
+    @POST("getChartList.php")
+    Call<List<ChartsModel>> getCharts();
 }
