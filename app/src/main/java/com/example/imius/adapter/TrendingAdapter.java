@@ -2,7 +2,6 @@ package com.example.imius.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,36 +12,32 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.imius.R;
-import com.example.imius.activity.PlaylistActivity;
 import com.example.imius.model.Trending;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
+//import de.hdodenhof.circleimageview.CircleImageView;
+
+
 public class TrendingAdapter extends RecyclerView.Adapter<TrendingAdapter.ViewHolder> {
     private Context context;
 
-    List<Trending> trendingList;
+    private List<Trending> trendingList;
 
-
-    public TrendingAdapter(Context context, ArrayList<Trending> arrayTrending){
+    public TrendingAdapter(Context context) {
         this.context = context;
-        this.trendingList = arrayTrending;
+    }
+    public TrendingAdapter(Context context, ArrayList<Trending> trendingArrayList){
+        this.context = context;
+        this.trendingList = trendingArrayList;
     }
 
     public List<Trending> getTrendingList() {
         return trendingList;
     }
 
-    public void setTrendingList(List<Trending> trendingList) {
-        this.trendingList = trendingList;
-    }
-
-
-    public TrendingAdapter(Context context) {
-        this.context = context;
-    }
 
     @NonNull
     @Override
@@ -51,10 +46,19 @@ public class TrendingAdapter extends RecyclerView.Adapter<TrendingAdapter.ViewHo
         View view = inflater.inflate(R.layout.item_trending, parent, false);
         return new ViewHolder(view);
     }
+    public void setTrendingList(List<Trending> trendingList) {
+        this.trendingList = trendingList;
+        notifyDataSetChanged();
+    }
 
     @Override
-    public void onBindViewHolder(@NonNull TrendingAdapter.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Trending trending = trendingList.get(position);
+
+        if(trendingList == null){
+            return;
+        }
+
         holder.tvNameTrending.setText(trending.getNameTrending());
         Picasso.get().load(trending.getImageTrending()).into(holder.imgTrending);
 
@@ -66,12 +70,12 @@ public class TrendingAdapter extends RecyclerView.Adapter<TrendingAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        ImageView imgTrending;
-        TextView tvNameTrending;
-        public ViewHolder(View itemView){
+        private ImageView imgTrending;
+        private TextView tvNameTrending;
+        public ViewHolder(@NonNull View itemView){
             super(itemView);
-            imgTrending = itemView.findViewById(R.id.item_trending_iv_trending_image);
-            tvNameTrending = imgTrending.findViewById(R.id.item_trending_tv_trending_name);
+            imgTrending = itemView.findViewById(R.id.item_newrelease_iv_newrelease_image);
+            tvNameTrending = itemView.findViewById(R.id.item_newrelease_tv_newrelease_name);
 
         }
 

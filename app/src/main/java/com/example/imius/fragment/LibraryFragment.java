@@ -63,6 +63,12 @@ public class LibraryFragment extends Fragment {
 
     private void callDialogAddToLibraryPlaylist(){
         DialogFragment dialogFragment =DialogAddToLibraryPlaylist.newInstance();
+
+        Bundle bundle =  new Bundle();
+        bundle.putString(getString(R.string.check_update),getString(R.string.insert));
+
+        dialogFragment.setArguments(bundle);
+
         dialogFragment.show(getActivity().getSupportFragmentManager(), "DialogAddToLibraryPlaylist");
     }
 }
