@@ -37,10 +37,10 @@ public class LibraryPlaylistViewModel extends AndroidViewModel {
         return libraryPlaylistList;
     }
 
-    public RefreshLiveData<List<FavoriteSong>> getFavoriteSongList() {
+    public LiveData<List<FavoriteSong>> getFavoriteSongList() {
         return favoriteSongList;
     }
-    public RefreshLiveData<List<SongLibraryPlaylist>> getAllSongLibraryPlaylist(int idLibraryPlaylist) {
+    public LiveData<List<SongLibraryPlaylist>> getAllSongLibraryPlaylist(int idLibraryPlaylist) {
         return repository.getAllSongLibraryPlaylist(idLibraryPlaylist);
     }
 

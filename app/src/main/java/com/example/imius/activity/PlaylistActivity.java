@@ -2,12 +2,16 @@ package com.example.imius.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.imius.R;
+import com.example.imius.adapter.LibraryPlaylistAdapter;
+import com.example.imius.adapter.SongLibraryPlaylistAdapter;
 import com.example.imius.databinding.ActivityLoginBinding;
 import com.example.imius.databinding.ActivityPlaylistBinding;
 import com.example.imius.fragment.SearchFragment;
@@ -19,6 +23,7 @@ public class PlaylistActivity extends AppCompatActivity {
 
     private ActivityPlaylistBinding binding;
     private LibraryPlaylistViewModel viewModel;
+    private SongLibraryPlaylistAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +37,8 @@ public class PlaylistActivity extends AppCompatActivity {
         if (bundle != null){
             Picasso.get().load(bundle.getString("imgPlaylistLibrary")).into(binding.activityPlaylistIvViewSong);
             binding.activityPlaylistTvSongName.setText(bundle.getString("nameLibraryPlaylist"));
-
+            getSongLibraryPlayList(bundle.getInt("idLibraryPlaylist"));
+      //     Toast.makeText(this, String.valueOf(bundle.getInt("idLibraryPlaylist")), Toast.LENGTH_LONG).show();
         }else {
             binding.activityPlaylistImAddSong.setVisibility(View.GONE);
         }
@@ -61,7 +67,15 @@ public class PlaylistActivity extends AppCompatActivity {
             }
         });
     }
-    private void getSongLibraryPlayList () {
+    private void getSongLibraryPlayList (int idLibraryPlaylist) {
+        binding.activityPlaylistRvPlaylist.setLayoutManager(new LinearLayoutManager(PlaylistActivity.this));
+        adapter = new SongLibraryPlaylistAdapter(PlaylistActivity.this);
+        binding.activityPlaylistRvPlaylist.setAdapter(adapter);
 
+        viewModel = new ViewModelProvider(this).get(LibraryPlaylistViewModel.class);
+        viewModel.getAllSongLibraryPlaylist(idLibraryPlaylist).observe(this, songLibraryPlaylists -> {
+            adapter.setSongLibraryPlaylistList(songLibraryPlaylists);
+           Toast.makeText(this, String.valueOf(adapter.getItemCount()), Toast.LENGTH_LONG).show();
+        });
     }
 }

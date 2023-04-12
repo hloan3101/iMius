@@ -55,7 +55,7 @@ public class TrendingFragment extends Fragment {
         viewModel = new ViewModelProvider(getActivity()).get(TrendingViewModel.class);
         viewModel.getTrending().observe(getViewLifecycleOwner(), trendingList -> {
             trendingAdapter.setTrendingList(trendingList);
-            Toast.makeText(getContext(), String.valueOf(trendingAdapter.getTrendingList().get(1).getImageTrending()), Toast.LENGTH_LONG).show();
+       //     Toast.makeText(getContext(), String.valueOf(trendingAdapter.getTrendingList().get(1).getImageTrending()), Toast.LENGTH_LONG).show();
         });
         return view;
     }
