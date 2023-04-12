@@ -67,4 +67,20 @@
     <string name="library_playlist_name_exits">The playlist name has been exists!</string>
     <string name="library_playlist_insert_success">Insert playlist successfully!</string>
     <string name="library_playlist_insert_failed">Insert playlist failed!</string>
+
+    <string name="status_player" translatable="false">status_player</string>
+    <string name="action_music" translatable="false">action_music</string>
+    <string name="duration_music" translatable="false">duration_music</string>
+    <string name="seek_to_music" translatable="false">seek_to_music</string>
+    <string name="position_music" translatable="false">position_music</string>
+    <string name="obj_song" translatable="false">obj_song</string>
+    <string name="obj_song_library" translatable="false">obj_song_library</string>
+    <string name="obj_song_favorite" translatable="false">obj_song_favorite</string>
+    <string name="action_music_service" translatable="false">action_music_service</string>
+    <string name="duration" translatable="false">duration</string>
+    <string name="repeat_music" translatable="false">repeat_music</string>
+    <string name="random_music" translatable="false">random_music</string>
+    <string name="send_data_to_activity" translatable="false">send_data_to_activity</string>
+
+
 </resources>

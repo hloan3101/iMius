@@ -5,6 +5,7 @@ import com.example.imius.data.DataLocalManager;
 import com.example.imius.livedata.RefreshLiveData;
 import com.example.imius.model.BaseResponse;
 import com.example.imius.model.LibraryPlaylist;
+import com.example.imius.model.Song;
 import com.example.imius.service.DataService;
 
 import java.util.ArrayList;
@@ -40,5 +41,22 @@ public class MusicRepository {
 
     public Call<BaseResponse> insertLibraryPlaylist (String nameLibraryPlaylist){
         return dataService.insertLibraryPlaylist(nameLibraryPlaylist, DataLocalManager.getUsernameData());
+    }
+
+    public Call<List<Song>> findSong(String key){
+        return dataService.findSong(key);
+    }
+
+    public Call<BaseResponse> checkLikeSong(String username, int idSong){
+        return dataService.checkLikeSong(username, idSong);
+    }
+
+    public Call<BaseResponse> deleteLikeSong(String username, int idSong){
+        return dataService.deleteLikeSong(username, idSong);
+    }
+
+    public Call<BaseResponse> insertLoveSong(int idLike, String username, Song song){
+        return dataService.insertLoveSong(idLike, username, song.getIdSong(), song.getNameSong(),
+                song.getNameSinger(), song.getImgSong(), song.getLinkSong());
     }
 }
