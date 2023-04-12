@@ -12,10 +12,14 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.imius.R;
+import com.example.imius.model.SongLibraryPlaylist;
+
+import java.util.List;
 
 public class SongLibraryPlaylistAdapter extends RecyclerView.Adapter<SongLibraryPlaylistAdapter.ViewHolder>{
 
     private Context context;
+    private List<SongLibraryPlaylist> songLibraryPlaylistList;
 
 
     public SongLibraryPlaylistAdapter(Context context) {

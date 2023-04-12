@@ -11,12 +11,14 @@ import com.example.imius.R;
 import com.example.imius.databinding.ActivityLoginBinding;
 import com.example.imius.databinding.ActivityPlaylistBinding;
 import com.example.imius.fragment.SearchFragment;
+import com.example.imius.viewmodel.LibraryPlaylistViewModel;
 import com.example.imius.viewmodel.UserViewModel;
 import com.squareup.picasso.Picasso;
 
 public class PlaylistActivity extends AppCompatActivity {
 
     private ActivityPlaylistBinding binding;
+    private LibraryPlaylistViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,8 @@ public class PlaylistActivity extends AppCompatActivity {
         if (bundle != null){
             Picasso.get().load(bundle.getString("imgPlaylistLibrary")).into(binding.activityPlaylistIvViewSong);
             binding.activityPlaylistTvSongName.setText(bundle.getString("nameLibraryPlaylist"));
+
+        }else {
             binding.activityPlaylistImAddSong.setVisibility(View.GONE);
         }
 
@@ -56,5 +60,8 @@ public class PlaylistActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+    private void getSongLibraryPlayList () {
+
     }
 }
