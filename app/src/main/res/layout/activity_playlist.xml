@@ -70,13 +70,14 @@
         android:id="@+id/activity_playlist_fab_action"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:elevation="6dp"
         android:scaleType="fitXY"
         android:src="@drawable/ic_play"
-        android:elevation="6dp"
         app:fabSize="normal"
-        app:layout_anchorGravity="top|center"
         app:layout_anchor="@id/activity_playlist_nested"
-        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"/>
+        app:layout_anchorGravity="top|center"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <LinearLayout
         android:id="@+id/activity_playlist_linearlayout"
@@ -99,7 +100,7 @@
                 android:background="@drawable/ic_arrow_back"/>
 
             <ImageView
-                android:id="@+id/activity_playlist_im_add"
+                android:id="@+id/activity_playlist_im_add_song"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_alignParentEnd="true"

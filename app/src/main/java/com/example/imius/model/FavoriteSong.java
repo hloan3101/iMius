@@ -8,61 +8,42 @@ import androidx.annotation.NonNull;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class FavoriteSong implements Parcelable {
+public class FavoriteSong{
     // BAI HAT YEU THICH
-    @SerializedName("idFavorite")
-    @Expose
-    private int idFavorite;
 
-    @SerializedName("userName")
-    @Expose
-    private String userName;
-
-    @SerializedName("idSong")
-    @Expose
+    private int idLike;
+    private String username;
     private int idSong;
-
-    @SerializedName("nameSong")
-    @Expose
     private String nameSong;
-
-    @SerializedName("imgSong")
-    @Expose
-    private String imgSong;
-
-    @SerializedName("nameSinger")
-    @Expose
     private String nameSinger;
-
-    @SerializedName("linkSong")
-    @Expose
+    private String imageSong;
     private String linkSong;
 
-    public FavoriteSong(int idFavorite, String userName, int idSong, String nameSong,
-                        String imgSong, String nameSinger, String linkSong){
-        this.idFavorite = idFavorite;
-        this.userName = userName;
+    public FavoriteSong(int idLike, String username, int idSong, String nameSong,
+                        String nameSinger, String imageSong, String linkSong) {
+        this.idLike = idLike;
+        this.username = username;
         this.idSong = idSong;
         this.nameSong = nameSong;
-        this.imgSong = imgSong;
         this.nameSinger = nameSinger;
+        this.imageSong = imageSong;
         this.linkSong = linkSong;
     }
 
-    public int getIdFavorite() {
-        return idFavorite;
+    public int getIdLike() {
+        return idLike;
     }
 
-    public void setIdFavorite(int idFavorite) {
-        this.idFavorite = idFavorite;
+    public void setIdLike(int idLike) {
+        this.idLike = idLike;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public int getIdSong() {
@@ -81,20 +62,20 @@ public class FavoriteSong implements Parcelable {
         this.nameSong = nameSong;
     }
 
-    public String getImgSong() {
-        return imgSong;
-    }
-
-    public void setImgSong(String imgSong) {
-        this.imgSong = imgSong;
-    }
-
     public String getNameSinger() {
         return nameSinger;
     }
 
     public void setNameSinger(String nameSinger) {
         this.nameSinger = nameSinger;
+    }
+
+    public String getImageSong() {
+        return imageSong;
+    }
+
+    public void setImageSong(String imageSong) {
+        this.imageSong = imageSong;
     }
 
     public String getLinkSong() {
@@ -104,39 +85,4 @@ public class FavoriteSong implements Parcelable {
     public void setLinkSong(String linkSong) {
         this.linkSong = linkSong;
     }
-
-    protected FavoriteSong(Parcel in){
-        idFavorite = in.readInt();
-        userName = in.readString();
-        idSong = in.readInt();
-        nameSong = in.readString();
-        imgSong = in.readString();
-        nameSinger = in.readString();
-        linkSong = in.readString();
-    }
-
-    public static final Creator<FavoriteSong> CREATOR = new Creator<FavoriteSong>() {
-        @Override
-        public FavoriteSong createFromParcel(Parcel in) {
-            return new FavoriteSong(in);
-        }
-
-        @Override
-        public FavoriteSong[] newArray(int size) {
-            return new FavoriteSong[size];
-        }
-    };
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(@NonNull Parcel parcel, int i) {
-
-    }
-
-
-
 }
