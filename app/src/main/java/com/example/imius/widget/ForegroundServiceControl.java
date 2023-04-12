@@ -70,17 +70,17 @@ public class ForegroundServiceControl extends Service {
 
             if (intent.hasExtra(getResources().getString(R.string.obj_song))){
                 clearArray();
-                songArrayList = intent.getParcelableArrayListExtra(getResources().getString(R.string.obj_song));
+                songArrayList = intent.getParcelableArrayListExtra(getResources().getString(R.string.obj_song));}
 
-            } else if (intent.hasExtra(getResources().getString(R.string.obj_song_library))){
-                clearArray();
-                songLibraryPlaylistArrayList = intent.getParcelableArrayListExtra(getResources().getString(R.string.obj_song_library));
-
-            } else if (intent.hasExtra(getResources().getString(R.string.obj_song_favorite))){
-                clearArray();
-                favoriteSongArrayList = intent.getParcelableArrayListExtra(getResources().getString(R.string.obj_song_favorite));
-
-            }
+//            } else if (intent.hasExtra(getResources().getString(R.string.obj_song_library))){
+//                clearArray();
+//                songLibraryPlaylistArrayList = intent.getParcelableArrayListExtra(getResources().getString(R.string.obj_song_library));
+//
+//            } else if (intent.hasExtra(getResources().getString(R.string.obj_song_favorite))){
+//                clearArray();
+//                favoriteSongArrayList = intent.getParcelableArrayListExtra(getResources().getString(R.string.obj_song_favorite));
+//
+//            }
         }
 
         assert intent != null;
@@ -164,22 +164,22 @@ public class ForegroundServiceControl extends Service {
     }
 
     private void CompleteAndStart() {
-        if (songArrayList != null && songArrayList.size() > 0){
-            startMusic(songArrayList.get(positionPlayer).getLinkSong());
-            songImage = songArrayList.get(positionPlayer).getImgSong();
-            sendNotificationMedia(songArrayList.get(positionPlayer).getNameSong(),songArrayList.get(positionPlayer).getNameSinger());
-
-        } else if (songLibraryPlaylistArrayList != null && songLibraryPlaylistArrayList.size() > 0){
-            startMusic(songLibraryPlaylistArrayList.get(positionPlayer).getLinkSong());
-            songImage = songLibraryPlaylistArrayList.get(positionPlayer).getImgSong();
-            sendNotificationMedia(songLibraryPlaylistArrayList.get(positionPlayer).getNameSong(), songLibraryPlaylistArrayList.get(positionPlayer).getNameSinger());
-
-        } else if (favoriteSongArrayList != null && favoriteSongArrayList.size() > 0){
-            startMusic(favoriteSongArrayList.get(positionPlayer).getLinkSong());
-            songImage = favoriteSongArrayList.get(positionPlayer).getImgSong();
-            sendNotificationMedia(favoriteSongArrayList.get(positionPlayer).getNameSong(),favoriteSongArrayList.get(positionPlayer).getNameSinger());
-
-        }
+//        if (songArrayList != null && songArrayList.size() > 0){
+//            startMusic(songArrayList.get(positionPlayer).getLinkSong());
+//            songImage = songArrayList.get(positionPlayer).getImgSong();
+//            sendNotificationMedia(songArrayList.get(positionPlayer).getNameSong(),songArrayList.get(positionPlayer).getNameSinger());
+//
+//        } else if (songLibraryPlaylistArrayList != null && songLibraryPlaylistArrayList.size() > 0){
+//            startMusic(songLibraryPlaylistArrayList.get(positionPlayer).getLinkSong());
+//            songImage = songLibraryPlaylistArrayList.get(positionPlayer).getImgSong();
+//            sendNotificationMedia(songLibraryPlaylistArrayList.get(positionPlayer).getNameSong(), songLibraryPlaylistArrayList.get(positionPlayer).getNameSinger());
+//
+//        } else if (favoriteSongArrayList != null && favoriteSongArrayList.size() > 0){
+//            startMusic(favoriteSongArrayList.get(positionPlayer).getLinkSong());
+//            songImage = favoriteSongArrayList.get(positionPlayer).getImgSong();
+//            sendNotificationMedia(favoriteSongArrayList.get(positionPlayer).getNameSong(),favoriteSongArrayList.get(positionPlayer).getNameSinger());
+//
+//        }
     }
 
     private void sendNotificationMedia(String nameSong, String nameSinger) {

@@ -64,12 +64,6 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         return 0;
     }
 
-    private boolean checkSearch(){
-
-        return true;
-    }
-
-
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         private ImageView imgImageOfSong;
@@ -85,11 +79,12 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
             tvNameOfSong = itemView.findViewById(R.id.item_search_tv_name_of_song);
             tvSinger = itemView.findViewById(R.id.item_search_tv_name_of_singer);
 
-            if (searchFragment.checkSearch()){
-                imgLoveButton.setImageResource(R.drawable.ic_add_circle);
-            } else {
-                imgLoveButton.setVisibility(View.GONE);
-            }
+//            if (searchFragment.checkSearch()){
+//                imgLoveButton.setImageResource(R.drawable.ic_add_circle);
+//            } else {
+//
+//            }
+            imgLoveButton.setVisibility(View.GONE);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
