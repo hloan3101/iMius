@@ -45,7 +45,7 @@ public class NewReleaseFragment extends Fragment {
         viewModel = new ViewModelProvider(getActivity()).get(NewReleaseViewModel.class);
         viewModel.getNewRelease().observe(getViewLifecycleOwner(), newReleaseModels -> {
             newReleaseAdapter.setNewReleaseModelList(newReleaseModels);
-            Toast.makeText(getContext(), String.valueOf(newReleaseAdapter.getNewReleaseModelList().get(0).getImageNewRelease()), Toast.LENGTH_LONG).show();
+       //     Toast.makeText(getContext(), String.valueOf(newReleaseAdapter.getNewReleaseModelList().get(0).getImageNewRelease()), Toast.LENGTH_LONG).show();
         });
         return view;
     }
