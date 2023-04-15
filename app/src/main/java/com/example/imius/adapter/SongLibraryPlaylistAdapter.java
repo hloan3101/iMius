@@ -1,6 +1,7 @@
 package com.example.imius.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,10 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.imius.R;
+import com.example.imius.activity.PlayMusicActivity;
+import com.example.imius.activity.PlaylistActivity;
 import com.example.imius.model.SongLibraryPlaylist;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -38,14 +42,42 @@ public class SongLibraryPlaylistAdapter extends RecyclerView.Adapter<SongLibrary
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        SongLibraryPlaylist songLibraryPlaylist = songLibraryPlaylistList.get(position);
 
+        if (songLibraryPlaylistList == null){
+            return;
+        }
+
+        holder.tvNameSong.setText(songLibraryPlaylist.getNameSong());
+        holder.tvNameSinger.setText(songLibraryPlaylist.getNameSinger());
+        Picasso.get().load(songLibraryPlaylist.getImageSong()).into(holder.imgSong);
+    }
+
+
+
+
+    private void callPlayMusicActivity (){
+        Intent intent = new Intent(context, PlayMusicActivity.class);
+
+        context.startActivity(intent);
     }
 
     @Override
     public int getItemCount() {
+        if (songLibraryPlaylistList != null){
+            return  songLibraryPlaylistList.size();
+        }
         return 0;
     }
 
+    public List<SongLibraryPlaylist> getSongLibraryPlaylistList() {
+        return songLibraryPlaylistList;
+    }
+
+    public void setSongLibraryPlaylistList(List<SongLibraryPlaylist> songLibraryPlaylistList) {
+        this.songLibraryPlaylistList = songLibraryPlaylistList;
+        notifyDataSetChanged();
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -56,10 +88,17 @@ public class SongLibraryPlaylistAdapter extends RecyclerView.Adapter<SongLibrary
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            layoutItem = itemView.findViewById(R.id.item_playlist);
+      //      layoutItem = itemView.findViewById(R.id.item_playlist);
             tvNameSong = itemView.findViewById(R.id.item_playlist_tv_name_of_song);
             tvNameSinger = itemView.findViewById(R.id.item_playlist_tv_name_of_singer);
             imgSong = itemView.findViewById(R.id.item_playlist_iv_image_of_song);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    callPlayMusicActivity();
+                }
+            });
         }
     }
 }
