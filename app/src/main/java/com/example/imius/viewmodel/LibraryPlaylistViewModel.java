@@ -24,6 +24,7 @@ public class LibraryPlaylistViewModel extends AndroidViewModel {
     private LibraryRepository repository;
     private RefreshLiveData<List<LibraryPlaylist>> libraryPlaylistList;
     private RefreshLiveData<List<FavoriteSong>> favoriteSongList;
+    private RefreshLiveData<List<SongLibraryPlaylist>> songLibraryPlaylistList;
 
     public LibraryPlaylistViewModel(@NonNull Application application) {
         super(application);
@@ -40,8 +41,12 @@ public class LibraryPlaylistViewModel extends AndroidViewModel {
     public LiveData<List<FavoriteSong>> getFavoriteSongList() {
         return favoriteSongList;
     }
-    public LiveData<List<SongLibraryPlaylist>> getAllSongLibraryPlaylist(int idLibraryPlaylist) {
-        return repository.getAllSongLibraryPlaylist(idLibraryPlaylist);
+    public LiveData<List<SongLibraryPlaylist>> getAllSongLibraryPlaylist() {
+        return songLibraryPlaylistList;
+    }
+
+    public void setSongLibraryPlaylistList(RefreshLiveData<List<SongLibraryPlaylist>> songLibraryPlaylistList) {
+        this.songLibraryPlaylistList = songLibraryPlaylistList;
     }
 
     public Call<BaseResponse> insertLibraryPlaylist (String nameLibraryPlaylist){
@@ -61,6 +66,7 @@ public class LibraryPlaylistViewModel extends AndroidViewModel {
     public Call<BaseResponse> updateLibraryPlaylistName (String nameLibraryPlaylist, String newNameLibraryPlaylist){
         return repository.updateLibraryPlaylistName(nameLibraryPlaylist, newNameLibraryPlaylist);
     }
+
 
     public void refreshLiveData (){
         libraryPlaylistList.refresh();
