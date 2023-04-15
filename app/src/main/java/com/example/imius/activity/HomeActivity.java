@@ -28,6 +28,8 @@ public class HomeActivity extends AppCompatActivity {
 
         setUpViewPager();
 
+        binding.activityHomeViewPager.setEnabled(false);
+
         binding.activityHomeBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

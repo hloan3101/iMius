@@ -24,10 +24,10 @@ public class Song implements Parcelable {
     @Expose
     private String linkSong;
 
-    public Song(int idSong, String nameSong, String imgSong, String nameSinger, String linkSong) {
+    public Song(int idSong, String imgSong, String nameSong, String nameSinger, String linkSong) {
         this.idSong = idSong;
-        this.nameSong = nameSong;
         this.imgSong = imgSong;
+        this.nameSong = nameSong;
         this.nameSinger = nameSinger;
         this.linkSong = linkSong;
     }
