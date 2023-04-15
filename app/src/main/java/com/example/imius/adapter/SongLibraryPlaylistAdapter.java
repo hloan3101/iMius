@@ -51,13 +51,6 @@ public class SongLibraryPlaylistAdapter extends RecyclerView.Adapter<SongLibrary
         holder.tvNameSong.setText(songLibraryPlaylist.getNameSong());
         holder.tvNameSinger.setText(songLibraryPlaylist.getNameSinger());
         Picasso.get().load(songLibraryPlaylist.getImageSong()).into(holder.imgSong);
-
-        holder.layoutItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                callPlayMusicActivity();
-            }
-        });
     }
 
 
@@ -95,10 +88,17 @@ public class SongLibraryPlaylistAdapter extends RecyclerView.Adapter<SongLibrary
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            layoutItem = itemView.findViewById(R.id.item_playlist);
+      //      layoutItem = itemView.findViewById(R.id.item_playlist);
             tvNameSong = itemView.findViewById(R.id.item_playlist_tv_name_of_song);
             tvNameSinger = itemView.findViewById(R.id.item_playlist_tv_name_of_singer);
             imgSong = itemView.findViewById(R.id.item_playlist_iv_image_of_song);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    callPlayMusicActivity();
+                }
+            });
         }
     }
 }

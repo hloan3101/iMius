@@ -68,9 +68,11 @@
     <string name="library_playlist_name_exits">The playlist name has been exists!</string>
     <string name="library_playlist_insert_success">Insert playlist successfully!</string>
     <string name="library_playlist_delete_success">Delete playlist successfully!</string>
+    <string name="song_library_playlist_delete_success">Delete song successfully!</string>
     <string name="library_playlist_update_success">Update playlist successfully!</string>
     <string name="library_playlist_insert_failed">Insert playlist failed!</string>
     <string name="library_playlist_delete_failed">Delete playlist failed!</string>
+    <string name="song_library_playlist_delete_failed">Delete song failed!</string>
     <string name="library_playlist_update_failed">Update playlist failed!</string>
 
     <string name="title_dialog_delete">Confirm</string>

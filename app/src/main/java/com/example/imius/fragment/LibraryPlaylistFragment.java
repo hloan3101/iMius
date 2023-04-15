@@ -64,7 +64,7 @@ public class LibraryPlaylistFragment extends Fragment {
         viewModel = new ViewModelProvider(getActivity()).get(LibraryPlaylistViewModel.class);
         viewModel.getListLibraryPlaylist().observe(getViewLifecycleOwner(), libraryPlaylists -> {
             adapter.setPlaylistLibraryList(libraryPlaylists);
-   //         Toast.makeText(getContext(), String.valueOf(adapter.getItemCount()), Toast.LENGTH_LONG).show();
+          //  Toast.makeText(getContext(), String.valueOf(adapter.getItemCount()), Toast.LENGTH_LONG).show();
         });
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,

@@ -13,6 +13,7 @@ import com.example.imius.model.Trending;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
@@ -49,6 +50,12 @@ public interface DataService {
 
     @GET("deleteLibraryPlaylist.php")
     Call<BaseResponse> deleteLibraryPlaylist (@Query("idLibraryPlaylist") int idLibraryPlaylist);
+
+    @GET("deleteSongLibraryPlaylist.php")
+    Call<BaseResponse> deleteAllSongLibraryPlaylist (@Query("idLibraryPlaylist") int idLibraryPlaylist);
+
+    @GET("deleteSongLibraryPlaylist.php")
+    Call<BaseResponse> deleteSongLibraryPlaylist (@Query("idSongLibraryPlaylist") int idSongLibraryPlaylist);
 
     @GET("updateLibraryPlaylistName.php")
     Call<BaseResponse> updateLibraryPlaylistName (@Query("nameLibraryPlaylist") String nameLibraryPlaylist,

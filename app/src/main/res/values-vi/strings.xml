@@ -52,6 +52,7 @@
     <string name="library_playlist_insert_success">Thêm danh sách phát thành công!</string>
     <string name="library_playlist_insert_failed">Thêm danh sách phát không thành công!</string>
     <string name="library_playlist_delete_success">Xóa danh sách phát thành công!</string>
+    <string name="song_library_playlist_delete_success">Xóa bài hát thành công!</string>
     <string name="library_playlist_delete_failed">Xóa danh sách phát không thành công!</string>
     <string name="title_dialog_delete">Xác nhận</string>
     <string name="title_dialog_delete_message">Bạn có chắc chắn muốn xóa</string>
@@ -60,4 +61,5 @@
     <string name="enter_new_name_for_your_playlist">Nhập một tên mới cho danh sách phát</string>
     <string name="library_playlist_update_success">Cập nhật danh sách phát thành công!</string>
     <string name="library_playlist_update_failed">Cập nhật danh sách phát không thành công!</string>
+    <string name="song_library_playlist_delete_failed">Xóa bài hát không thành công!</string>
 </resources>
