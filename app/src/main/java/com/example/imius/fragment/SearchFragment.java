@@ -1,9 +1,7 @@
 package com.example.imius.fragment;
 
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,6 +22,7 @@ import com.example.imius.adapter.SongAdapter;
 
 
 import com.example.imius.R;
+import com.example.imius.data.DataLocalManager;
 import com.example.imius.databinding.FragmentSearchBinding;
 import com.example.imius.model.Song;
 import com.example.imius.viewmodel.SongViewModel;
@@ -56,6 +55,20 @@ public class SearchFragment extends Fragment {
 
         songViewModel = new ViewModelProvider(getActivity()).get(SongViewModel.class);
 
+        songAdapter = new SongAdapter(getActivity());
+
+        Bundle bundle = this.getArguments();
+
+        if (bundle != null){
+            if (bundle.getBoolean("checkAddLibrary")){
+                DataLocalManager.setCheckSearch(true);
+            } else {
+                DataLocalManager.setCheckSearch(false);
+            }
+        } else {
+            DataLocalManager.setCheckSearch(false);
+        }
+
         ((AppCompatActivity)getActivity()).setSupportActionBar(binding.fragmentSearchToolBar);
         setHasOptionsMenu(true);
         return view;
@@ -86,16 +99,9 @@ public class SearchFragment extends Fragment {
     }
 
     public boolean checkSearch(){
-        Intent intent = getActivity().getIntent();
 
-        if (intent != null){
-            if (intent.hasExtra("checkAddLibrary")){
-                return true;
-            }
-        }
         return false;
     }
-
 
     private void findSong(String key){
         songViewModel.findSong(key).enqueue(new Callback<List<Song>>() {

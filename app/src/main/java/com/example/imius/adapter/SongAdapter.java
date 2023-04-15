@@ -3,6 +3,7 @@ package com.example.imius.adapter;
 import android.app.appsearch.AppSearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +14,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.imius.R;
 import com.example.imius.activity.PlayMusicActivity;
+import com.example.imius.data.DataLocalManager;
 import com.example.imius.fragment.SearchFragment;
 import com.example.imius.model.Song;
 import com.squareup.picasso.Picasso;
@@ -30,7 +33,12 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
     private ArrayList<Song> listSongs;
 //    private ArrayList<Song> keyOfSong;
 
-    private SearchFragment searchFragment;
+    private SearchFragment searchFragment = new SearchFragment();
+
+    public SongAdapter(Context context) {
+        this.context = context;
+
+    }
 
     public SongAdapter(Context context, ArrayList<Song> listSongs) {
         this.context = context;
@@ -54,6 +62,12 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         holder.tvSinger.setText(song.getNameSinger());
         Picasso.get().load(song.getImgSong()).into(holder.imgImageOfSong);
 
+        if (DataLocalManager.getCheckSearch()){
+            holder.imgLoveButton.setImageResource(R.drawable.ic_add_circle);
+        } else {
+            holder.imgLoveButton.setImageResource(R.drawable.ic_love);
+        }
+
     }
 
     @Override
@@ -69,7 +83,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         private ImageView imgImageOfSong;
         private TextView tvNameOfSong;
         private TextView tvSinger;
-        private ImageView imgLoveButton;
+        public ImageView imgLoveButton;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -79,12 +93,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
             tvNameOfSong = itemView.findViewById(R.id.item_search_tv_name_of_song);
             tvSinger = itemView.findViewById(R.id.item_search_tv_name_of_singer);
 
-//            if (searchFragment.checkSearch()){
-//                imgLoveButton.setImageResource(R.drawable.ic_add_circle);
-//            } else {
-//
-//            }
-            imgLoveButton.setVisibility(View.GONE);
+//            imgLoveButton.setVisibility(View.GONE);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

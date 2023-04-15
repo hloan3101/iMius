@@ -9,6 +9,9 @@ public class DataLocalManager {
     private static final String NAME = "NAME";
     private static final String IMAGE = "IMAGE";
     private static final String CHECK_EDIT = "CHECK_EDIT";
+    private static final String CHECK_SEARCH = "CHECK_SEARCH";
+
+
 
     private static DataLocalManager instance;
     private MySharedPreferences mySharedPreferences;
@@ -37,6 +40,10 @@ public class DataLocalManager {
         DataLocalManager.getInstance().mySharedPreferences.putBoolean(CHECK_EDIT, value);
     }
 
+    public static void setCheckSearch(boolean value) {
+        DataLocalManager.getInstance().mySharedPreferences.putBoolean(CHECK_SEARCH, value);
+    }
+
     public static void setUsernameData(String value) {
         DataLocalManager.getInstance().mySharedPreferences.putStringValue(USERNAME, value);
     }
@@ -55,6 +62,10 @@ public class DataLocalManager {
 
     public static boolean getCheckEdit() {
         return DataLocalManager.getInstance().mySharedPreferences.getBooleanValue(CHECK_EDIT);
+    }
+
+    public static boolean getCheckSearch() {
+        return DataLocalManager.getInstance().mySharedPreferences.getBooleanValue(CHECK_SEARCH);
     }
 
     public static String getUsernameData() {
