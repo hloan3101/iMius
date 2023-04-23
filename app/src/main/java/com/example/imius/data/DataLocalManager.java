@@ -10,6 +10,7 @@ public class DataLocalManager {
     private static final String IMAGE = "IMAGE";
     private static final String CHECK_EDIT = "CHECK_EDIT";
     private static final String CHECK_SEARCH = "CHECK_SEARCH";
+    private static final String ID_LIBRARY_PLAYLIST = "ID_LIBRARY_PLAYLIST";
 
 
 
@@ -52,6 +53,10 @@ public class DataLocalManager {
         DataLocalManager.getInstance().mySharedPreferences.putStringValue(NAME, value);
     }
 
+    public static void setIdLibraryPlaylist(int value) {
+        DataLocalManager.getInstance().mySharedPreferences.putIntValue(ID_LIBRARY_PLAYLIST, value);
+    }
+
     public static String getEmail() {
         return DataLocalManager.getInstance().mySharedPreferences.getStringValue(EMAIL);
     }
@@ -78,6 +83,10 @@ public class DataLocalManager {
 
     public static String getImage(){
         return DataLocalManager.getInstance().mySharedPreferences.getStringValue(IMAGE);
+    }
+
+    public static int getIdLibraryPlaylist(){
+        return DataLocalManager.getInstance().mySharedPreferences.getIntValue(ID_LIBRARY_PLAYLIST);
     }
 
 }

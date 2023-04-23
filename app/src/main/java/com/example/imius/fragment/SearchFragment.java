@@ -118,7 +118,7 @@ public class SearchFragment extends Fragment {
                     binding.fragmentSearchCantFind.setVisibility(View.GONE);
                     binding.fragmentSearchRvSearch.setVisibility(View.VISIBLE);
 
-                    Toast.makeText(getContext(), String.valueOf(songAdapter.getItemCount()), Toast.LENGTH_SHORT).show();
+              //      Toast.makeText(getContext(), String.valueOf(songAdapter.getItemCount()), Toast.LENGTH_SHORT).show();
 
                 } else {
                     binding.fragmentSearchRvSearch.setVisibility(View.GONE);

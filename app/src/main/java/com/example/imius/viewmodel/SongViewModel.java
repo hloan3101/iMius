@@ -42,8 +42,8 @@ public class SongViewModel extends AndroidViewModel {
         return musicRepository.deleteLikeSong(username, idSong);
     }
 
-    public Call<BaseResponse> insertLoveSong(int idLike, String username, Song song){
-        return musicRepository.insertLoveSong(idLike, username, song);
+    public Call<BaseResponse> insertLoveSong(String username, Song song){
+        return musicRepository.insertLoveSong(username, song);
     }
 
     public void refreshLiveData (){

@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.imius.R;
 import com.example.imius.activity.PlaylistActivity;
+import com.example.imius.data.DataLocalManager;
 import com.example.imius.fragment.DialogAddToLibraryPlaylist;
 import com.example.imius.model.LibraryPlaylist;
 import com.squareup.picasso.Picasso;
@@ -60,6 +61,8 @@ public class LibraryPlaylistAdapter extends RecyclerView.Adapter<LibraryPlaylist
     }
 
     private void callPlaylistActivity (LibraryPlaylist libraryPlaylist){
+        DataLocalManager.setIdLibraryPlaylist(libraryPlaylist.getIdLibraryPlaylist());
+
         Intent intent = new Intent(context, PlaylistActivity.class);
 
         Bundle bundle =  new Bundle();
