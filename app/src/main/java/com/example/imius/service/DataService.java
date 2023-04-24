@@ -95,4 +95,7 @@ public interface DataService {
 
     @GET("subNumberOfLike.php")
     Call<BaseResponse> subNumberOfLike(@Query("idSong") int idSong);
+
+    @GET("updateLikeOfNumber.php")
+    Call<BaseResponse> updateLikeOfNumber(@Query("username") String username, @Query("idSong") int idSong);
 }

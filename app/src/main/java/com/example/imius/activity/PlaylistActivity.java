@@ -104,6 +104,9 @@ public class PlaylistActivity extends AppCompatActivity {
         setContentView(view);
     }
 
+
+
+
     public void callSearchFragment() {
         Bundle bundle = new Bundle();
 

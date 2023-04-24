@@ -24,13 +24,15 @@ public class Song implements Parcelable {
     @Expose
     private String linkSong;
 
-    public Song(int idSong, String imgSong, String nameSong, String imageSong, String nameSinger, String linkSong) {
+    public Song(int idSong, String nameSong, String imageSong, String nameSinger, String linkSong) {
         this.idSong = idSong;
         this.imageSong = imageSong;
         this.nameSong = nameSong;
         this.nameSinger = nameSinger;
         this.linkSong = linkSong;
     }
+
+
 
     public Song(Parcel in) {
         idSong = in.readInt();

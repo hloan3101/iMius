@@ -3,7 +3,6 @@ package com.example.imius.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-import androidx.palette.graphics.Palette;
 
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;

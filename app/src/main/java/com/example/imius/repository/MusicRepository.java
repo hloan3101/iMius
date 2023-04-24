@@ -69,4 +69,7 @@ public class MusicRepository {
         return dataService.subNumberOfLike(idSong);
     }
 
+    public Call<BaseResponse> updateLikeOfNumber (int idSong){
+        return dataService.updateLikeOfNumber(DataLocalManager.getUsernameData(), idSong);
+    }
 }

@@ -6,6 +6,7 @@ public class Constants {
 
     public static final String EMAIL_PATTERN = "^[a-zA-Z0-9]*@{1}gmail.com$";
 
+
     public static final String successfully = "1";
     public static final String failed = "0";
 
@@ -20,4 +21,7 @@ public class Constants {
     public static final int ACTION_RANDOM = 7;
 
     public static final String CHANNEL_ID = "channel_service_example";
+    public static final String DELETE = "delete";
+    public static final String ADD = "add";
+
 }
