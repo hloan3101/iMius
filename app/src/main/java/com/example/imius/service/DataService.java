@@ -49,6 +49,12 @@ public interface DataService {
     Call<BaseResponse> insertLibraryPlaylist (@Query("nameLibraryPlaylist") String nameLibraryPlaylist,
                                               @Query("username") String username);
 
+    @GET("insertSongLibraryPlaylist.php")
+    Call<BaseResponse> insertSongLibraryPlaylist (@Query("idLibraryPlaylist") int idLibraryPlaylist,
+                                                  @Query("idSong") int idSong, @Query("nameSong") String nameSong,
+                                                  @Query("nameSinger") String nameSinger, @Query("imageSong") String imageSong,
+                                                  @Query("linkSong") String linkSong);
+
     @GET("deleteLibraryPlaylist.php")
     Call<BaseResponse> deleteLibraryPlaylist (@Query("idLibraryPlaylist") int idLibraryPlaylist);
 
@@ -71,12 +77,25 @@ public interface DataService {
     @POST("checkLikeSong.php")
     Call<BaseResponse> checkLikeSong(@Query("username") String username, @Query("idSong") int idSong);
 
-    @POST("deleteLikeSong.php")
+    @GET("checkSongLibraryPlaylist.php")
+    Call<BaseResponse> checkSongLibraryPlaylist(@Query("idLibraryPlaylist") int idLibraryPlaylist, @Query("idSong") int idSong);
+
+    @GET("deleteLikeSong.php")
     Call<BaseResponse> deleteLikeSong(@Query("username") String username, @Query("idSong")int idSong);
 
-    @POST("insertLikeSong.php")
-    Call<BaseResponse> insertLoveSong(@Query("idLike") int idLike, @Query("username") String username,
+    @GET("insertLikeSong.php")
+    Call<BaseResponse> insertLoveSong(@Query("username") String username,
                                       @Query("idSong")int idSong, @Query("nameSong") String nameSong,
                                       @Query("nameSinger") String nameSinger, @Query("imageSong") String imageSong,
                                       @Query("linkSong") String linkSong);
+
+
+    @GET("addNumberOfLike.php")
+    Call<BaseResponse> addNumberOfLike(@Query("idSong") int idSong, @Query("numberOfLike") int numberOfLike);
+
+    @GET("subNumberOfLike.php")
+    Call<BaseResponse> subNumberOfLike(@Query("idSong") int idSong);
+
+    @GET("updateLikeOfNumber.php")
+    Call<BaseResponse> updateLikeOfNumber(@Query("username") String username, @Query("idSong") int idSong);
 }

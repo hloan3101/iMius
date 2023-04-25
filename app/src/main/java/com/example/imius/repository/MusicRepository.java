@@ -14,6 +14,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.Query;
 
 public class MusicRepository {
     private DataService dataService;
@@ -55,8 +56,20 @@ public class MusicRepository {
         return dataService.deleteLikeSong(username, idSong);
     }
 
-    public Call<BaseResponse> insertLoveSong(int idLike, String username, Song song){
-        return dataService.insertLoveSong(idLike, username, song.getIdSong(), song.getNameSong(),
+    public Call<BaseResponse> insertLoveSong(String username, Song song){
+        return dataService.insertLoveSong(username, song.getIdSong(), song.getNameSong(),
                 song.getNameSinger(), song.getImgSong(), song.getLinkSong());
+    }
+
+    public Call<BaseResponse> addNumberOfLike (int idSong, int numberOfLike){
+        return dataService.addNumberOfLike(idSong, numberOfLike);
+    }
+
+    public Call<BaseResponse> subNumberOfLike (int idSong){
+        return dataService.subNumberOfLike(idSong);
+    }
+
+    public Call<BaseResponse> updateLikeOfNumber (int idSong){
+        return dataService.updateLikeOfNumber(DataLocalManager.getUsernameData(), idSong);
     }
 }

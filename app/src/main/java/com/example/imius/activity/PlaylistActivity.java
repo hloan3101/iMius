@@ -2,6 +2,7 @@ package com.example.imius.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -71,6 +72,7 @@ public class PlaylistActivity extends AppCompatActivity {
             Picasso.get().load(bundle.getString("imgPlaylistLibrary")).into(binding.activityPlaylistIvViewSong);
             binding.activityPlaylistTvSongName.setText(bundle.getString("nameLibraryPlaylist"));
             idLibraryPlaylist = bundle.getInt("idLibraryPlaylist");
+            DataLocalManager.setIdLibraryPlaylist( bundle.getInt("idLibraryPlaylist"));
          //   getAllSongLibraryPlaylist();
 
             dataService.getSongLibraryPlaylistList(idLibraryPlaylist).enqueue(new Callback<List<SongLibraryPlaylist>>() {
@@ -89,6 +91,8 @@ public class PlaylistActivity extends AppCompatActivity {
                 }
             });
             deleteSongLibraryPlaylist();
+
+
         } else {
             binding.activityPlaylistImAddSong.setVisibility(View.GONE);
         }
@@ -99,6 +103,9 @@ public class PlaylistActivity extends AppCompatActivity {
 
         setContentView(view);
     }
+
+
+
 
     public void callSearchFragment() {
         Bundle bundle = new Bundle();
@@ -117,8 +124,6 @@ public class PlaylistActivity extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.activity_playlist_coordinator_layout, searchFragment);
         transaction.commit();
-
-
     }
 
     private void initView() {

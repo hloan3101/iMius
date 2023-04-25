@@ -46,7 +46,7 @@ public class ChartsFragment extends Fragment {
         viewModel = new ViewModelProvider(getActivity()).get(ChartsViewModel.class);
         viewModel.getCharts().observe(getViewLifecycleOwner(), chartsModels -> {
             chartsAdapter.setChartsModelList(chartsModels);
-            Toast.makeText(getContext(), String.valueOf(chartsAdapter.getChartsModelList().get(0).getImageChart()), Toast.LENGTH_LONG).show();
+     //       Toast.makeText(getContext(), String.valueOf(chartsAdapter.getChartsModelList().get(0).getImageChart()), Toast.LENGTH_LONG).show();
         });
 
         return view;

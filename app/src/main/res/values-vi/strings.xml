@@ -62,4 +62,7 @@
     <string name="library_playlist_update_success">Cập nhật danh sách phát thành công!</string>
     <string name="library_playlist_update_failed">Cập nhật danh sách phát không thành công!</string>
     <string name="song_library_playlist_delete_failed">Xóa bài hát không thành công!</string>
+    <string name="song_insert_success">Thêm bài hát thành công!</string>
+    <string name="song_insert_failed">Thêm bài hát không thành công!</string>
+    <string name="song_exist">Bài hát này đã có trong thư viện!</string>
 </resources>

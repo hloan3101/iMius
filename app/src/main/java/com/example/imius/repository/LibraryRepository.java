@@ -15,6 +15,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.Query;
 
 public class LibraryRepository {
     private DataService dataService;
@@ -86,4 +87,17 @@ public class LibraryRepository {
     public Call<BaseResponse> deleteFavoriteSong (String idSong){
         return dataService.deleteFavoriteSong(idSong, DataLocalManager.getUsernameData());
     }
+
+    public Call<BaseResponse> insertSongLibraryPlaylist (int idLibraryPlaylist, int idSong, String nameSong,
+                                                         String nameSinger, String imageSong,
+                                                         String linkSong){
+        return dataService.insertSongLibraryPlaylist(idLibraryPlaylist, idSong, nameSong, nameSinger,
+                imageSong,linkSong);
+    }
+
+    public Call<BaseResponse> checkSongLibraryPlaylist (int idLibraryPlaylist, int idSong){
+        return dataService.checkSongLibraryPlaylist(idLibraryPlaylist, idSong);
+    }
+
+
 }

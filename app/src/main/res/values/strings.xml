@@ -52,6 +52,7 @@
     <string name="compare_password_require">Passwords are not match</string>
     <string name="email_invalidate">Email invalidate</string>
     <string name="email_exist">This email already exists</string>
+    <string name="song_exist">This song is already in the playlist!</string>
     <string name="signup_successfully">Signup Successfully</string>
     <string name="subject_email">Confirmation code from IMIUS</string>
     <string name="content_email">"iMius sent you an OTP for email verification: "</string>
@@ -64,14 +65,16 @@
     <string name="password_email_server" translatable="false">cwoaqfrumgvhqnsz</string>
 
     <string name="library_playlist_name_exits">The playlist name has been exists!</string>
-    <string name="library_playlist_insert_success">Insert playlist successfully!</string>
-    <string name="library_playlist_delete_success">Delete playlist successfully!</string>
-    <string name="song_library_playlist_delete_success">Delete song successfully!</string>
-    <string name="library_playlist_update_success">Update playlist successfully!</string>
-    <string name="library_playlist_insert_failed">Insert playlist failed!</string>
-    <string name="library_playlist_delete_failed">Delete playlist failed!</string>
-    <string name="song_library_playlist_delete_failed">Delete song failed!</string>
-    <string name="library_playlist_update_failed">Update playlist failed!</string>
+    <string name="library_playlist_insert_success">Insert the playlist successfully!</string>
+    <string name="library_playlist_delete_success">Delete the playlist successfully!</string>
+    <string name="song_library_playlist_delete_success">Delete the song successfully!</string>
+    <string name="library_playlist_update_success">Update the playlist successfully!</string>
+    <string name="song_insert_success">Insert the song successfully!</string>
+    <string name="library_playlist_insert_failed">Insert the playlist failed!</string>
+    <string name="library_playlist_delete_failed">Delete the playlist failed!</string>
+    <string name="song_library_playlist_delete_failed">Delete the song failed!</string>
+    <string name="library_playlist_update_failed">Update the playlist failed!</string>
+    <string name="song_insert_failed">Insert the song failed!</string>
 
     <string name="title_dialog_delete">Confirm</string>
     <string name="title_dialog_delete_message">Are you sure you want to delete?</string>
