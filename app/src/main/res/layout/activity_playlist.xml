@@ -32,6 +32,11 @@
             app:expandedTitleMarginBottom="33dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white" />
+
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -57,11 +62,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="1000dp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </androidx.core.widget.NestedScrollView>
