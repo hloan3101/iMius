@@ -87,7 +87,7 @@ public class SongLibraryPlaylist implements Parcelable {
         return imageSong;
     }
 
-    public void setImgSong(String imgSong) {
+    public void setImageSong(String imgSong) {
         this.imageSong = imgSong;
     }
 

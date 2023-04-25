@@ -72,16 +72,16 @@ public class ForegroundServiceControl extends Service {
                 clearArray();
                 songArrayList = intent.getParcelableArrayListExtra(getResources().getString(R.string.obj_song));}
 
-//            } else if (intent.hasExtra(getResources().getString(R.string.obj_song_library))){
-//                clearArray();
-//                songLibraryPlaylistArrayList = intent.getParcelableArrayListExtra(getResources().getString(R.string.obj_song_library));
-//
-//            } else if (intent.hasExtra(getResources().getString(R.string.obj_song_favorite))){
-//                clearArray();
-//                favoriteSongArrayList = intent.getParcelableArrayListExtra(getResources().getString(R.string.obj_song_favorite));
-//
-//            }
-        }
+            } else if (intent.hasExtra(getResources().getString(R.string.obj_song_library))){
+                clearArray();
+                songLibraryPlaylistArrayList = intent.getParcelableArrayListExtra(getResources().getString(R.string.obj_song_library));
+
+            } else if (intent.hasExtra(getResources().getString(R.string.obj_song_favorite))){
+                clearArray();
+                favoriteSongArrayList = intent.getParcelableArrayListExtra(getResources().getString(R.string.obj_song_favorite));
+
+            }
+
 
         assert intent != null;
         if (!intent.hasExtra(getResources().getString(R.string.action_music_service))){
