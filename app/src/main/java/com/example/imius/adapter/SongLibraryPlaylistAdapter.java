@@ -66,8 +66,6 @@ public class SongLibraryPlaylistAdapter extends RecyclerView.Adapter<SongLibrary
         holder.btnLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 setBtnLike(holder, songLibraryPlaylist);
             }
         });
@@ -169,15 +167,6 @@ public class SongLibraryPlaylistAdapter extends RecyclerView.Adapter<SongLibrary
         });
     }
 
-
-
-    private void callPlayMusicActivity (){
-        Intent intent = new Intent(context, PlayMusicActivity.class);
-
-        context.startActivity(intent);
-    }
-
-
     @Override
     public int getItemCount() {
         if (songLibraryPlaylistList != null){
@@ -211,12 +200,15 @@ public class SongLibraryPlaylistAdapter extends RecyclerView.Adapter<SongLibrary
             tvNameSinger = itemView.findViewById(R.id.item_playlist_tv_name_of_singer);
             imgSong = itemView.findViewById(R.id.item_playlist_iv_image_of_song);
             btnLike = itemView.findViewById(R.id.item_playlist_iv_love);
-//            itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    callPlayMusicActivity();
-//                }
-//            });
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, PlayMusicActivity.class);
+                    intent.putExtra("library_song", songLibraryPlaylistList.get(getPosition()));
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }
