@@ -25,6 +25,7 @@ import com.example.imius.data.DataLocalManager;
 import com.example.imius.fragment.SearchFragment;
 import com.example.imius.model.BaseResponse;
 import com.example.imius.model.Song;
+import com.example.imius.model.SongLibraryPlaylist;
 import com.example.imius.repository.LibraryRepository;
 import com.example.imius.repository.MusicRepository;
 import com.squareup.picasso.Picasso;
@@ -40,9 +41,6 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
 
     private Context context;
     private ArrayList<Song> listSongs;
-//    private ArrayList<Song> keyOfSong;
-
-    private int checkLike = 0;
 
     private SearchFragment searchFragment = new SearchFragment();
 
@@ -55,7 +53,6 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         this.context = context;
         this.listSongs = listSongs;
         notifyDataSetChanged();
-//        this.keyOfSong = listSongs;
     }
 
     @NonNull
@@ -83,34 +80,14 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
                 }
             });
         } else {
-            holder.imgLoveButton.setImageResource(R.drawable.ic_love);
+            checkLikeSong(holder, song);
             holder.imgLoveButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    checkLike++;
-                    if (checkLike % 2 != 0) {
-                        updateNumberOfLike(song);
-                    } else {
-                        deleteLikeSong(song);
-                    }
+                    setBtnLike(holder, song);
                 }
             });
         }
-
-    }
-
-    public void updateNumberOfLike(Song song) {
-        MusicRepository repository = new MusicRepository();
-
-        repository.addNumberOfLike(song.getIdSong(), 1);
-        repository.insertLoveSong(DataLocalManager.getUsernameData(), song);
-    }
-
-    public void deleteLikeSong(Song song) {
-        MusicRepository repository = new MusicRepository();
-
-        repository.subNumberOfLike(song.getIdSong());
-        repository.deleteLikeSong(DataLocalManager.getUsernameData(), song.getIdSong());
     }
 
     public void checkSongLibraryPlaylist (Song song){
@@ -118,24 +95,24 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
 
         repository.checkSongLibraryPlaylist(DataLocalManager.getIdLibraryPlaylist(), song.getIdSong())
                 .enqueue(new Callback<BaseResponse>() {
-            @Override
-            public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
-                if (response.body() != null){
-                    if (!response.body().getIsSuccess().equals(Constants.successfully)){
-                  //      Toast.makeText(context, String.valueOf(response.body().equals(Constants.successfully)))
-                       addSongLibraryPlaylist(song);
+                    @Override
+                    public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+                        if (response.body() != null){
+                            if (!response.body().getIsSuccess().equals(Constants.successfully)){
+                                //      Toast.makeText(context, String.valueOf(response.body().equals(Constants.successfully)))
+                                addSongLibraryPlaylist(song);
+                            }
+                            else {
+                                Toast.makeText(context, R.string.song_exist, Toast.LENGTH_LONG).show();
+                            }
+                        }
                     }
-                    else {
-                        Toast.makeText(context, R.string.song_exist, Toast.LENGTH_LONG).show();
-                    }
-                }
-            }
 
-            @Override
-            public void onFailure(Call<BaseResponse> call, Throwable t) {
-                Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
+                    @Override
+                    public void onFailure(Call<BaseResponse> call, Throwable t) {
+                        Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 
     public void addSongLibraryPlaylist(Song song) {
@@ -159,6 +136,98 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
             }
         });
     }
+    public void checkLikeSong (ViewHolder holder,Song song){
+        MusicRepository repository = new MusicRepository();
+
+        repository.checkLikeSong(DataLocalManager.getUsernameData(), song.getIdSong())
+                .enqueue(new Callback<BaseResponse>() {
+                    @Override
+                    public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+                        if (response.body() != null){
+                            //    Toast.makeText(context, response.body().getIsSuccess(), Toast.LENGTH_LONG).show();
+                            if (response.body().getIsSuccess().equals(Constants.successfully)){
+                                holder.imgLoveButton.setImageResource(R.drawable.ic_loved);
+                            }else {
+                                holder.imgLoveButton.setImageResource(R.drawable.ic_love);
+                            }
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<BaseResponse> call, Throwable t) {
+                        Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    public void setBtnLike (ViewHolder holder, Song song){
+        MusicRepository repository = new MusicRepository();
+
+        repository.updateLikeOfNumber(song.getIdSong())
+                .enqueue(new Callback<BaseResponse>() {
+                    @Override
+                    public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+                        if (response.body() != null){
+                            //    Toast.makeText(context, response.body().getIsSuccess(), Toast.LENGTH_LONG).show();
+                            if (response.body().getIsSuccess().equals(Constants.successfully)){
+                                if (response.body().getMessage().equals(Constants.DELETE)){
+                                    deleteLikeSong(song.getIdSong());
+                                    holder.imgLoveButton.setImageResource(R.drawable.ic_love);
+                                }else {
+                                    updateNumberOfLike(song);
+                                    holder.imgLoveButton.setImageResource(R.drawable.ic_loved);
+                                }
+                            }
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<BaseResponse> call, Throwable t) {
+                        Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    public void updateNumberOfLike(Song song) {
+        MusicRepository repository = new MusicRepository();
+
+        //     repository.insertLoveSong(DataLocalManager.getUsernameData(), song);
+        repository.insertLoveSong(DataLocalManager.getUsernameData(), song).enqueue(new Callback<BaseResponse>() {
+            @Override
+            public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+//                if (response.body().getIsSuccess().equals(Constants.successfully)){
+//                    Toast.makeText(context, "insert success", Toast.LENGTH_SHORT).show();
+//                }else {
+//                    Toast.makeText(context, "insert failed", Toast.LENGTH_SHORT).show();
+//                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse> call, Throwable t) {
+                Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void deleteLikeSong(int idSong) {
+        MusicRepository repository = new MusicRepository();
+        //       repository.deleteLikeSong(DataLocalManager.getUsernameData(), idSong);
+
+        repository.deleteLikeSong(DataLocalManager.getUsernameData(), idSong).enqueue(new Callback<BaseResponse>() {
+            @Override
+            public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+//                if (response.body().getIsSuccess().equals(Constants.successfully)){
+//                    Toast.makeText(context, "delete success", Toast.LENGTH_SHORT).show();
+//                }else {
+//                    Toast.makeText(context, "delete failed", Toast.LENGTH_SHORT).show();
+//                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse> call, Throwable t) {
+                Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 
     @Override
     public int getItemCount() {

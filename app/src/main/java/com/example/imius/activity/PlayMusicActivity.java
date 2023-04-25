@@ -349,19 +349,19 @@ public class PlayMusicActivity extends AppCompatActivity {
                 binding.activityPlayMusicIvLoveButton.setImageResource(R.drawable.ic_loved);
                 view.startAnimation(animation);
                 if (songArrayList.size() > 0){
-                    insertLoveSong(idLike, username, songArrayList.get(position).getIdSong(),
+                    insertLoveSong(username, songArrayList.get(position).getIdSong(),
                             songArrayList.get(position).getNameSong(),songArrayList.get(position).getNameSinger(),
                             songArrayList.get(position).getImgSong(), songArrayList.get(position).getLinkSong());
 
                 } else if (songLibraryPlaylistArrayList.size() > 0){
-                    insertLoveSong(idLike, username, songLibraryPlaylistArrayList.get(position).getIdSong(),
+                    insertLoveSong(username, songLibraryPlaylistArrayList.get(position).getIdSong(),
                             songLibraryPlaylistArrayList.get(position).getNameSong(),
                             songLibraryPlaylistArrayList.get(position).getNameSinger(),
-                            songLibraryPlaylistArrayList.get(position).getImgSong(),
+                            songLibraryPlaylistArrayList.get(position).getImageSong(),
                             songLibraryPlaylistArrayList.get(position).getLinkSong());
 
                 } else if (favoriteSongArrayList.size() > 0){
-                    insertLoveSong(idLike, username, favoriteSongArrayList.get(position).getIdSong(),
+                    insertLoveSong(username, favoriteSongArrayList.get(position).getIdSong(),
                             favoriteSongArrayList.get(position).getNameSong(),
                             favoriteSongArrayList.get(position).getNameSinger(),
                             favoriteSongArrayList.get(position).getImgSong(),
@@ -469,11 +469,11 @@ public class PlayMusicActivity extends AppCompatActivity {
 //        startService(intent);
 //    }
 
-    private void insertLoveSong(int idLike, String username, int idSong, String nameSong,
+    private void insertLoveSong(String username, int idSong, String nameSong,
                                 String nameSinger, String imageSong, String linkSong){
         Song song = new Song(idSong, nameSong, nameSinger, imageSong, linkSong);
 
-        viewModel.insertLoveSong(idLike, username, song).enqueue(new Callback<BaseResponse>() {
+        viewModel.insertLoveSong(username, song).enqueue(new Callback<BaseResponse>() {
             @Override
             public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
                 Toast.makeText(PlayMusicActivity.this, "Add successfully", Toast.LENGTH_SHORT).show();
@@ -485,6 +485,7 @@ public class PlayMusicActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private void checkLikeSong(String username, int idSong){
         viewModel.checkLikeSong(username, idSong).enqueue(new Callback<BaseResponse>() {

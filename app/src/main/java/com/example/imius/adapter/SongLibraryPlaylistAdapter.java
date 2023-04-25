@@ -66,8 +66,6 @@ public class SongLibraryPlaylistAdapter extends RecyclerView.Adapter<SongLibrary
         holder.btnLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 setBtnLike(holder, songLibraryPlaylist);
             }
         });
