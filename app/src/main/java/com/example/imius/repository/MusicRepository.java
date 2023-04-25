@@ -61,14 +61,6 @@ public class MusicRepository {
                 song.getNameSinger(), song.getImgSong(), song.getLinkSong());
     }
 
-    public Call<BaseResponse> addNumberOfLike (int idSong, int numberOfLike){
-        return dataService.addNumberOfLike(idSong, numberOfLike);
-    }
-
-    public Call<BaseResponse> subNumberOfLike (int idSong){
-        return dataService.subNumberOfLike(idSong);
-    }
-
     public Call<BaseResponse> updateLikeOfNumber (int idSong){
         return dataService.updateLikeOfNumber(DataLocalManager.getUsernameData(), idSong);
     }
