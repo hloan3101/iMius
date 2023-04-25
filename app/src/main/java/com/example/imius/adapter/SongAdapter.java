@@ -71,7 +71,11 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         holder.tvSinger.setText(song.getNameSinger());
         Picasso.get().load(song.getImgSong()).into(holder.imgImageOfSong);
 
+        Toast.makeText(context, String.valueOf(DataLocalManager.getCheckSearch()), Toast.LENGTH_SHORT).show();
+
         if (DataLocalManager.getCheckSearch()) {
+
+
             holder.imgLoveButton.setImageResource(R.drawable.ic_add_circle);
             holder.imgLoveButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -252,6 +256,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         private TextView tvNameOfSong;
         private TextView tvSinger;
         public ImageView imgLoveButton;
+        public ConstraintLayout constraintLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -260,17 +265,18 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
             imgLoveButton = itemView.findViewById(R.id.item_search_iv_love);
             tvNameOfSong = itemView.findViewById(R.id.item_search_tv_name_of_song);
             tvSinger = itemView.findViewById(R.id.item_search_tv_name_of_singer);
+            constraintLayout = itemView.findViewById(R.id.item_search_constraint_layout);
 
 //            imgLoveButton.setVisibility(View.GONE);
 
-//            itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    Intent intent = new Intent(context, PlayMusicActivity.class);
-//                    intent.putExtra("song", listSongs.get(getPosition()));
-//                    context.startActivity(intent);
-//                }
-//            });
+            constraintLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, PlayMusicActivity.class);
+                    intent.putExtra("song", listSongs.get(getPosition()));
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 

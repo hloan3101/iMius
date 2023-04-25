@@ -3,8 +3,6 @@ package com.example.imius.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
@@ -51,14 +49,10 @@ public class PlayMusicActivity extends AppCompatActivity {
 
     private ActivityPlayMusicBinding binding;
     private SongViewModel viewModel;
-    private SQLiteDatabase db;
-
-    private String username;
 
     private int index = 0, position = 0, duration = 0, timeValue = 0, durationToService = 0;
 
-    private int idLike = 0;
-
+    private String username;
     private boolean repeat = false;
     private boolean checkRandom = false;
     private boolean nextSong = false;
@@ -103,7 +97,6 @@ public class PlayMusicActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this).get(SongViewModel.class);
         setContentView(view);
 
-        db = openOrCreateDatabase("user.db", MODE_PRIVATE, null);
 //        LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver,
 //                new IntentFilter(getResources().getString(R.string.send_data_to_activity)));
 
@@ -113,9 +106,9 @@ public class PlayMusicActivity extends AppCompatActivity {
         getDataFromIntent();
         init();
         eventClick();
-     //   getDataSQLite();
-       // setViewStart();
-       // startService();
+        //   getDataSQLite();
+        // setViewStart();
+        // startService();
         overridePendingTransition(R.anim.anim_intent_in, R.anim.anim_intent_out);
 
     }
@@ -407,13 +400,6 @@ public class PlayMusicActivity extends AppCompatActivity {
 
     }
 
-    private void getDataSQLite() {
-        String sql = "SELECT * FROM user";
-        @SuppressLint("Recycle") Cursor cursor = db.rawQuery(sql, null);
-        cursor.moveToLast();
-        username = cursor.getString(1);
-    }
-
 //    private void getDataFromIntent() {
 //        Intent intent = getIntent();
 //
@@ -445,15 +431,36 @@ public class PlayMusicActivity extends AppCompatActivity {
 
     private void getDataFromIntent(){
         Intent intent = getIntent();
+//        if (intent != null){
+//            if (intent.hasExtra("song")){
+//                Song song = intent.getParcelableExtra("song");
+//                songArrayList.add(song);
+//            }
+//
+//            if (intent.hasExtra("list_song")){
+//                ArrayList<Song> listSong = intent.getParcelableArrayListExtra("list_song");
+//                songArrayList = listSong;
+//            }
+//        }
+
         if (intent != null){
             if (intent.hasExtra("song")){
                 Song song = intent.getParcelableExtra("song");
                 songArrayList.add(song);
-            }
 
-            if (intent.hasExtra("list_song")){
-                ArrayList<Song> listSong = intent.getParcelableArrayListExtra("list_song");
-                songArrayList = listSong;
+            } else if (intent.hasExtra("list_song")){
+                songArrayList = intent.getParcelableArrayListExtra("list_song");
+
+            } else if (intent.hasExtra("library_song")){
+                SongLibraryPlaylist songLibraryPlaylist = intent.getParcelableExtra("library_song");
+                songLibraryPlaylistArrayList.add(songLibraryPlaylist);
+
+            } else if (intent.hasExtra("list_song_library")){
+                songLibraryPlaylistArrayList = intent.getParcelableArrayListExtra("list_song_library");
+
+            } else if (intent.hasExtra("favorite_song")){
+                FavoriteSong favoriteSong = intent.getParcelableExtra("favorite_song");
+                favoriteSongArrayList.add(favoriteSong);
             }
         }
     }
