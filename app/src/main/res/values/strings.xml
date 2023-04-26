@@ -68,11 +68,13 @@
     <string name="library_playlist_insert_success">Insert the playlist successfully!</string>
     <string name="library_playlist_delete_success">Delete the playlist successfully!</string>
     <string name="song_library_playlist_delete_success">Delete the song successfully!</string>
+    <string name="delete_success">Deleted</string>
     <string name="library_playlist_update_success">Update the playlist successfully!</string>
     <string name="song_insert_success">Insert the song successfully!</string>
     <string name="library_playlist_insert_failed">Insert the playlist failed!</string>
     <string name="library_playlist_delete_failed">Delete the playlist failed!</string>
     <string name="song_library_playlist_delete_failed">Delete the song failed!</string>
+    <string name="delete_failed">Can not delete</string>
     <string name="library_playlist_update_failed">Update the playlist failed!</string>
     <string name="song_insert_failed">Insert the song failed!</string>
 
