@@ -20,9 +20,9 @@ public class SongLibraryPlaylist implements Parcelable {
     @SerializedName("nameSong")
     @Expose
     private String nameSong;
-    @SerializedName("imgSong")
+    @SerializedName("imageSong")
     @Expose
-    private String imgSong;
+    private String imageSong;
     @SerializedName("nameSinger")
     @Expose
     private String nameSinger;
@@ -36,7 +36,7 @@ public class SongLibraryPlaylist implements Parcelable {
         this.idLibraryPlaylist = idLibraryPlaylist;
         this.idSong = idSong;
         this.nameSong = nameSong;
-        this.imgSong = imgSong;
+        this.imageSong = imgSong;
         this.nameSinger = nameSinger;
         this.linkSong = linkSong;
     }
@@ -46,7 +46,7 @@ public class SongLibraryPlaylist implements Parcelable {
         idLibraryPlaylist = in.readInt();
         idSong = in.readInt();
         nameSong = in.readString();
-        imgSong = in.readString();
+        imageSong = in.readString();
         nameSinger = in.readString();
         linkSong = in.readString();
     }
@@ -83,12 +83,12 @@ public class SongLibraryPlaylist implements Parcelable {
         this.nameSong = nameSong;
     }
 
-    public String getImgSong() {
-        return imgSong;
+    public String getImageSong() {
+        return imageSong;
     }
 
-    public void setImgSong(String imgSong) {
-        this.imgSong = imgSong;
+    public void setImageSong(String imgSong) {
+        this.imageSong = imgSong;
     }
 
     public String getNameSinger() {
@@ -130,7 +130,7 @@ public class SongLibraryPlaylist implements Parcelable {
         dest.writeInt(idLibraryPlaylist);
         dest.writeInt(idSong);
         dest.writeString(nameSong);
-        dest.writeString(imgSong);
+        dest.writeString(imageSong);
         dest.writeString(nameSinger);
         dest.writeString(linkSong);
     }
