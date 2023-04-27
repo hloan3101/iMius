@@ -29,7 +29,6 @@
     <string name="runtime" translatable="false">--:--</string>
     <string name="total_time" translatable="false">--:--</string>
     <string name="enter_name_for_your_playlist">Enter a name for your playlist</string>
-    <string name="enter_new_name_for_your_playlist">Enter a new name for your playlist</string>
     <string name="enter_name_of_playlist">Enter a name of playlist</string>
     <string name="enter">Enter</string>
     <string name="library">Library</string>
@@ -48,14 +47,15 @@
     <string name="login_failed">Login failed</string>
     <string name="require">REQUIRE</string>
     <string name="progressbar_tittle">"Please wait</string>
-    <string name="progressbar_login">"Logging in...</string>
-    <string name="progressbar_signup">"Signing up...</string>
+    <string name="progressbar_login">Logging in...</string>
+    <string name="progressbar_signup">Signing up...</string>
     <string name="compare_password_require">Passwords are not match</string>
     <string name="email_invalidate">Email invalidate</string>
     <string name="email_exist">This email already exists</string>
     <string name="signup_successfully">Signup Successfully</string>
     <string name="subject_email">Confirmation code from IMIUS</string>
     <string name="content_email">"iMius sent you an OTP for email verification: "</string>
+
     <string name="hello_email">Hello you,</string>
     <string name="end_email">Thank you!</string>
     <string name="code_error">Code error</string>
@@ -68,9 +68,11 @@
     <string name="library_playlist_name_exits">The playlist name has been exists!</string>
     <string name="library_playlist_insert_success">Insert playlist successfully!</string>
     <string name="library_playlist_delete_success">Delete playlist successfully!</string>
+    <string name="song_library_playlist_delete_success">Delete song successfully!</string>
     <string name="library_playlist_update_success">Update playlist successfully!</string>
     <string name="library_playlist_insert_failed">Insert playlist failed!</string>
     <string name="library_playlist_delete_failed">Delete playlist failed!</string>
+    <string name="song_library_playlist_delete_failed">Delete song failed!</string>
     <string name="library_playlist_update_failed">Update playlist failed!</string>
 
     <string name="title_dialog_delete">Confirm</string>
@@ -82,4 +84,19 @@
     <string name="nameLibraryPlaylist" translatable="false">nameLibraryPlaylist</string>
     <string name="update" translatable="false">update</string>
     <string name="insert" translatable="false">insert</string>
+
+    <string name="status_player" translatable="false">status_player</string>
+    <string name="action_music" translatable="false">action_music</string>
+    <string name="duration_music" translatable="false">duration_music</string>
+    <string name="seek_to_music" translatable="false">seek_to_music</string>
+    <string name="position_music" translatable="false">position_music</string>
+    <string name="obj_song" translatable="false">obj_song</string>
+    <string name="obj_song_library" translatable="false">obj_song_library</string>
+    <string name="obj_song_favorite" translatable="false">obj_song_favorite</string>
+    <string name="action_music_service" translatable="false">action_music_service</string>
+    <string name="duration" translatable="false">duration</string>
+    <string name="repeat_music" translatable="false">repeat_music</string>
+    <string name="random_music" translatable="false">random_music</string>
+    <string name="send_data_to_activity" translatable="false">send_data_to_activity</string>
+    <string name="enter_new_name_for_your_playlist">Enter new name for your playlist</string>
 </resources>

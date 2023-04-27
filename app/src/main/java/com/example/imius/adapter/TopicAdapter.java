@@ -2,6 +2,7 @@ package com.example.imius.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.imius.R;
+import com.example.imius.activity.PlaylistActivity;
 import com.example.imius.model.TopicModel;
 
 import com.squareup.picasso.Picasso;
@@ -74,6 +76,14 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder>{
             imgTopic = itemView.findViewById(R.id.item_newrelease_iv_newrelease_image);
             tvNameTopic = itemView.findViewById(R.id.item_newrelease_tv_newrelease_name);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, PlaylistActivity.class);
+                    intent.putExtra("topic", String.valueOf(topicModelList.get(getPosition())));
+                    context.startActivity(intent);
+                }
+            });
         }
 
     }

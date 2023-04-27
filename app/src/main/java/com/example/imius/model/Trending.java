@@ -5,10 +5,16 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class Trending {
+public class Trending implements Serializable {
 
+    @SerializedName("idTrending")
+    @Expose
     private int idTrending;
+    @SerializedName("nameTrending")
+    @Expose
     private String nameTrending;
+    @SerializedName("imageTrending")
+    @Expose
     private String imageTrending;
 
     public Trending(int idTrending, String nameTrending, String imageTrending) {
@@ -45,4 +51,6 @@ public class Trending {
     public void setImageTrending(String imageTrending) {
         this.imageTrending = imageTrending;
     }
+
+
 }

@@ -16,7 +16,7 @@ public class Song implements Parcelable {
     private String nameSong;
     @SerializedName("imgSong")
     @Expose
-    private String imgSong;
+    private String imageSong;
     @SerializedName("nameSinger")
     @Expose
     private String nameSinger;
@@ -27,7 +27,7 @@ public class Song implements Parcelable {
     public Song(int idSong, String nameSong, String imgSong, String nameSinger, String linkSong) {
         this.idSong = idSong;
         this.nameSong = nameSong;
-        this.imgSong = imgSong;
+        this.imageSong = imgSong;
         this.nameSinger = nameSinger;
         this.linkSong = linkSong;
     }
@@ -35,7 +35,7 @@ public class Song implements Parcelable {
     public Song(Parcel in) {
         idSong = in.readInt();
         nameSong = in.readString();
-        imgSong = in.readString();
+        imageSong = in.readString();
         nameSinger = in.readString();
         linkSong = in.readString();
     }
@@ -68,12 +68,12 @@ public class Song implements Parcelable {
         this.nameSinger = nameSinger;
     }
 
-    public String getImgSong() {
-        return imgSong;
+    public String getImageSong() {
+        return imageSong;
     }
 
-    public void setImgSong(String imgSong) {
-        this.imgSong = imgSong;
+    public void setImageSong(String imageSong) {
+        this.imageSong = imageSong;
     }
 
     public String getNameSong() {
@@ -101,7 +101,7 @@ public class Song implements Parcelable {
     public void writeToParcel(Parcel parcel, int i){
         parcel.writeInt(idSong);
         parcel.writeString(nameSong);
-        parcel.writeString(imgSong);
+        parcel.writeString(imageSong);
         parcel.writeString(nameSinger);
         parcel.writeString(linkSong);
     }

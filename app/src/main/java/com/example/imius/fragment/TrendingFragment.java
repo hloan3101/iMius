@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.imius.adapter.LibraryPlaylistAdapter;
 import com.example.imius.adapter.TrendingAdapter;
+import com.example.imius.api.API;
 import com.example.imius.databinding.FragmentTrendingBinding;
 
 import android.view.LayoutInflater;
@@ -31,6 +32,9 @@ public class TrendingFragment extends Fragment {
     private FragmentTrendingBinding binding;
     private TrendingAdapter trendingAdapter;
     private TrendingViewModel viewModel;
+
+
+    private DataService dataService = API.getAccount().create(DataService.class);
 
     public static TrendingFragment newInstance() {
         TrendingFragment fragment = new TrendingFragment();
@@ -57,8 +61,32 @@ public class TrendingFragment extends Fragment {
             trendingAdapter.setTrendingList(trendingList);
             Toast.makeText(getContext(), String.valueOf(trendingAdapter.getTrendingList().get(1).getImageTrending()), Toast.LENGTH_LONG).show();
         });
+
+        getData();
+
         return view;
     }
+
+    private void getData() {
+        Call<List<Trending>> callback = dataService.getTrending();
+        callback.enqueue(new Callback<List<Trending>>() {
+            @Override
+            public void onResponse(Call<List<Trending>> call, Response<List<Trending>> response) {
+                ArrayList<Trending> trendingArrayList = (ArrayList<Trending>) response.body();
+                trendingAdapter = new TrendingAdapter(getActivity(), trendingArrayList);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+                binding.fragmentTrendingRvTrending.setLayoutManager(linearLayoutManager);
+                binding.fragmentTrendingRvTrending.setAdapter(trendingAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<Trending>> call, Throwable t) {
+
+            }
+        });
+    }
+
     @Override
     public void onResume() {
         super.onResume();

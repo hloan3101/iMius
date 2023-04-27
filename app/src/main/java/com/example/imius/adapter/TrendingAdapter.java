@@ -2,6 +2,8 @@ package com.example.imius.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.imius.R;
+import com.example.imius.activity.PlaylistActivity;
+import com.example.imius.data.DataLocalManager;
 import com.example.imius.model.Trending;
 import com.squareup.picasso.Picasso;
 
@@ -38,7 +42,20 @@ public class TrendingAdapter extends RecyclerView.Adapter<TrendingAdapter.ViewHo
         return trendingList;
     }
 
+    private void callPlaylistActivity (Trending trending){
+        DataLocalManager.setIdTrending(trending.getIdTrending());
 
+        Intent intent = new Intent(context, PlaylistActivity.class);
+
+        Bundle bundle =  new Bundle();
+
+        bundle.putString("nameTrending", trending.getNameTrending());
+        bundle.putString("imageTrending", trending.getImageTrending());
+        bundle.putBoolean("checkTrending", true);
+        intent.putExtras(bundle);
+
+        context.startActivity(intent);
+    }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -58,9 +75,14 @@ public class TrendingAdapter extends RecyclerView.Adapter<TrendingAdapter.ViewHo
         if(trendingList == null){
             return;
         }
-
-        holder.tvNameTrending.setText(trending.getNameTrending());
         Picasso.get().load(trending.getImageTrending()).into(holder.imgTrending);
+        holder.tvNameTrending.setText(trending.getNameTrending());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callPlaylistActivity(trending);
+            }
+        });
 
     }
 
@@ -77,6 +99,14 @@ public class TrendingAdapter extends RecyclerView.Adapter<TrendingAdapter.ViewHo
             imgTrending = itemView.findViewById(R.id.item_newrelease_iv_newrelease_image);
             tvNameTrending = itemView.findViewById(R.id.item_newrelease_tv_newrelease_name);
 
+//            itemView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    Intent intent = new Intent(context, PlaylistActivity.class);
+//                    intent.putExtra("idTrending", trendingList.get(getPosition()));
+//                    context.startActivity(intent);
+//                }
+//            });
         }
 
     }
