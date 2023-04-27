@@ -34,7 +34,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SearchFragment extends Fragment {
+public class SearchFragment extends Fragment{
 
     private FragmentSearchBinding binding ;
     private SongViewModel songViewModel;
@@ -68,7 +68,6 @@ public class SearchFragment extends Fragment {
         } else {
             DataLocalManager.setCheckSearch(false);
         }
-
         ((AppCompatActivity)getActivity()).setSupportActionBar(binding.fragmentSearchToolBar);
         setHasOptionsMenu(true);
         return view;
@@ -79,28 +78,31 @@ public class SearchFragment extends Fragment {
         inflater.inflate(R.menu.menu_search, menu);
         MenuItem menuItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) menuItem.getActionView();
+        searchView.setMaxWidth(Integer.MAX_VALUE);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-//                songAdapter.getFilter().filter(query);
-                return false;
+                findSong(query);
+                return true;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
+
                 if (!newText.trim().equals("")){
                     findSong(newText);
+                }
+
+                if (listSong != null){
+                    if (newText.isEmpty()){
+                        listSong.clear();
+                    }
                 }
                 return true;
             }
         });
 
         super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    public boolean checkSearch(){
-
-        return false;
     }
 
     private void findSong(String key){
@@ -134,4 +136,5 @@ public class SearchFragment extends Fragment {
             }
         });
     }
+
 }

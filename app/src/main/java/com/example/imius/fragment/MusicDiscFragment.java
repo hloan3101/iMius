@@ -34,7 +34,7 @@ public class MusicDiscFragment extends Fragment {
 
         circleImageView = view.findViewById(R.id.fragment_music_disc_civ_disc_image);
         objectAnimator = ObjectAnimator.ofFloat(circleImageView, "rotation", 0f, 360f);
-        objectAnimator.setDuration(20000);
+        objectAnimator.setDuration(10000);
         objectAnimator.setRepeatCount(ValueAnimator.INFINITE);
         objectAnimator.setRepeatMode(ValueAnimator.RESTART);
         objectAnimator.setInterpolator(new LinearInterpolator());

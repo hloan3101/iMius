@@ -4,17 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/search_layout"
+    android:background="@drawable/sky"
     tools:context=".fragment.SearchFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/fragment_search_app_bar"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="56dp"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:background="@color/white">
+        android:background="@drawable/bgr_search_bar">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/fragment_search_tool_bar"
@@ -23,6 +23,7 @@
             android:gravity="center_horizontal"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
+            android:background="@drawable/bgr_search_bar"
             app:titleTextColor="@color/black"
             app:title="@string/search_in_library"
             app:collapseIcon="?attr/actionModeCloseDrawable"/>

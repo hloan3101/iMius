@@ -71,8 +71,6 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         holder.tvSinger.setText(song.getNameSinger());
         Picasso.get().load(song.getImgSong()).into(holder.imgImageOfSong);
 
-        Toast.makeText(context, String.valueOf(DataLocalManager.getCheckSearch()), Toast.LENGTH_SHORT).show();
-
         if (DataLocalManager.getCheckSearch()) {
 
 

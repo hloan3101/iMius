@@ -13,6 +13,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.View;
 import android.widget.Toast;
 
@@ -59,6 +60,9 @@ public class PlaylistActivity extends AppCompatActivity {
         binding = ActivityPlaylistBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
 
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
 
@@ -97,9 +101,8 @@ public class PlaylistActivity extends AppCompatActivity {
             binding.activityPlaylistImAddSong.setVisibility(View.GONE);
         }
 
-
-
         initView();
+        eventClickFabBtn();
 
         setContentView(view);
     }
@@ -127,6 +130,8 @@ public class PlaylistActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        binding.activityPlaylistFabAction.setEnabled(false);
+
         binding.activityPlaylistImAddSong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -155,6 +160,7 @@ public class PlaylistActivity extends AppCompatActivity {
             public void onResponse(Call<List<SongLibraryPlaylist>> call, Response<List<SongLibraryPlaylist>> response) {
                 if (response.body() != null) {
                     adapter.setSongLibraryPlaylistList(response.body());
+                    eventClickFabBtn();
                 } else {
                     Toast.makeText(PlaylistActivity.this, "null", Toast.LENGTH_LONG).show();
                 }
@@ -233,6 +239,25 @@ public class PlaylistActivity extends AppCompatActivity {
                 }
             }
         }).attachToRecyclerView(binding.activityPlaylistRvPlaylist);
+    }
+
+    private void eventClickFabBtn(){
+        binding.activityPlaylistFabAction.setEnabled(true);
+        binding.activityPlaylistFabAction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PlaylistActivity.this, PlayMusicActivity.class);
+                if (adapter.getSongLibraryPlaylistList() != null){
+                    if (adapter.getSongLibraryPlaylistList().size() > 0){
+                        intent.putExtra("list_song_library", (ArrayList<SongLibraryPlaylist>)adapter.getSongLibraryPlaylistList());
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(PlaylistActivity.this, "The list has no songs at all.", Toast.LENGTH_LONG).show();
+                    }
+                }
+
+            }
+        });
     }
 
 }
