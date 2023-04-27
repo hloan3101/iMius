@@ -32,7 +32,7 @@
     <string name="enter_name_of_playlist">Enter a name of playlist</string>
     <string name="enter">Enter</string>
     <string name="library">Library</string>
-    <string name="search_in_library">Enter a singer, song or podcast</string>
+    <string name="search_in_library">Enter a song....</string>
     <string name="cant_find">I can not find this song :(</string>
     <string name="change_password">Change password</string>
     <string name="new_password">Enter a new password</string>

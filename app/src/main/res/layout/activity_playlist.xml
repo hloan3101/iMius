@@ -37,6 +37,36 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white" />
 
+            <LinearLayout
+                android:layout_marginTop="50dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/activity_playlist_iv_view_song"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="24dp"
+                    android:elevation="0dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/item_note_music"/>
+
+                <TextView
+                    android:id="@+id/activity_playlist_tv_song_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxWidth="350dp"
+                    android:maxLines="2"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:elevation="0dp"
+                    android:text="TextView"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"/>
+
+            </LinearLayout>
+
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -109,31 +139,7 @@
                 app:layout_anchorGravity="top|right"/>
         </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/activity_playlist_iv_view_song"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="24dp"
-            android:elevation="0dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/item_note_music"/>
-
-        <TextView
-            android:id="@+id/activity_playlist_tv_song_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxWidth="350dp"
-            android:maxLines="2"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
-            android:elevation="0dp"
-            android:text="TextView"
-            android:textColor="@color/black"
-            android:textSize="24sp"/>
 
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-

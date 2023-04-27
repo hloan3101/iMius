@@ -31,12 +31,12 @@ public class SongLibraryPlaylist implements Parcelable {
     private String linkSong;
 
     public SongLibraryPlaylist(int idSongLibraryPlaylist, int idLibraryPlaylist, int idSong,
-                               String nameSong, String imageSong, String nameSinger, String linkSong) {
+                               String nameSong, String imgSong, String nameSinger, String linkSong) {
         this.idSongLibraryPlaylist = idSongLibraryPlaylist;
         this.idLibraryPlaylist = idLibraryPlaylist;
         this.idSong = idSong;
         this.nameSong = nameSong;
-        this.imageSong = imageSong;
+        this.imageSong = imgSong;
         this.nameSinger = nameSinger;
         this.linkSong = linkSong;
     }

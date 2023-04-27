@@ -80,7 +80,7 @@ public class FavoriteSong implements Parcelable {
         this.nameSong = nameSong;
     }
 
-    public String getImgSong() {
+    public String getImageSong() {
         return imageSong;
     }
 

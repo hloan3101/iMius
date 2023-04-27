@@ -1,6 +1,7 @@
 package com.example.imius.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +13,8 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.imius.R;
+import com.example.imius.activity.PlayMusicActivity;
 import com.example.imius.model.FavoriteSong;
-import com.example.imius.model.LibraryPlaylist;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -46,7 +47,7 @@ public class FavoriteSongAdapter extends RecyclerView.Adapter<FavoriteSongAdapte
         }
         holder.tvNameFavoriteSong.setText(favoriteSong.getNameSong());
         holder.tvNameSinger.setText(favoriteSong.getNameSinger());
-        Picasso.get().load(favoriteSong.getImgSong()).into(holder.imgFavoriteSong);
+        Picasso.get().load(favoriteSong.getImageSong()).into(holder.imgFavoriteSong);
     }
 
     @Override
@@ -71,13 +72,21 @@ public class FavoriteSongAdapter extends RecyclerView.Adapter<FavoriteSongAdapte
         private ImageView imgFavoriteSong;
         private TextView tvNameSinger;
 
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tvNameFavoriteSong = itemView.findViewById(R.id.item_favorite_tv_name_of_song);
             tvNameSinger = itemView.findViewById(R.id.item_favorite_tv_name_of_singer);
             imgFavoriteSong = itemView.findViewById(R.id.item_favorite_iv_image_of_song);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, PlayMusicActivity.class);
+                    intent.putExtra("favorite_song", favoriteSongs.get(getPosition()));
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 

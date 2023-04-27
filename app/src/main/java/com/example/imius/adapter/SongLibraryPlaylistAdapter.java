@@ -34,8 +34,6 @@ public class SongLibraryPlaylistAdapter extends RecyclerView.Adapter<SongLibrary
     private Context context;
     private List<SongLibraryPlaylist> songLibraryPlaylistList;
 
-
-
     public SongLibraryPlaylistAdapter(Context context) {
         this.context = context;
     }
@@ -205,7 +203,7 @@ public class SongLibraryPlaylistAdapter extends RecyclerView.Adapter<SongLibrary
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, PlayMusicActivity.class);
-                    intent.putExtra("library_song", songLibraryPlaylistList.get(getPosition()));
+                    intent.putExtra("library_song", songLibraryPlaylistList.get(getAdapterPosition()));
                     context.startActivity(intent);
                 }
             });
