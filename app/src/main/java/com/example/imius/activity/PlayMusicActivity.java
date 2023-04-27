@@ -20,6 +20,7 @@ import android.widget.SeekBar;
 import android.widget.Toast;
 
 import com.example.imius.constants.Constants;
+import com.example.imius.data.DataLocalManager;
 import com.example.imius.databinding.ActivityPlayMusicBinding;
 
 import com.example.imius.R;
@@ -31,6 +32,8 @@ import com.example.imius.model.FavoriteSong;
 import com.example.imius.model.Song;
 import com.example.imius.model.SongLibraryPlaylist;
 
+import com.example.imius.repository.LibraryRepository;
+import com.example.imius.repository.MusicRepository;
 import com.example.imius.viewmodel.SongViewModel;
 import com.example.imius.widget.DiscViewPager;
 
@@ -81,6 +84,8 @@ public class PlayMusicActivity extends AppCompatActivity {
         eventClick();
 
         overridePendingTransition(R.anim.anim_intent_in, R.anim.anim_intent_out);
+
+
 
     }
 
@@ -406,9 +411,11 @@ public class PlayMusicActivity extends AppCompatActivity {
                 if (mediaPlayer.isPlaying()){
                     mediaPlayer.pause();
                     binding.activityPlayMusicIbPlayAndPauseSong.setImageResource(R.drawable.ic_pause_button);
+                    musicDiscFragment.stopImgOfSong();
                 } else {
                     mediaPlayer.start();
                     binding.activityPlayMusicIbPlayAndPauseSong.setImageResource(R.drawable.ic_play_button);
+                    musicDiscFragment.startImgOfSong();
                 }
             }
         });

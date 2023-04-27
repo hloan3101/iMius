@@ -64,4 +64,18 @@ public class MusicRepository {
     public Call<BaseResponse> updateLikeOfNumber (int idSong){
         return dataService.updateLikeOfNumber(DataLocalManager.getUsernameData(), idSong);
     }
+
+    public Call<BaseResponse> checkHistorySong (String username, int idSong){
+        return dataService.checkHistorySong(username, idSong);
+    }
+
+    public Call<BaseResponse> deleteHistorySong (int idSong) {
+        return dataService.deleteHistorySong(DataLocalManager.getUsernameData(), idSong);
+    }
+
+    public Call<BaseResponse> insertHistorySong (Song song){
+        return dataService.insertHistorySong(DataLocalManager.getUsernameData(),
+                song.getIdSong(), song.getNameSong(),
+                song.getNameSinger(), song.getImgSong(), song.getLinkSong());
+    }
 }

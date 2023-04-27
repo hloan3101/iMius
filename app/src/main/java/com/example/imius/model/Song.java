@@ -24,6 +24,15 @@ public class Song implements Parcelable {
     @Expose
     private String linkSong;
 
+
+    public Song(Song song) {
+        this.idSong = song.getIdSong();
+        this.imageSong = song.getImgSong();
+        this.nameSong = song.getNameSong();
+        this.nameSinger = song.getNameSinger();
+        this.linkSong = song.getLinkSong();
+    }
+
     public Song(int idSong, String nameSong, String imageSong, String nameSinger, String linkSong) {
         this.idSong = idSong;
         this.imageSong = imageSong;

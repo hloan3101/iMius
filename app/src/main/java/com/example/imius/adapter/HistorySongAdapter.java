@@ -18,6 +18,7 @@ import com.example.imius.constants.Constants;
 import com.example.imius.data.DataLocalManager;
 import com.example.imius.model.BaseResponse;
 import com.example.imius.model.FavoriteSong;
+import com.example.imius.model.HistorySong;
 import com.example.imius.model.Song;
 import com.example.imius.repository.MusicRepository;
 import com.squareup.picasso.Picasso;
@@ -28,12 +29,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FavoriteSongAdapter extends RecyclerView.Adapter<FavoriteSongAdapter.ViewHolder>{
+public class HistorySongAdapter extends RecyclerView.Adapter<HistorySongAdapter.ViewHolder>{
 
     private Context context;
-    private List<FavoriteSong> favoriteSongs;
+    private List<HistorySong> historySongs;
 
-    public FavoriteSongAdapter(Context context) {
+    public HistorySongAdapter(Context context) {
         this.context = context;
     }
 
@@ -49,73 +50,71 @@ public class FavoriteSongAdapter extends RecyclerView.Adapter<FavoriteSongAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        FavoriteSong favoriteSong = favoriteSongs.get(position);
+        HistorySong historySong = historySongs.get(position);
 
-        if (favoriteSongs == null){
+        if (historySongs == null){
             return;
         }
+        holder.setSong(new Song(historySong.getIdSong(), historySong.getNameSong(), historySong.getImageSong(),
+                historySong.getNameSinger(), historySong.getLinkSong()));
 
-        holder.setSong(new Song(favoriteSong.getIdSong(), favoriteSong.getNameSong(),
-                favoriteSong.getImageSong(), favoriteSong.getNameSinger(), favoriteSong.getLinkSong()));
-
-        holder.tvNameFavoriteSong.setText(favoriteSong.getNameSong());
-        holder.tvNameSinger.setText(favoriteSong.getNameSinger());
-        Picasso.get().load(favoriteSong.getImageSong()).into(holder.imgFavoriteSong);
+        holder.tvNameHistorySong.setText(historySong.getNameSong());
+        holder.tvNameSinger.setText(historySong.getNameSinger());
+        Picasso.get().load(historySong.getImageSong()).into(holder.imgHistorySong);
     }
 
     @Override
     public int getItemCount() {
-        if (favoriteSongs != null){
-            return favoriteSongs.size();
+        if (historySongs != null){
+            return historySongs.size();
         }
         return 0;
     }
 
-    public List<FavoriteSong> getFavoriteSongs() {
-        return favoriteSongs;
+    public List<HistorySong> getHistorySongs() {
+        return historySongs;
     }
 
-    public void setFavoriteSongs(List<FavoriteSong> favoriteSongs) {
-        this.favoriteSongs = favoriteSongs;
+    public void setHistorySongs(List<HistorySong> historySongs) {
+        this.historySongs = historySongs;
         notifyDataSetChanged();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvNameFavoriteSong;
-        private ImageView imgFavoriteSong;
+    public class ViewHolder extends RecyclerView.ViewHolder{
+        private TextView tvNameHistorySong;
+        private ImageView imgHistorySong;
         private TextView tvNameSinger;
-
         private Song song;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            tvNameFavoriteSong = itemView.findViewById(R.id.item_favorite_tv_name_of_song);
+            tvNameHistorySong = itemView.findViewById(R.id.item_favorite_tv_name_of_song);
             tvNameSinger = itemView.findViewById(R.id.item_favorite_tv_name_of_singer);
-            imgFavoriteSong = itemView.findViewById(R.id.item_favorite_iv_image_of_song);
+            imgHistorySong = itemView.findViewById(R.id.item_favorite_iv_image_of_song);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, PlayMusicActivity.class);
-                    intent.putExtra("favorite_song", favoriteSongs.get(getPosition()));
+                    intent.putExtra("history_song", historySongs.get(getPosition()));
                     checkHistorySong(song);
                     context.startActivity(intent);
                 }
             });
         }
 
-        private void checkHistorySong(Song song) {
+        private void checkHistorySong (Song song){
             MusicRepository repository = new MusicRepository();
 
             repository.checkHistorySong(DataLocalManager.getUsernameData(), song.getIdSong())
                     .enqueue(new Callback<BaseResponse>() {
                         @Override
                         public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
-                            if (response.body() != null) {
-                                if (!response.body().getIsSuccess().equals(Constants.successfully)) {
-                                //    Toast.makeText(context, String.valueOf(response.body().equals(Constants.successfully))).show();
-                                    addHistorySong(song);
+                            if (response.body() != null){
+                                if (!response.body().getIsSuccess().equals(Constants.successfully)){
+                                    //      Toast.makeText(context, String.valueOf(response.body().equals(Constants.successfully)))
+                                    addSongLibraryPlaylist(song);
                                 }
                             }
                         }
@@ -127,14 +126,14 @@ public class FavoriteSongAdapter extends RecyclerView.Adapter<FavoriteSongAdapte
                     });
         }
 
-        public void addHistorySong(Song song) {
+        public void addSongLibraryPlaylist(Song song) {
             MusicRepository repository = new MusicRepository();
             repository.insertHistorySong(song).enqueue(new Callback<BaseResponse>() {
                 @Override
                 public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
                     if (response.body() != null) {
                         //  Toast.makeText(context, R.string.song_insert_success, Toast.LENGTH_LONG).show();
-                    } else {
+                    }else {
                         //  Toast.makeText(context, R.string.song_insert_failed, Toast.LENGTH_LONG).show();
                     }
                 }
@@ -146,9 +145,8 @@ public class FavoriteSongAdapter extends RecyclerView.Adapter<FavoriteSongAdapte
             });
         }
 
-        private void setSong(Song song) {
+        public void setSong (Song song){
             this.song = new Song(song);
-
         }
     }
 
