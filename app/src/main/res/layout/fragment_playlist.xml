@@ -8,6 +8,7 @@
     tools:context=".fragment.PlaylistFragment">
 
     <LinearLayout
+        android:id="@+id/fragment_playlist_linear_layout_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -33,7 +34,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fragment_playlist_rv_playlist"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:paddingTop="20dp"/>
 
 </LinearLayout>

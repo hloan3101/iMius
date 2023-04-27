@@ -14,7 +14,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:background="@drawable/bgr_search_bar">
+        android:background="@color/white">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/fragment_search_tool_bar"
@@ -27,24 +27,23 @@
             app:title="@string/search_in_library"
             app:collapseIcon="?attr/actionModeCloseDrawable"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/fragment_search_rv_search"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
-            android:layout_below="@+id/fragment_search_app_bar"/>
-
-        <TextView
-            android:id="@+id/fragment_search_cant_find"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone"
-            android:text="@string/cant_find"
-            android:gravity="center"
-            android:textSize="27sp"
-            android:textColor="@color/black"/>
-
-
     </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fragment_search_rv_search"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/fragment_search_app_bar"/>
+
+    <TextView
+        android:id="@+id/fragment_search_cant_find"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:text="@string/cant_find"
+        android:gravity="center"
+        android:textSize="27sp"
+        android:textColor="@color/black"/>
 
 </RelativeLayout>

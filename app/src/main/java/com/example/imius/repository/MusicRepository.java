@@ -1,12 +1,11 @@
 package com.example.imius.repository;
 
-import android.widget.Toast;
-
 import com.example.imius.api.API;
 import com.example.imius.data.DataLocalManager;
 import com.example.imius.livedata.RefreshLiveData;
 import com.example.imius.model.BaseResponse;
 import com.example.imius.model.LibraryPlaylist;
+import com.example.imius.model.Song;
 import com.example.imius.service.DataService;
 
 import java.util.ArrayList;
@@ -15,6 +14,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.Query;
 
 public class MusicRepository {
     private DataService dataService;
@@ -33,6 +33,7 @@ public class MusicRepository {
 
                 @Override
                 public void onFailure(Call<List<LibraryPlaylist>> call, Throwable t) {
+
                 }
             });
         });
@@ -43,11 +44,24 @@ public class MusicRepository {
         return dataService.insertLibraryPlaylist(nameLibraryPlaylist, DataLocalManager.getUsernameData());
     }
 
-    public Call<BaseResponse> deleteLibraryPlaylist (int idLibraryPlaylist){
-        return dataService.deleteLibraryPlaylist(idLibraryPlaylist);
+    public Call<List<Song>> findSong(String key){
+        return dataService.findSong(key);
     }
 
-    public Call<BaseResponse> updateLibraryPlaylistName (String nameLibraryPlaylist, String newNameLibraryPlaylist){
-        return dataService.updateLibraryPlaylistName(nameLibraryPlaylist, newNameLibraryPlaylist, DataLocalManager.getUsernameData());
+    public Call<BaseResponse> checkLikeSong(String username, int idSong){
+        return dataService.checkLikeSong(username, idSong);
+    }
+
+    public Call<BaseResponse> deleteLikeSong(String username, int idSong){
+        return dataService.deleteLikeSong(username, idSong);
+    }
+
+    public Call<BaseResponse> insertLoveSong(String username, Song song){
+        return dataService.insertLoveSong(username, song.getIdSong(), song.getNameSong(),
+                song.getNameSinger(), song.getImgSong(), song.getLinkSong());
+    }
+
+    public Call<BaseResponse> updateLikeOfNumber (int idSong){
+        return dataService.updateLikeOfNumber(DataLocalManager.getUsernameData(), idSong);
     }
 }

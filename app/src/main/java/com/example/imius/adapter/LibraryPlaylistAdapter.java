@@ -1,6 +1,8 @@
 package com.example.imius.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,9 +10,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.imius.R;
+import com.example.imius.activity.PlaylistActivity;
+import com.example.imius.data.DataLocalManager;
+import com.example.imius.fragment.DialogAddToLibraryPlaylist;
 import com.example.imius.model.LibraryPlaylist;
 import com.squareup.picasso.Picasso;
 
@@ -44,6 +51,28 @@ public class LibraryPlaylistAdapter extends RecyclerView.Adapter<LibraryPlaylist
         }
         holder.tvNamePlaylistLibrary.setText(playlistLibrary.getNameLibraryPlaylist());
         Picasso.get().load(playlistLibrary.getImageLibraryPlaylist()).into(holder.imgPlaylistLibrary);
+
+        holder.layoutItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callPlaylistActivity(playlistLibrary);
+            }
+        });
+    }
+
+    private void callPlaylistActivity (LibraryPlaylist libraryPlaylist){
+        DataLocalManager.setIdLibraryPlaylist(libraryPlaylist.getIdLibraryPlaylist());
+
+        Intent intent = new Intent(context, PlaylistActivity.class);
+
+        Bundle bundle =  new Bundle();
+        bundle.putInt("idLibraryPlaylist", libraryPlaylist.getIdLibraryPlaylist());
+        bundle.putString("nameLibraryPlaylist", libraryPlaylist.getNameLibraryPlaylist());
+        bundle.putString("imgPlaylistLibrary", libraryPlaylist.getImageLibraryPlaylist());
+
+        intent.putExtras(bundle);
+
+        context.startActivity(intent);
     }
 
     @Override
@@ -65,13 +94,15 @@ public class LibraryPlaylistAdapter extends RecyclerView.Adapter<LibraryPlaylist
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
+        private CardView layoutItem;
         private TextView tvNamePlaylistLibrary;
         private ImageView imgPlaylistLibrary;
 
 
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            layoutItem = itemView.findViewById(R.id.item_library_playlist);
             tvNamePlaylistLibrary = itemView.findViewById(R.id.item_library_playlist_tv_name);
             imgPlaylistLibrary = itemView.findViewById(R.id.item_library_playlist_img);
         }

@@ -56,7 +56,7 @@ public class TopicFragment extends Fragment {
         viewModel = new ViewModelProvider(getActivity()).get(TopicViewModel.class);
         viewModel.getTopic().observe(getViewLifecycleOwner(), topicModelList -> {
             topicAdapter.setTopicModelList(topicModelList);
-            Toast.makeText(getContext(), String.valueOf(topicAdapter.getTopicModelList().get(0).getImageTopic()), Toast.LENGTH_LONG).show();
+            //  Toast.makeText(getContext(), String.valueOf(topicAdapter.getTopicModelList().get(0).getImageTopic()), Toast.LENGTH_LONG).show();
         });
         return view;
     }
