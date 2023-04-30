@@ -70,4 +70,5 @@
     <string name="update_success">Cập nhật thành công!</string>
     <string name="update_faild">Cập nhật khoonng thành công!</string>
     <string name="cannot_find">Không tìm thấy!</string>
+    <string name="network_disconnected">Không có Internet!</string>
 </resources>

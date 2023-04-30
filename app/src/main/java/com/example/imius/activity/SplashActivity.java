@@ -5,43 +5,42 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.Toast;
 
 import com.example.imius.R;
-import com.example.imius.data.MySharedPreferences;
-import com.example.imius.databinding.ActivityWelcomeBinding;
+import com.example.imius.data.DataLocalManager;
+import com.example.imius.network.AppUtil;
+
+import io.github.muddz.styleabletoast.StyleableToast;
 
 public class SplashActivity extends AppCompatActivity {
-
-    private MySharedPreferences mySharedPreferences;
-    private static final String KEY_FIRST_INSTALL = "KEY_FIRST_INSTALL";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
-        mySharedPreferences = new MySharedPreferences(this);
-
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                if (mySharedPreferences.getBooleanValue(KEY_FIRST_INSTALL)){
-                    startActivity(HomeActivity.class);
-                } else {
-                    startActivity(ActivityWelcomeBinding.class);
-                    mySharedPreferences.putBoolean(KEY_FIRST_INSTALL, true);
-                }
-//                nextActivity();
-            }
-        }, 2000);
-
+        
+        loadData();
     }
 
-    private void startActivity(Class<?> cls){
-        Intent intent = new Intent(this, cls);
-        startActivity(intent);
-        finish();
+    private void loadData() {
+        if (AppUtil.isNetworkAvailable(this)){
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (!DataLocalManager.getFirstInstall()){
+                        Intent intent = new Intent(SplashActivity.this, WelcomeActivity.class);
+                        startActivity(intent);
+                    }else {
+                        Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                    }
+                    finish();
+                }
+            }, 3000);
+        }else {
+            StyleableToast.makeText(this, getString(R.string.network_disconnected),
+                    Toast.LENGTH_LONG, R.style.myToast).show();
+        }
     }
 }

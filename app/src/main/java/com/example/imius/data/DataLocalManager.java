@@ -3,6 +3,7 @@ package com.example.imius.data;
 import android.content.Context;
 
 public class DataLocalManager {
+    private static final String KEY_FIRST_INSTALL = "KEY_FIRST_INSTALL";
     private static final String EMAIL = "EMAIL";
     private static final String PASSWORD = "PASSWORD";
     private static final String USERNAME = "USERNAME";
@@ -27,6 +28,10 @@ public class DataLocalManager {
             instance = new DataLocalManager();
         }
         return instance;
+    }
+
+    public static void setFirstInstall(boolean value) {
+        DataLocalManager.getInstance().mySharedPreferences.putBoolean(KEY_FIRST_INSTALL, value);
     }
 
     public static void setEmail(String value) {
@@ -63,6 +68,10 @@ public class DataLocalManager {
 
     public static String getPassword() {
         return DataLocalManager.getInstance().mySharedPreferences.getStringValue(PASSWORD);
+    }
+
+    public static boolean getFirstInstall() {
+        return DataLocalManager.getInstance().mySharedPreferences.getBooleanValue(KEY_FIRST_INSTALL);
     }
 
     public static boolean getCheckEdit() {

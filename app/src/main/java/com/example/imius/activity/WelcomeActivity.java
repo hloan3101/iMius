@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.imius.data.DataLocalManager;
 import com.example.imius.databinding.ActivityWelcomeBinding;
 
 public class WelcomeActivity extends AppCompatActivity {
@@ -17,8 +18,11 @@ public class WelcomeActivity extends AppCompatActivity {
 
         binding = ActivityWelcomeBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
+        setListener();
         setContentView(view);
     }
+
+
 
     private void setListener (){
 //        binding.activityWelcomeBtnSignupWithGmail.setOnClickListener(new View.OnClickListener() {
@@ -38,7 +42,8 @@ public class WelcomeActivity extends AppCompatActivity {
         binding.activityWelcomeTvContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                callHomeActivity();
+                DataLocalManager.setFirstInstall(true);
+                callSplashActivity();
             }
         });
     }
@@ -55,6 +60,11 @@ public class WelcomeActivity extends AppCompatActivity {
 
     private void callHomeActivity (){
         Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
+        startActivity(intent);
+    }
+
+    private void callSplashActivity (){
+        Intent intent = new Intent(WelcomeActivity.this, SplashActivity.class);
         startActivity(intent);
     }
 }
