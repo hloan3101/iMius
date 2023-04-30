@@ -11,7 +11,7 @@
     <string name="forget_password">Quên mật khẩu?</string>
     <string name="login_account">Bạn đã có tài khoản? Đăng nhập</string>
     <string name="confirm_code">Mã xác nhận</string>
-    <string name="continue_continue">TIẾP TỤC</string>
+    <string name="skip">BỎ QUA</string>
     <string name="create_an_account">Tạo tài khoản</string>
     <string name="play_list">Danh sách phát</string>
     <string name="singer">Nghê sĩ</string>

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.example.imius.activity.PlayMusicActivity;
 import com.example.imius.adapter.PlaylistPlayMusicAdapter;
 import com.example.imius.adapter.PlaylistPlayMusicFavoriteAdapter;
+import com.example.imius.adapter.PlaylistPlayMusicHistoryAdapter;
 import com.example.imius.adapter.PlaylistPlayMusicLibraryAdapter;
 import com.example.imius.databinding.FragmentPlayMusicPlaylistBinding;
 
@@ -22,6 +23,7 @@ public class PlayMusicPlaylistFragment extends Fragment {
     private PlaylistPlayMusicAdapter adapter;
     private PlaylistPlayMusicLibraryAdapter adapterLibrary;
     private PlaylistPlayMusicFavoriteAdapter adapterFavorite;
+    private PlaylistPlayMusicHistoryAdapter adapterHistory;
 
     public static PlayMusicPlaylistFragment newInstance() {
         PlayMusicPlaylistFragment fragment = new PlayMusicPlaylistFragment();
@@ -60,6 +62,13 @@ public class PlayMusicPlaylistFragment extends Fragment {
 
             binding.fragmentPlayMusicPlaylistRvPlayMusic.setLayoutManager(new LinearLayoutManager(getActivity()));
             binding.fragmentPlayMusicPlaylistRvPlayMusic.setAdapter(adapterFavorite);
+        }
+
+        if (PlayMusicActivity.historySongArrayList.size() > 0){
+            adapterHistory = new PlaylistPlayMusicHistoryAdapter(getActivity(), PlayMusicActivity.historySongArrayList);
+
+            binding.fragmentPlayMusicPlaylistRvPlayMusic.setLayoutManager(new LinearLayoutManager(getActivity()));
+            binding.fragmentPlayMusicPlaylistRvPlayMusic.setAdapter(adapterHistory);
         }
 
         return view;
