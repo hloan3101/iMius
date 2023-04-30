@@ -36,10 +36,12 @@ import com.example.imius.model.SongLibraryPlaylist;
 import com.example.imius.repository.MusicRepository;
 import com.example.imius.viewmodel.SongViewModel;
 import com.example.imius.widget.DiscViewPager;
+import com.example.imius.widget.ForegroundServiceControl;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 import io.github.muddz.styleabletoast.StyleableToast;
@@ -85,9 +87,20 @@ public class PlayMusicActivity extends AppCompatActivity {
         getDataFromIntent();
         init();
         eventClick();
+        startService();
 
         overridePendingTransition(R.anim.anim_intent_in, R.anim.anim_intent_out);
 
+    }
+
+    private void startService(){
+        Intent intent = new Intent(this, ForegroundServiceControl.class);
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("object_song", songArrayList);
+        intent.putExtras(bundle);
+
+        startService(intent);
     }
 
     private void init(){
@@ -103,7 +116,7 @@ public class PlayMusicActivity extends AppCompatActivity {
 
         setSupportActionBar(binding.activityPlayMusicToolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         musicDiscFragment = (MusicDiscFragment) discViewPager.getItem(0);
 
@@ -139,6 +152,7 @@ public class PlayMusicActivity extends AppCompatActivity {
 
     }
 
+
     private void eventClick() {
 
         Handler handler = new Handler();
@@ -162,7 +176,6 @@ public class PlayMusicActivity extends AppCompatActivity {
                 }
             }
         },500);
-
 
         binding.activityPlayMusicIbBackSong.setOnClickListener(new View.OnClickListener() {
             @Override
