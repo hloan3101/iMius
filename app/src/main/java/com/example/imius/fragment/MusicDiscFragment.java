@@ -33,17 +33,24 @@ public class MusicDiscFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_music_disc, container, false);
 
         circleImageView = view.findViewById(R.id.fragment_music_disc_civ_disc_image);
+        startImgOfSong();
+        return view;
+    }
+
+    public void playMusicDisc(String image){
+        Picasso.get().load(image).into(circleImageView);
+    }
+
+    public void stopImgOfSong(){
+        objectAnimator.pause();
+    }
+
+    public void startImgOfSong(){
         objectAnimator = ObjectAnimator.ofFloat(circleImageView, "rotation", 0f, 360f);
         objectAnimator.setDuration(10000);
         objectAnimator.setRepeatCount(ValueAnimator.INFINITE);
         objectAnimator.setRepeatMode(ValueAnimator.RESTART);
         objectAnimator.setInterpolator(new LinearInterpolator());
         objectAnimator.start();
-
-        return view;
-    }
-
-    public void playMusicDisc(String image){
-        Picasso.get().load(image).into(circleImageView);
     }
 }

@@ -17,6 +17,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity {
     private ActivityHomeBinding binding;
+    private PlayMusicActivity playMusicActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +63,7 @@ public class HomeActivity extends AppCompatActivity {
 
         binding.activityHomeViewPager.setAdapter(viewPagerAdapter);
 
-
     }
+
+
 }
