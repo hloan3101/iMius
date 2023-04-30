@@ -147,10 +147,10 @@ public class FavoriteFragment extends Fragment {
             @Override
             public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
                 if (response.body().getIsSuccess().equals(Constants.successfully)){
-                    Toast.makeText(getContext(), getString(R.string.delete_success),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.library_playlist_delete_success),Toast.LENGTH_SHORT).show();
                     viewModel.refreshLiveData();
                 }else {
-                    Toast.makeText(getContext(), getString(R.string.delete_failed), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.library_playlist_delete_failed), Toast.LENGTH_SHORT).show();
                 }
             }
 

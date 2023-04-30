@@ -1,5 +1,6 @@
 package com.example.imius.fragment;
 
+import android.hardware.lights.LightState;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.imius.adapter.TopicAdapter;
 import com.example.imius.adapter.TrendingAdapter;
+import com.example.imius.api.API;
 import com.example.imius.databinding.FragmentTopicBinding;
 import com.example.imius.databinding.FragmentTrendingBinding;
 import com.example.imius.model.TopicModel;
@@ -21,6 +23,7 @@ import com.example.imius.viewmodel.TopicViewModel;
 import com.example.imius.viewmodel.TrendingViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,6 +33,8 @@ public class TopicFragment extends Fragment {
     private FragmentTopicBinding binding;
     private TopicAdapter topicAdapter;
     private TopicViewModel viewModel;
+
+    private DataService dataService = API.getAccount().create(DataService.class);
 
     public static TopicFragment newInstance(String param1, String param2) {
         TopicFragment fragment = new TopicFragment();
@@ -58,8 +63,10 @@ public class TopicFragment extends Fragment {
             topicAdapter.setTopicModelList(topicModelList);
             //  Toast.makeText(getContext(), String.valueOf(topicAdapter.getTopicModelList().get(0).getImageTopic()), Toast.LENGTH_LONG).show();
         });
+
         return view;
     }
+
     @Override
     public void onResume() {
         super.onResume();

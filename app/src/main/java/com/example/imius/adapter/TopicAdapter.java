@@ -24,6 +24,8 @@ import java.util.List;
 public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder>{
     private Context context;
 
+    private View view;
+
     private List<TopicModel> topicModelList;
     public TopicAdapter(Context context){
         this.context = context;
@@ -47,7 +49,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder>{
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.item_trending, parent, false);
+        view = inflater.inflate(R.layout.item_trending, parent, false);
         return new ViewHolder(view);
     }
 
@@ -60,6 +62,15 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder>{
         }
         holder.tvNameTopic.setText(topicModel.getNameTopic());
         Picasso.get().load(topicModel.getImageTopic()).into(holder.imgTopic);
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, PlaylistActivity.class);
+                intent.putExtra("topic", topicModelList.get(position));
+                context.startActivity(intent);
+            }
+        });
 
     }
 
@@ -76,14 +87,14 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder>{
             imgTopic = itemView.findViewById(R.id.item_newrelease_iv_newrelease_image);
             tvNameTopic = itemView.findViewById(R.id.item_newrelease_tv_newrelease_name);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(context, PlaylistActivity.class);
-                    intent.putExtra("topic", String.valueOf(topicModelList.get(getPosition())));
-                    context.startActivity(intent);
-                }
-            });
+//            itemView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    Intent intent = new Intent(context, PlaylistActivity.class);
+//                    intent.putExtra("topic", topicModelList.get(getPosition()));
+//                    context.startActivity(intent);
+//                }
+//            });
         }
 
     }

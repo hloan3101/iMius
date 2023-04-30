@@ -99,14 +99,6 @@ public class TrendingAdapter extends RecyclerView.Adapter<TrendingAdapter.ViewHo
             imgTrending = itemView.findViewById(R.id.item_newrelease_iv_newrelease_image);
             tvNameTrending = itemView.findViewById(R.id.item_newrelease_tv_newrelease_name);
 
-//            itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    Intent intent = new Intent(context, PlaylistActivity.class);
-//                    intent.putExtra("idTrending", trendingList.get(getPosition()));
-//                    context.startActivity(intent);
-//                }
-//            });
         }
 
     }

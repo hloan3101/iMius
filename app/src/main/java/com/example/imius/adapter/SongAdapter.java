@@ -263,14 +263,14 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
 
 //            imgLoveButton.setVisibility(View.GONE);
 
-//            itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    Intent intent = new Intent(context, PlayMusicActivity.class);
-//                    intent.putExtra("song", listSongs.get(getPosition()));
-//                    context.startActivity(intent);
-//                }
-//            });
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, PlayMusicActivity.class);
+                    intent.putExtra("song", listSongs.get(getPosition()));
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 

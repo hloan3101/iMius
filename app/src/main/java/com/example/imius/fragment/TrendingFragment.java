@@ -62,30 +62,9 @@ public class TrendingFragment extends Fragment {
        //     Toast.makeText(getContext(), String.valueOf(trendingAdapter.getTrendingList().get(1).getImageTrending()), Toast.LENGTH_LONG).show();
         });
 
-        getData();
-
         return view;
     }
 
-    private void getData() {
-        Call<List<Trending>> callback = dataService.getTrending();
-        callback.enqueue(new Callback<List<Trending>>() {
-            @Override
-            public void onResponse(Call<List<Trending>> call, Response<List<Trending>> response) {
-                ArrayList<Trending> trendingArrayList = (ArrayList<Trending>) response.body();
-                trendingAdapter = new TrendingAdapter(getActivity(), trendingArrayList);
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-                linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-                binding.fragmentTrendingRvTrending.setLayoutManager(linearLayoutManager);
-                binding.fragmentTrendingRvTrending.setAdapter(trendingAdapter);
-            }
-
-            @Override
-            public void onFailure(Call<List<Trending>> call, Throwable t) {
-
-            }
-        });
-    }
 
     @Override
     public void onResume() {

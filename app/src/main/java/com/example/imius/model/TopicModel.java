@@ -3,9 +3,17 @@ package com.example.imius.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class TopicModel {
+import java.io.Serializable;
+
+public class TopicModel implements Serializable {
+    @SerializedName("idTopic")
+    @Expose
     private int idTopic;
+    @SerializedName("nameTopic")
+    @Expose
     private String nameTopic;
+    @SerializedName("imageTopic")
+    @Expose
     private String imageTopic;
 
     public TopicModel(int idTopic, String nameTopic, String imageTopic) {

@@ -58,7 +58,7 @@ public class MusicRepository {
 
     public Call<BaseResponse> insertLoveSong(String username, Song song){
         return dataService.insertLoveSong(username, song.getIdSong(), song.getNameSong(),
-                song.getNameSinger(), song.getImgSong(), song.getLinkSong());
+                song.getNameSinger(), song.getImageSong(), song.getLinkSong());
     }
 
     public Call<BaseResponse> updateLikeOfNumber (int idSong){

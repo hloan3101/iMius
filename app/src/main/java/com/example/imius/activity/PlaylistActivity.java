@@ -1,3 +1,5 @@
+// Playlist Activity
+
 package com.example.imius.activity;
 
 import android.app.AlertDialog;
@@ -77,10 +79,7 @@ public class PlaylistActivity extends AppCompatActivity {
 
         binding.activityPlaylistRvPlaylist.setLayoutManager(new LinearLayoutManager(PlaylistActivity.this));
 
-
-
         viewModel = new ViewModelProvider(this).get(LibraryPlaylistViewModel.class);
-
 //        if (bundle.getString("nameLibraryPlaylist") != null) {
 //
 //            songLibraryPlaylistAdapter = new SongLibraryPlaylistAdapter(PlaylistActivity.this);
@@ -111,91 +110,43 @@ public class PlaylistActivity extends AppCompatActivity {
 //
 //
 //        } else {
-            binding.activityPlaylistImAdd.setVisibility(View.GONE);
-            songAdapter = new SongAdapter(PlaylistActivity.this);
-            binding.activityPlaylistRvPlaylist.setAdapter(songAdapter);
+        binding.activityPlaylistImAddSong.setVisibility(View.GONE);
+        songAdapter = new SongAdapter(PlaylistActivity.this);
+        binding.activityPlaylistRvPlaylist.setAdapter(songAdapter);
 
-           // if (bundle.getBoolean("checkTrending", false)) {
+        // if (bundle.getBoolean("checkTrending", false)) {
 
-                Picasso.get().load(bundle.getString("imgTrending")).into(binding.activityPlaylistIvViewSong);
+        Picasso.get().load(bundle.getString("imageTrending")).into(binding.activityPlaylistIvViewSong);
 
-                binding.activityPlaylistTvSongName.setText(bundle.getString("nameTrending"));
+        binding.activityPlaylistTvSongName.setText(bundle.getString("nameTrending"));
 
-                DataLocalManager.setIdTrending(bundle.getInt("idTrending"));
-                Toast.makeText(PlaylistActivity.this, bundle.getString("nameTrending"), Toast.LENGTH_LONG).show();
-                //   getAllSongLibraryPlaylist();
+        DataLocalManager.setIdTrending(bundle.getInt("idTrending"));
+        Toast.makeText(PlaylistActivity.this, bundle.getString("nameTrending"), Toast.LENGTH_LONG).show();
+        //   getAllSongLibraryPlaylist();
 
-                dataService.getTrendingList(String.valueOf(DataLocalManager.getIdTrending())).enqueue(new Callback<List<Song>>() {
-                    @Override
-                    public void onResponse(Call<List<Song>> call, Response<List<Song>> response) {
-                        if (response.body() != null) {
-                            songAdapter.setListSongs((ArrayList<Song>) response.body());
-                        } else {
-                            Toast.makeText(PlaylistActivity.this, "null", Toast.LENGTH_LONG).show();
-                        }
-                    }
+        dataService.getTrendingList(DataLocalManager.getIdTrending()).enqueue(new Callback<List<Song>>() {
+            @Override
+            public void onResponse(Call<List<Song>> call, Response<List<Song>> response) {
+                if (response.body() != null) {
+                    songAdapter.setListSongs((ArrayList<Song>) response.body());
+                } else {
+                    Toast.makeText(PlaylistActivity.this, "null", Toast.LENGTH_LONG).show();
+                }
+            }
 
-                    @Override
-                    public void onFailure(Call<List<Song>> call, Throwable t) {
+            @Override
+            public void onFailure(Call<List<Song>> call, Throwable t) {
 
-                    }
-                });
+            }
+        });
         //    }
-      //  }
-
-
-   //     dataIntent();
+        //  }
 
         initView();
-
-
-//        if (trendingModel != null && trendingModel.getNameTrending().equals("")){
-//            setValueInView(trendingModel.getImageTrending());
-//            getDataTrending(String.valueOf(trendingModel.getIdTrending()));
-//            txtcollapsing.setText(trendingModel.getNameTrending());
-//            getSupportActionBar().setTitle(trendingModel.getNameTrending());
-//        }
 
         setContentView(view);
 
 
-    }
-
-    private void getDataTrending(String idTrending) {
-//        Call<List<Song>> callback = dataService.getTrendingList(idTrending);
-//        callback.enqueue(new Callback<List<Song>>() {
-//            @Override
-//            public void onResponse(Call<List<Song>> call, Response<List<Song>> response) {
-//                songArrayList = (ArrayList<Song>) response.body();
-//                playlistAdapter = new PlaylistAdapter(PlaylistActivity.this, songArrayList);
-//                recyclerViewTrending.setLayoutManager(new LinearLayoutManager(PlaylistActivity.this));
-//                recyclerViewTrending.setAdapter(playlistAdapter);
-//
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Song>> call, Throwable t) {
-//
-//            }
-//        });
-
-    }
-
-
-//    private void dataIntent() {
-//        Intent intent = getIntent();
-//        if (intent != null){
-//            if (intent.hasExtra("idTrending")){
-//                trendingModel = (Trending) intent.getSerializableExtra("idTrending");
-//                Toast.makeText(this, trendingModel.getNameTrending(), Toast.LENGTH_SHORT).show();
-//            }
-//        }
-//    }
-
-
-    private void setValueInView(String img){
-        Picasso.get().load(img).into(imgListSong);
     }
 
     public void callSearchFragment() {
@@ -218,7 +169,7 @@ public class PlaylistActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        binding.activityPlaylistImAdd.setOnClickListener(new View.OnClickListener() {
+        binding.activityPlaylistImAddSong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                Intent intent = new Intent(PlaylistActivity.this, SearchFragment.class);

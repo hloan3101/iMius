@@ -14,12 +14,12 @@ public class Song implements Parcelable {
     @SerializedName("nameSong")
     @Expose
     private String nameSong;
-    @SerializedName("imgSong")
-    @Expose
-    private String imageSong;
     @SerializedName("nameSinger")
     @Expose
     private String nameSinger;
+    @SerializedName("imgSong")
+    @Expose
+    private String imageSong;
     @SerializedName("linkSong")
     @Expose
     private String linkSong;
@@ -101,8 +101,8 @@ public class Song implements Parcelable {
     public void writeToParcel(Parcel parcel, int i){
         parcel.writeInt(idSong);
         parcel.writeString(nameSong);
-        parcel.writeString(imageSong);
         parcel.writeString(nameSinger);
+        parcel.writeString(imageSong);
         parcel.writeString(linkSong);
     }
 }

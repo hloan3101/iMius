@@ -36,13 +36,13 @@ public class PlayMusicPlaylistFragment extends Fragment {
         binding = FragmentPlayMusicPlaylistBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        if (PlayMusicActivity.songArrayList.size() > 0){
-            adapter = new PlaylistPlayMusicAdapter(getActivity(), PlayMusicActivity.songArrayList);
-
-            binding.fragmentPlayMusicPlaylistRvPlayMusic.setLayoutManager(new LinearLayoutManager(getActivity()));
-            binding.fragmentPlayMusicPlaylistRvPlayMusic.setAdapter(adapter);
-
-        }
+//        if (PlayMusicActivity.songArrayList.size() > 0){
+//            adapter = new PlaylistPlayMusicAdapter(getActivity(), PlayMusicActivity.songArrayList);
+//
+//            binding.fragmentPlayMusicPlaylistRvPlayMusic.setLayoutManager(new LinearLayoutManager(getActivity()));
+//            binding.fragmentPlayMusicPlaylistRvPlayMusic.setAdapter(adapter);
+//
+//        }
 
         return view;
     }

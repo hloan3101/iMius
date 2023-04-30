@@ -10,13 +10,13 @@ public class Playlist implements Serializable {
     @Expose
     private String idPlaylist;
 
-    @SerializedName("name")
+    @SerializedName("namePlaylist")
     @Expose
-    private String name;
+    private String namePlaylist;
 
-    @SerializedName("imgPlaylist")
+    @SerializedName("imagePlaylist")
     @Expose
-    private String imgPlaylist;
+    private String imagePlaylist;
 
     public String getIdPlaylist() {
         return idPlaylist;
@@ -27,18 +27,18 @@ public class Playlist implements Serializable {
     }
 
     public String getName() {
-        return name;
+        return namePlaylist;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.namePlaylist = namePlaylist;
     }
 
-    public void setImgPlaylist(String imgPlaylist) {
-        this.imgPlaylist = imgPlaylist;
+    public void setImagePlaylist(String imagePlaylist) {
+        this.imagePlaylist = imagePlaylist;
     }
 
-    public String getImgPlaylist() {
-        return imgPlaylist;
+    public String getImagePlaylist() {
+        return imagePlaylist;
     }
 }
