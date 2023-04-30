@@ -68,7 +68,7 @@ public class HistoryFragment extends Fragment {
         viewModel = new ViewModelProvider(getActivity()).get(HistorySongViewModel.class);
         viewModel.getHistorySongs().observe(getViewLifecycleOwner(), songs -> {
             adapter.setHistorySongs(songs);
-            Toast.makeText(getContext(), String.valueOf(adapter.getItemCount()), Toast.LENGTH_LONG).show();
+        //    Toast.makeText(getContext(), String.valueOf(adapter.getItemCount()), Toast.LENGTH_LONG).show();
         });
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,

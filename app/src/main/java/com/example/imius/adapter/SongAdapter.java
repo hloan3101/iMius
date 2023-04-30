@@ -67,6 +67,8 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Song song = listSongs.get(position);
 
+        holder.setSong(song);
+
         holder.tvNameOfSong.setText(song.getNameSong());
         holder.tvSinger.setText(song.getNameSinger());
         Picasso.get().load(song.getImgSong()).into(holder.imgImageOfSong);
@@ -255,6 +257,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         private TextView tvSinger;
         public ImageView imgLoveButton;
         public ConstraintLayout constraintLayout;
+        private Song song;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -272,10 +275,57 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
                 public void onClick(View view) {
                     Intent intent = new Intent(context, PlayMusicActivity.class);
                     intent.putExtra("song", listSongs.get(getPosition()));
+                    checkHistorySong(song);
                     context.startActivity(intent);
                 }
             });
         }
+
+        private void checkHistorySong (Song song){
+            MusicRepository repository = new MusicRepository();
+
+            repository.checkHistorySong(DataLocalManager.getUsernameData(), song.getIdSong())
+                    .enqueue(new Callback<BaseResponse>() {
+                        @Override
+                        public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+                            if (response.body() != null){
+                                if (!response.body().getIsSuccess().equals(Constants.successfully)){
+                                    //      Toast.makeText(context, String.valueOf(response.body().equals(Constants.successfully)))
+                                    addSongLibraryPlaylist(song);
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<BaseResponse> call, Throwable t) {
+                            Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    });
+        }
+
+        public void addSongLibraryPlaylist(Song song) {
+            MusicRepository repository = new MusicRepository();
+            repository.insertHistorySong(song).enqueue(new Callback<BaseResponse>() {
+                @Override
+                public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+                    if (response.body() != null) {
+                        //  Toast.makeText(context, R.string.song_insert_success, Toast.LENGTH_LONG).show();
+                    }else {
+                        //  Toast.makeText(context, R.string.song_insert_failed, Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<BaseResponse> call, Throwable t) {
+                    Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+
+        public void setSong (Song song){
+            this.song = new Song(song);
+        }
+
     }
 
 //    @Override
