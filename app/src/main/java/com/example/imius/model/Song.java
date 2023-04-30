@@ -25,6 +25,9 @@ public class Song implements Parcelable {
     private String linkSong;
 
 
+    public Song() {
+    }
+
     public Song(Song song) {
         this.idSong = song.getIdSong();
         this.imageSong = song.getImgSong();

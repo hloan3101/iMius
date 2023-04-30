@@ -16,8 +16,11 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.SeekBar;
+import android.widget.Toast;
 
+import com.example.imius.adapter.SongAdapter;
 import com.example.imius.constants.Constants;
+import com.example.imius.data.DataLocalManager;
 import com.example.imius.databinding.ActivityPlayMusicBinding;
 
 import com.example.imius.R;
@@ -30,6 +33,7 @@ import com.example.imius.model.Song;
 import com.example.imius.model.SongLibraryPlaylist;
 
 
+import com.example.imius.repository.MusicRepository;
 import com.example.imius.viewmodel.SongViewModel;
 import com.example.imius.widget.DiscViewPager;
 
@@ -38,6 +42,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Random;
 
+import io.github.muddz.styleabletoast.StyleableToast;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -64,6 +69,8 @@ public class PlayMusicActivity extends AppCompatActivity {
     public static ArrayList<SongLibraryPlaylist> songLibraryPlaylistArrayList = new ArrayList<>();
     public static ArrayList<FavoriteSong> favoriteSongArrayList = new ArrayList<>();
 
+    private Song song = new Song();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,8 +87,6 @@ public class PlayMusicActivity extends AppCompatActivity {
         eventClick();
 
         overridePendingTransition(R.anim.anim_intent_in, R.anim.anim_intent_out);
-
-
 
     }
 
@@ -129,7 +134,9 @@ public class PlayMusicActivity extends AppCompatActivity {
             favoriteSongArrayList.clear();
         });
 
-          binding.activityPlayMusicToolbar.setTitleTextColor(Color.BLACK);
+        binding.activityPlayMusicToolbar.setTitleTextColor(Color.BLACK);
+
+
     }
 
     private void eventClick() {
@@ -452,46 +459,29 @@ public class PlayMusicActivity extends AppCompatActivity {
             }
         });
 
+        if (songArrayList.size() > 0){
+            song = new Song(songArrayList.get(position).getIdSong(), songArrayList.get(position).getNameSong(),
+                    songArrayList.get(position).getImgSong(), songArrayList.get(position).getNameSong(),
+                    songArrayList.get(position).getLinkSong());
+
+        } else if (songLibraryPlaylistArrayList.size() > 0){
+            song = new Song(songLibraryPlaylistArrayList.get(position).getIdSong(),
+                    songLibraryPlaylistArrayList.get(position).getNameSong(),
+                    songLibraryPlaylistArrayList.get(position).getImageSong(),
+                    songLibraryPlaylistArrayList.get(position).getNameSong(),
+                    songLibraryPlaylistArrayList.get(position).getLinkSong());
+
+        } else if (favoriteSongArrayList.size() > 0){
+            song = new Song(favoriteSongArrayList.get(position).getIdSong(),
+                    favoriteSongArrayList.get(position).getNameSong(),
+                    favoriteSongArrayList.get(position).getImageSong(),
+                    favoriteSongArrayList.get(position).getNameSong(),
+                    favoriteSongArrayList.get(position).getLinkSong());
+        }
+
+        checkLikeSong();
         binding.activityPlayMusicIvLoveButton.setOnClickListener(view -> {
-            if (index == 0){
-                Animation animation = AnimationUtils.loadAnimation(PlayMusicActivity.this
-                        , R.anim.anim_love_click);
-                binding.activityPlayMusicIvLoveButton.setImageResource(R.drawable.ic_loved);
-                view.startAnimation(animation);
-                if (songArrayList.size() > 0){
-                    insertLoveSong(username, songArrayList.get(position).getIdSong(),
-                            songArrayList.get(position).getNameSong(),songArrayList.get(position).getNameSinger(),
-                            songArrayList.get(position).getImgSong(), songArrayList.get(position).getLinkSong());
-
-                } else if (songLibraryPlaylistArrayList.size() > 0){
-                    insertLoveSong(username, songLibraryPlaylistArrayList.get(position).getIdSong(),
-                            songLibraryPlaylistArrayList.get(position).getNameSong(),
-                            songLibraryPlaylistArrayList.get(position).getNameSinger(),
-                            songLibraryPlaylistArrayList.get(position).getImageSong(),
-                            songLibraryPlaylistArrayList.get(position).getLinkSong());
-
-                } else if (favoriteSongArrayList.size() > 0){
-                    insertLoveSong(username, favoriteSongArrayList.get(position).getIdSong(),
-                            favoriteSongArrayList.get(position).getNameSong(),
-                            favoriteSongArrayList.get(position).getNameSinger(),
-                            favoriteSongArrayList.get(position).getImageSong(),
-                            favoriteSongArrayList.get(position).getLinkSong());
-                }
-
-                index++;
-
-            } else {
-                binding.activityPlayMusicIvLoveButton.setImageResource(R.drawable.ic_love);
-                if (songArrayList.size() > 0){
-                    deleteLikeSong(username, songArrayList.get(position).getIdSong());
-                } else if (songLibraryPlaylistArrayList.size() > 0){
-                    deleteLikeSong(username, songLibraryPlaylistArrayList.get(position).getIdSong());
-                } else if (favoriteSongArrayList.size() > 0){
-                    deleteLikeSong(username, favoriteSongArrayList.get(position).getIdSong());
-                }
-
-                index--;
-            }
+            setBtnLike();
         });
 
         binding.activityPlayMusicSbSongTime.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -512,6 +502,102 @@ public class PlayMusicActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void checkLikeSong (){
+        MusicRepository repository = new MusicRepository();
+
+        repository.checkLikeSong(DataLocalManager.getUsernameData(), song.getIdSong())
+                .enqueue(new Callback<BaseResponse>() {
+                    @Override
+                    public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+                        if (response.body() != null){
+                            //    Toast.makeText(context, response.body().getIsSuccess(), Toast.LENGTH_LONG).show();
+                            if (response.body().getIsSuccess().equals(Constants.successfully)){
+                                binding.activityPlayMusicIvLoveButton.setImageResource(R.drawable.ic_loved);
+                            }else {
+                                binding.activityPlayMusicIvLoveButton.setImageResource(R.drawable.ic_love);
+                            }
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<BaseResponse> call, Throwable t) {
+                        StyleableToast.makeText(PlayMusicActivity.this, t.getMessage(),
+                                Toast.LENGTH_LONG, R.style.myToast).show();
+                    }
+                });
+    }
+
+    public void setBtnLike (){
+        MusicRepository repository = new MusicRepository();
+
+        repository.updateLikeOfNumber(song.getIdSong())
+                .enqueue(new Callback<BaseResponse>() {
+                    @Override
+                    public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+                        if (response.body() != null){
+                            //    Toast.makeText(context, response.body().getIsSuccess(), Toast.LENGTH_LONG).show();
+                            if (response.body().getIsSuccess().equals(Constants.successfully)){
+                                if (response.body().getMessage().equals(Constants.DELETE)){
+                                    deleteLikeSong(song.getIdSong());
+                                    binding.activityPlayMusicIvLoveButton.setImageResource(R.drawable.ic_love);
+                                }else {
+                                    updateNumberOfLike();
+                                    binding.activityPlayMusicIvLoveButton.setImageResource(R.drawable.ic_loved);
+                                }
+                            }
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<BaseResponse> call, Throwable t) {
+                        StyleableToast.makeText(PlayMusicActivity.this, t.getMessage(),
+                                Toast.LENGTH_LONG, R.style.myToast).show();
+                    }
+                });
+    }
+
+    public void updateNumberOfLike() {
+        MusicRepository repository = new MusicRepository();
+
+        //     repository.insertLoveSong(DataLocalManager.getUsernameData(), song);
+        repository.insertLoveSong(DataLocalManager.getUsernameData(), song).enqueue(new Callback<BaseResponse>() {
+            @Override
+            public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+//                if (response.body().getIsSuccess().equals(Constants.successfully)){
+//                    Toast.makeText(context, "insert success", Toast.LENGTH_SHORT).show();
+//                }else {
+//                    Toast.makeText(context, "insert failed", Toast.LENGTH_SHORT).show();
+//                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse> call, Throwable t) {
+                StyleableToast.makeText(PlayMusicActivity.this, t.getMessage(),
+                        Toast.LENGTH_LONG, R.style.myToast).show();
+            }
+        });
+    }
+
+    public void deleteLikeSong(int idSong) {
+        MusicRepository repository = new MusicRepository();
+        //       repository.deleteLikeSong(DataLocalManager.getUsernameData(), idSong);
+
+        repository.deleteLikeSong(DataLocalManager.getUsernameData(), idSong).enqueue(new Callback<BaseResponse>() {
+            @Override
+            public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+//                if (response.body().getIsSuccess().equals(Constants.successfully)){
+//                    Toast.makeText(context, "delete success", Toast.LENGTH_SHORT).show();
+//                }else {
+//                    Toast.makeText(context, "delete failed", Toast.LENGTH_SHORT).show();
+//                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse> call, Throwable t) {
+                StyleableToast.makeText(PlayMusicActivity.this, t.getMessage(),
+                        Toast.LENGTH_LONG, R.style.myToast).show();
+            }
+        });
     }
 
     private void getDataFromIntent(){
@@ -549,62 +635,7 @@ public class PlayMusicActivity extends AppCompatActivity {
         }
     }
 
-    private void insertLoveSong(String username, int idSong, String nameSong,
-                                String nameSinger, String imageSong, String linkSong){
-        Song song = new Song(idSong, nameSong, nameSinger, imageSong, linkSong);
 
-        viewModel.insertLoveSong(username, song).enqueue(new Callback<BaseResponse>() {
-            @Override
-            public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
-            }
-
-            @Override
-            public void onFailure(Call<BaseResponse> call, Throwable t) {
-
-            }
-        });
-    }
-
-
-    private void checkLikeSong(String username, int idSong){
-        viewModel.checkLikeSong(username, idSong).enqueue(new Callback<BaseResponse>() {
-            @Override
-            public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
-                BaseResponse baseResponse = response.body();
-
-                if (baseResponse != null){
-                    if (baseResponse.getIsSuccess().equals(Constants.successfully)){
-                        index = 1;
-                        binding.activityPlayMusicIvLoveButton.setImageResource(R.drawable.ic_loved);
-                    } else {
-                        index = 0;
-                        binding.activityPlayMusicIvLoveButton.setImageResource(R.drawable.ic_love);
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<BaseResponse> call, Throwable t) {
-
-            }
-        });
-    }
-
-
-
-    private void deleteLikeSong(String username, int idSong){
-        viewModel.deleteLikeSong(username, idSong).enqueue(new Callback<BaseResponse>() {
-            @Override
-            public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
-
-            }
-
-            @Override
-            public void onFailure(Call<BaseResponse> call, Throwable t) {
-
-            }
-        });
-    }
 
     private void timeSong() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
