@@ -9,9 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.example.imius.R;
 import com.example.imius.adapter.NewReleaseAdapter;
 import com.example.imius.databinding.FragmentNewReleaseBinding;
 import com.example.imius.viewmodel.NewReleaseViewModel;
@@ -45,7 +43,6 @@ public class NewReleaseFragment extends Fragment {
         viewModel = new ViewModelProvider(getActivity()).get(NewReleaseViewModel.class);
         viewModel.getNewRelease().observe(getViewLifecycleOwner(), newReleaseModels -> {
             newReleaseAdapter.setNewReleaseModelList(newReleaseModels);
-       //     Toast.makeText(getContext(), String.valueOf(newReleaseAdapter.getNewReleaseModelList().get(0).getImageNewRelease()), Toast.LENGTH_LONG).show();
         });
         return view;
     }

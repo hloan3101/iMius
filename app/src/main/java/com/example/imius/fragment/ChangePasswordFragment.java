@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.imius.activity.HomeActivity;
 import com.example.imius.activity.LoginActivity;
 import com.example.imius.constants.Constants;
 import com.example.imius.data.DataLocalManager;
@@ -25,6 +24,7 @@ import com.example.imius.model.BaseResponse;
 import com.example.imius.model.User;
 import com.example.imius.viewmodel.UserViewModel;
 
+import io.github.muddz.styleabletoast.StyleableToast;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -124,11 +124,13 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
                         Intent intent = new Intent(getActivity(), LoginActivity.class);
                         startActivity(intent);
 
-                        Toast.makeText(getContext(), "Update successfully", Toast.LENGTH_SHORT).show();
+                        StyleableToast.makeText(getContext(), "Update successfully",
+                                Toast.LENGTH_LONG, R.style.myToast).show();
                         progressDialog.dismiss();
 
                     } else {
-                        Toast.makeText(getContext(), baseResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                        StyleableToast.makeText(getContext(), baseResponse.getMessage(),
+                                Toast.LENGTH_LONG, R.style.myToast).show();
                         progressDialog.dismiss();
                     }
                 }
@@ -136,7 +138,8 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
 
             @Override
             public void onFailure(Call<BaseResponse> call, Throwable t) {
-                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+                StyleableToast.makeText(getContext(), t.getMessage(),
+                        Toast.LENGTH_LONG, R.style.myToast).show();
                 progressDialog.dismiss();
             }
         });

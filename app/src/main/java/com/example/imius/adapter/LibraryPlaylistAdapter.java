@@ -11,13 +11,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.imius.R;
 import com.example.imius.activity.PlaylistActivity;
 import com.example.imius.data.DataLocalManager;
-import com.example.imius.fragment.DialogAddToLibraryPlaylist;
 import com.example.imius.model.LibraryPlaylist;
 import com.squareup.picasso.Picasso;
 

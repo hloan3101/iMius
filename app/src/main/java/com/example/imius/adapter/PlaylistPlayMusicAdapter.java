@@ -1,7 +1,6 @@
 package com.example.imius.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.imius.R;
-import com.example.imius.activity.PlayMusicActivity;
-import com.example.imius.model.FavoriteSong;
 import com.example.imius.model.Song;
-import com.example.imius.model.SongLibraryPlaylist;
 
 import java.util.ArrayList;
 

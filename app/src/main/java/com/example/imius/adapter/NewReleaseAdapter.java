@@ -12,10 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.imius.R;
 import com.example.imius.model.NewReleaseModel;
-import com.example.imius.viewmodel.NewReleaseViewModel;
 import com.squareup.picasso.Picasso;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 

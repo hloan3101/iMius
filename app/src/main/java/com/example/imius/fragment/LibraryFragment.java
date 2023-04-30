@@ -14,7 +14,6 @@ import com.example.imius.R;
 import com.example.imius.adapter.ViewPagerLibrary;
 import com.example.imius.databinding.FragmentLibraryBinding;
 import com.google.android.material.tabs.TabLayout;
-import com.squareup.picasso.Picasso;
 
 public class LibraryFragment extends Fragment {
 

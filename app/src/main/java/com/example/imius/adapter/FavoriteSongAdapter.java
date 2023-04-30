@@ -24,6 +24,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import io.github.muddz.styleabletoast.StyleableToast;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -122,7 +123,8 @@ public class FavoriteSongAdapter extends RecyclerView.Adapter<FavoriteSongAdapte
 
                         @Override
                         public void onFailure(Call<BaseResponse> call, Throwable t) {
-                            Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+                            StyleableToast.makeText(context, t.getMessage(),
+                                    Toast.LENGTH_LONG, R.style.myToast).show();
                         }
                     });
         }
@@ -141,7 +143,8 @@ public class FavoriteSongAdapter extends RecyclerView.Adapter<FavoriteSongAdapte
 
                 @Override
                 public void onFailure(Call<BaseResponse> call, Throwable t) {
-                    Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+                    StyleableToast.makeText(context, t.getMessage(),
+                            Toast.LENGTH_LONG, R.style.myToast).show();
                 }
             });
         }

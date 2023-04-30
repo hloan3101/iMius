@@ -17,20 +17,17 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.imius.R;
-import com.example.imius.adapter.FavoriteSongAdapter;
 import com.example.imius.adapter.HistorySongAdapter;
 import com.example.imius.constants.Constants;
-import com.example.imius.data.DataLocalManager;
 import com.example.imius.databinding.FragmentHistoryBinding;
 import com.example.imius.model.BaseResponse;
-import com.example.imius.model.FavoriteSong;
 import com.example.imius.model.HistorySong;
 import com.example.imius.repository.MusicRepository;
-import com.example.imius.viewmodel.FavoriteSongViewModel;
 import com.example.imius.viewmodel.HistorySongViewModel;
 
 import java.util.List;
 
+import io.github.muddz.styleabletoast.StyleableToast;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -126,16 +123,20 @@ public class HistoryFragment extends Fragment {
             @Override
             public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
                 if (response.body().getIsSuccess().equals(Constants.successfully)){
-                    Toast.makeText(getContext(), getString(R.string.delete_success),Toast.LENGTH_SHORT).show();
+                    StyleableToast.makeText(getContext(), getString(R.string.delete_success),
+                            Toast.LENGTH_LONG, R.style.myToast).show();
                     viewModel.refreshLiveData();
                 }else {
-                    Toast.makeText(getContext(), getString(R.string.delete_failed), Toast.LENGTH_SHORT).show();
+                    StyleableToast.makeText(getContext(), getString(R.string.delete_failed),
+                            Toast.LENGTH_LONG, R.style.myToast).show();
                 }
             }
 
             @Override
             public void onFailure(Call<BaseResponse> call, Throwable t) {
-                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+
+                StyleableToast.makeText(getContext(), t.getMessage(),
+                        Toast.LENGTH_LONG, R.style.myToast).show();
             }
         });
     }

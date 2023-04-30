@@ -6,9 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.imius.R;
-import com.example.imius.databinding.ActivityHomeBinding;
-import com.example.imius.databinding.ActivityLoginBinding;
 import com.example.imius.databinding.ActivityWelcomeBinding;
 
 public class WelcomeActivity extends AppCompatActivity {

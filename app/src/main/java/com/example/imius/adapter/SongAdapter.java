@@ -1,21 +1,16 @@
 package com.example.imius.adapter;
 
-import android.app.appsearch.AppSearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.imius.R;
@@ -25,14 +20,12 @@ import com.example.imius.data.DataLocalManager;
 import com.example.imius.fragment.SearchFragment;
 import com.example.imius.model.BaseResponse;
 import com.example.imius.model.Song;
-import com.example.imius.model.SongLibraryPlaylist;
 import com.example.imius.repository.LibraryRepository;
 import com.example.imius.repository.MusicRepository;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.List;
-
+import io.github.muddz.styleabletoast.StyleableToast;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -107,14 +100,16 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
                                 addSongLibraryPlaylist(song);
                             }
                             else {
-                                Toast.makeText(context, R.string.song_exist, Toast.LENGTH_LONG).show();
+                                StyleableToast.makeText(context, String.valueOf(R.string.song_exist),
+                                        Toast.LENGTH_LONG, R.style.myToast).show();
                             }
                         }
                     }
 
                     @Override
                     public void onFailure(Call<BaseResponse> call, Throwable t) {
-                        Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+                        StyleableToast.makeText(context, t.getMessage(),
+                                Toast.LENGTH_LONG, R.style.myToast).show();
                     }
                 });
     }
@@ -128,15 +123,18 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
             @Override
             public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
                 if (response.body() != null) {
-                    Toast.makeText(context, R.string.song_insert_success, Toast.LENGTH_LONG).show();
+                    StyleableToast.makeText(context, String.valueOf(R.string.song_insert_success),
+                            Toast.LENGTH_LONG, R.style.myToast).show();
                 }else {
-                    Toast.makeText(context, R.string.song_insert_failed, Toast.LENGTH_LONG).show();
+                    StyleableToast.makeText(context, String.valueOf(R.string.song_insert_failed),
+                            Toast.LENGTH_LONG, R.style.myToast).show();
                 }
             }
 
             @Override
             public void onFailure(Call<BaseResponse> call, Throwable t) {
-                Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+                StyleableToast.makeText(context, t.getMessage(),
+                        Toast.LENGTH_LONG, R.style.myToast).show();
             }
         });
     }
@@ -158,7 +156,8 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
                     }
                     @Override
                     public void onFailure(Call<BaseResponse> call, Throwable t) {
-                        Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
+                        StyleableToast.makeText(context, t.getMessage(),
+                                Toast.LENGTH_LONG, R.style.myToast).show();
                     }
                 });
     }
@@ -185,7 +184,8 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
                     }
                     @Override
                     public void onFailure(Call<BaseResponse> call, Throwable t) {
-                        Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
+                        StyleableToast.makeText(context, t.getMessage(),
+                                Toast.LENGTH_LONG, R.style.myToast).show();
                     }
                 });
     }
@@ -206,7 +206,8 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
 
             @Override
             public void onFailure(Call<BaseResponse> call, Throwable t) {
-                Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
+                StyleableToast.makeText(context, t.getMessage(),
+                        Toast.LENGTH_LONG, R.style.myToast).show();
             }
         });
     }
@@ -227,7 +228,8 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
 
             @Override
             public void onFailure(Call<BaseResponse> call, Throwable t) {
-                Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
+                StyleableToast.makeText(context, t.getMessage(),
+                        Toast.LENGTH_LONG, R.style.myToast).show();
             }
         });
     }
@@ -298,7 +300,8 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
 
                         @Override
                         public void onFailure(Call<BaseResponse> call, Throwable t) {
-                            Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+                            StyleableToast.makeText(context, t.getMessage(),
+                                    Toast.LENGTH_LONG, R.style.myToast).show();
                         }
                     });
         }
@@ -317,7 +320,8 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
 
                 @Override
                 public void onFailure(Call<BaseResponse> call, Throwable t) {
-                    Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+                    StyleableToast.makeText(context, t.getMessage(),
+                            Toast.LENGTH_LONG, R.style.myToast).show();
                 }
             });
         }

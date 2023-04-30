@@ -15,9 +15,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.imius.R;
-import com.example.imius.activity.LoginActivity;
 import com.example.imius.constants.Constants;
-import com.example.imius.data.DataLocalManager;
 import com.example.imius.databinding.DialogAddToLibraryPlaylistBinding;
 import com.example.imius.model.BaseResponse;
 import com.example.imius.model.LibraryPlaylist;
@@ -26,6 +24,7 @@ import com.example.imius.viewmodel.LibraryPlaylistViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.github.muddz.styleabletoast.StyleableToast;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -54,8 +53,6 @@ public class DialogAddToLibraryPlaylist extends DialogFragment {
     private void initView (){
 
         viewModel = new ViewModelProvider(getActivity()).get(LibraryPlaylistViewModel.class);
-
-   //     Toast.makeText(getContext(), getArguments().getString(getString(R.string.check_update)), Toast.LENGTH_LONG).show();
 
         if (getArguments().getString(getString(R.string.check_update)).equals(getString(R.string.update))){
             binding.dialogAddToLibraryPlaylistTvContent.setText(getString(R.string.enter_new_name_for_your_playlist));
@@ -123,14 +120,16 @@ public class DialogAddToLibraryPlaylist extends DialogFragment {
             public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
                 if(response.body() != null){
                     if (response.body().getIsSuccess().equals(Constants.successfully)){
-                        Toast.makeText(getContext(), getString(R.string.library_playlist_insert_success), Toast.LENGTH_LONG).show();
+                        StyleableToast.makeText(getContext(), getString(R.string.library_playlist_insert_success),
+                                Toast.LENGTH_LONG, R.style.myToast).show();
                         progressDialog.dismiss();
                         getDialog().dismiss();
                         viewModel.refreshLiveData();
 
 
                     }else{
-                        Toast.makeText(getContext(), getString(R.string.library_playlist_insert_failed), Toast.LENGTH_LONG).show();
+                        StyleableToast.makeText(getContext(), getString(R.string.library_playlist_insert_failed),
+                                Toast.LENGTH_LONG, R.style.myToast).show();
                         binding.dialogAddToLibraryPlaylistTilPlaylistName.setError(" ");
                         progressDialog.dismiss();
                     }
@@ -140,7 +139,8 @@ public class DialogAddToLibraryPlaylist extends DialogFragment {
 
             @Override
             public void onFailure(Call<BaseResponse> call, Throwable t) {
-                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+                StyleableToast.makeText(getContext(), t.getMessage(),
+                        Toast.LENGTH_LONG, R.style.myToast).show();
             }
         });
     }
@@ -159,15 +159,16 @@ public class DialogAddToLibraryPlaylist extends DialogFragment {
             public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
                 if(response.body() != null){
                     if (response.body().getIsSuccess().equals(Constants.successfully)){
-                        Toast.makeText(getContext(), getString(R.string.library_playlist_update_success)
-                                , Toast.LENGTH_LONG).show();
+                        StyleableToast.makeText(getContext(), getString(R.string.library_playlist_update_success),
+                                Toast.LENGTH_LONG, R.style.myToast).show();
                         progressDialog.dismiss();
                         getDialog().dismiss();
                         viewModel.refreshLiveData();
 
 
                     }else{
-                        Toast.makeText(getContext(), getString(R.string.library_playlist_update_failed), Toast.LENGTH_LONG).show();
+                        StyleableToast.makeText(getContext(), getString(R.string.library_playlist_update_failed),
+                                Toast.LENGTH_LONG, R.style.myToast).show();
                         binding.dialogAddToLibraryPlaylistTilPlaylistName.setError(" ");
                         progressDialog.dismiss();
                     }
@@ -177,7 +178,8 @@ public class DialogAddToLibraryPlaylist extends DialogFragment {
 
             @Override
             public void onFailure(Call<BaseResponse> call, Throwable t) {
-                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+                StyleableToast.makeText(getContext(), t.getMessage(),
+                        Toast.LENGTH_LONG, R.style.myToast).show();
             }
         });
     }

@@ -1,8 +1,6 @@
 package com.example.imius.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -22,6 +20,7 @@ import com.example.imius.model.BaseResponse;
 import com.example.imius.model.User;
 import com.example.imius.viewmodel.UserViewModel;
 
+import io.github.muddz.styleabletoast.StyleableToast;
 import retrofit2.Call;
 import retrofit2.Callback;
 
@@ -112,8 +111,9 @@ public class LoginActivity extends AppCompatActivity {
                 BaseResponse baseResponse = response.body();
                 if (baseResponse != null){
                     if (baseResponse.getIsSuccess().equals(Constants.successfully)){
-                        Toast.makeText(LoginActivity.this, getResources().
-                                getString(R.string.login_successfully), Toast.LENGTH_LONG).show();
+                        StyleableToast.makeText(LoginActivity.this, getResources().
+                                        getString(R.string.login_successfully),
+                                Toast.LENGTH_LONG, R.style.myToast).show();
 
                         DataLocalManager.setUsernameData(user.getUsername());
                         DataLocalManager.setPassword(user.getPassword());
@@ -125,8 +125,9 @@ public class LoginActivity extends AppCompatActivity {
                     //    callChangePasswordFragment();
                         progressDialog.dismiss();
                     }else {
-                        Toast.makeText(LoginActivity.this, getResources().getString
-                                (R.string.login_failed), Toast.LENGTH_LONG).show();
+                        StyleableToast.makeText(LoginActivity.this, getResources().getString
+                                (R.string.login_failed), Toast.LENGTH_LONG,
+                                R.style.myToast).show();
                         binding.activityLoginTilUsername.setError(" ");
                         binding.activityLoginTilPassword.setError(" ");
                         progressDialog.dismiss();
@@ -136,7 +137,8 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<BaseResponse> call, Throwable t) {
-                Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                StyleableToast.makeText(LoginActivity.this, t.getMessage(),
+                        Toast.LENGTH_LONG, R.style.myToast).show();
                 progressDialog.dismiss();
             }
         });

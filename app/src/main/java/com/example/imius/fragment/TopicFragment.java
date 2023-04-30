@@ -9,22 +9,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.imius.adapter.TopicAdapter;
-import com.example.imius.adapter.TrendingAdapter;
 import com.example.imius.databinding.FragmentTopicBinding;
-import com.example.imius.databinding.FragmentTrendingBinding;
-import com.example.imius.model.TopicModel;
-import com.example.imius.service.DataService;
+
 import com.example.imius.viewmodel.TopicViewModel;
-import com.example.imius.viewmodel.TrendingViewModel;
-
-import java.util.ArrayList;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class TopicFragment extends Fragment {
     private FragmentTopicBinding binding;
@@ -56,7 +45,6 @@ public class TopicFragment extends Fragment {
         viewModel = new ViewModelProvider(getActivity()).get(TopicViewModel.class);
         viewModel.getTopic().observe(getViewLifecycleOwner(), topicModelList -> {
             topicAdapter.setTopicModelList(topicModelList);
-            //  Toast.makeText(getContext(), String.valueOf(topicAdapter.getTopicModelList().get(0).getImageTopic()), Toast.LENGTH_LONG).show();
         });
         return view;
     }

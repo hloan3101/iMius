@@ -42,6 +42,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.github.muddz.styleabletoast.StyleableToast;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -85,7 +86,8 @@ public class PlaylistActivity extends AppCompatActivity {
                     if (response.body() != null) {
                         adapter.setSongLibraryPlaylistList(response.body());
                     } else {
-                        Toast.makeText(PlaylistActivity.this, "null", Toast.LENGTH_LONG).show();
+                        StyleableToast.makeText(PlaylistActivity.this, "null",
+                                Toast.LENGTH_LONG, R.style.myToast).show();
                     }
                 }
 
@@ -162,7 +164,8 @@ public class PlaylistActivity extends AppCompatActivity {
                     adapter.setSongLibraryPlaylistList(response.body());
                     eventClickFabBtn();
                 } else {
-                    Toast.makeText(PlaylistActivity.this, "null", Toast.LENGTH_LONG).show();
+                    StyleableToast.makeText(PlaylistActivity.this, "null",
+                            Toast.LENGTH_LONG, R.style.myToast).show();
                 }
             }
 
@@ -205,14 +208,14 @@ public class PlaylistActivity extends AppCompatActivity {
                                         @Override
                                         public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
                                             if (response.body().getIsSuccess().equals(Constants.successfully)) {
-                                                Toast.makeText(PlaylistActivity.this,
-                                                        getString(R.string.song_library_playlist_delete_success)
-                                                        , Toast.LENGTH_LONG).show();
+                                                StyleableToast.makeText(PlaylistActivity.this,
+                                                        getString(R.string.song_library_playlist_delete_success),
+                                                        Toast.LENGTH_LONG, R.style.myToast).show();
                                                 getAllSongLibraryPlaylist();
                                             } else {
-                                                Toast.makeText(PlaylistActivity.this,
+                                                StyleableToast.makeText(PlaylistActivity.this,
                                                         getString(R.string.song_library_playlist_delete_failed),
-                                                        Toast.LENGTH_LONG).show();
+                                                        Toast.LENGTH_LONG, R.style.myToast).show();
                                             }
                                         }
 
@@ -249,10 +252,12 @@ public class PlaylistActivity extends AppCompatActivity {
                 Intent intent = new Intent(PlaylistActivity.this, PlayMusicActivity.class);
                 if (adapter.getSongLibraryPlaylistList() != null){
                     if (adapter.getSongLibraryPlaylistList().size() > 0){
-                        intent.putExtra("list_song_library", (ArrayList<SongLibraryPlaylist>)adapter.getSongLibraryPlaylistList());
+                        intent.putExtra("list_song_library",
+                                (ArrayList<SongLibraryPlaylist>)adapter.getSongLibraryPlaylistList());
                         startActivity(intent);
                     } else {
-                        Toast.makeText(PlaylistActivity.this, "The list has no songs at all.", Toast.LENGTH_LONG).show();
+                        StyleableToast.makeText(PlaylistActivity.this, "The list has no songs at all.",
+                                Toast.LENGTH_LONG, R.style.myToast).show();
                     }
                 }
 

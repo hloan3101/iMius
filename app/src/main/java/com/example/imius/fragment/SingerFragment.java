@@ -6,23 +6,14 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.example.imius.adapter.SingerAdapter;
-import com.example.imius.adapter.TrendingAdapter;
 import com.example.imius.databinding.FragmentSingerBinding;
-import com.example.imius.databinding.FragmentTrendingBinding;
-import com.example.imius.model.Singer;
-import com.example.imius.service.DataService;
 import com.example.imius.viewmodel.SingerViewModel;
-import com.example.imius.viewmodel.TrendingViewModel;
 
-import java.util.ArrayList;
 
 
 public class SingerFragment extends Fragment {

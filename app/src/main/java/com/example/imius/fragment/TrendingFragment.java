@@ -6,26 +6,15 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.imius.adapter.LibraryPlaylistAdapter;
 import com.example.imius.adapter.TrendingAdapter;
 import com.example.imius.databinding.FragmentTrendingBinding;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.example.imius.model.Trending;
-import com.example.imius.service.DataService;
-import com.example.imius.viewmodel.LibraryPlaylistViewModel;
 import com.example.imius.viewmodel.TrendingViewModel;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class TrendingFragment extends Fragment {
     private FragmentTrendingBinding binding;
@@ -55,7 +44,6 @@ public class TrendingFragment extends Fragment {
         viewModel = new ViewModelProvider(getActivity()).get(TrendingViewModel.class);
         viewModel.getTrending().observe(getViewLifecycleOwner(), trendingList -> {
             trendingAdapter.setTrendingList(trendingList);
-       //     Toast.makeText(getContext(), String.valueOf(trendingAdapter.getTrendingList().get(1).getImageTrending()), Toast.LENGTH_LONG).show();
         });
         return view;
     }

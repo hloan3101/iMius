@@ -102,4 +102,8 @@
     <string name="random_music" translatable="false">random_music</string>
     <string name="send_data_to_activity" translatable="false">send_data_to_activity</string>
     <string name="enter_new_name_for_your_playlist">Enter new name for your playlist</string>
+
+    <string name="update_success">Update successfully</string>
+    <string name="update_faild">Update failed</string>
+    <string name="cannot_find">Cannot find</string>
 </resources>

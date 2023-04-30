@@ -1,6 +1,5 @@
 package com.example.imius.activity;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -19,12 +18,8 @@ import com.example.imius.databinding.ActivitySignUpBinding;
 import com.example.imius.databinding.ActivityWelcomeBinding;
 import com.example.imius.model.BaseResponse;
 import com.example.imius.model.User;
-import com.example.imius.service.UserService;
 import com.example.imius.viewmodel.UserViewModel;
 
-import java.lang.ref.ReferenceQueue;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
 import java.util.regex.Pattern;
@@ -34,10 +29,10 @@ import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
-import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import io.github.muddz.styleabletoast.StyleableToast;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -310,9 +305,9 @@ public class SignUpActivity extends AppCompatActivity {
                     if (baseResponse.getIsSuccess().equals(Constants.failed)){
                         binding.activitySignupTilEmail.setError(getResources().getString(R.string.email_exist));
                     } else {
-                        Toast.makeText(SignUpActivity.this,
+                        StyleableToast.makeText(SignUpActivity.this,
                                 getResources().getString(R.string.signup_successfully),
-                                Toast.LENGTH_LONG).show();
+                                Toast.LENGTH_LONG, R.style.myToast).show();
 
                         DataLocalManager.setEmail(binding.activitySignupEtEmail.getText().toString());
                         DataLocalManager.setPassword(binding.activitySignupEtPassword.getText().toString());

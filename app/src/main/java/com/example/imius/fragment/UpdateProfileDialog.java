@@ -21,6 +21,7 @@ import com.example.imius.databinding.DialogUpdateProfileBinding;
 import com.example.imius.model.BaseResponse;
 import com.example.imius.viewmodel.UserViewModel;
 
+import io.github.muddz.styleabletoast.StyleableToast;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -108,10 +109,12 @@ public class UpdateProfileDialog extends DialogFragment implements View.OnClickL
                     if (baseResponse.getIsSuccess().equals("1")){
                         DataLocalManager.setNameData(binding.dialogUpdateProfileEtUsername.getText().toString());
 //                        callProfileFragment();
-                        Toast.makeText(getContext(), "Update successfully", Toast.LENGTH_SHORT).show();
+                        StyleableToast.makeText(getContext(), getString(R.string.update_success),
+                                Toast.LENGTH_LONG, R.style.myToast).show();
                         progressDialog.dismiss();
                     } else {
-                        Toast.makeText(getContext(), baseResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                        StyleableToast.makeText(getContext(), getString(R.string.update_faild),
+                                Toast.LENGTH_LONG, R.style.myToast).show();
                         progressDialog.dismiss();
                     }
                 }
@@ -119,7 +122,8 @@ public class UpdateProfileDialog extends DialogFragment implements View.OnClickL
 
             @Override
             public void onFailure(Call<BaseResponse> call, Throwable t) {
-                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+                StyleableToast.makeText(getContext(), t.getMessage(),
+                        Toast.LENGTH_LONG, R.style.myToast).show();
                 progressDialog.dismiss();
             }
         });

@@ -30,6 +30,7 @@ import com.example.imius.viewmodel.SongViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.github.muddz.styleabletoast.StyleableToast;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -120,19 +121,20 @@ public class SearchFragment extends Fragment{
                     binding.fragmentSearchCantFind.setVisibility(View.GONE);
                     binding.fragmentSearchRvSearch.setVisibility(View.VISIBLE);
 
-              //      Toast.makeText(getContext(), String.valueOf(songAdapter.getItemCount()), Toast.LENGTH_SHORT).show();
 
                 } else {
                     binding.fragmentSearchRvSearch.setVisibility(View.GONE);
                     binding.fragmentSearchCantFind.setVisibility(View.VISIBLE);
 
-                    Toast.makeText(getContext(), "cant find", Toast.LENGTH_SHORT).show();
+                    StyleableToast.makeText(getContext(), getString(R.string.cannot_find),
+                            Toast.LENGTH_LONG, R.style.myToast).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<Song>> call, Throwable t) {
-
+                StyleableToast.makeText(getContext(),t.getMessage(),
+                        Toast.LENGTH_LONG, R.style.myToast).show();
             }
         });
     }

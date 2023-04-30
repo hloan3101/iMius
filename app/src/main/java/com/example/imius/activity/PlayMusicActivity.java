@@ -3,7 +3,6 @@ package com.example.imius.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 
@@ -17,10 +16,8 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.SeekBar;
-import android.widget.Toast;
 
 import com.example.imius.constants.Constants;
-import com.example.imius.data.DataLocalManager;
 import com.example.imius.databinding.ActivityPlayMusicBinding;
 
 import com.example.imius.R;
@@ -32,8 +29,7 @@ import com.example.imius.model.FavoriteSong;
 import com.example.imius.model.Song;
 import com.example.imius.model.SongLibraryPlaylist;
 
-import com.example.imius.repository.LibraryRepository;
-import com.example.imius.repository.MusicRepository;
+
 import com.example.imius.viewmodel.SongViewModel;
 import com.example.imius.widget.DiscViewPager;
 
@@ -560,7 +556,6 @@ public class PlayMusicActivity extends AppCompatActivity {
         viewModel.insertLoveSong(username, song).enqueue(new Callback<BaseResponse>() {
             @Override
             public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
-                Toast.makeText(PlayMusicActivity.this, "Add successfully", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -732,6 +727,7 @@ public class PlayMusicActivity extends AppCompatActivity {
                     }
 
                     binding.activityPlayMusicIbBackSong.setClickable(false);
+
                     binding.activityPlayMusicIbNextSong.setClickable(false);
 
                     Handler handler1 = new Handler();
