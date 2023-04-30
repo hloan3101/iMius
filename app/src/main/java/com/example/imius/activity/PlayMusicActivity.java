@@ -29,6 +29,7 @@ import com.example.imius.fragment.MusicDiscFragment;
 import com.example.imius.fragment.PlayMusicPlaylistFragment;
 import com.example.imius.model.BaseResponse;
 import com.example.imius.model.FavoriteSong;
+import com.example.imius.model.HistorySong;
 import com.example.imius.model.Song;
 import com.example.imius.model.SongLibraryPlaylist;
 
@@ -70,6 +71,7 @@ public class PlayMusicActivity extends AppCompatActivity {
     public static ArrayList<Song> songArrayList = new ArrayList<>();
     public static ArrayList<SongLibraryPlaylist> songLibraryPlaylistArrayList = new ArrayList<>();
     public static ArrayList<FavoriteSong> favoriteSongArrayList = new ArrayList<>();
+    public static ArrayList<HistorySong> historySongArrayList = new ArrayList<>();
 
     private Song song = new Song();
 
@@ -138,17 +140,22 @@ public class PlayMusicActivity extends AppCompatActivity {
             binding.activityPlayMusicIbPlayAndPauseSong.setImageResource(R.drawable.ic_play_button);
         }
 
+        if (historySongArrayList.size() > 0){
+            getSupportActionBar().setTitle(historySongArrayList.get(0).getNameSong());
+            new PlayMP3().execute(historySongArrayList.get(0).getLinkSong());
+            binding.activityPlayMusicIbPlayAndPauseSong.setImageResource(R.drawable.ic_play_button);
+        }
+
         binding.activityPlayMusicToolbar.setNavigationOnClickListener( view -> {
             finish();
-
             mediaPlayer.stop();
             songArrayList.clear();
             songLibraryPlaylistArrayList.clear();
             favoriteSongArrayList.clear();
+            historySongArrayList.clear();
         });
 
         binding.activityPlayMusicToolbar.setTitleTextColor(Color.BLACK);
-
 
     }
 
@@ -169,7 +176,10 @@ public class PlayMusicActivity extends AppCompatActivity {
                     } else if (favoriteSongArrayList.size() > 0){
                         musicDiscFragment.playMusicDisc(favoriteSongArrayList.get(0).getImageSong());
                         handler.removeCallbacks(this);
-                    } else {
+                    } else if (historySongArrayList.size() >0){
+                        musicDiscFragment.playMusicDisc(historySongArrayList.get(0).getImageSong());
+                        handler.removeCallbacks(this);
+                    }else {
                         handler.postDelayed(this, 300);
                     }
 
@@ -278,6 +288,40 @@ public class PlayMusicActivity extends AppCompatActivity {
                         new PlayMP3().execute(favoriteSongArrayList.get(position).getLinkSong());
                         musicDiscFragment.playMusicDisc(favoriteSongArrayList.get(position).getImageSong());
                         getSupportActionBar().setTitle(favoriteSongArrayList.get(position).getNameSong());
+                        updateTimeSong();
+                    }
+                }
+
+                if (historySongArrayList.size() > 0){
+                    if (mediaPlayer.isPlaying() || mediaPlayer != null){
+                        mediaPlayer.stop();
+                        mediaPlayer.release();
+                        mediaPlayer = null;
+                    }
+                    if (position < (historySongArrayList.size())){
+                        binding.activityPlayMusicIbPlayAndPauseSong.setImageResource(R.drawable.ic_play_button);
+                        position--;
+
+                        if (position < 0){
+                            position = historySongArrayList.size() - 1;
+                        }
+
+                        if (repeat == true){
+                            position += 1;
+                        }
+
+                        if (checkRandom == true ){
+                            Random random = new Random();
+                            index = random.nextInt(historySongArrayList.size());
+                            if (index == position){
+                                position = index - 1;
+                            }
+
+                            position = index;
+                        }
+                        new PlayMP3().execute(historySongArrayList.get(position).getLinkSong());
+                        musicDiscFragment.playMusicDisc(historySongArrayList.get(position).getImageSong());
+                        getSupportActionBar().setTitle(historySongArrayList.get(position).getNameSong());
                         updateTimeSong();
                     }
                 }
@@ -407,6 +451,43 @@ public class PlayMusicActivity extends AppCompatActivity {
                         updateTimeSong();
                     }
                 }
+
+                if (historySongArrayList.size() > 0){
+                    if (mediaPlayer.isPlaying() || mediaPlayer != null){
+                        mediaPlayer.stop();
+                        mediaPlayer.release();
+                        mediaPlayer = null;
+                    }
+                    if (position < (historySongArrayList.size())){
+                        binding.activityPlayMusicIbPlayAndPauseSong.setImageResource(R.drawable.ic_play_button);
+                        position++;
+
+                        if (repeat == true){
+                            if (position == 0){
+                                position = historySongArrayList.size();
+                            }
+                            position -= 1;
+                        }
+
+                        if (checkRandom == true ){
+                            Random random = new Random();
+                            index = random.nextInt(historySongArrayList.size());
+                            if (index == position){
+                                position = index - 1;
+                            }
+
+                            position = index;
+                        }
+                        if (position > (historySongArrayList.size() - 1)){
+                            position = 0;
+                        }
+                        new PlayMP3().execute(historySongArrayList.get(position).getLinkSong());
+                        musicDiscFragment.playMusicDisc(historySongArrayList.get(position).getImageSong());
+                        getSupportActionBar().setTitle(historySongArrayList.get(position).getNameSong());
+                        updateTimeSong();
+                    }
+
+                }
                 binding.activityPlayMusicIbBackSong.setClickable(false);
                 binding.activityPlayMusicIbNextSong.setClickable(false);
 
@@ -490,6 +571,13 @@ public class PlayMusicActivity extends AppCompatActivity {
                     favoriteSongArrayList.get(position).getImageSong(),
                     favoriteSongArrayList.get(position).getNameSong(),
                     favoriteSongArrayList.get(position).getLinkSong());
+
+        } else if (historySongArrayList.size() > 0){
+            song = new Song(historySongArrayList.get(position).getIdSong(),
+                    historySongArrayList.get(position).getNameSong(),
+                    historySongArrayList.get(position).getImageSong(),
+                    historySongArrayList.get(position).getNameSong(),
+                    historySongArrayList.get(position).getLinkSong());
         }
 
         checkLikeSong();
@@ -619,6 +707,7 @@ public class PlayMusicActivity extends AppCompatActivity {
         songArrayList.clear();
         songLibraryPlaylistArrayList.clear();
         favoriteSongArrayList.clear();
+        historySongArrayList.clear();
 
         if (intent != null){
             if (intent.hasExtra("song")){
@@ -644,6 +733,11 @@ public class PlayMusicActivity extends AppCompatActivity {
             if (intent.hasExtra("favorite_song")){
                 FavoriteSong favoriteSong = intent.getParcelableExtra("favorite_song");
                 favoriteSongArrayList.add(favoriteSong);
+            }
+
+            if (intent.hasExtra("history_song")){
+                HistorySong historySong = intent.getParcelableExtra("history_song");
+                historySongArrayList.add(historySong);
             }
         }
     }
@@ -768,6 +862,34 @@ public class PlayMusicActivity extends AppCompatActivity {
                         new PlayMP3().execute(favoriteSongArrayList.get(position).getLinkSong());
                         musicDiscFragment.playMusicDisc(favoriteSongArrayList.get(position).getImageSong());
                         getSupportActionBar().setTitle(favoriteSongArrayList.get(position).getNameSong());
+                    }
+
+                    if (position < (historySongArrayList.size())){
+                        binding.activityPlayMusicIbPlayAndPauseSong.setImageResource(R.drawable.ic_play_button);
+                        position++;
+
+                        if (repeat == true){
+                            if (position == 0){
+                                position = historySongArrayList.size();
+                            }
+                            position -= 1;
+                        }
+
+                        if (checkRandom == true ){
+                            Random random = new Random();
+                            index = random.nextInt(historySongArrayList.size());
+                            if (index == position){
+                                position = index - 1;
+                            }
+
+                            position = index;
+                        }
+                        if (position > (historySongArrayList.size() - 1)){
+                            position = 0;
+                        }
+                        new PlayMP3().execute(historySongArrayList.get(position).getLinkSong());
+                        musicDiscFragment.playMusicDisc(historySongArrayList.get(position).getImageSong());
+                        getSupportActionBar().setTitle(historySongArrayList.get(position).getNameSong());
                     }
 
                     binding.activityPlayMusicIbBackSong.setClickable(false);

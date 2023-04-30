@@ -15,7 +15,7 @@
     <string name="login_account">Do you already have an account? Login</string>
 
     <string name="signup_with_email">Sign up with Email</string>
-    <string name="continue_continue">CONTINUE</string>
+    <string name="skip">SKIP</string>
     <string name="create_an_account">Create an account? Sign up</string>
 
     <string name="play_list">Play list</string>
