@@ -1,11 +1,16 @@
 package com.example.imius.fragment;
 
+import static android.graphics.Color.TRANSPARENT;
+
 import android.app.ProgressDialog;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -131,17 +136,15 @@ public class UpdateProfileDialog extends DialogFragment{
 
     }
 
-    public void callProfileFragment(){
+    @Override
+    public void onResume() {
+        super.onResume();
 
-        Fragment profileFragment = new ProfileFragment();
-        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        binding.dialogUpdateProfileCardview.setVisibility(View.GONE);
-
-        transaction.replace(R.id.dialog_update_profile_frame_content, profileFragment);
-        transaction.addToBackStack(null);
-
-        transaction.commit();
-
+        ViewGroup.LayoutParams layoutParams = getDialog().getWindow().getAttributes();
+        layoutParams.width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        layoutParams.height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        getDialog().getWindow().setAttributes((WindowManager.LayoutParams) layoutParams);
+        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(TRANSPARENT));
     }
 
 }

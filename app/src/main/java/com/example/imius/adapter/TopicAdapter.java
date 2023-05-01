@@ -45,7 +45,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder>{
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.item_trending, parent, false);
+        View view = inflater.inflate(R.layout.item_theme, parent, false);
         return new ViewHolder(view);
     }
 
@@ -71,8 +71,8 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder>{
         TextView tvNameTopic;
         public ViewHolder(View itemView){
             super(itemView);
-            imgTopic = itemView.findViewById(R.id.item_newrelease_iv_newrelease_image);
-            tvNameTopic = itemView.findViewById(R.id.item_newrelease_tv_newrelease_name);
+            imgTopic = itemView.findViewById(R.id.item_theme_iv_charts_theme);
+            tvNameTopic = itemView.findViewById(R.id.item_theme_tv_theme_name);
 
         }
 
