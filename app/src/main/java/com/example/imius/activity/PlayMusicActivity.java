@@ -926,6 +926,9 @@ public class PlayMusicActivity extends AppCompatActivity {
         },1000);
     }
 
+
+
+
     class PlayMP3 extends AsyncTask<String, Void, String> {
 
         @Override
