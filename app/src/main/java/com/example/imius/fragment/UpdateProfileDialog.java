@@ -26,7 +26,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UpdateProfileDialog extends DialogFragment implements View.OnClickListener{
+public class UpdateProfileDialog extends DialogFragment{
 
     private DialogUpdateProfileBinding binding;
     private UserViewModel viewModel;
@@ -108,10 +108,11 @@ public class UpdateProfileDialog extends DialogFragment implements View.OnClickL
                 if (baseResponse != null){
                     if (baseResponse.getIsSuccess().equals("1")){
                         DataLocalManager.setNameData(binding.dialogUpdateProfileEtUsername.getText().toString());
-//                        callProfileFragment();
+                     //   callProfileFragment();
                         StyleableToast.makeText(getContext(), getString(R.string.update_success),
                                 Toast.LENGTH_LONG, R.style.myToast).show();
                         progressDialog.dismiss();
+                        dismiss();
                     } else {
                         StyleableToast.makeText(getContext(), getString(R.string.update_faild),
                                 Toast.LENGTH_LONG, R.style.myToast).show();
@@ -143,8 +144,4 @@ public class UpdateProfileDialog extends DialogFragment implements View.OnClickL
 
     }
 
-    @Override
-    public void onClick(View view) {
-
-    }
 }
