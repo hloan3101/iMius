@@ -11,7 +11,7 @@
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#B3B2B2">
+        android:background="@color/white">
 
         <ImageView
             android:id="@+id/item_charts_iv_charts_image"
@@ -30,7 +30,7 @@
             android:layout_marginRight="2dp"
             android:ellipsize="end"
             android:maxWidth="150dp"
-            android:maxLines="2"
+            android:maxLines="1"
             android:textStyle="bold"
             android:text="@string/text_view"
             android:textColor="@color/black"

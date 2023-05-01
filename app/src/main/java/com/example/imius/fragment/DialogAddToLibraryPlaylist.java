@@ -1,6 +1,10 @@
 package com.example.imius.fragment;
 
+import static android.graphics.Color.TRANSPARENT;
+
 import android.app.ProgressDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -190,8 +194,10 @@ public class DialogAddToLibraryPlaylist extends DialogFragment {
         viewModel.refreshLiveData();
 
         ViewGroup.LayoutParams layoutParams = getDialog().getWindow().getAttributes();
-        layoutParams.width = LinearLayout.LayoutParams.MATCH_PARENT;
+        layoutParams.width = LinearLayout.LayoutParams.WRAP_CONTENT;
         layoutParams.height = LinearLayout.LayoutParams.WRAP_CONTENT;
         getDialog().getWindow().setAttributes((WindowManager.LayoutParams) layoutParams);
+        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(TRANSPARENT));
+
     }
 }

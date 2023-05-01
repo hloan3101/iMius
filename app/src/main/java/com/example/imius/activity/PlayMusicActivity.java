@@ -555,48 +555,48 @@ public class PlayMusicActivity extends AppCompatActivity {
             }
         });
 
-//        if (!DataLocalManager.getCheckLogin()){
-//            binding.activityPlayMusicIvLoveButton.setImageResource(R.drawable.ic_love);
-//            binding.activityPlayMusicIvLoveButton.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Intent intent = new Intent(PlayMusicActivity.this, LoginActivity.class);
-//                    startActivity(intent);
-//                }
-//            });
-//        }else {
-//            if (songArrayList.size() > 0){
-//                song = new Song(songArrayList.get(position).getIdSong(), songArrayList.get(position).getNameSong(),
-//                        songArrayList.get(position).getImgSong(), songArrayList.get(position).getNameSong(),
-//                        songArrayList.get(position).getLinkSong());
-//
-//            } else if (songLibraryPlaylistArrayList.size() > 0){
-//                song = new Song(songLibraryPlaylistArrayList.get(position).getIdSong(),
-//                        songLibraryPlaylistArrayList.get(position).getNameSong(),
-//                        songLibraryPlaylistArrayList.get(position).getImageSong(),
-//                        songLibraryPlaylistArrayList.get(position).getNameSong(),
-//                        songLibraryPlaylistArrayList.get(position).getLinkSong());
-//
-//            } else if (favoriteSongArrayList.size() > 0){
-//                song = new Song(favoriteSongArrayList.get(position).getIdSong(),
-//                        favoriteSongArrayList.get(position).getNameSong(),
-//                        favoriteSongArrayList.get(position).getImageSong(),
-//                        favoriteSongArrayList.get(position).getNameSong(),
-//                        favoriteSongArrayList.get(position).getLinkSong());
-//
-//            } else if (historySongArrayList.size() > 0){
-//                song = new Song(historySongArrayList.get(position).getIdSong(),
-//                        historySongArrayList.get(position).getNameSong(),
-//                        historySongArrayList.get(position).getImageSong(),
-//                        historySongArrayList.get(position).getNameSong(),
-//                        historySongArrayList.get(position).getLinkSong());
-//            }
-//
-//            checkLikeSong();
-//            binding.activityPlayMusicIvLoveButton.setOnClickListener(view -> {
-//                setBtnLike();
-//            });
-//        }
+        if (!DataLocalManager.getCheckLogin()){
+            binding.activityPlayMusicIvLoveButton.setImageResource(R.drawable.ic_love);
+            binding.activityPlayMusicIvLoveButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(PlayMusicActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }else {
+            if (songArrayList.size() > 0){
+                song = new Song(songArrayList.get(position).getIdSong(), songArrayList.get(position).getNameSong(),
+                        songArrayList.get(position).getImgSong(), songArrayList.get(position).getNameSong(),
+                        songArrayList.get(position).getLinkSong());
+
+            } else if (songLibraryPlaylistArrayList.size() > 0){
+                song = new Song(songLibraryPlaylistArrayList.get(position).getIdSong(),
+                        songLibraryPlaylistArrayList.get(position).getNameSong(),
+                        songLibraryPlaylistArrayList.get(position).getImageSong(),
+                        songLibraryPlaylistArrayList.get(position).getNameSong(),
+                        songLibraryPlaylistArrayList.get(position).getLinkSong());
+
+            } else if (favoriteSongArrayList.size() > 0){
+                song = new Song(favoriteSongArrayList.get(position).getIdSong(),
+                        favoriteSongArrayList.get(position).getNameSong(),
+                        favoriteSongArrayList.get(position).getImageSong(),
+                        favoriteSongArrayList.get(position).getNameSong(),
+                        favoriteSongArrayList.get(position).getLinkSong());
+
+            } else if (historySongArrayList.size() > 0){
+                song = new Song(historySongArrayList.get(position).getIdSong(),
+                        historySongArrayList.get(position).getNameSong(),
+                        historySongArrayList.get(position).getImageSong(),
+                        historySongArrayList.get(position).getNameSong(),
+                        historySongArrayList.get(position).getLinkSong());
+            }
+
+            checkLikeSong();
+            binding.activityPlayMusicIvLoveButton.setOnClickListener(view -> {
+                setBtnLike();
+            });
+        }
 
         binding.activityPlayMusicSbSongTime.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
