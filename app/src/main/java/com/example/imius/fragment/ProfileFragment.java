@@ -41,22 +41,29 @@ public class ProfileFragment extends Fragment{
         }
 
         init();
-
+        binding.fragmentProfileTvUsername.setText(DataLocalManager.getNameData());
         return view;
     }
 
     public void init(){
+
+        binding.fragmentProfileTvUsername.setText(DataLocalManager.getNameData());
+
         binding.fragmentProfileTvUsername.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 callUpdateProfileDialog();
+                binding.fragmentProfileTvUsername.setText(DataLocalManager.getNameData());
+
             }
         });
 
         binding.fragmentProfileCivAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                binding.fragmentProfileTvUsername.setText(DataLocalManager.getNameData());
                 callUpdateProfileDialog();
+                reloadFragment();
             }
         });
 
@@ -64,6 +71,7 @@ public class ProfileFragment extends Fragment{
             @Override
             public void onClick(View view) {
                 callUpdateProfileDialog();
+                reloadFragment();
             }
         });
 
@@ -100,5 +108,11 @@ public class ProfileFragment extends Fragment{
         transaction.commit();
     }
 
+    public void reloadFragment(){
+        final FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.detach(this);
+        ft.attach(this);
+        ft.commit();
+    }
 
 }

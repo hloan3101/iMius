@@ -31,7 +31,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UpdateProfileDialog extends DialogFragment implements View.OnClickListener{
+public class UpdateProfileDialog extends DialogFragment{
 
     private DialogUpdateProfileBinding binding;
     private UserViewModel viewModel;
@@ -113,10 +113,12 @@ public class UpdateProfileDialog extends DialogFragment implements View.OnClickL
                 if (baseResponse != null){
                     if (baseResponse.getIsSuccess().equals("1")){
                         DataLocalManager.setNameData(binding.dialogUpdateProfileEtUsername.getText().toString());
-//                        callProfileFragment();
+                    //    dismiss();
                         StyleableToast.makeText(getContext(), getString(R.string.update_success),
                                 Toast.LENGTH_LONG, R.style.myToast).show();
                         progressDialog.dismiss();
+
+                        callProfileFragment();
                     } else {
                         StyleableToast.makeText(getContext(), getString(R.string.update_faild),
                                 Toast.LENGTH_LONG, R.style.myToast).show();
@@ -135,6 +137,15 @@ public class UpdateProfileDialog extends DialogFragment implements View.OnClickL
 
     }
 
+    private void callProfileFragment(){
+        ProfileFragment profileFragment = new ProfileFragment();
+        dismiss();
+
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_profile_frame_content, profileFragment);
+        transaction.commit();
+    }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -144,10 +155,5 @@ public class UpdateProfileDialog extends DialogFragment implements View.OnClickL
         layoutParams.height = LinearLayout.LayoutParams.WRAP_CONTENT;
         getDialog().getWindow().setAttributes((WindowManager.LayoutParams) layoutParams);
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(TRANSPARENT));
-    }
-
-    @Override
-    public void onClick(View view) {
-
     }
 }
