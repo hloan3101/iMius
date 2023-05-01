@@ -113,12 +113,20 @@ public class UpdateProfileDialog extends DialogFragment{
                 if (baseResponse != null){
                     if (baseResponse.getIsSuccess().equals("1")){
                         DataLocalManager.setNameData(binding.dialogUpdateProfileEtUsername.getText().toString());
+
                     //    dismiss();
                         StyleableToast.makeText(getContext(), getString(R.string.update_success),
                                 Toast.LENGTH_LONG, R.style.myToast).show();
                         progressDialog.dismiss();
 
                         callProfileFragment();
+
+                     //   callProfileFragment();
+                        StyleableToast.makeText(getContext(), getString(R.string.update_success),
+                                Toast.LENGTH_LONG, R.style.myToast).show();
+                        progressDialog.dismiss();
+                        dismiss();
+
                     } else {
                         StyleableToast.makeText(getContext(), getString(R.string.update_faild),
                                 Toast.LENGTH_LONG, R.style.myToast).show();
@@ -156,4 +164,5 @@ public class UpdateProfileDialog extends DialogFragment{
         getDialog().getWindow().setAttributes((WindowManager.LayoutParams) layoutParams);
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(TRANSPARENT));
     }
+
 }

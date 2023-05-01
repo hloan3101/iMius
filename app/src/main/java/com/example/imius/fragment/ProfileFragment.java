@@ -1,24 +1,25 @@
 package com.example.imius.fragment;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.imius.activity.SignUpActivity;
+import com.example.imius.activity.LoginActivity;
 import com.example.imius.data.DataLocalManager;
 import com.example.imius.databinding.FragmentProfileBinding;
 
 import com.example.imius.R;
 
 public class ProfileFragment extends Fragment{
-    private FragmentProfileBinding binding;
+    public FragmentProfileBinding binding;
 
     public static ProfileFragment newInstance() {
         ProfileFragment fragment = new ProfileFragment();
@@ -34,20 +35,21 @@ public class ProfileFragment extends Fragment{
 
         View view = binding.getRoot();
 
-        if (DataLocalManager.getNameData() == null){
-            binding.fragmentProfileTvUsername.setText(DataLocalManager.getUsernameData());
-        } else {
-            binding.fragmentProfileTvUsername.setText(DataLocalManager.getNameData());
-        }
-
         init();
         binding.fragmentProfileTvUsername.setText(DataLocalManager.getNameData());
         return view;
     }
 
+
     public void init(){
 
         binding.fragmentProfileTvUsername.setText(DataLocalManager.getNameData());
+        if (DataLocalManager.getNameData().equals("")){
+            binding.fragmentProfileTvUsername.setText(DataLocalManager.getUsernameData());
+        } else {
+            binding.fragmentProfileTvUsername.setText(DataLocalManager.getNameData());
+        }
+
 
         binding.fragmentProfileTvUsername.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +65,11 @@ public class ProfileFragment extends Fragment{
             public void onClick(View view) {
                 binding.fragmentProfileTvUsername.setText(DataLocalManager.getNameData());
                 callUpdateProfileDialog();
+
                 reloadFragment();
+
+                binding.fragmentProfileTvUsername.setText(DataLocalManager.getNameData());
+
             }
         });
 
@@ -71,15 +77,23 @@ public class ProfileFragment extends Fragment{
             @Override
             public void onClick(View view) {
                 callUpdateProfileDialog();
+
                 reloadFragment();
+
+                binding.fragmentProfileTvUsername.setText(DataLocalManager.getNameData());
+
             }
         });
+
+        if (!DataLocalManager.getCheckLogin()){
+            binding.fragmentProfileBtnLogout.setText(getString(R.string.login));
+            binding.fragmentProfileTvChangePassword.setVisibility(View.GONE);
+        }
 
         binding.fragmentProfileBtnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), SignUpActivity.class);
-                DataLocalManager.clearDataLocal();
+                Intent intent = new Intent(getContext(), LoginActivity.class);
                 startActivity(intent);
             }
         });
@@ -90,12 +104,12 @@ public class ProfileFragment extends Fragment{
                 callChangePasswordFragment();
             }
         });
+
     }
 
     public void callUpdateProfileDialog() {
         DialogFragment updateProfileDialog = UpdateProfileDialog.newInstance();
         updateProfileDialog.show(getActivity().getSupportFragmentManager(),"Update Profile Dialog");
-
     }
 
     public void callChangePasswordFragment(){
@@ -114,5 +128,6 @@ public class ProfileFragment extends Fragment{
         ft.attach(this);
         ft.commit();
     }
+
 
 }
