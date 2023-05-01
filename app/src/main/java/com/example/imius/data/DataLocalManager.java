@@ -14,6 +14,9 @@ public class DataLocalManager {
     private static final String CHECK_SEARCH = "CHECK_SEARCH";
     private static final String ID_LIBRARY_PLAYLIST = "ID_LIBRARY_PLAYLIST";
     private static final String ID_TRENDING = "ID_TRENDING";
+    private static final String ID_TOPIC= "ID_TOPIC";
+    private static final String ID_SINGER= "ID_SINGER";
+    private static final String ID_CHART= "ID_CHART";
 
 
 
@@ -61,9 +64,20 @@ public class DataLocalManager {
     public static void setIdLibraryPlaylist(int value) {
         DataLocalManager.getInstance().mySharedPreferences.putIntValue(ID_LIBRARY_PLAYLIST, value);
     }
+    // Get DATA
+    public static void setIdSinger(int value){
+        DataLocalManager.getInstance().mySharedPreferences.putIntValue(ID_SINGER, value);
+    }
     public static void setIdTrending(int value){
         DataLocalManager.getInstance().mySharedPreferences.putIntValue(ID_TRENDING, value);
     }
+    public static void setIdTopic(int value){
+        DataLocalManager.getInstance().mySharedPreferences.putIntValue(ID_TOPIC, value);
+    }
+    public static void setIdChart(int value){
+        DataLocalManager.getInstance().mySharedPreferences.putIntValue(ID_CHART, value);
+    }
+
 
     public static String getEmail() {
         return DataLocalManager.getInstance().mySharedPreferences.getStringValue(EMAIL);
@@ -97,9 +111,18 @@ public class DataLocalManager {
         return DataLocalManager.getInstance().mySharedPreferences.getIntValue(ID_LIBRARY_PLAYLIST);
     }
 
+    // Get DATA
+    public static int getIdSingerData(){
+        return DataLocalManager.getInstance().mySharedPreferences.getIntValue(ID_SINGER);
+    }
     public static int getIdTrending(){
         return DataLocalManager.getInstance().mySharedPreferences.getIntValue(ID_TRENDING);
     }
-
+    public static int getIdTopicData(){
+        return DataLocalManager.getInstance().mySharedPreferences.getIntValue(ID_TOPIC);
+    }
+    public static int getIdChart(){
+        return DataLocalManager.getInstance().mySharedPreferences.getIntValue(ID_CHART);
+    }
 }
 

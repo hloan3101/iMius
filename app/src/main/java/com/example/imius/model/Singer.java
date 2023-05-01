@@ -5,9 +5,15 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class Singer {
+public class Singer implements Serializable{
+    @SerializedName("idSinger")
+    @Expose
     private int idSinger;
+    @SerializedName("nameSinger")
+    @Expose
     private String nameSinger;
+    @SerializedName("imageSinger")
+    @Expose
     private String imageSinger;
 
     public Singer(int idSinger, String nameSinger, String imageSinger) {

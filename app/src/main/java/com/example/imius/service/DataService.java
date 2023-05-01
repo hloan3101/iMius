@@ -101,6 +101,11 @@ public interface DataService {
     @GET("subNumberOfLike.php")
     Call<BaseResponse> subNumberOfLike(@Query("idSong") int idSong);
 
+    // Get DATA
+    @FormUrlEncoded
+    @POST("getSongList.php")
+    Call<List<Song>> getSingerList(@Field("idSinger") int idSinger);
+
     @FormUrlEncoded
     @POST("getSongList.php")
     Call<List<Song>> getTrendingList(@Field("idTrending") int idTrending);
@@ -109,7 +114,7 @@ public interface DataService {
     @POST("getSongList.php")
     Call<List<Song>> getTopicList(@Field("idTopic") int idTopic);
 
-
-
-
+    @FormUrlEncoded
+    @POST("getSongList.php")
+    Call<List<Song>> getChartList(@Field("idChart") int idChart);
 }

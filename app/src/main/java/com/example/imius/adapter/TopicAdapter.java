@@ -3,6 +3,7 @@ package com.example.imius.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.imius.R;
 import com.example.imius.activity.PlaylistActivity;
+import com.example.imius.data.DataLocalManager;
 import com.example.imius.model.TopicModel;
 
 import com.squareup.picasso.Picasso;
@@ -38,7 +40,18 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder>{
     public List<TopicModel> getTopicModelList() {
         return topicModelList;
     }
+    private void callPlaylistActivity(TopicModel topic){
+        DataLocalManager.setIdTopic(topic.getIdTopic());
+        Intent intent = new Intent(context, PlaylistActivity.class);
+        Bundle bundle = new Bundle();
 
+        bundle.putString("nameTopic", topic.getNameTopic());
+        bundle.putString("imageTopic", topic.getImageTopic());
+        bundle.putBoolean("checkTrending", true);
+        intent.putExtras(bundle);
+
+        context.startActivity(intent);
+    }
     public void setTopicModelList(List<TopicModel> topicModelList) {
         this.topicModelList = topicModelList;
         notifyDataSetChanged();
@@ -60,15 +73,14 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder>{
         if(topicModelList == null){
             return;
         }
-        holder.tvNameTopic.setText(topicModel.getNameTopic());
-        Picasso.get().load(topicModel.getImageTopic()).into(holder.imgTopic);
 
-        view.setOnClickListener(new View.OnClickListener() {
+        Picasso.get().load(topicModel.getImageTopic()).into(holder.imgTopic);
+        holder.tvNameTopic.setText(topicModel.getNameTopic());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, PlaylistActivity.class);
-                intent.putExtra("topic", topicModelList.get(position));
-                context.startActivity(intent);
+                callPlaylistActivity(topicModel);
             }
         });
 
@@ -86,15 +98,6 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder>{
             super(itemView);
             imgTopic = itemView.findViewById(R.id.item_newrelease_iv_newrelease_image);
             tvNameTopic = itemView.findViewById(R.id.item_newrelease_tv_newrelease_name);
-
-//            itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    Intent intent = new Intent(context, PlaylistActivity.class);
-//                    intent.putExtra("topic", topicModelList.get(getPosition()));
-//                    context.startActivity(intent);
-//                }
-//            });
         }
 
     }

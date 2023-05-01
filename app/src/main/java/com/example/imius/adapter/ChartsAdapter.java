@@ -1,17 +1,20 @@
 package com.example.imius.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextClock;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.imius.R;
+import com.example.imius.activity.PlaylistActivity;
+import com.example.imius.data.DataLocalManager;
 import com.example.imius.model.ChartsModel;
 import com.squareup.picasso.Picasso;
 
@@ -30,6 +33,19 @@ public class ChartsAdapter extends RecyclerView.Adapter<ChartsAdapter.ViewHolder
     }
     public List<ChartsModel> getChartsModelList(){
         return chartsModelList;
+    }
+    private void callPlaylistActivity(ChartsModel chartsModel){
+        DataLocalManager.setIdChart(chartsModel.getIdChart());
+        Intent intent = new Intent(context, PlaylistActivity.class);
+        Bundle bundle= new Bundle();
+
+        bundle.putString("nameChart", chartsModel.getNameChart());
+        bundle.putString("imageChart", chartsModel.getImageChart());
+        bundle.putBoolean("checkChart", true);
+        intent.putExtras(bundle);
+
+        context.startActivity(intent);
+
     }
     @NonNull
     @Override
@@ -52,6 +68,13 @@ public class ChartsAdapter extends RecyclerView.Adapter<ChartsAdapter.ViewHolder
         }
         holder.tvNameChart.setText(chartsModel.getNameChart());
         Picasso.get().load(chartsModel.getImageChart()).into(holder.imgChart);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callPlaylistActivity(chartsModel);
+            }
+        });
     }
 
     @Override

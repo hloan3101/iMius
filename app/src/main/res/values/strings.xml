@@ -99,4 +99,9 @@
     <string name="random_music" translatable="false">random_music</string>
     <string name="send_data_to_activity" translatable="false">send_data_to_activity</string>
     <string name="enter_new_name_for_your_playlist">Enter new name for your playlist</string>
+    <string name="delete_success">Delete successfully songs</string>
+    <string name="song_insert_success">Insert successfull songs</string>
+    <string name="song_insert_failed">Insert failed songs</string>
+    <string name="song_exist">Song exist</string>
+    <string name="delete_failed">Delete failed</string>
 </resources>
