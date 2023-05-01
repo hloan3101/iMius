@@ -11,6 +11,11 @@ public class MySharedPreferences {
         this.mContext = mContext;
     }
 
+    public void clearShare (){
+        SharedPreferences settings = mContext.getSharedPreferences("MY_SHARED_PREFERENCES", Context.MODE_PRIVATE);
+        settings.edit().clear().commit();
+    }
+
     public void putStringValue(String key, String value) {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences
                 (MY_SHARED_PREFERENCES, Context.MODE_PRIVATE);

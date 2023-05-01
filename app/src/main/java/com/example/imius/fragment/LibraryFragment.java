@@ -1,5 +1,7 @@
 package com.example.imius.fragment;
 
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +13,9 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.imius.R;
+import com.example.imius.activity.LoginActivity;
 import com.example.imius.adapter.ViewPagerLibrary;
+import com.example.imius.data.DataLocalManager;
 import com.example.imius.databinding.FragmentLibraryBinding;
 import com.google.android.material.tabs.TabLayout;
 
@@ -34,15 +38,25 @@ public class LibraryFragment extends Fragment {
         super.onCreate(savedInstanceState);
         binding = FragmentLibraryBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
-
+   //     checkLogin();
         init();
         return view;
+    }
+
+    private void checkLogin (){
+        if (!DataLocalManager.getCheckLogin()){
+            DataLocalManager.setCheckFromLibrary(true);
+            Intent intent = new Intent(getContext(), LoginActivity.class);
+            startActivity(intent);
+        }
     }
 
     private void init(){
 
         viewPager = binding.fragmentLibraryViewPager;
         tabLayout = binding.fragmentLibraryTabLayout;
+
+       // checkLogin();
 
         ViewPagerLibrary viewPagerLibrary = new ViewPagerLibrary(getChildFragmentManager());
         viewPagerLibrary.addFragment(new LibraryPlaylistFragment(), "Playlist");
@@ -55,6 +69,7 @@ public class LibraryFragment extends Fragment {
         binding.fragmentLibraryIvAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+          //      checkLogin();
                 callDialogAddToLibraryPlaylist();
             }
         });

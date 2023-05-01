@@ -15,6 +15,7 @@ import com.example.imius.constants.Constants;
 import com.example.imius.data.DataLocalManager;
 import com.example.imius.databinding.ActivityLoginBinding;
 import com.example.imius.fragment.ChangePasswordFragment;
+import com.example.imius.fragment.HomeFragment;
 import com.example.imius.fragment.ProfileFragment;
 import com.example.imius.model.BaseResponse;
 import com.example.imius.model.User;
@@ -62,6 +63,25 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+                startActivity(intent);
+            }
+        });
+
+//        if (DataLocalManager.getCheckFromLibrary()){
+//            binding.activityLoginTvBack.setVisibility(View.GONE);
+//        }
+
+        binding.activityLoginTvBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        binding.activityLoginTvSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                 startActivity(intent);
             }
         });
@@ -117,6 +137,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         DataLocalManager.setUsernameData(user.getUsername());
                         DataLocalManager.setPassword(user.getPassword());
+                        DataLocalManager.setCheckLogin(true);
 
                         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                         startActivity(intent);

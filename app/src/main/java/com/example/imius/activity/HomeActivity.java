@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import com.example.imius.R;
 
 import com.example.imius.adapter.ViewPagerAdapter;
+import com.example.imius.data.DataLocalManager;
 import com.example.imius.databinding.ActivityHomeBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -44,9 +46,13 @@ public class HomeActivity extends AppCompatActivity {
                         break;
 
                     case R.id.action_library:
-                        binding.activityHomeViewPager.setCurrentItem(2);
+                        if (!DataLocalManager.getCheckLogin()){
+                            Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                        }else {
+                            binding.activityHomeViewPager.setCurrentItem(2);
+                        }
                         break;
-
                     case R.id.action_account:
                         binding.activityHomeViewPager.setCurrentItem(3);
                         break;

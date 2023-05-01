@@ -1,6 +1,7 @@
 package com.example.imius.fragment;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +17,7 @@ import com.example.imius.databinding.FragmentProfileBinding;
 
 import com.example.imius.R;
 
-public class ProfileFragment extends Fragment implements View.OnClickListener{
+public class ProfileFragment extends Fragment{
     private FragmentProfileBinding binding;
 
     public static ProfileFragment newInstance() {
@@ -70,6 +71,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), SignUpActivity.class);
+                DataLocalManager.clearDataLocal();
                 startActivity(intent);
             }
         });
@@ -98,8 +100,5 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         transaction.commit();
     }
 
-    @Override
-    public void onClick(View view) {
 
-    }
 }

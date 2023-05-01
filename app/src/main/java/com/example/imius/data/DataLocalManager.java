@@ -4,6 +4,8 @@ import android.content.Context;
 
 public class DataLocalManager {
     private static final String KEY_FIRST_INSTALL = "KEY_FIRST_INSTALL";
+    private static final String CHECK_FROM_LIBRARY = "CHECK_FROM_LIBRARY";
+    private static final String CHECK_LOGIN = "CHECK_LOGIN";
     private static final String EMAIL = "EMAIL";
     private static final String PASSWORD = "PASSWORD";
     private static final String USERNAME = "USERNAME";
@@ -32,6 +34,13 @@ public class DataLocalManager {
 
     public static void setFirstInstall(boolean value) {
         DataLocalManager.getInstance().mySharedPreferences.putBoolean(KEY_FIRST_INSTALL, value);
+    }
+    public static void setCheckFromLibrary(boolean value) {
+        DataLocalManager.getInstance().mySharedPreferences.putBoolean(CHECK_FROM_LIBRARY, value);
+    }
+
+    public static void setCheckLogin(boolean value) {
+        DataLocalManager.getInstance().mySharedPreferences.putBoolean(CHECK_LOGIN, value);
     }
 
     public static void setEmail(String value) {
@@ -74,6 +83,14 @@ public class DataLocalManager {
         return DataLocalManager.getInstance().mySharedPreferences.getBooleanValue(KEY_FIRST_INSTALL);
     }
 
+    public static boolean getCheckLogin() {
+        return DataLocalManager.getInstance().mySharedPreferences.getBooleanValue(CHECK_LOGIN);
+    }
+
+    public static boolean getCheckFromLibrary() {
+        return DataLocalManager.getInstance().mySharedPreferences.getBooleanValue(CHECK_FROM_LIBRARY);
+    }
+
     public static boolean getCheckEdit() {
         return DataLocalManager.getInstance().mySharedPreferences.getBooleanValue(CHECK_EDIT);
     }
@@ -96,6 +113,10 @@ public class DataLocalManager {
 
     public static int getIdLibraryPlaylist(){
         return DataLocalManager.getInstance().mySharedPreferences.getIntValue(ID_LIBRARY_PLAYLIST);
+    }
+
+    public static void clearDataLocal (){
+        DataLocalManager.getInstance().mySharedPreferences.clearShare();
     }
 
 }

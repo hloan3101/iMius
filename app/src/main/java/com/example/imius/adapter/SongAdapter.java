@@ -14,6 +14,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.imius.R;
+import com.example.imius.activity.LoginActivity;
 import com.example.imius.activity.PlayMusicActivity;
 import com.example.imius.constants.Constants;
 import com.example.imius.data.DataLocalManager;
@@ -66,25 +67,35 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         holder.tvSinger.setText(song.getNameSinger());
         Picasso.get().load(song.getImgSong()).into(holder.imgImageOfSong);
 
-        if (DataLocalManager.getCheckSearch()) {
-
-
-            holder.imgLoveButton.setImageResource(R.drawable.ic_add_circle);
+        if (!DataLocalManager.getCheckLogin()){
+            holder.imgLoveButton.setImageResource(R.drawable.ic_love);
             holder.imgLoveButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                   checkSongLibraryPlaylist(song);
+                    Intent intent = new Intent(context, LoginActivity.class);
+                    context.startActivity(intent);
                 }
             });
-        } else {
-            checkLikeSong(holder, song);
-            holder.imgLoveButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    setBtnLike(holder, song);
-                }
-            });
+        }else {
+            if (DataLocalManager.getCheckSearch()) {
+                holder.imgLoveButton.setImageResource(R.drawable.ic_add_circle);
+                holder.imgLoveButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        checkSongLibraryPlaylist(song);
+                    }
+                });
+            } else {
+                checkLikeSong(holder, song);
+                holder.imgLoveButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        setBtnLike(holder, song);
+                    }
+                });
+            }
         }
+
     }
 
     public void checkSongLibraryPlaylist (Song song){

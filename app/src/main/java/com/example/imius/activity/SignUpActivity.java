@@ -170,8 +170,7 @@ public class SignUpActivity extends AppCompatActivity {
         binding.activitySignupTvBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SignUpActivity.this, ActivityWelcomeBinding.class);
-                startActivity(intent);
+                finish();
             }
         });
 
@@ -179,6 +178,14 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        binding.activitySignupTvSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);
                 startActivity(intent);
             }
         });
