@@ -36,32 +36,40 @@ public class ProfileFragment extends Fragment{
         View view = binding.getRoot();
 
         init();
-
+        binding.fragmentProfileTvUsername.setText(DataLocalManager.getNameData());
         return view;
     }
 
 
     public void init(){
 
+        binding.fragmentProfileTvUsername.setText(DataLocalManager.getNameData());
         if (DataLocalManager.getNameData().equals("")){
             binding.fragmentProfileTvUsername.setText(DataLocalManager.getUsernameData());
         } else {
             binding.fragmentProfileTvUsername.setText(DataLocalManager.getNameData());
         }
 
+
         binding.fragmentProfileTvUsername.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 callUpdateProfileDialog();
                 binding.fragmentProfileTvUsername.setText(DataLocalManager.getNameData());
+
             }
         });
 
         binding.fragmentProfileCivAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                callUpdateProfileDialog();
                 binding.fragmentProfileTvUsername.setText(DataLocalManager.getNameData());
+                callUpdateProfileDialog();
+
+                reloadFragment();
+
+                binding.fragmentProfileTvUsername.setText(DataLocalManager.getNameData());
+
             }
         });
 
@@ -69,7 +77,11 @@ public class ProfileFragment extends Fragment{
             @Override
             public void onClick(View view) {
                 callUpdateProfileDialog();
+
+                reloadFragment();
+
                 binding.fragmentProfileTvUsername.setText(DataLocalManager.getNameData());
+
             }
         });
 
@@ -109,4 +121,13 @@ public class ProfileFragment extends Fragment{
         transaction.replace(R.id.fragment_profile_frame_content, changePasswordFragment);
         transaction.commit();
     }
+
+    public void reloadFragment(){
+        final FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.detach(this);
+        ft.attach(this);
+        ft.commit();
+    }
+
+
 }

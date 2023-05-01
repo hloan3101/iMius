@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
@@ -68,6 +69,14 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
                     resetError();
                     binding.fragmentChangePasswordTilPassword.setError("Password is not match !!");
                 }
+            }
+        });
+
+        binding.fragmentChangePasswordTvBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callProfileFragment();
+
             }
         });
 
@@ -148,11 +157,10 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
 
     public void callProfileFragment(){
 
-        Fragment profileFragment = new ProfileFragment();
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-
+        ProfileFragment profileFragment = new ProfileFragment();
+        binding.fragmentChangePasswordLinearlayout2.setVisibility(View.GONE);
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_change_password_linearlayout, profileFragment);
-        transaction.addToBackStack(null);
 
         transaction.commit();
 
