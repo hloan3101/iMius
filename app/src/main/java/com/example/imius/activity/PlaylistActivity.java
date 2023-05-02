@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.imius.R;
 
+import com.example.imius.adapter.SongAdapter;
 import com.example.imius.data.DataLocalManager;
 
 import com.example.imius.adapter.LibraryPlaylistAdapter;
@@ -33,6 +34,7 @@ import com.example.imius.fragment.SearchFragment;
 import com.example.imius.livedata.RefreshLiveData;
 import com.example.imius.model.BaseResponse;
 import com.example.imius.model.LibraryPlaylist;
+import com.example.imius.model.Song;
 import com.example.imius.model.SongLibraryPlaylist;
 import com.example.imius.service.DataService;
 import com.example.imius.viewmodel.LibraryPlaylistViewModel;
@@ -52,6 +54,7 @@ public class PlaylistActivity extends AppCompatActivity {
     private ActivityPlaylistBinding binding;
     private LibraryPlaylistViewModel viewModel;
     private SongLibraryPlaylistAdapter adapter;
+    private SongAdapter songAdapter;
 
     private DataService dataService = API.getAccount().create(DataService.class);
     private int idLibraryPlaylist;
@@ -64,6 +67,15 @@ public class PlaylistActivity extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
+        setAdapter();
+
+        initView();
+        eventClickFabBtn();
+
+        setContentView(view);
+    }
+
+    public void setAdapter (){
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
 
@@ -73,12 +85,11 @@ public class PlaylistActivity extends AppCompatActivity {
 
         viewModel = new ViewModelProvider(this).get(LibraryPlaylistViewModel.class);
 
-        if (bundle != null) {
+        if (bundle.getString("nameLibraryPlaylist") != null) {
             Picasso.get().load(bundle.getString("imgPlaylistLibrary")).into(binding.activityPlaylistIvViewSong);
             binding.activityPlaylistTvSongName.setText(bundle.getString("nameLibraryPlaylist"));
             idLibraryPlaylist = bundle.getInt("idLibraryPlaylist");
-            DataLocalManager.setIdLibraryPlaylist( bundle.getInt("idLibraryPlaylist"));
-         //   getAllSongLibraryPlaylist();
+            //   getAllSongLibraryPlaylist();
 
             dataService.getSongLibraryPlaylistList(idLibraryPlaylist).enqueue(new Callback<List<SongLibraryPlaylist>>() {
                 @Override
@@ -101,15 +112,83 @@ public class PlaylistActivity extends AppCompatActivity {
 
         } else {
             binding.activityPlaylistImAddSong.setVisibility(View.GONE);
+            if (bundle.getString("nameSinger") != null){
+                songAdapter = new SongAdapter(PlaylistActivity.this);
+                binding.activityPlaylistRvPlaylist.setAdapter(songAdapter);
+                // if (bundle.getBoolean("checkTrending", false)) {
+
+                Picasso.get().load(bundle.getString("imageSinger")).into(binding.activityPlaylistIvViewSong);
+                binding.activityPlaylistTvSongName.setText(bundle.getString("nameSinger"));
+                //   getAllSongLibraryPlaylist();
+                dataService.getSongSingerList(DataLocalManager.getIdSinger()).enqueue(new Callback<List<Song>>() {
+                    @Override
+                    public void onResponse(Call<List<Song>> call, Response<List<Song>> response) {
+                        if (response.body() != null) {
+                            songAdapter.setListSongs((ArrayList<Song>) response.body());
+                        } else {
+                            StyleableToast.makeText(PlaylistActivity.this, "null",
+                                    Toast.LENGTH_LONG, R.style.myToast).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Song>> call, Throwable t) {
+
+                    }
+                });
+            }else if (bundle.getString("nameTrending") != null){
+                songAdapter = new SongAdapter(PlaylistActivity.this);
+                binding.activityPlaylistRvPlaylist.setAdapter(songAdapter);
+                // if (bundle.getBoolean("checkTrending", false)) {
+
+                Picasso.get().load(bundle.getString("imageTrending")).into(binding.activityPlaylistIvViewSong);
+                binding.activityPlaylistTvSongName.setText(bundle.getString("nameTrending"));
+                //   getAllSongLibraryPlaylist();
+                dataService.getSongTrendingList(DataLocalManager.getIdTrending())
+                        .enqueue(new Callback<List<Song>>() {
+                    @Override
+                    public void onResponse(Call<List<Song>> call, Response<List<Song>> response) {
+                        if (response.body() != null) {
+                            songAdapter.setListSongs((ArrayList<Song>) response.body());
+                        } else {
+                            StyleableToast.makeText(PlaylistActivity.this, "null",
+                                    Toast.LENGTH_LONG, R.style.myToast).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Song>> call, Throwable t) {
+
+                    }
+                });
+            }else if (bundle.getString("nameTopic") != null){
+                songAdapter = new SongAdapter(PlaylistActivity.this);
+                binding.activityPlaylistRvPlaylist.setAdapter(songAdapter);
+                // if (bundle.getBoolean("checkTrending", false)) {
+
+                Picasso.get().load(bundle.getString("imageTopic")).into(binding.activityPlaylistIvViewSong);
+                binding.activityPlaylistTvSongName.setText(bundle.getString("nameTopic"));
+                //   getAllSongLibraryPlaylist();
+                dataService.getSongTopicList(DataLocalManager.getIdTopic())
+                        .enqueue(new Callback<List<Song>>() {
+                            @Override
+                            public void onResponse(Call<List<Song>> call, Response<List<Song>> response) {
+                                if (response.body() != null) {
+                                    songAdapter.setListSongs((ArrayList<Song>) response.body());
+                                } else {
+                                    StyleableToast.makeText(PlaylistActivity.this, "null",
+                                            Toast.LENGTH_LONG, R.style.myToast).show();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<List<Song>> call, Throwable t) {
+
+                            }
+                        });
+            }
         }
-
-        initView();
-        eventClickFabBtn();
-
-        setContentView(view);
     }
-
-
 
 
     public void callSearchFragment() {

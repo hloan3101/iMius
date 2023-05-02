@@ -2,6 +2,8 @@ package com.example.imius.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.imius.R;
+import com.example.imius.activity.PlaylistActivity;
+import com.example.imius.data.DataLocalManager;
 import com.example.imius.model.Singer;
 
 import com.squareup.picasso.Picasso;
@@ -61,6 +65,27 @@ public class SingerAdapter extends RecyclerView.Adapter<SingerAdapter.ViewHolder
         }
         holder.tvNameSinger.setText(singer.getNameSinger());
         Picasso.get().load(singer.getImageSinger()).into(holder.imgSinger);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callPlaylistActivity(singer);
+            }
+
+        });
+    }
+
+    private void callPlaylistActivity(Singer singer) {
+      DataLocalManager.setIdSinger(String.valueOf(singer.getIdSinger()));
+        Intent intent = new Intent(context, PlaylistActivity.class);
+        Bundle bundle = new Bundle();
+
+  //      bundle.putString("idSinger", String.valueOf(singer.getIdSinger()));
+        bundle.putString("nameSinger", singer.getNameSinger());
+        bundle.putString("imageSinger", singer.getImageSinger());
+        intent.putExtras(bundle);
+
+        context.startActivity(intent);
     }
 
     @Override
@@ -69,6 +94,7 @@ public class SingerAdapter extends RecyclerView.Adapter<SingerAdapter.ViewHolder
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
+
         private CircleImageView imgSinger;
         private TextView tvNameSinger;
         public ViewHolder(@NonNull View itemView){

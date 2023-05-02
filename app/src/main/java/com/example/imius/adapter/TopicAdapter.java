@@ -2,6 +2,8 @@ package com.example.imius.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.imius.R;
+import com.example.imius.activity.PlaylistActivity;
+import com.example.imius.data.DataLocalManager;
+import com.example.imius.model.Singer;
 import com.example.imius.model.TopicModel;
 
 import com.squareup.picasso.Picasso;
@@ -59,6 +64,26 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder>{
         holder.tvNameTopic.setText(topicModel.getNameTopic());
         Picasso.get().load(topicModel.getImageTopic()).into(holder.imgTopic);
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callPlaylistActivity(topicModel);
+            }
+
+        });
+    }
+
+    private void callPlaylistActivity(TopicModel topicModel) {
+        DataLocalManager.setIdTopic(String.valueOf(topicModel.getIdTopic()));
+        Intent intent = new Intent(context, PlaylistActivity.class);
+        Bundle bundle = new Bundle();
+
+        //      bundle.putString("idSinger", String.valueOf(singer.getIdSinger()));
+        bundle.putString("nameTopic", topicModel.getNameTopic());
+        bundle.putString("imageTopic", topicModel.getImageTopic());
+        intent.putExtras(bundle);
+
+        context.startActivity(intent);
     }
 
     @Override

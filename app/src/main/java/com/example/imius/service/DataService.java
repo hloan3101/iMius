@@ -114,4 +114,15 @@ public interface DataService {
                                           @Query("nameSong") String nameSong, @Query("nameSinger") String nameSinger,
                                           @Query("imageSong") String imageSong, @Query("linkSong") String  linkSong);
 
+    @GET("getSongList.php")
+    Call<List<Song>> getSongSingerList(@Query("idSinger") String idSinger);
+
+    @GET("getSongList.php")
+    Call<List<Song>> getSongTrendingList(@Query("idTrending") String idTrending);
+
+    @GET("getSongList.php")
+    Call<List<Song>> getSongTopicList(@Query("idTopic") String idTopic);
+
+    @GET("getSongNewRelease.php")
+    Call<Song> getSongNewReleaseList(@Query("idNewRelease") String idNewRelease);
 }
