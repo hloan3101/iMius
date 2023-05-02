@@ -15,6 +15,7 @@ import com.example.imius.model.Trending;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -113,5 +114,9 @@ public interface DataService {
     Call<BaseResponse> insertHistorySong (@Query("username") String username, @Query("idSong") int idSong,
                                           @Query("nameSong") String nameSong, @Query("nameSinger") String nameSinger,
                                           @Query("imageSong") String imageSong, @Query("linkSong") String  linkSong);
+
+    @FormUrlEncoded
+    @POST("getSongChart.php")
+    Call<List<Song>> getChartList (@Field("idChart") String idChart);
 
 }

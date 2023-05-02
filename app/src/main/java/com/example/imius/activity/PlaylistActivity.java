@@ -1,14 +1,5 @@
 package com.example.imius.activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,26 +8,27 @@ import android.os.StrictMode;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.imius.R;
-
-import com.example.imius.data.DataLocalManager;
-
-import com.example.imius.adapter.LibraryPlaylistAdapter;
+import com.example.imius.adapter.SongAdapter;
 import com.example.imius.adapter.SongLibraryPlaylistAdapter;
 import com.example.imius.api.API;
 import com.example.imius.constants.Constants;
-
-import com.example.imius.databinding.ActivityLoginBinding;
+import com.example.imius.data.DataLocalManager;
 import com.example.imius.databinding.ActivityPlaylistBinding;
-import com.example.imius.fragment.ProfileFragment;
 import com.example.imius.fragment.SearchFragment;
-import com.example.imius.livedata.RefreshLiveData;
 import com.example.imius.model.BaseResponse;
-import com.example.imius.model.LibraryPlaylist;
+import com.example.imius.model.Song;
 import com.example.imius.model.SongLibraryPlaylist;
 import com.example.imius.service.DataService;
 import com.example.imius.viewmodel.LibraryPlaylistViewModel;
-import com.example.imius.viewmodel.UserViewModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -52,6 +44,7 @@ public class PlaylistActivity extends AppCompatActivity {
     private ActivityPlaylistBinding binding;
     private LibraryPlaylistViewModel viewModel;
     private SongLibraryPlaylistAdapter adapter;
+    private SongAdapter songAdapter;
 
     private DataService dataService = API.getAccount().create(DataService.class);
     private int idLibraryPlaylist;
@@ -104,6 +97,35 @@ public class PlaylistActivity extends AppCompatActivity {
         }
 
         initView();
+
+        // Chart
+        if (bundle.getString("nameChart") != null) {
+            binding.activityPlaylistImAddSong.setVisibility(View.GONE);
+            songAdapter = new SongAdapter(PlaylistActivity.this);
+            binding.activityPlaylistRvPlaylist.setAdapter(songAdapter);
+
+            Picasso.get().load(bundle.getString("imageChart")).into(binding.activityPlaylistIvViewSong);
+            binding.activityPlaylistTvSongName.setText(bundle.getString("nameChart"));
+            DataLocalManager.setIdChart(String.valueOf(bundle.getInt("idChart")));
+            Toast.makeText(PlaylistActivity.this, bundle.getString("nameChart"), Toast.LENGTH_LONG).show();
+            //   getAllSongLibraryPlaylist();
+            dataService.getChartList(DataLocalManager.getIdChart()).enqueue(new Callback<List<Song>>() {
+                @Override
+                public void onResponse(Call<List<Song>> call, Response<List<Song>> response) {
+                    if (response.body() != null) {
+                        songAdapter.setListSongs((ArrayList<Song>) response.body());
+                    } else {
+                        Toast.makeText(PlaylistActivity.this, "null", Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<Song>> call, Throwable t) {
+
+                }
+            });
+        }
+
         eventClickFabBtn();
 
         setContentView(view);

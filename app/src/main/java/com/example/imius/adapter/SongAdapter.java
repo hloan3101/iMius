@@ -2,6 +2,7 @@ package com.example.imius.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +17,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.imius.R;
 import com.example.imius.activity.LoginActivity;
 import com.example.imius.activity.PlayMusicActivity;
+import com.example.imius.activity.PlaylistActivity;
 import com.example.imius.constants.Constants;
 import com.example.imius.data.DataLocalManager;
 import com.example.imius.fragment.SearchFragment;
 import com.example.imius.model.BaseResponse;
+import com.example.imius.model.ChartsModel;
 import com.example.imius.model.Song;
 import com.example.imius.repository.LibraryRepository;
 import com.example.imius.repository.MusicRepository;
@@ -56,6 +59,20 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         View view = inflater.inflate(R.layout.item_search, parent, false);
         return new ViewHolder(view);
     }
+
+//    private void callPlaylistActivity(Song song){
+//        DataLocalManager.setIdChart(String.valueOf(song.getIdSong()));
+//        Intent intent = new Intent(context, PlaylistActivity.class);
+//        Bundle bundle= new Bundle();
+//
+//        bundle.putString("nameChart", song.getNameSong());
+//        bundle.putString("imageChart", song.getImgSong());
+//        bundle.putBoolean("checkChart", true);
+//        intent.putExtras(bundle);
+//
+//        context.startActivity(intent);
+//
+//    }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
@@ -96,6 +113,12 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
             }
         }
 
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                callPlaylistActivity(song);
+//            }
+//        });
     }
 
     public void checkSongLibraryPlaylist (Song song){

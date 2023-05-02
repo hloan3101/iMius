@@ -9,8 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-
+import com.example.imius.R;
 import com.example.imius.adapter.ChartsAdapter;
 import com.example.imius.databinding.FragmentChartsBinding;
 import com.example.imius.viewmodel.ChartsViewModel;
@@ -45,6 +46,7 @@ public class ChartsFragment extends Fragment {
         viewModel = new ViewModelProvider(getActivity()).get(ChartsViewModel.class);
         viewModel.getCharts().observe(getViewLifecycleOwner(), chartsModels -> {
             chartsAdapter.setChartsModelList(chartsModels);
+            //       Toast.makeText(getContext(), String.valueOf(chartsAdapter.getChartsModelList().get(0).getImageChart()), Toast.LENGTH_LONG).show();
         });
 
         return view;
