@@ -13,18 +13,23 @@ import android.widget.Toast;
 
 import com.example.imius.R;
 import com.example.imius.adapter.ChartsAdapter;
+import com.example.imius.adapter.SongAdapter;
 import com.example.imius.databinding.FragmentChartsBinding;
+import com.example.imius.model.Song;
 import com.example.imius.viewmodel.ChartsViewModel;
+import com.example.imius.viewmodel.SongViewModel;
+
+import java.util.ArrayList;
 
 public class ChartsFragment extends Fragment {
     private FragmentChartsBinding binding;
     private ChartsAdapter chartsAdapter;
     private ChartsViewModel viewModel;
+    private SongAdapter songAdapter;
+    private SongViewModel songViewModel;
 
-    // TODO: Rename and change types and number of parameters
     public static ChartsFragment newInstance(String param1, String param2) {
         ChartsFragment fragment = new ChartsFragment();
-
         return fragment;
     }
 
@@ -36,17 +41,16 @@ public class ChartsFragment extends Fragment {
         View view = binding.getRoot();
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext());
-        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
         binding.fragmentChartsRvCharts.setLayoutManager(linearLayoutManager);
 
-        chartsAdapter = new ChartsAdapter(this.getContext());
-        binding.fragmentChartsRvCharts.setAdapter(chartsAdapter);
+        songAdapter = new SongAdapter(this.getContext());
+        binding.fragmentChartsRvCharts.setAdapter(songAdapter);
 
-        viewModel = new ViewModelProvider(getActivity()).get(ChartsViewModel.class);
-        viewModel.getCharts().observe(getViewLifecycleOwner(), chartsModels -> {
-            chartsAdapter.setChartsModelList(chartsModels);
-            //       Toast.makeText(getContext(), String.valueOf(chartsAdapter.getChartsModelList().get(0).getImageChart()), Toast.LENGTH_LONG).show();
+        songViewModel = new ViewModelProvider(getActivity()).get(SongViewModel.class);
+        songViewModel.getSongs().observe(getViewLifecycleOwner(), songs -> {
+            songAdapter.setListSongs((ArrayList<Song>) songs);
         });
 
         return view;
@@ -54,6 +58,6 @@ public class ChartsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        viewModel.refreshLiveData();
+        songViewModel.refreshLiveData();
     }
 }

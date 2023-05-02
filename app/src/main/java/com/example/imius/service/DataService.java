@@ -44,8 +44,10 @@ public interface DataService {
     @POST("getNewReleaseList.php")
     Call<List<NewReleaseModel>> getNewRelease();
 
-    @POST("getChartList.php")
+    @POST("getSongChart.php")
     Call<List<ChartsModel>> getCharts();
+    @POST("getSongChart.php")
+    Call<List<Song>> getSongCharts();
 
     @GET("insertLibraryPlaylist.php")
     Call<BaseResponse> insertLibraryPlaylist (@Query("nameLibraryPlaylist") String nameLibraryPlaylist,
@@ -115,8 +117,19 @@ public interface DataService {
                                           @Query("nameSong") String nameSong, @Query("nameSinger") String nameSinger,
                                           @Query("imageSong") String imageSong, @Query("linkSong") String  linkSong);
 
-    @FormUrlEncoded
-    @POST("getSongChart.php")
-    Call<List<Song>> getChartList (@Field("idChart") String idChart);
 
+    @GET("getSongList.php")
+    Call<List<Song>> getSongSingerList(@Query("idSinger") String idSinger);
+
+    @GET("getSongList.php")
+    Call<List<Song>> getSongTrendingList(@Query("idTrending") String idTrending);
+
+    @GET("getSongList.php")
+    Call<List<Song>> getSongTopicList(@Query("idTopic") String idTopic);
+
+    @GET("getSongNewRelease.php")
+    Call<Song> getSongNewReleaseList(@Query("idNewRelease") String idNewRelease);
+
+    @GET("getSongList.php")
+    Call<List<Song>> getSongChartList(@Query("idChart") String idChart);
 }

@@ -10,6 +10,7 @@ import com.example.imius.livedata.RefreshLiveData;
 import com.example.imius.model.BaseResponse;
 import com.example.imius.model.Song;
 import com.example.imius.repository.MusicRepository;
+import com.example.imius.repository.SongRespository;
 
 import java.util.List;
 
@@ -18,12 +19,15 @@ import retrofit2.Call;
 public class SongViewModel extends AndroidViewModel {
     private MusicRepository musicRepository;
     private RefreshLiveData<List<Song>> songs;
+    private SongRespository respository;
 
     public SongViewModel(@NonNull Application application) {
         super(application);
 
         musicRepository = new MusicRepository();
 //        songs = musicRepository.findSong(Constants.KEY);
+        respository = new SongRespository();
+        songs = respository.getSongChart();
     }
 
     public LiveData<List<Song>> getSongs() {

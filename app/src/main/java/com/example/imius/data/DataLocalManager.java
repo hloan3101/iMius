@@ -14,7 +14,12 @@ public class DataLocalManager {
     private static final String CHECK_EDIT = "CHECK_EDIT";
     private static final String CHECK_SEARCH = "CHECK_SEARCH";
     private static final String ID_LIBRARY_PLAYLIST = "ID_LIBRARY_PLAYLIST";
+    private static final String ID_SINGER = "ID_SINGER";
+    private static final String ID_TRENDING = "ID_TRENDING";
+
+    private static final String ID_TOPIC = "ID_TOPIC";
     private static final String ID_CHART = "ID_CHART";
+    private static final String ID_SONGCHART = "ID_SONGCHART";
 
 
 
@@ -72,8 +77,23 @@ public class DataLocalManager {
         DataLocalManager.getInstance().mySharedPreferences.putIntValue(ID_LIBRARY_PLAYLIST, value);
     }
 
+    public static void setIdSinger(String value) {
+        DataLocalManager.getInstance().mySharedPreferences.putStringValue(ID_SINGER, value);
+    }
+
+    public static void setIdTrending(String value) {
+        DataLocalManager.getInstance().mySharedPreferences.putStringValue(ID_TRENDING, value);
+    }
+
+    public static void setIdTopic(String value) {
+        DataLocalManager.getInstance().mySharedPreferences.putStringValue(ID_TOPIC, value);
+    }
+
     public static void setIdChart(String value) {
         DataLocalManager.getInstance().mySharedPreferences.putStringValue(ID_CHART, value);
+    }
+    public static void setIdSongChart(String value) {
+        DataLocalManager.getInstance().mySharedPreferences.putStringValue(ID_SONGCHART, value);
     }
 
     public static String getEmail() {
@@ -122,6 +142,20 @@ public class DataLocalManager {
 
     public static String getIdChart(){
         return DataLocalManager.getInstance().mySharedPreferences.getStringValue(ID_CHART);
+    }
+    public static String getIdSongChart(){
+        return DataLocalManager.getInstance().mySharedPreferences.getStringValue(ID_SONGCHART);
+    }
+    public static String getIdSinger(){
+        return DataLocalManager.getInstance().mySharedPreferences.getStringValue(ID_SINGER);
+    }
+
+    public static String getIdTrending(){
+        return DataLocalManager.getInstance().mySharedPreferences.getStringValue(ID_TRENDING);
+    }
+
+    public static String getIdTopic(){
+        return DataLocalManager.getInstance().mySharedPreferences.getStringValue(ID_TOPIC);
     }
 
     public static void clearDataLocal (){
