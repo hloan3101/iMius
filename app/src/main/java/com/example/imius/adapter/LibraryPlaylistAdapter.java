@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -15,11 +16,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.imius.R;
 import com.example.imius.activity.PlaylistActivity;
+import com.example.imius.api.API;
 import com.example.imius.data.DataLocalManager;
 import com.example.imius.model.LibraryPlaylist;
+import com.example.imius.model.SongLibraryPlaylist;
+import com.example.imius.service.DataService;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import io.github.muddz.styleabletoast.StyleableToast;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LibraryPlaylistAdapter extends RecyclerView.Adapter<LibraryPlaylistAdapter.ViewHolder> {
 
@@ -48,7 +57,23 @@ public class LibraryPlaylistAdapter extends RecyclerView.Adapter<LibraryPlaylist
             return;
         }
         holder.tvNamePlaylistLibrary.setText(playlistLibrary.getNameLibraryPlaylist());
-        Picasso.get().load(playlistLibrary.getImageLibraryPlaylist()).into(holder.imgPlaylistLibrary);
+    //    Picasso.get().load(playlistLibrary.getImageLibraryPlaylist()).into(holder.imgPlaylistLibrary);
+
+        DataService dataService = API.getAccount().create(DataService.class);
+
+        dataService.getSongLibraryPlaylistList(playlistLibrary.getIdLibraryPlaylist()).enqueue(new Callback<List<SongLibraryPlaylist>>() {
+            @Override
+            public void onResponse(Call<List<SongLibraryPlaylist>> call, Response<List<SongLibraryPlaylist>> response) {
+                if (response.body() != null) {
+                    Picasso.get().load(response.body().get(0).getImageSong()).into(holder.imgPlaylistLibrary);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<SongLibraryPlaylist>> call, Throwable t) {
+
+            }
+        });
 
         holder.layoutItem.setOnClickListener(new View.OnClickListener() {
             @Override

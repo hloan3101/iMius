@@ -31,7 +31,7 @@ public class WelcomeActivity extends AppCompatActivity {
 //                callSignUpActivity();
 //            }
 //        });
-
+        DataLocalManager.setFirstInstall(true);
         binding.activityWelcomeBtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -42,7 +42,6 @@ public class WelcomeActivity extends AppCompatActivity {
         binding.activityWelcomeTvContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DataLocalManager.setFirstInstall(true);
                 callSplashActivity();
             }
         });
