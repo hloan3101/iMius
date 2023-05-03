@@ -64,8 +64,9 @@ public class LibraryPlaylistAdapter extends RecyclerView.Adapter<LibraryPlaylist
         dataService.getSongLibraryPlaylistList(playlistLibrary.getIdLibraryPlaylist()).enqueue(new Callback<List<SongLibraryPlaylist>>() {
             @Override
             public void onResponse(Call<List<SongLibraryPlaylist>> call, Response<List<SongLibraryPlaylist>> response) {
-                if (response.body() != null) {
-                    Picasso.get().load(response.body().get(0).getImageSong()).into(holder.imgPlaylistLibrary);
+                if (response.body().size() > 0) {
+
+                    Picasso.get().load(response.body().get(response.body().size() -1).getImageSong()).into(holder.imgPlaylistLibrary);
                 }
             }
 
