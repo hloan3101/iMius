@@ -25,24 +25,28 @@ public class WelcomeActivity extends AppCompatActivity {
 
 
     private void setListener (){
-//        binding.activityWelcomeBtnSignupWithGmail.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                callSignUpActivity();
-//            }
-//        });
-        DataLocalManager.setFirstInstall(true);
+
         binding.activityWelcomeBtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 callLoginActivity();
+                DataLocalManager.setFirstInstall(true);
             }
         });
 
         binding.activityWelcomeTvContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                DataLocalManager.setFirstInstall(true);
                 callSplashActivity();
+            }
+        });
+
+        binding.activityWelcomeBtnSignupWithGmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DataLocalManager.setFirstInstall(true);
+                callSignUpActivity();
             }
         });
     }
@@ -52,10 +56,10 @@ public class WelcomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-//    private void callSignUpActivity (){
-//        Intent intent = new Intent(WelcomeActivity.this, SignUpActivity.class);
-//        startActivity(intent);
-//    }
+    private void callSignUpActivity (){
+        Intent intent = new Intent(WelcomeActivity.this, SignUpActivity.class);
+        startActivity(intent);
+    }
 
     private void callHomeActivity (){
         Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
