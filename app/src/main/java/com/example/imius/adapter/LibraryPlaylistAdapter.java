@@ -97,6 +97,7 @@ public class LibraryPlaylistAdapter extends RecyclerView.Adapter<LibraryPlaylist
         Bundle bundle =  new Bundle();
         bundle.putInt("idLibraryPlaylist", libraryPlaylist.getIdLibraryPlaylist());
         bundle.putString("nameLibraryPlaylist", libraryPlaylist.getNameLibraryPlaylist());
+
         bundle.putString("imgPlaylistLibrary", image);
 
         intent.putExtras(bundle);
