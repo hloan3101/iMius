@@ -46,6 +46,13 @@ public class ForgetPasswordFragment extends Fragment implements View.OnClickList
 
         viewModel = new ViewModelProvider(getActivity()).get(UserViewModel.class);
 
+        binding.fragmentForgetPasswordTvBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().finish();
+            }
+        });
+
         binding.fragmentForgetPasswordBtnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -105,7 +112,9 @@ public class ForgetPasswordFragment extends Fragment implements View.OnClickList
                         Toast.LENGTH_LONG, R.style.myToast).show();
             }
         });
-    }public void callProfileFragment() {
+    }
+
+    public void callProfileFragment() {
         ProfileFragment profileFragment = new ProfileFragment();
         binding.fragmentForgetPasswordLinearLayout.setVisibility(View.GONE);
 

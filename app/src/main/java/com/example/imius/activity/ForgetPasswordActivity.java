@@ -1,6 +1,8 @@
 package com.example.imius.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +19,7 @@ import com.example.imius.viewmodel.UserViewModel;
 
 import java.util.Properties;
 import java.util.Random;
+import java.util.regex.Pattern;
 
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -55,7 +58,8 @@ public class ForgetPasswordActivity extends AppCompatActivity implements View.On
         binding.activityForgetPasswordCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(ForgetPasswordActivity.this, LoginActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -89,10 +93,15 @@ public class ForgetPasswordActivity extends AppCompatActivity implements View.On
                         mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(
                                 binding.activityForgetPasswordEtEmail.getText().toString().trim()));
 
-                        mimeMessage.setSubject("IMIUS CODE VERIFICATION");
-                        mimeMessage.setText("Hello, "+ "\n\n" +
-                                "iMius sent you an OTP for email verification: " +  code + "\n\n" +
-                                "Thank you!");
+//                        mimeMessage.setSubject("IMIUS CODE VERIFICATION");
+//                        mimeMessage.setText("Hello, "+ "\n\n" +
+//                                "iMius sent you an OTP for email verification: " +  code + "\n\n" +
+//                                "Thank you!");
+
+                        mimeMessage.setSubject(getResources().getString(R.string.subject_email));
+                        mimeMessage.setText(getResources().getString(R.string.hello_email)+ "\n\n" +
+                                getResources().getString(R.string.content_email) +  code + "\n\n" +
+                                getResources().getString(R.string.end_email));
 
                         Thread thread = new Thread(new Runnable() {
                             @Override
@@ -119,11 +128,44 @@ public class ForgetPasswordActivity extends AppCompatActivity implements View.On
             @Override
             public void onClick(View v) {
                 callForgetPasswordFragment();
+
             }
         });
     }
 
+    private boolean checkInput(){
+        resetError();
+
+        if (TextUtils.isEmpty(binding.activityForgetPasswordEtEmail.getText().toString())){
+            binding.activityForgetPasswordTilEmail.setError(getResources().getString(R.string.require));
+            return false;
+        } else if (!Pattern.matches(getResources().getString(R.string.email_pattern),
+                binding.activityForgetPasswordEtEmail.getText().toString().trim())) {
+            binding.activityForgetPasswordTilEmail.setError(getResources().getString(R.string.format_error));
+            return false;
+        }
+
+        if (TextUtils.isEmpty(binding.activityForgetPasswordEtConfirmCode.getText().toString().trim())){
+            binding.activityForgetPasswordTilConfirmCode.setError(getResources().getString(R.string.require));
+            return false;
+        }else{
+            if(Integer.parseInt(binding.activityForgetPasswordEtConfirmCode.getText().toString().trim()) != code) {
+                binding.activityForgetPasswordTilConfirmCode.setError(getResources().getString(R.string.code_error));
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void resetError(){
+        binding.activityForgetPasswordTilEmail.setError(null);
+        binding.activityForgetPasswordTilConfirmCode.setError(null);
+    }
+
     public void callForgetPasswordFragment() {
+        if (!checkInput())
+            return;
+
         ForgetPasswordFragment forgetPasswordFragment = new ForgetPasswordFragment();
         binding.activityForgetPasswordLinearLayout.setVisibility(View.GONE);
 
