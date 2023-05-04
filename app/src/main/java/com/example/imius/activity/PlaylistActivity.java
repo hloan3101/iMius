@@ -30,9 +30,6 @@ import com.example.imius.databinding.ActivityPlaylistBinding;
 import com.example.imius.fragment.SearchFragment;
 import com.example.imius.model.BaseResponse;
 
-import com.example.imius.model.ChartsModel;
-=======
-import com.example.imius.model.LibraryPlaylist;
 import com.example.imius.model.Song;
 import com.example.imius.model.SongLibraryPlaylist;
 import com.example.imius.service.DataService;
@@ -162,7 +159,7 @@ public class PlaylistActivity extends AppCompatActivity {
         adapter = new SongLibraryPlaylistAdapter(PlaylistActivity.this);
         binding.activityPlaylistRvPlaylist.setAdapter(adapter);
 
-        viewModel = new ViewModelProvider(this).get(LibraryPlaylistViewModel.class);
+        viewModel = new ViewModelProvider(PlaylistActivity.this).get(LibraryPlaylistViewModel.class);
 
         if (bundle.getString("nameLibraryPlaylist") != null) {
             Picasso.get().load(bundle.getString("imgPlaylistLibrary")).into(binding.activityPlaylistIvViewSong);

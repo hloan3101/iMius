@@ -50,10 +50,13 @@
     <string name="progressbar_login">"Logging in...</string>
     <string name="progressbar_signup">"Signing up...</string>
     <string name="compare_password_require">Passwords are not match</string>
-    <string name="email_invalidate">Email invalidate</string>
-    <string name="email_exist">This email already exists</string>
+    <string name="password_error">The password is invalidate</string>
+    <string name="email_invalidate">Email is invalidate</string>
+    <string name="email_exist">This email is already exists</string>
+    <string name="username_exist">The username is already exists</string>
     <string name="song_exist">This song is already in the playlist!</string>
     <string name="signup_successfully">Signup Successfully</string>
+    <string name="check_code">Please check the Code in your Email</string>
     <string name="subject_email">Confirmation code from IMIUS</string>
     <string name="content_email">"iMius sent you an OTP for email verification: "</string>
     <string name="hello_email">Hello you,</string>

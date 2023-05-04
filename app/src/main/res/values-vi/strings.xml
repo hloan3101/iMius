@@ -67,9 +67,12 @@
     <string name="song_exist">Bài hát này đã có trong thư viện!</string>
     <string name="delete_failed">Không thể xóa</string>
     <string name="update_success">Cập nhật thành công!</string>
-    <string name="update_faild">Cập nhật khoonng thành công!</string>
+    <string name="update_faild">Cập nhật không thành công!</string>
     <string name="cannot_find">Không tìm thấy!</string>
     <string name="network_disconnected">Không có Internet!</string>
     <string name="continue_continue">TIẾP TỤC</string>
     <string name="format_error">Lỗi định dạng</string>
+    <string name="password_error">Mật khẩu không đúng</string>
+    <string name="check_code">Vui lòng xem mã Code trong Email của bạn!</string>
+    <string name="username_exist">Username này đã tồn tại</string>
 </resources>

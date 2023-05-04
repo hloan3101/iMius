@@ -31,7 +31,7 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-public class ForgetPasswordActivity extends AppCompatActivity implements View.OnClickListener{
+public class ForgetPasswordActivity extends AppCompatActivity{
 
     private ActivityForgetPasswordBinding binding;
     private UserViewModel viewModel;
@@ -66,6 +66,15 @@ public class ForgetPasswordActivity extends AppCompatActivity implements View.On
         binding.activityForgetPasswordBtnGetCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (TextUtils.isEmpty(binding.activityForgetPasswordEtEmail.getText().toString().trim())){
+                    binding.activityForgetPasswordTilEmail.setError(getResources().getString(R.string.require));
+                    return;
+                } else if (!Pattern.matches(getResources().getString(R.string.email_pattern),
+                        binding.activityForgetPasswordEtEmail.getText().toString().trim())) {
+                    binding.activityForgetPasswordTilEmail.setError(getResources().getString(R.string.format_error));
+                    return;
+                }
+
 
                 if (check){
                     Random random = new Random();
@@ -136,7 +145,7 @@ public class ForgetPasswordActivity extends AppCompatActivity implements View.On
     private boolean checkInput(){
         resetError();
 
-        if (TextUtils.isEmpty(binding.activityForgetPasswordEtEmail.getText().toString())){
+        if (TextUtils.isEmpty(binding.activityForgetPasswordEtEmail.getText().toString().trim())){
             binding.activityForgetPasswordTilEmail.setError(getResources().getString(R.string.require));
             return false;
         } else if (!Pattern.matches(getResources().getString(R.string.email_pattern),
@@ -175,8 +184,4 @@ public class ForgetPasswordActivity extends AppCompatActivity implements View.On
 
     }
 
-    @Override
-    public void onClick(View view) {
-
-    }
 }
