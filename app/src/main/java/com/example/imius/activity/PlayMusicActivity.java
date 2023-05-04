@@ -359,15 +359,15 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
 
         musicDiscFragment = (MusicDiscFragment) discViewPager.getItem(0);
 
-        binding.activityPlayMusicIbBackSong.setOnClickListener(view -> sendActionToService(
-        ForegroundServiceControl.ACTION_PREVIOUS
-        setLikeSong();
-        ));
+        binding.activityPlayMusicIbBackSong.setOnClickListener(view -> {
+            sendActionToService(ForegroundServiceControl.ACTION_PREVIOUS);
+            setLikeSong();
+        });
 
-        binding.activityPlayMusicIbNextSong.setOnClickListener(view -> sendActionToService(
-        ForegroundServiceControl.ACTION_NEXT
-        setLikeSong();
-        ));
+        binding.activityPlayMusicIbNextSong.setOnClickListener(view -> {
+            sendActionToService(ForegroundServiceControl.ACTION_NEXT);
+            setLikeSong();
+        });
 
         binding.activityPlayMusicIbPlayAndPauseSong.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -458,8 +458,8 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                mediaPlayer.seekTo(seekBar.getProgress());
-
+                durationToService = seekBar.getProgress();
+                sendActionToService(ForegroundServiceControl.ACTION_DURATION);
             }
         });
 
@@ -505,35 +505,8 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
             }
 
             checkLikeSong();
-            
-            
-        }
 
         }
-    }
-
-    public void checkLikeSong (){
-        MusicRepository repository = new MusicRepository();
-
-        repository.checkLikeSong(DataLocalManager.getUsernameData(), song.getIdSong())
-                .enqueue(new Callback<BaseResponse>() {
-                    @Override
-                    public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
-                        if (response.body() != null){
-                            //    Toast.makeText(context, response.body().getIsSuccess(), Toast.LENGTH_LONG).show();
-                            if (response.body().getIsSuccess().equals(Constants.successfully)){
-                                binding.activityPlayMusicIvLoveButton.setImageResource(R.drawable.ic_loved);
-                            }else {
-                                binding.activityPlayMusicIvLoveButton.setImageResource(R.drawable.ic_love);
-                            }
-                        }
-                    }
-                    @Override
-                    public void onFailure(Call<BaseResponse> call, Throwable t) {
-                        StyleableToast.makeText(PlayMusicActivity.this, t.getMessage(),
-                                Toast.LENGTH_LONG, R.style.myToast).show();
-                    }
-                });
     }
 
     public void setBtnLike (){
