@@ -1,10 +1,5 @@
 package com.example.imius.model;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
-import java.io.Serializable;
-
 public class Singer {
     private int idSinger;
     private String nameSinger;

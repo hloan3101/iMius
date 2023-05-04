@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:layout_gravity="center"
     android:layout_marginRight="10dp"
     android:layout_marginLeft="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <LinearLayout
-        android:id="@+id/item_singer_linear_layout"
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/item_singer_civ_singer_image"
@@ -37,6 +33,5 @@
             android:textColor="@color/black"
             android:textSize="20sp"/>
 
-    </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+</LinearLayout>

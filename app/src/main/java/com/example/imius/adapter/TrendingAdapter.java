@@ -2,6 +2,8 @@ package com.example.imius.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.imius.R;
+import com.example.imius.activity.PlaylistActivity;
+import com.example.imius.data.DataLocalManager;
+import com.example.imius.model.Singer;
 import com.example.imius.model.Trending;
 import com.squareup.picasso.Picasso;
 
@@ -61,7 +66,28 @@ public class TrendingAdapter extends RecyclerView.Adapter<TrendingAdapter.ViewHo
         holder.tvNameTrending.setText(trending.getNameTrending());
         Picasso.get().load(trending.getImageTrending()).into(holder.imgTrending);
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callPlaylistActivity(trending);
+            }
+
+        });
     }
+
+    private void callPlaylistActivity(Trending trending) {
+        DataLocalManager.setIdTrending(String.valueOf(trending.getIdTrending()));
+        Intent intent = new Intent(context, PlaylistActivity.class);
+        Bundle bundle = new Bundle();
+
+        //      bundle.putString("idSinger", String.valueOf(singer.getIdSinger()));
+        bundle.putString("nameTrending", trending.getNameTrending());
+        bundle.putString("imageTrending", trending.getImageTrending());
+        intent.putExtras(bundle);
+
+        context.startActivity(intent);
+    }
+
 
     @Override
     public int getItemCount() {
