@@ -29,10 +29,12 @@
 
         <TextView
             android:id="@+id/item_library_playlist_tv_name"
-            android:layout_width="300dp"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:maxWidth="300dp"
+            android:maxWidth="260dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:text="@string/name_of_song"
             android:textColor="@color/black"
             android:textSize="21sp"
