@@ -363,13 +363,11 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
         musicDiscFragment = (MusicDiscFragment) discViewPager.getItem(0);
 
         binding.activityPlayMusicIbBackSong.setOnClickListener(view -> {
-            setLikeSong();
             sendActionToService(ForegroundServiceControl.ACTION_PREVIOUS);
 
         });
 
         binding.activityPlayMusicIbNextSong.setOnClickListener(view -> {
-            setLikeSong();
             sendActionToService(ForegroundServiceControl.ACTION_NEXT);
         });
 
