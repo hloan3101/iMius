@@ -315,6 +315,7 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
         }, 500);
     }
 
+
     private void setGradient(String songImg){
 //        Picasso.get().load(songImg).into(new Target() {
 //            @Override
