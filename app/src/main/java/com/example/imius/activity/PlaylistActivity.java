@@ -470,6 +470,16 @@ public class PlaylistActivity extends AppCompatActivity {
                         StyleableToast.makeText(PlaylistActivity.this, "The list has no songs at all.",
                                 Toast.LENGTH_LONG, R.style.myToast).show();
                     }
+
+                } else if (songAdapter.getListSongs() != null){
+                    if (songAdapter.getListSongs().size() > 0){
+                        intent.putExtra("list_song",
+                                (ArrayList<Song>)songAdapter.getListSongs());
+                        startActivity(intent);
+                    } else {
+                        StyleableToast.makeText(PlaylistActivity.this, "The list has no songs at all.",
+                                Toast.LENGTH_LONG, R.style.myToast).show();
+                    }
                 }
 
             }

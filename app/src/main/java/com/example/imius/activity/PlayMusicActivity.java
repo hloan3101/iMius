@@ -224,11 +224,13 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
     private void nextMusic(){
         binding.activityPlayMusicIbPlayAndPauseSong.setImageResource(R.drawable.ic_play_button);
         timeValue = 0;
+        setLikeSong();
     }
 
     private void previousMusic(){
         binding.activityPlayMusicIbPlayAndPauseSong.setImageResource(R.drawable.ic_play_button);
         timeValue = 0;
+        setLikeSong();
     }
 
     private void completeNextMusic() {
@@ -361,13 +363,14 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
         musicDiscFragment = (MusicDiscFragment) discViewPager.getItem(0);
 
         binding.activityPlayMusicIbBackSong.setOnClickListener(view -> {
-            sendActionToService(ForegroundServiceControl.ACTION_PREVIOUS);
             setLikeSong();
+            sendActionToService(ForegroundServiceControl.ACTION_PREVIOUS);
+
         });
 
         binding.activityPlayMusicIbNextSong.setOnClickListener(view -> {
-            sendActionToService(ForegroundServiceControl.ACTION_NEXT);
             setLikeSong();
+            sendActionToService(ForegroundServiceControl.ACTION_NEXT);
         });
 
         binding.activityPlayMusicIbPlayAndPauseSong.setOnClickListener(new View.OnClickListener() {
@@ -387,9 +390,9 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
 
 
         binding.activityPlayMusicIbRepeatSong.setOnClickListener(this::onClick);
-        
+
         setLikeSong();
-        
+
         binding.activityPlayMusicIvLoveButton.setOnClickListener(view -> {
                 Animation animation = AnimationUtils.loadAnimation(PlayMusicActivity.this, R.anim.anim_love_click);
                 setBtnLike();
@@ -440,6 +443,7 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
                 songArrayList.clear();
                 songLibraryPlaylistArrayList.clear();
                 favoriteSongArrayList.clear();
+                historySongArrayList.clear();
                 finish();
             }
         });
@@ -628,4 +632,5 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
         }
         sendActionToService(ForegroundServiceControl.ACTION_REPEAT);
     }
+
 }
