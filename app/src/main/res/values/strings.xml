@@ -22,7 +22,7 @@
     <string name="singer">Singer</string>
     <string name="trending">Trending</string>
     <string name="new_release">New release</string>
-    <string name="theme">Theme</string>
+    <string name="theme">Topic</string>
     <string name="charts">Charts</string>
     <string name="song_name" translatable="false">------</string>
     <string name="singer_name" translatable="false">----</string>

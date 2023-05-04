@@ -3,10 +3,19 @@ package com.example.imius.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ChartsModel {
+import java.io.Serializable;
+
+public class ChartsModel implements Serializable {
+
     // BANG XEP HANG AM NHAC
+    @SerializedName("idChart")
+    @Expose
     private int idChart;
+    @SerializedName("nameChart")
+    @Expose
     private String nameChart;
+    @SerializedName("imageChart")
+    @Expose
     private String imageChart;
 
     public ChartsModel(int idChart, String nameChart, String imageChart) {

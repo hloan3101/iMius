@@ -15,6 +15,7 @@ import com.example.imius.model.Trending;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -43,8 +44,10 @@ public interface DataService {
     @POST("getNewReleaseList.php")
     Call<List<NewReleaseModel>> getNewRelease();
 
-    @POST("getChartList.php")
+    @POST("getSongChart.php")
     Call<List<ChartsModel>> getCharts();
+    @POST("getSongChart.php")
+    Call<List<Song>> getSongCharts();
 
     @GET("insertLibraryPlaylist.php")
     Call<BaseResponse> insertLibraryPlaylist (@Query("nameLibraryPlaylist") String nameLibraryPlaylist,
@@ -113,5 +116,20 @@ public interface DataService {
     Call<BaseResponse> insertHistorySong (@Query("username") String username, @Query("idSong") int idSong,
                                           @Query("nameSong") String nameSong, @Query("nameSinger") String nameSinger,
                                           @Query("imageSong") String imageSong, @Query("linkSong") String  linkSong);
+
+    @GET("getSongList.php")
+    Call<List<Song>> getSongSingerList(@Query("idSinger") String idSinger);
+
+    @GET("getSongList.php")
+    Call<List<Song>> getSongTrendingList(@Query("idTrending") String idTrending);
+
+    @GET("getSongList.php")
+    Call<List<Song>> getSongTopicList(@Query("idTopic") String idTopic);
+
+    @GET("getSongNewRelease.php")
+    Call<Song> getSongNewReleaseList(@Query("idNewRelease") String idNewRelease);
+
+    @GET("getSongList.php")
+    Call<List<Song>> getSongChartList(@Query("idChart") String idChart);
 
 }
