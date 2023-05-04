@@ -2,7 +2,6 @@ package com.example.imius.fragment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,10 +17,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.imius.R;
-import com.example.imius.activity.LoginActivity;
 import com.example.imius.adapter.HistorySongAdapter;
 import com.example.imius.constants.Constants;
-import com.example.imius.data.DataLocalManager;
 import com.example.imius.databinding.FragmentHistoryBinding;
 import com.example.imius.model.BaseResponse;
 import com.example.imius.model.HistorySong;
@@ -90,8 +87,8 @@ public class HistoryFragment extends Fragment {
                 if (direction == ItemTouchHelper.LEFT){
                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
-                    builder.setTitle(getString(R.string.title_dialog_delete));
-                    builder.setMessage(getString(R.string.title_dialog_delete_message));
+                    builder.setTitle(getString(R.string.title_dialog));
+                    builder.setMessage(getString(R.string.dialog_delete_message));
                     builder.setCancelable(false);
 
                     builder.setPositiveButton(getString(R.string.yes_dialog),

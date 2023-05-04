@@ -28,7 +28,7 @@ public class HomeActivity extends AppCompatActivity {
 
         View view = binding.getRoot();
         setContentView(view);
-
+        DataLocalManager.setCheckFromLogout(false);
         setUpViewPager();
 
         binding.activityHomeViewPager.setEnabled(false);

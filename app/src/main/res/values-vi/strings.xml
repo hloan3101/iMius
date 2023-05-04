@@ -53,8 +53,8 @@
     <string name="library_playlist_delete_success">Xóa danh sách phát thành công!</string>
     <string name="song_library_playlist_delete_success">Xóa bài hát thành công!</string>
     <string name="library_playlist_delete_failed">Xóa danh sách phát không thành công!</string>
-    <string name="title_dialog_delete">Xác nhận</string>
-    <string name="title_dialog_delete_message">Bạn có chắc chắn muốn xóa</string>
+    <string name="title_dialog">Xác nhận</string>
+    <string name="dialog_delete_message">Bạn có chắc chắn muốn xóa?</string>
     <string name="yes_dialog">Có</string>
     <string name="no_dialog">Không</string>
     <string name="enter_new_name_for_your_playlist">Nhập một tên mới cho danh sách phát</string>
@@ -75,4 +75,6 @@
     <string name="password_error">Mật khẩu không đúng</string>
     <string name="check_code">Vui lòng xem mã Code trong Email của bạn!</string>
     <string name="username_exist">Username này đã tồn tại</string>
+    <string name="dialog_delete_logout">Bạn có chắc chắn muốn thoát?</string>
+    <string name="dialog_logout">Bạn có chắc chắn muốn đăng xuất?</string>
 </resources>

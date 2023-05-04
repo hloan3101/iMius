@@ -5,6 +5,7 @@ import android.content.Context;
 public class DataLocalManager {
     private static final String KEY_FIRST_INSTALL = "KEY_FIRST_INSTALL";
     private static final String CHECK_FROM_LIBRARY = "CHECK_FROM_LIBRARY";
+    private static final String CHECK_FROM_LOGOUT = "CHECK_FROM_LOGOUT";
     private static final String CHECK_LOGIN = "CHECK_LOGIN";
     private static final String EMAIL = "EMAIL";
     private static final String PASSWORD = "PASSWORD";
@@ -53,6 +54,9 @@ public class DataLocalManager {
     }
     public static void setCheckFromLibrary(boolean value) {
         DataLocalManager.getInstance().mySharedPreferences.putBoolean(CHECK_FROM_LIBRARY, value);
+    }
+    public static void setCheckFromLogout(boolean value) {
+        DataLocalManager.getInstance().mySharedPreferences.putBoolean(CHECK_FROM_LOGOUT, value);
     }
 
     public static void setCheckLogin(boolean value) {
@@ -112,6 +116,10 @@ public class DataLocalManager {
 
     public static boolean getCheckFromLibrary() {
         return DataLocalManager.getInstance().mySharedPreferences.getBooleanValue(CHECK_FROM_LIBRARY);
+    }
+
+    public static boolean getCheckFromLogout() {
+        return DataLocalManager.getInstance().mySharedPreferences.getBooleanValue(CHECK_FROM_LOGOUT);
     }
 
     public static boolean getCheckEdit() {

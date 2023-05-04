@@ -2,7 +2,6 @@ package com.example.imius.fragment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.imius.R;
-import com.example.imius.activity.LoginActivity;
 import com.example.imius.adapter.FavoriteSongAdapter;
 import com.example.imius.constants.Constants;
 import com.example.imius.data.DataLocalManager;
@@ -91,8 +89,8 @@ public class FavoriteFragment extends Fragment {
                 if (direction == ItemTouchHelper.LEFT){
                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
-                    builder.setTitle(getString(R.string.title_dialog_delete));
-                    builder.setMessage(getString(R.string.title_dialog_delete_message));
+                    builder.setTitle(getString(R.string.title_dialog));
+                    builder.setMessage(getString(R.string.dialog_delete_message));
                     builder.setCancelable(false);
 
                     builder.setPositiveButton(getString(R.string.yes_dialog),

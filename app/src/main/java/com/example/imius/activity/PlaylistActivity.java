@@ -20,12 +20,9 @@ import com.example.imius.R;
 
 import com.example.imius.adapter.SongAdapter;
 import com.example.imius.data.DataLocalManager;
-import com.example.imius.R;
-import com.example.imius.adapter.SongAdapter;
 import com.example.imius.adapter.SongLibraryPlaylistAdapter;
 import com.example.imius.api.API;
 import com.example.imius.constants.Constants;
-import com.example.imius.data.DataLocalManager;
 import com.example.imius.databinding.ActivityPlaylistBinding;
 import com.example.imius.fragment.SearchFragment;
 import com.example.imius.model.BaseResponse;
@@ -409,8 +406,8 @@ public class PlaylistActivity extends AppCompatActivity {
                 if (direction == ItemTouchHelper.LEFT){
                     AlertDialog.Builder builder = new AlertDialog.Builder(PlaylistActivity.this);
 
-                    builder.setTitle(getString(R.string.title_dialog_delete));
-                    builder.setMessage(getString(R.string.title_dialog_delete_message));
+                    builder.setTitle(getString(R.string.title_dialog));
+                    builder.setMessage(getString(R.string.dialog_delete_message));
                     builder.setCancelable(false);
 
                     builder.setPositiveButton(getString(R.string.yes_dialog),

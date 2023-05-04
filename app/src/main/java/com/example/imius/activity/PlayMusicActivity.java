@@ -535,7 +535,10 @@ public class PlayMusicActivity extends AppCompatActivity {
             }
         });
 
-
+        setLikeSong();
+        binding.activityPlayMusicIvLoveButton.setOnClickListener(view -> {
+            setBtnLike();
+        });
 
         binding.activityPlayMusicIbRandomSong.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -555,6 +558,29 @@ public class PlayMusicActivity extends AppCompatActivity {
             }
         });
 
+
+
+        binding.activityPlayMusicSbSongTime.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                mediaPlayer.seekTo(seekBar.getProgress());
+
+            }
+        });
+
+    }
+
+    private void setLikeSong (){
         if (!DataLocalManager.getCheckLogin()){
             binding.activityPlayMusicIvLoveButton.setImageResource(R.drawable.ic_love);
             binding.activityPlayMusicIvLoveButton.setOnClickListener(new View.OnClickListener() {
@@ -593,29 +619,7 @@ public class PlayMusicActivity extends AppCompatActivity {
             }
 
             checkLikeSong();
-            binding.activityPlayMusicIvLoveButton.setOnClickListener(view -> {
-                setBtnLike();
-            });
         }
-
-        binding.activityPlayMusicSbSongTime.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                mediaPlayer.seekTo(seekBar.getProgress());
-
-            }
-        });
-
     }
 
     public void checkLikeSong (){

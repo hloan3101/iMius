@@ -83,8 +83,9 @@
     <string name="library_playlist_update_failed">Update the playlist failed!</string>
     <string name="song_insert_failed">Insert the song failed!</string>
 
-    <string name="title_dialog_delete">Confirm</string>
-    <string name="title_dialog_delete_message">Are you sure you want to delete?</string>
+    <string name="title_dialog">Confirm</string>
+    <string name="dialog_delete_message">Are you sure you want to delete?</string>
+    <string name="dialog_logout">Are you sure you want to logout?</string>
     <string name="yes_dialog">Yes</string>
     <string name="no_dialog">No</string>
 
