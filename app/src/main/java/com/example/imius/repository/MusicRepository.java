@@ -40,6 +40,62 @@ public class MusicRepository {
         return data;
     }
 
+    public RefreshLiveData<List<Song>> getSongSingerList(String idSinger){
+        RefreshLiveData<List<Song>> data = new RefreshLiveData<>(callback -> {
+            dataService.getSongSingerList(idSinger).enqueue(new Callback<List<Song>>() {
+                @Override
+                public void onResponse(Call<List<Song>> call, Response<List<Song>> response) {
+                    callback.onDataLoaded((ArrayList<Song>) response.body());
+                }
+
+                @Override
+                public void onFailure(Call<List<Song>> call, Throwable t) {
+
+                }
+            });
+        });
+        return data;
+    }
+
+    public RefreshLiveData<List<Song>> getSongTrendingList(String idTrending){
+        RefreshLiveData<List<Song>> data = new RefreshLiveData<>(callback -> {
+            dataService.getSongSingerList(idTrending).enqueue(new Callback<List<Song>>() {
+                @Override
+                public void onResponse(Call<List<Song>> call, Response<List<Song>> response) {
+                    callback.onDataLoaded((ArrayList<Song>) response.body());
+                }
+
+                @Override
+                public void onFailure(Call<List<Song>> call, Throwable t) {
+
+                }
+            });
+        });
+        return data;
+    }
+
+    public RefreshLiveData<List<Song>> getSongTopicList(String idTopic){
+        RefreshLiveData<List<Song>> data = new RefreshLiveData<>(callback -> {
+            dataService.getSongSingerList(idTopic).enqueue(new Callback<List<Song>>() {
+                @Override
+                public void onResponse(Call<List<Song>> call, Response<List<Song>> response) {
+                    callback.onDataLoaded((ArrayList<Song>) response.body());
+                }
+
+                @Override
+                public void onFailure(Call<List<Song>> call, Throwable t) {
+
+                }
+            });
+        });
+        return data;
+    }
+
+    public Call<Song> getSongNewReleaseList(String idNewRelease){
+
+        return dataService.getSongNewReleaseList(idNewRelease);
+    }
+
     public Call<BaseResponse> insertLibraryPlaylist (String nameLibraryPlaylist){
         return dataService.insertLibraryPlaylist(nameLibraryPlaylist, DataLocalManager.getUsernameData());
     }

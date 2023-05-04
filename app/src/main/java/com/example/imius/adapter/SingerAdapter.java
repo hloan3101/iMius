@@ -80,7 +80,7 @@ public class SingerAdapter extends RecyclerView.Adapter<SingerAdapter.ViewHolder
         Intent intent = new Intent(context, PlaylistActivity.class);
         Bundle bundle = new Bundle();
 
-        //      bundle.putString("idSinger", String.valueOf(singer.getIdSinger()));
+  //      bundle.putString("idSinger", String.valueOf(singer.getIdSinger()));
         bundle.putString("nameSinger", singer.getNameSinger());
         bundle.putString("imageSinger", singer.getImageSinger());
         intent.putExtras(bundle);

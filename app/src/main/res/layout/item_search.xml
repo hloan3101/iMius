@@ -69,8 +69,7 @@
             android:text="@string/singer"
             android:textColor="@color/black"
             android:textSize="13sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/item_search_iv_image_of_song"
+            android:textStyle="bold"app:layout_constraintStart_toEndOf="@+id/item_search_iv_image_of_song"
             app:layout_constraintTop_toBottomOf="@+id/item_search_tv_name_of_song" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -21,8 +21,6 @@ public class DataLocalManager {
     private static final String ID_CHART = "ID_CHART";
     private static final String ID_SONGCHART = "ID_SONGCHART";
 
-
-
     private static DataLocalManager instance;
     private MySharedPreferences mySharedPreferences;
 
@@ -40,6 +38,18 @@ public class DataLocalManager {
 
     public static void setFirstInstall(boolean value) {
         DataLocalManager.getInstance().mySharedPreferences.putBoolean(KEY_FIRST_INSTALL, value);
+    }
+
+    public static void setIdSinger(String value) {
+        DataLocalManager.getInstance().mySharedPreferences.putStringValue(ID_SINGER, value);
+    }
+
+    public static void setIdTrending(String value) {
+        DataLocalManager.getInstance().mySharedPreferences.putStringValue(ID_TRENDING, value);
+    }
+
+    public static void setIdTopic(String value) {
+        DataLocalManager.getInstance().mySharedPreferences.putStringValue(ID_TOPIC, value);
     }
     public static void setCheckFromLibrary(boolean value) {
         DataLocalManager.getInstance().mySharedPreferences.putBoolean(CHECK_FROM_LIBRARY, value);
@@ -134,6 +144,17 @@ public class DataLocalManager {
 
     public static String getImage(){
         return DataLocalManager.getInstance().mySharedPreferences.getStringValue(IMAGE);
+    }
+    public static String getIdSinger(){
+        return DataLocalManager.getInstance().mySharedPreferences.getStringValue(ID_SINGER);
+    }
+
+    public static String getIdTrending(){
+        return DataLocalManager.getInstance().mySharedPreferences.getStringValue(ID_TRENDING);
+    }
+
+    public static String getIdTopic(){
+        return DataLocalManager.getInstance().mySharedPreferences.getStringValue(ID_TOPIC);
     }
 
     public static int getIdLibraryPlaylist(){

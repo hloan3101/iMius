@@ -42,15 +42,24 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <ImageView
-                    android:id="@+id/activity_playlist_iv_view_song"
+
+                <androidx.cardview.widget.CardView
                     android:layout_width="250dp"
                     android:layout_height="250dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="24dp"
-                    android:elevation="0dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/item_note_music"/>
+                    app:cardCornerRadius="15dp"
+                    android:layout_marginTop="40dp">
+                    <ImageView
+                        android:id="@+id/activity_playlist_iv_view_song"
+                        app:cardCornerRadius="15dp"
+                        android:layout_width="250dp"
+                        android:layout_height="250dp"
+                        android:layout_gravity="center"
+                        android:elevation="0dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/item_note_music"/>
+                </androidx.cardview.widget.CardView>
+
 
                 <TextView
                     android:id="@+id/activity_playlist_tv_song_name"
@@ -75,7 +84,7 @@
         android:id="@+id/activity_playlist_nested"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="55dp"
         android:backgroundTint="@color/black"
         android:elevation="6dp"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">

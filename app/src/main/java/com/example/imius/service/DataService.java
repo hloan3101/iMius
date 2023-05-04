@@ -117,7 +117,6 @@ public interface DataService {
                                           @Query("nameSong") String nameSong, @Query("nameSinger") String nameSinger,
                                           @Query("imageSong") String imageSong, @Query("linkSong") String  linkSong);
 
-
     @GET("getSongList.php")
     Call<List<Song>> getSongSingerList(@Query("idSinger") String idSinger);
 
@@ -132,4 +131,5 @@ public interface DataService {
 
     @GET("getSongList.php")
     Call<List<Song>> getSongChartList(@Query("idChart") String idChart);
+
 }

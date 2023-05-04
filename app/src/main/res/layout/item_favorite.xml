@@ -16,9 +16,8 @@
         android:background="#CFCECC">
         <ImageView
             android:id="@+id/item_favorite_iv_image_of_song"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_margin="15dp"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
             android:src="@drawable/ic_some_item_avt"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
