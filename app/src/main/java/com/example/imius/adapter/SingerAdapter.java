@@ -76,7 +76,7 @@ public class SingerAdapter extends RecyclerView.Adapter<SingerAdapter.ViewHolder
     }
 
     private void callPlaylistActivity(Singer singer) {
-      DataLocalManager.setIdSinger(String.valueOf(singer.getIdSinger()));
+        DataLocalManager.setIdSinger(String.valueOf(singer.getIdSinger()));
         Intent intent = new Intent(context, PlaylistActivity.class);
         Bundle bundle = new Bundle();
 
