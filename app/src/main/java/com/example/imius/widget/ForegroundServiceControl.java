@@ -1,5 +1,8 @@
 package com.example.imius.widget;
 
+import static android.widget.RemoteViews.*;
+import static com.example.imius.MyApplication.*;
+
 import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -12,15 +15,22 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.session.MediaSession;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.support.v4.media.session.MediaSessionCompat;
+import android.widget.RemoteViews;
 
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import com.example.imius.MyApplication;
 import com.example.imius.R;
+import com.example.imius.activity.PlayMusicActivity;
 import com.example.imius.constants.Constants;
 import com.example.imius.model.FavoriteSong;
+import com.example.imius.model.HistorySong;
 import com.example.imius.model.Song;
 import com.example.imius.model.SongLibraryPlaylist;
 import com.squareup.picasso.Picasso;
@@ -47,9 +57,9 @@ public class ForegroundServiceControl extends Service {
     private ArrayList<Song> songArrayList = new ArrayList<>();
     private ArrayList<SongLibraryPlaylist> songLibraryPlaylistArrayList = new ArrayList<>();
     private ArrayList<FavoriteSong> favoriteSongArrayList = new ArrayList<>();
+    private ArrayList<HistorySong> historySongArrayList = new ArrayList<>();
 
     private int positionPlayer = 0, duration = 0, seekToTime = 0, currentTime = 0;
-
 
     @Nullable
     @Override
@@ -64,37 +74,53 @@ public class ForegroundServiceControl extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+
         if (intent != null){
+        //    sendNotificationMedia(songArrayList.get(positionPlayer).getNameSong(), songArrayList.get(positionPlayer).getNameSinger());
 
-            if (intent.hasExtra(getResources().getString(R.string.obj_song))){
+            if (intent.hasExtra("obj_song")){
                 clearArray();
-                songArrayList = intent.getParcelableArrayListExtra(getResources().getString(R.string.obj_song));
+                songArrayList = intent.getParcelableArrayListExtra("obj_song");
 
-            } else if (intent.hasExtra(getResources().getString(R.string.obj_song_library))){
+            }
+            if (intent.hasExtra("obj_song_library")){
                 clearArray();
-                songLibraryPlaylistArrayList = intent.getParcelableArrayListExtra(getResources().getString(R.string.obj_song_library));
+                songLibraryPlaylistArrayList = intent.getParcelableArrayListExtra("obj_song_library");
 
-            } else if (intent.hasExtra(getResources().getString(R.string.obj_song_favorite))){
+            }
+            if (intent.hasExtra("obj_song_favorite")){
                 clearArray();
-                favoriteSongArrayList = intent.getParcelableArrayListExtra(getResources().getString(R.string.obj_song_favorite));
+                favoriteSongArrayList = intent.getParcelableArrayListExtra("obj_song_favorite");
 
+            }
+            if (intent.hasExtra("obj_song_history")){
+                clearArray();
+                historySongArrayList = intent.getParcelableArrayListExtra("obj_song_history");
             }
         }
 
         assert intent != null;
-        if (!intent.hasExtra(getResources().getString(R.string.action_music_service))){
+        if (!intent.hasExtra("action_music_service")){
             completeAndStart();
         }
 
-        int actionMusic = intent.getIntExtra(getResources().getString(R.string.action_music_service), 0);
+        int actionMusic = intent.getIntExtra("action_music_service", 0);
 
-        seekToTime = intent.getIntExtra(getResources().getString(R.string.duration), 0);
-        isRepeat = intent.getBooleanExtra(getResources().getString(R.string.repeat_music), false);
-        isRandom = intent.getBooleanExtra(getResources().getString(R.string.random_music), false);
+        seekToTime = intent.getIntExtra("duration", 0);
+        isRepeat = intent.getBooleanExtra("repeat_music", false);
+        isRandom = intent.getBooleanExtra("random_music", false);
 
         handleActionMusic(actionMusic);
 
         return START_NOT_STICKY;
+    }
+
+    private void clearArray() {
+        positionPlayer = 0;
+        songArrayList.clear();
+        songLibraryPlaylistArrayList.clear();
+        favoriteSongArrayList.clear();
+        historySongArrayList.clear();
     }
 
     private void handleActionMusic(int actionMusic) {
@@ -111,6 +137,10 @@ public class ForegroundServiceControl extends Service {
                 } else if (favoriteSongArrayList != null && favoriteSongArrayList.size() > 0){
                     pauseMusic(favoriteSongArrayList.get(positionPlayer).getNameSong(),
                             favoriteSongArrayList.get(positionPlayer).getNameSinger());
+
+                } else if (historySongArrayList != null && historySongArrayList.size() > 0){
+                    pauseMusic(historySongArrayList.get(positionPlayer).getNameSong(),
+                            historySongArrayList.get(positionPlayer).getNameSinger());
                 }
                 break;
 
@@ -126,6 +156,10 @@ public class ForegroundServiceControl extends Service {
                 } else if (favoriteSongArrayList != null && favoriteSongArrayList.size() > 0){
                     resumeMusic(favoriteSongArrayList.get(positionPlayer).getNameSong(),
                             favoriteSongArrayList.get(positionPlayer).getNameSinger());
+
+                }else if (historySongArrayList != null && historySongArrayList.size() > 0){
+                    resumeMusic(historySongArrayList.get(positionPlayer).getNameSong(),
+                            historySongArrayList.get(positionPlayer).getNameSinger());
                 }
                 break;
             case ACTION_NEXT:
@@ -136,6 +170,9 @@ public class ForegroundServiceControl extends Service {
                     nextMusic(songLibraryPlaylistArrayList.size());
 
                 } else if (favoriteSongArrayList != null && favoriteSongArrayList.size() > 0){
+                    nextMusic(favoriteSongArrayList.size());
+
+                } else if (historySongArrayList != null && historySongArrayList.size() > 0){
                     nextMusic(favoriteSongArrayList.size());
                 }
                 completeAndStart();
@@ -150,72 +187,18 @@ public class ForegroundServiceControl extends Service {
 
                 } else if (favoriteSongArrayList != null && favoriteSongArrayList.size() > 0){
                     previousMusic(favoriteSongArrayList.size());
+
+                }else if (historySongArrayList != null && historySongArrayList.size() > 0){
+                    previousMusic(historySongArrayList.size());
                 }
                 completeAndStart();
                 break;
+
             case ACTION_DURATION:
                 mediaPlayer.seekTo(seekToTime);
                 break;
         }
 
-    }
-
-    private void completeAndStart() {
-        if (songArrayList != null && songArrayList.size() > 0){
-            startMusic(songArrayList.get(positionPlayer).getLinkSong());
-            songImage = songArrayList.get(positionPlayer).getImgSong();
-            sendNotificationMedia(songArrayList.get(positionPlayer).getNameSong(),songArrayList.get(positionPlayer).getNameSinger());
-
-        } else if (songLibraryPlaylistArrayList != null && songLibraryPlaylistArrayList.size() > 0){
-            startMusic(songLibraryPlaylistArrayList.get(positionPlayer).getLinkSong());
-            songImage = songLibraryPlaylistArrayList.get(positionPlayer).getImageSong();
-            sendNotificationMedia(songArrayList.get(positionPlayer).getNameSong(), songArrayList.get(positionPlayer).getNameSinger());
-
-        } else if (favoriteSongArrayList != null && favoriteSongArrayList.size() > 0){
-            startMusic(favoriteSongArrayList.get(positionPlayer).getLinkSong());
-            songImage = favoriteSongArrayList.get(positionPlayer).getImageSong();
-            sendNotificationMedia(favoriteSongArrayList.get(positionPlayer).getNameSong(),favoriteSongArrayList.get(positionPlayer).getNameSinger());
-
-        }
-    }
-    private void sendNotificationMedia(String nameSong, String nameSinger) {
-        MediaSession mediaSession = new MediaSession(this, "tag");
-        Notification.Builder notificationBuilder = new Notification.Builder(this, Constants.CHANNEL_ID);
-
-        notificationBuilder.setSmallIcon(R.drawable.ic_note)
-                .setContentText("iMius")
-                .setContentTitle(nameSong)
-                .setContentText(nameSinger)
-                .addAction(R.drawable.ic_back_song, "Previous", getPendingIntent(this, ACTION_PREVIOUS));
-
-        if (isPlaying){
-            notificationBuilder.addAction(R.drawable.ic_pause_button,"Pause", getPendingIntent(this, ACTION_PAUSE));
-
-        } else {
-            notificationBuilder.addAction(R.drawable.ic_play_button, "Pause", getPendingIntent(this, Constants.ACTION_RESUME));
-        }
-
-        notificationBuilder.addAction(R.drawable.ic_next_song, "Next" , getPendingIntent(this,Constants.ACTION_NEXT));
-
-        Picasso.get().load(songImage).into(new Target() {
-            @Override
-            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                notificationBuilder.setLargeIcon(bitmap);
-            }
-
-            @Override
-            public void onBitmapFailed(Exception e, Drawable errorDrawable) {
-
-            }
-
-            @Override
-            public void onPrepareLoad(Drawable placeHolderDrawable) {
-
-            }
-        });
-
-        Notification notification = notificationBuilder.build();
-        startForeground(1, notification);
     }
 
     private void startMusic(String songLink){
@@ -229,8 +212,28 @@ public class ForegroundServiceControl extends Service {
 
         isPlaying = true;
         duration = mediaPlayer.getDuration();
-        sendActionToPlayMusicActivity(ACTION_PREVIOUS);
+        sendActionToPlayMusicActivity(ACTION_RESUME);
         sendTimeCurrent();
+    }
+
+    private void resumeMusic(String nameSong, String nameSinger) {
+        if (mediaPlayer != null && !isPlaying){
+
+            mediaPlayer.start();
+            isPlaying = true;
+            sendNotificationMedia(nameSong, nameSinger);
+            sendActionToPlayMusicActivity(ACTION_RESUME);
+        }
+    }
+
+    private void pauseMusic(String nameSong, String nameSinger) {
+        if (mediaPlayer != null && isPlaying){
+
+            mediaPlayer.pause();
+            isPlaying = false;
+            sendNotificationMedia(nameSong, nameSinger);
+            sendActionToPlayMusicActivity(ACTION_PAUSE);
+        }
     }
 
     private void nextMusic(int size) {
@@ -244,7 +247,7 @@ public class ForegroundServiceControl extends Service {
         if (positionPlayer >= size){
             positionPlayer = 0;
         }
-        sendActionToPlayMusicActivity(Constants.ACTION_NEXT);
+        sendActionToPlayMusicActivity(ACTION_NEXT);
     }
 
     private void previousMusic(int size){
@@ -261,28 +264,83 @@ public class ForegroundServiceControl extends Service {
         sendActionToPlayMusicActivity(ACTION_PREVIOUS);
     }
 
-    private void resumeMusic(String nameSong, String nameSinger) {
+    private void completeAndStart() {
+        if (songArrayList != null && songArrayList.size() > 0){
+            startMusic(songArrayList.get(positionPlayer).getLinkSong());
+            songImage = songArrayList.get(positionPlayer).getImgSong();
+            sendNotificationMedia(songArrayList.get(positionPlayer).getNameSong(),
+                    songArrayList.get(positionPlayer).getNameSinger());
 
-        if (mediaPlayer != null && !isPlaying){
+        } else if (songLibraryPlaylistArrayList != null && songLibraryPlaylistArrayList.size() > 0){
+            startMusic(songLibraryPlaylistArrayList.get(positionPlayer).getLinkSong());
+            songImage = songLibraryPlaylistArrayList.get(positionPlayer).getImageSong();
+            sendNotificationMedia(songLibraryPlaylistArrayList.get(positionPlayer).getNameSong(),
+                    songLibraryPlaylistArrayList.get(positionPlayer).getNameSinger());
 
-            mediaPlayer.start();
-            isPlaying = true;
-            sendNotificationMedia(nameSong, nameSinger);
-            sendActionToPlayMusicActivity(ACTION_RESUME);
+        } else if (favoriteSongArrayList != null && favoriteSongArrayList.size() > 0){
+            startMusic(favoriteSongArrayList.get(positionPlayer).getLinkSong());
+            songImage = favoriteSongArrayList.get(positionPlayer).getImageSong();
+            sendNotificationMedia(favoriteSongArrayList.get(positionPlayer).getNameSong(),
+                    favoriteSongArrayList.get(positionPlayer).getNameSinger());
+
+        } else if (historySongArrayList != null && favoriteSongArrayList.size() > 0){
+            startMusic(historySongArrayList.get(positionPlayer).getLinkSong());
+            songImage = historySongArrayList.get(positionPlayer).getImageSong();
+            sendNotificationMedia(historySongArrayList.get(positionPlayer).getNameSong(),
+                    historySongArrayList.get(positionPlayer).getNameSinger());
         }
     }
 
-    private void pauseMusic(String nameSong, String nameSinger) {
+    private void sendNotificationMedia(String nameSong, String nameSinger) {
+        MediaSessionCompat mediaSession = new MediaSessionCompat(this, "tag");
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID);
+        builder.setSmallIcon(R.drawable.ic_note)
+                .setContentText("iMius")
+                .setContentTitle(nameSong)
+                .setContentText(nameSinger)
+                .setStyle(new androidx.media.app.NotificationCompat.MediaStyle()
+                        .setShowActionsInCompactView(0,1,2)
+                        .setMediaSession(mediaSession.getSessionToken()))
+                .addAction(R.drawable.ic_back_song_for_noti, "Previous",getPendingIntent(this, ACTION_PREVIOUS));
 
-        if (mediaPlayer != null && isPlaying){
-
-            mediaPlayer.pause();
-            isPlaying = false;
-            sendNotificationMedia(nameSong, nameSinger);
-            sendActionToPlayMusicActivity(ACTION_PAUSE);
+        if (isPlaying){
+            builder
+                    .addAction(R.drawable.ic_play_button,"Pause", getPendingIntent(this, ACTION_PAUSE));
+        } else {
+            builder
+                    .addAction(R.drawable.ic_pause_button,"Play", getPendingIntent(this, ACTION_RESUME));
         }
+
+        builder.addAction(R.drawable.ic_next_song, "Next" , getPendingIntent(this,Constants.ACTION_NEXT));
+
+        Picasso.get().load(songImage).into(new Target() {
+            @Override
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                builder.setLargeIcon(bitmap);
+            }
+
+            @Override
+            public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+
+            }
+
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+            }
+        });
+
+        Notification notification = builder.build();
+        startForeground(1, notification);
     }
 
+    private PendingIntent getPendingIntent(Context context, int action){
+        Intent intent = new Intent(this, BroadcastReceiverAction.class);
+        intent.putExtra("action_music", action);
+        return PendingIntent.getBroadcast(context.getApplicationContext(), action, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+    }
+
+    @SuppressWarnings("deprecation")
     private void sendTimeCurrent(){
         if (mediaPlayer != null){
             currentTime = mediaPlayer.getCurrentPosition();
@@ -299,21 +357,15 @@ public class ForegroundServiceControl extends Service {
         }
     }
 
-    private void clearArray() {
-        positionPlayer = 0;
-        songArrayList.clear();
-        songLibraryPlaylistArrayList.clear();
-        favoriteSongArrayList.clear();
-    }
+    private void sendActionToPlayMusicActivity(int action) {
 
-    private void sendActionToPlayMusicActivity(int actionPrevious) {
+        if (songArrayList != null || songLibraryPlaylistArrayList != null || favoriteSongArrayList != null
+            || historySongArrayList != null){
 
-        if (songArrayList != null || songLibraryPlaylistArrayList != null || favoriteSongArrayList != null){
-
-            Intent intent = new Intent(getResources().getString(R.string.send_data_to_activity));
+            Intent intent = new Intent("send_data_to_activity");
 
             intent.putExtra(getResources().getString(R.string.status_player), isPlaying);
-            intent.putExtra(getResources().getString(R.string.action_music), actionPrevious);
+            intent.putExtra(getResources().getString(R.string.action_music), action);
             intent.putExtra(getResources().getString(R.string.position_music), positionPlayer);
             intent.putExtra(getResources().getString(R.string.duration_music), duration);
             intent.putExtra(getResources().getString(R.string.seek_to_music), currentTime);
@@ -325,14 +377,12 @@ public class ForegroundServiceControl extends Service {
     public void onDestroy() {
         super.onDestroy();
         mediaPlayer.stop();
+
     }
 
-    private PendingIntent getPendingIntent(Context context, int action){
-        Intent intent = new Intent(this, BroadcastReceiverAction.class);
-        intent.putExtra(getResources().getString(R.string.action_music), action);
-        return  PendingIntent.getBroadcast(context.getApplicationContext(), action, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-    }
 
+    @SuppressWarnings("deprecation")
+    @SuppressLint("StaticFieldLeak")
     class PlayMP3 extends AsyncTask<String, Void, String> {
 
         @Override
@@ -350,8 +400,17 @@ public class ForegroundServiceControl extends Service {
                 mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                     @Override
                     public void onCompletion(MediaPlayer mediaPlayer) {
-                        mediaPlayer.stop();
-                        mediaPlayer.reset();
+
+                        if (songArrayList != null && songArrayList.size() > 0){
+                            nextMusic(songArrayList.size());
+                        } else if (songLibraryPlaylistArrayList != null && songLibraryPlaylistArrayList.size() > 0){
+                            nextMusic(songLibraryPlaylistArrayList.size());
+                        } else if (favoriteSongArrayList != null && favoriteSongArrayList.size() > 0){
+                            nextMusic(favoriteSongArrayList.size());
+                        } else if (historySongArrayList != null && historySongArrayList.size() > 0){
+                            nextMusic(historySongArrayList.size());
+                        }
+                        completeAndStart();
                     }
                 });
 

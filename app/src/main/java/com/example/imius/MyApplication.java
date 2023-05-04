@@ -16,7 +16,6 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         DataLocalManager.init(getApplicationContext());
-    
         createNotificationChannel();
     }
 
@@ -30,7 +29,7 @@ public class MyApplication extends Application {
                 manager.createNotificationChannel(channel);
             }
         }
-        
+
     }
     
 }

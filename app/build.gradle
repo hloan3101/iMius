@@ -70,4 +70,5 @@ dependencies {
     implementation "androidx.media:media:1.4.3"
 
     implementation 'io.github.muddz:styleabletoast:2.4.0'
+    implementation 'androidx.work:work-runtime:2.7.1'
 }
