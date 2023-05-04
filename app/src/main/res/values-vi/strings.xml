@@ -16,7 +16,7 @@
     <string name="play_list">Danh sách phát</string>
     <string name="singer">Nghê sĩ</string>
     <string name="trending">Thịnh hành</string>
-    <string name="popularity">Phổ biến</string>
+    <string name="new_release">Mới phát hành</string>
     <string name="theme">Chủ đề</string>
     <string name="charts">Bảng xếp hạng</string>
     <string name="enter_name_for_your_playlist">Nhập tên cho danh sách nghe của bạn</string>
@@ -47,7 +47,6 @@
     <string name="end_email">Cảm ơn!</string>
     <string name="code_error">Mã code không đúng</string>
     <string name="email_format_error">Email không đúng định dạng</string>
-    <string name="email_pattern">Định dạng Email</string>
     <string name="library_playlist_name_exits">Tên danh sách phát đã tồn tại!</string>
     <string name="library_playlist_insert_success">Thêm danh sách phát thành công!</string>
     <string name="library_playlist_insert_failed">Thêm danh sách phát không thành công!</string>
@@ -71,4 +70,6 @@
     <string name="update_faild">Cập nhật khoonng thành công!</string>
     <string name="cannot_find">Không tìm thấy!</string>
     <string name="network_disconnected">Không có Internet!</string>
+    <string name="continue_continue">TIẾP TỤC</string>
+    <string name="format_error">Lỗi định dạng</string>
 </resources>

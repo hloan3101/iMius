@@ -21,8 +21,8 @@
     <string name="play_list">Play list</string>
     <string name="singer">Singer</string>
     <string name="trending">Trending</string>
-    <string name="popularity">Popularity</string>
-    <string name="theme">Theme</string>
+    <string name="new_release">New release</string>
+    <string name="theme">Topic</string>
     <string name="charts">Charts</string>
     <string name="song_name" translatable="false">------</string>
     <string name="singer_name" translatable="false">----</string>
@@ -60,7 +60,9 @@
     <string name="end_email">Thank you!</string>
     <string name="code_error">Code error</string>
     <string name="email_format_error">Email invalidate</string>
-    <string name="email_pattern">Email pattern</string>
+    <string name="format_error">Format Error</string>
+    <string name="email_pattern" translatable="false">[a-zA-Z][\\w-]+@([\\w]+\\.[\\w]+|[\\w]+\\.[\\w]{2,}\\.[\\w]{2,})
+    </string>
     <string name="email_server" translatable="false">imiusg@gmail.com</string>
     <string name="password_email_server" translatable="false">cwoaqfrumgvhqnsz</string>
 
@@ -107,4 +109,5 @@
     <string name="update_faild">Update failed</string>
     <string name="cannot_find">Cannot find</string>
     <string name="network_disconnected">Network disconnected</string>
+    <string name="continue_continue">CONTINUE</string>
 </resources>

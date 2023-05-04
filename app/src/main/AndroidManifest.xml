@@ -75,8 +75,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".activity.LoginActivity"
-            android:exported="true"></activity>
+            android:name=".activity.LoginActivity"/>
 
         <service android:name=".widget.ForegroundServiceControl"/>
         <receiver android:name=".widget.BroadcastReceiverAction"/>

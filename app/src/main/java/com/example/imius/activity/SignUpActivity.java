@@ -29,6 +29,7 @@ import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
+import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
@@ -71,52 +72,6 @@ public class SignUpActivity extends AppCompatActivity {
 
                     if (check){
                         resetError();
-//                        Random random = new Random();
-//                        code = random.nextInt(8999)+1000;
-//
-//                        String stringHost = "smtp.gmail.com";
-//
-//                        Properties properties = System.getProperties();
-//                        properties.put("mail.smtp.host", stringHost);
-//                        properties.put("mail.smtp.port", "465");
-//                        properties.put("mail.smtp.ssl.enable", "true");
-//                        properties.put("mail.smtp.auth", "true");
-//
-//                        javax.mail.Session session = Session.getInstance(properties, new Authenticator() {
-//                            @Override
-//                            protected PasswordAuthentication getPasswordAuthentication() {
-//                                return new PasswordAuthentication(getResources().getString(R.string.email_server),
-//                                        getResources().getString(R.string.password_email_server));
-//                            }
-//                        });
-//
-//                        MimeMessage mimeMessage = new MimeMessage(session);
-//
-//                        try {
-//                            mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(
-//                                    binding.activitySignupEtEmail.getText().toString().trim()));
-//
-//                            mimeMessage.setSubject(getResources().getString(R.string.subject_email));
-//                            mimeMessage.setText(getResources().getString(R.string.hello_email)+ "\n\n" +
-//                                    getResources().getString(R.string.content_email) +  code + "\n\n" +
-//                                    getResources().getString(R.string.end_email));
-//
-//                            Thread thread = new Thread(new Runnable() {
-//                                @Override
-//                                public void run() {
-//                                    try {
-//                                        Transport.send(mimeMessage);
-//                                    } catch (MessagingException e) {
-//                                        throw new RuntimeException(e);
-//                                    }
-//                                }
-//                            });
-//
-//                            thread.start();
-//                        } catch (MessagingException e) {
-//                            throw new RuntimeException(e);
-//                        }
-
                         Random random = new Random();
                         code = random.nextInt(8999)+1000;
 
@@ -131,7 +86,7 @@ public class SignUpActivity extends AppCompatActivity {
                         javax.mail.Session session = Session.getInstance(properties, new Authenticator() {
                             @Override
                             protected PasswordAuthentication getPasswordAuthentication() {
-                                return new PasswordAuthentication("imiusg@gmail.com",
+                                return new PasswordAuthentication(getResources().getString(R.string.email_server),
                                         getResources().getString(R.string.password_email_server));
                             }
                         });
@@ -142,17 +97,16 @@ public class SignUpActivity extends AppCompatActivity {
                             mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(
                                     binding.activitySignupEtEmail.getText().toString().trim()));
 
-                            mimeMessage.setSubject("IMIUS CODE VERIFICATION");
-                            mimeMessage.setText("Hello, "+ "\n\n" +
-                                    "iMius sent you an OTP for email verification: " +  code + "\n\n" +
-                                    "Thank you!");
+                            mimeMessage.setSubject(getResources().getString(R.string.subject_email));
+                            mimeMessage.setText(getResources().getString(R.string.hello_email)+ "\n\n" +
+                                    getResources().getString(R.string.content_email) +  code + "\n\n" +
+                                    getResources().getString(R.string.end_email));
 
                             Thread thread = new Thread(new Runnable() {
                                 @Override
                                 public void run() {
                                     try {
-                                        //Transport.send(mimeMessage);
-                                        javax.mail.Transport.send(mimeMessage);
+                                        Transport.send(mimeMessage);
                                     } catch (MessagingException e) {
                                         throw new RuntimeException(e);
                                     }
@@ -163,6 +117,7 @@ public class SignUpActivity extends AppCompatActivity {
                         } catch (MessagingException e) {
                             throw new RuntimeException(e);
                         }
+
                     }
                 }
         });
@@ -226,6 +181,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         if (TextUtils.isEmpty(binding.activitySignupEtConfirmCode.getText().toString().trim())){
             binding.activitySignupEtConfirmCode.setError(getResources().getString(R.string.require));
+            check = false;
         }else{
             if(Integer.parseInt(binding.activitySignupEtConfirmCode.getText().toString().trim()) != code) {
                 binding.activitySignupEtConfirmCode.setError(getResources().getString(R.string.code_error));
