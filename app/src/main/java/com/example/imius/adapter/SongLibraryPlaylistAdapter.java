@@ -44,7 +44,7 @@ public class SongLibraryPlaylistAdapter extends RecyclerView.Adapter<SongLibrary
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
 
-        View view = layoutInflater.inflate(R.layout.item_playlist, parent, false);
+        View view = layoutInflater.inflate(R.layout.item_search, parent, false);
 
         return new ViewHolder(view);
     }
@@ -61,12 +61,13 @@ public class SongLibraryPlaylistAdapter extends RecyclerView.Adapter<SongLibrary
                 songLibraryPlaylist.getImageSong(), songLibraryPlaylist.getNameSinger(),
                 songLibraryPlaylist.getLinkSong()));
 
-        holder.tvNameSong.setText(songLibraryPlaylist.getNameSong());
-        holder.tvNameSinger.setText(songLibraryPlaylist.getNameSinger());
-        Picasso.get().load(songLibraryPlaylist.getImageSong()).into(holder.imgSong);
+        holder.tvIndex.setText(position + 1 + "");
+        holder.tvNameOfSong.setText(songLibraryPlaylist.getNameSong());
+        holder.tvSinger.setText(songLibraryPlaylist.getNameSinger());
+        Picasso.get().load(songLibraryPlaylist.getImageSong()).into(holder.imgImageOfSong);
         checkLikeSong(holder, songLibraryPlaylist);
 
-        holder.btnLike.setOnClickListener(new View.OnClickListener() {
+        holder.imgLoveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setBtnLike(holder, songLibraryPlaylist);
@@ -85,9 +86,9 @@ public class SongLibraryPlaylistAdapter extends RecyclerView.Adapter<SongLibrary
                         if (response.body() != null){
                         //    Toast.makeText(context, response.body().getIsSuccess(), Toast.LENGTH_LONG).show();
                             if (response.body().getIsSuccess().equals(Constants.successfully)){
-                                holder.btnLike.setImageResource(R.drawable.ic_loved);
+                                holder.imgLoveButton.setImageResource(R.drawable.ic_loved);
                             }else {
-                                holder.btnLike.setImageResource(R.drawable.ic_love);
+                                holder.imgLoveButton.setImageResource(R.drawable.ic_love);
                             }
                         }
                     }
@@ -111,10 +112,10 @@ public class SongLibraryPlaylistAdapter extends RecyclerView.Adapter<SongLibrary
                             if (response.body().getIsSuccess().equals(Constants.successfully)){
                                 if (response.body().getMessage().equals(Constants.DELETE)){
                                     deleteLikeSong(songLibraryPlaylist.getIdSong());
-                                    holder.btnLike.setImageResource(R.drawable.ic_love);
+                                    holder.imgLoveButton.setImageResource(R.drawable.ic_love);
                                 }else {
                                     updateNumberOfLike(songLibraryPlaylist);
-                                    holder.btnLike.setImageResource(R.drawable.ic_loved);
+                                    holder.imgLoveButton.setImageResource(R.drawable.ic_loved);
                                 }
                             }
                         }
@@ -193,22 +194,23 @@ public class SongLibraryPlaylistAdapter extends RecyclerView.Adapter<SongLibrary
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        private ConstraintLayout layoutItem;
-        private TextView tvNameSong;
-        private TextView tvNameSinger;
-        private ImageView imgSong;
-
-        private ImageView btnLike;
+        private ImageView imgImageOfSong;
+        private TextView tvNameOfSong;
+        private TextView tvIndex, tvSinger;
+        public ImageView imgLoveButton;
+        public ConstraintLayout constraintLayout;
 
         private Song song;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
       //      layoutItem = itemView.findViewById(R.id.item_playlist);
-            tvNameSong = itemView.findViewById(R.id.item_playlist_tv_name_of_song);
-            tvNameSinger = itemView.findViewById(R.id.item_playlist_tv_name_of_singer);
-            imgSong = itemView.findViewById(R.id.item_playlist_iv_image_of_song);
-            btnLike = itemView.findViewById(R.id.item_playlist_iv_love);
+            tvIndex = itemView.findViewById(R.id.item_search_tv_index_song);
+            imgImageOfSong = itemView.findViewById(R.id.item_search_iv_image_of_song);
+            imgLoveButton = itemView.findViewById(R.id.item_search_iv_love);
+            tvNameOfSong = itemView.findViewById(R.id.item_search_tv_name_of_song);
+            tvSinger = itemView.findViewById(R.id.item_search_tv_name_of_singer);
+            constraintLayout = itemView.findViewById(R.id.item_search_constraint_layout);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
