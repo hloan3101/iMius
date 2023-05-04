@@ -19,44 +19,51 @@
             android:id="@+id/item_search_tv_index_song"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:textColor="@color/black"
+            android:layout_marginEnd="12dp"
             android:text="1"
-
-            app:layout_constraintEnd_toStartOf="@+id/item_search_iv_image_of_song"
-            android:layout_marginEnd="20dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/item_search_cardview"
             app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="30dp"
             tools:ignore="MissingConstraints" />
 
-        <ImageView
-            android:id="@+id/item_search_iv_image_of_song"
+        <androidx.cardview.widget.CardView
+            android:id="@id/item_search_cardview"
             android:layout_width="65dp"
             android:layout_height="65dp"
-            android:layout_marginStart="40dp"
+            android:layout_marginStart="35dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:scaleType="fitXY"
+            app:cardCornerRadius="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            tools:src="@drawable/ic_some_item_avt" />
+            app:layout_constraintVertical_bias="0.0">
+
+            <ImageView
+                android:id="@+id/item_search_iv_image_of_song"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                tools:src="@drawable/ic_some_item_avt" />
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/item_search_tv_name_of_song"
-            android:layout_width="wrap_content"
+            android:layout_width="210dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="16dp"
-            android:maxWidth="250dp"
+            android:maxWidth="210dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:text="@string/name_of_song"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/item_search_iv_image_of_song"
+            app:layout_constraintStart_toEndOf="@+id/item_search_cardview"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -69,7 +76,8 @@
             android:text="@string/singer"
             android:textColor="@color/black"
             android:textSize="13sp"
-            android:textStyle="bold"app:layout_constraintStart_toEndOf="@+id/item_search_iv_image_of_song"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/item_search_cardview"
             app:layout_constraintTop_toBottomOf="@+id/item_search_tv_name_of_song" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

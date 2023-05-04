@@ -62,12 +62,12 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
                         changePassword();
                     } else {
                         resetError();
-                        binding.fragmentChangePasswordTilConfirmNewPassword.setError("Confirm password is not match !!");
+                        binding.fragmentChangePasswordTilConfirmNewPassword.setError(getString(R.string.compare_password_require));
                     }
 
                 } else {
                     resetError();
-                    binding.fragmentChangePasswordTilPassword.setError("Password is not match !!");
+                    binding.fragmentChangePasswordTilPassword.setError(getString(R.string.password_error));
                 }
             }
         });
@@ -133,7 +133,7 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
                         Intent intent = new Intent(getActivity(), LoginActivity.class);
                         startActivity(intent);
 
-                        StyleableToast.makeText(getContext(), "Update successfully",
+                        StyleableToast.makeText(getContext(), getString(R.string.update_success),
                                 Toast.LENGTH_LONG, R.style.myToast).show();
                         progressDialog.dismiss();
 

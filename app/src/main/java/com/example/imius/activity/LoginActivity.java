@@ -37,6 +37,9 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(view);
 
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        if (DataLocalManager.getCheckFromLogout()){
+            binding.activityLoginTvBack.setVisibility(View.GONE);
+        }
         initListener();
     }
 
@@ -47,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
         binding.activityLoginBtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                login();
             }
         });
@@ -82,6 +86,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                DataLocalManager.setCheckFromLogout(false);
                 startActivity(intent);
             }
         });

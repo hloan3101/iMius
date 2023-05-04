@@ -1,13 +1,13 @@
 package com.example.imius.fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -42,7 +42,6 @@ public class ProfileFragment extends Fragment{
 
 
     public void init(){
-
         binding.fragmentProfileTvUsername.setText(DataLocalManager.getNameData());
         if (DataLocalManager.getNameData().equals("")){
             binding.fragmentProfileTvUsername.setText(DataLocalManager.getUsernameData());
@@ -93,9 +92,12 @@ public class ProfileFragment extends Fragment{
         binding.fragmentProfileBtnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), LoginActivity.class);
-                DataLocalManager.clearDataLocal();
-                startActivity(intent);
+                if (!DataLocalManager.getCheckLogin()){
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
+                }else {
+                    showDialogLogout();
+                }
             }
         });
 
@@ -130,5 +132,33 @@ public class ProfileFragment extends Fragment{
         ft.commit();
     }
 
+    private void showDialogLogout(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
+        builder.setTitle(getString(R.string.title_dialog));
+        builder.setMessage(getString(R.string.dialog_logout));
+        builder.setCancelable(false);
+
+        builder.setPositiveButton(getString(R.string.yes_dialog),
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(getContext(), LoginActivity.class);
+                        DataLocalManager.clearDataLocal();
+                        DataLocalManager.setCheckFromLogout(true);
+                        startActivity(intent);
+                    }
+                });
+
+        builder.setNegativeButton(getString(R.string.no_dialog),
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
 }

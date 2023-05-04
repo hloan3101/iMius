@@ -27,7 +27,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ForgetPasswordFragment extends Fragment implements View.OnClickListener{
+public class ForgetPasswordFragment extends Fragment{
 
     private FragmentForgetPasswordBinding binding;
     private UserViewModel viewModel;
@@ -61,7 +61,6 @@ public class ForgetPasswordFragment extends Fragment implements View.OnClickList
 
                     forgetPassword();
                 } else {
-
                     binding.fragmentForgetPasswordTilConfirmNewPassword.setError("Password is not match !!");
                 }
             }
@@ -124,9 +123,4 @@ public class ForgetPasswordFragment extends Fragment implements View.OnClickList
 
     }
 
-
-    @Override
-    public void onClick(View view) {
-
-    }
 }
