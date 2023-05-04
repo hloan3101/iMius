@@ -34,6 +34,7 @@ public class LibraryPlaylistAdapter extends RecyclerView.Adapter<LibraryPlaylist
 
     private Context context;
     private List<LibraryPlaylist> playlistLibraryList;
+    private String image;
 
     public LibraryPlaylistAdapter(Context context){
         this.context = context;
@@ -65,8 +66,8 @@ public class LibraryPlaylistAdapter extends RecyclerView.Adapter<LibraryPlaylist
             @Override
             public void onResponse(Call<List<SongLibraryPlaylist>> call, Response<List<SongLibraryPlaylist>> response) {
                 if (response.body().size() > 0) {
-
                     Picasso.get().load(response.body().get(response.body().size() -1).getImageSong()).into(holder.imgPlaylistLibrary);
+                    setImage(response.body().get(response.body().size() -1).getImageSong());
                 }
             }
 
@@ -84,6 +85,10 @@ public class LibraryPlaylistAdapter extends RecyclerView.Adapter<LibraryPlaylist
         });
     }
 
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     private void callPlaylistActivity (LibraryPlaylist libraryPlaylist){
         DataLocalManager.setIdLibraryPlaylist(libraryPlaylist.getIdLibraryPlaylist());
 
@@ -92,7 +97,7 @@ public class LibraryPlaylistAdapter extends RecyclerView.Adapter<LibraryPlaylist
         Bundle bundle =  new Bundle();
         bundle.putInt("idLibraryPlaylist", libraryPlaylist.getIdLibraryPlaylist());
         bundle.putString("nameLibraryPlaylist", libraryPlaylist.getNameLibraryPlaylist());
-        bundle.putString("imgPlaylistLibrary", libraryPlaylist.getImageLibraryPlaylist());
+        bundle.putString("imgPlaylistLibrary", image);
 
         intent.putExtras(bundle);
 
