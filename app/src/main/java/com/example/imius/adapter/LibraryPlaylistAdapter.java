@@ -34,7 +34,6 @@ public class LibraryPlaylistAdapter extends RecyclerView.Adapter<LibraryPlaylist
 
     private Context context;
     private List<LibraryPlaylist> playlistLibraryList;
-    private String image;
 
     public LibraryPlaylistAdapter(Context context){
         this.context = context;
@@ -59,16 +58,18 @@ public class LibraryPlaylistAdapter extends RecyclerView.Adapter<LibraryPlaylist
         }
         holder.tvNamePlaylistLibrary.setText(playlistLibrary.getNameLibraryPlaylist());
     //    Picasso.get().load(playlistLibrary.getImageLibraryPlaylist()).into(holder.imgPlaylistLibrary);
-
-        DataService dataService = API.getAccount().create(DataService.class);
+               DataService dataService = API.getAccount().create(DataService.class);
 
         dataService.getSongLibraryPlaylistList(playlistLibrary.getIdLibraryPlaylist()).enqueue(new Callback<List<SongLibraryPlaylist>>() {
             @Override
             public void onResponse(Call<List<SongLibraryPlaylist>> call, Response<List<SongLibraryPlaylist>> response) {
-                if (response.body().size() > 0) {
-                    Picasso.get().load(response.body().get(response.body().size() -1).getImageSong()).into(holder.imgPlaylistLibrary);
-                    setImage(response.body().get(response.body().size() -1).getImageSong());
+                if (response.body() != null){
+                    if (response.body().size() > 0) {
+                        Picasso.get().load(response.body().get(response.body().size() -1).getImageSong()).into(holder.imgPlaylistLibrary);
+                        playlistLibrary.setImageLibraryPlaylist(response.body().get(response.body().size() -1).getImageSong());
+                    }
                 }
+
             }
 
             @Override
@@ -81,12 +82,9 @@ public class LibraryPlaylistAdapter extends RecyclerView.Adapter<LibraryPlaylist
             @Override
             public void onClick(View v) {
                 callPlaylistActivity(playlistLibrary);
+
             }
         });
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 
     private void callPlaylistActivity (LibraryPlaylist libraryPlaylist){
@@ -98,7 +96,7 @@ public class LibraryPlaylistAdapter extends RecyclerView.Adapter<LibraryPlaylist
         bundle.putInt("idLibraryPlaylist", libraryPlaylist.getIdLibraryPlaylist());
         bundle.putString("nameLibraryPlaylist", libraryPlaylist.getNameLibraryPlaylist());
 
-        bundle.putString("imgPlaylistLibrary", image);
+        bundle.putString("imgPlaylistLibrary", libraryPlaylist.getImageLibraryPlaylist());
 
         intent.putExtras(bundle);
 
