@@ -126,8 +126,8 @@ public class SearchFragment extends Fragment{
                     binding.fragmentSearchRvSearch.setVisibility(View.GONE);
                     binding.fragmentSearchCantFind.setVisibility(View.VISIBLE);
 
-                    StyleableToast.makeText(getContext(), getString(R.string.cannot_find),
-                            Toast.LENGTH_LONG, R.style.myToast).show();
+//                    StyleableToast.makeText(getContext(), getString(R.string.cannot_find),
+//                            Toast.LENGTH_LONG, R.style.myToast).show();
                 }
             }
 

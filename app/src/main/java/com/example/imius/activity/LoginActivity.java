@@ -139,9 +139,9 @@ public class LoginActivity extends AppCompatActivity {
                         StyleableToast.makeText(LoginActivity.this, getResources().
                                         getString(R.string.login_successfully),
                                 Toast.LENGTH_LONG, R.style.myToast).show();
-
                         DataLocalManager.setUsernameData(user.getUsername());
                         DataLocalManager.setPassword(user.getPassword());
+                        DataLocalManager.setNameData(response.body().getUser().getName());
                         DataLocalManager.setCheckLogin(true);
 
                         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);

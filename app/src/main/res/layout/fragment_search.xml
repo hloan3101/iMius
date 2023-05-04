@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/sky"
     tools:context=".fragment.SearchFragment">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -12,8 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:background="@drawable/bgr_search_bar">
 
         <androidx.appcompat.widget.Toolbar
