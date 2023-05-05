@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:layout_marginTop="8dp"
@@ -10,7 +10,7 @@
 
     <TextView
         android:id="@+id/item_search_tv_index_song"
-        android:layout_width="wrap_content"
+        android:layout_width="20dp"
         android:layout_height="wrap_content"
         android:maxLength="100"
         android:text="1"
@@ -25,7 +25,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/item_search_constraint_layout"
-        android:layout_width="330dp"
+        android:layout_width="315dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp">
 

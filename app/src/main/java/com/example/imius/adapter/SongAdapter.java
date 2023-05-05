@@ -81,12 +81,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
 
         holder.setSong(song);
 
-        if (checkChart){
-            holder.tvIndex.setText(position + 1 + "");
-        }
-        else {
-            holder.tvIndex.setVisibility(View.GONE);
-        }
+        holder.tvIndex.setText(position + 1 + "");
 
         holder.tvNameOfSong.setText(song.getNameSong());
         holder.tvSinger.setText(song.getNameSinger());
