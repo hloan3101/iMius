@@ -27,6 +27,7 @@ public class ChartsAdapter extends RecyclerView.Adapter<ChartsAdapter.ViewHolder
         this.context = context;
     }
 
+
     public ChartsAdapter(Context context, List<ChartsModel> chartsModelList) {
         this.context = context;
         this.chartsModelList = chartsModelList;

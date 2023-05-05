@@ -7,7 +7,7 @@
     <string name="signup_with_email">Đăng nhập với Email</string>
     <string name="confirm_password">Xác nhận mật khẩu</string>
     <string name="username">Tên tài khoản</string>
-    <string name="get_code">Lấy mã xác nhận</string>
+    <string name="get_code">Lấy mã</string>
     <string name="forget_password">Quên mật khẩu?</string>
     <string name="login_account">Bạn đã có tài khoản? Đăng nhập</string>
     <string name="confirm_code">Mã xác nhận</string>

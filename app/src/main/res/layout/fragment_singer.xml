@@ -9,7 +9,7 @@
   <TextView
       android:id="@+id/fragment_singer_tv_singer"
       android:textColor="@color/colorPrimary"
-      android:layout_width="wrap_content"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:text="@string/singer"
       android:textSize="35dp"

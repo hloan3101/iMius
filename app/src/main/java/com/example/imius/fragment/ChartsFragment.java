@@ -51,6 +51,7 @@ public class ChartsFragment extends Fragment {
             songAdapter.setListSongs((ArrayList<Song>) songs);
         });
 
+        songAdapter.setCheckChart(true);
         return view;
     }
     @Override
