@@ -18,7 +18,7 @@
     <string name="skip">SKIP</string>
     <string name="create_an_account">Create an account? Sign up</string>
 
-    <string name="play_list">Play list</string>
+    <string name="play_list">Playlist</string>
     <string name="singer">Singer</string>
     <string name="trending">Trending</string>
     <string name="new_release">New release</string>
@@ -114,4 +114,10 @@
     <string name="cannot_find">Cannot find</string>
     <string name="network_disconnected">Network disconnected</string>
     <string name="continue_continue">CONTINUE</string>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="account">Account</string>
+    <string name="playlist">Playlist</string>
+    <string name="favorite">Favorite</string>
+    <string name="history">History</string>
 </resources>

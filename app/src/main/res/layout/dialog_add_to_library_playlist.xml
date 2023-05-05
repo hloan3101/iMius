@@ -36,7 +36,7 @@
         android:id="@+id/dialog_add_to_library_playlist_til_playlist_name"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_marginTop="40dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
@@ -53,7 +53,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/dialog_add_to_library_playlist_et_playlist_name"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="match_parent"
             android:inputType="textPersonName"
             android:textColor="@color/colorPrimary" />
     </com.google.android.material.textfield.TextInputLayout>

@@ -5,8 +5,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_gravity="center"
-    android:layout_marginRight="10dp"
-    android:layout_marginLeft="10dp"
+    android:layout_marginRight="12dp"
+    android:layout_marginLeft="12dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
         <de.hdodenhof.circleimageview.CircleImageView

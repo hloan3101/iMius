@@ -23,8 +23,6 @@ import java.util.ArrayList;
 
 public class ChartsFragment extends Fragment {
     private FragmentChartsBinding binding;
-    private ChartsAdapter chartsAdapter;
-    private ChartsViewModel viewModel;
     private SongAdapter songAdapter;
     private SongViewModel songViewModel;
 
