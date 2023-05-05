@@ -9,14 +9,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.example.imius.R;
-import com.example.imius.adapter.ChartsAdapter;
 import com.example.imius.adapter.SongAdapter;
 import com.example.imius.databinding.FragmentChartsBinding;
 import com.example.imius.model.Song;
-import com.example.imius.viewmodel.ChartsViewModel;
 import com.example.imius.viewmodel.SongViewModel;
 
 import java.util.ArrayList;
