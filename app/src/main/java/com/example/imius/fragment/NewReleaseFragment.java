@@ -44,11 +44,9 @@ public class NewReleaseFragment extends Fragment {
         viewModel.getNewRelease().observe(getViewLifecycleOwner(), newReleaseModels -> {
             newReleaseAdapter.setNewReleaseModelList(newReleaseModels);
         });
+
+        viewModel.refreshLivaData();
         return view;
     }
-    @Override
-    public void onResume() {
-        super.onResume();
-        viewModel.refreshLivaData();
-    }
+
 }

@@ -14,7 +14,7 @@
         android:paddingTop="20dp"
         android:text="@string/charts"
         android:textColor="@color/colorPrimary"
-        android:textSize="35dp" />
+        android:textSize="30dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fragment_charts_rv_charts"
