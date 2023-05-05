@@ -137,7 +137,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
                                 addSongLibraryPlaylist(song);
                             }
                             else {
-                                StyleableToast.makeText(context, String.valueOf(R.string.song_exist),
+                                StyleableToast.makeText(context, context.getString(R.string.song_exist),
                                         Toast.LENGTH_LONG, R.style.myToast).show();
                             }
                         }
@@ -160,10 +160,10 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
             @Override
             public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
                 if (response.body() != null) {
-                    StyleableToast.makeText(context, String.valueOf(R.string.song_insert_success),
+                    StyleableToast.makeText(context, context.getString(R.string.song_insert_success),
                             Toast.LENGTH_LONG, R.style.myToast).show();
                 }else {
-                    StyleableToast.makeText(context, String.valueOf(R.string.song_insert_failed),
+                    StyleableToast.makeText(context, context.getString(R.string.song_insert_failed),
                             Toast.LENGTH_LONG, R.style.myToast).show();
                 }
             }
@@ -372,37 +372,4 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         }
 
     }
-
-//    @Override
-//    public Filter getFilter() {
-//        return new Filter() {
-//            @Override
-//            protected FilterResults performFiltering(CharSequence charSequence) {
-//               String search = charSequence.toString();
-//               if (search.isEmpty()){
-//                   listSongs = keyOfSong;
-//               } else {
-//                   ArrayList<Song> newListSong = new ArrayList<>();
-//                   for (Song song: keyOfSong) {
-//                        if (song.getNameSong().toLowerCase().contains(search.toLowerCase())){
-//                            newListSong.add(song);
-//                        }
-//                   }
-//
-//                   listSongs = newListSong;
-//               }
-//
-//               FilterResults results = new FilterResults();
-//               results.values = listSongs;
-//
-//               return results;
-//            }
-//
-//            @Override
-//            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-//                listSongs = (ArrayList<Song>) filterResults.values;
-//                notifyDataSetChanged();
-//            }
-//        };
-//    }
 }
