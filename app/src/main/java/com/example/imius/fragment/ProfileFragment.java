@@ -147,6 +147,7 @@ public class ProfileFragment extends Fragment{
                         Intent intent = new Intent(getContext(), LoginActivity.class);
                         DataLocalManager.clearDataLocal();
                         DataLocalManager.setCheckFromLogout(true);
+                        getActivity().finish();
                         startActivity(intent);
                     }
                 });

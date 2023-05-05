@@ -57,7 +57,7 @@ public class HistoryFragment extends Fragment {
         return view;
     }
 
-    private void initView (){
+    private void initView() {
         binding.fragmentLibraryHistoryRvHistory.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new HistorySongAdapter(this.getContext());
         binding.fragmentLibraryHistoryRvHistory.setAdapter(adapter);
@@ -65,11 +65,11 @@ public class HistoryFragment extends Fragment {
         viewModel = new ViewModelProvider(getActivity()).get(HistorySongViewModel.class);
         viewModel.getHistorySongs().observe(getViewLifecycleOwner(), songs -> {
             adapter.setHistorySongs(songs);
-        //    Toast.makeText(getContext(), String.valueOf(adapter.getItemCount()), Toast.LENGTH_LONG).show();
+            //    Toast.makeText(getContext(), String.valueOf(adapter.getItemCount()), Toast.LENGTH_LONG).show();
         });
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
-                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+                ItemTouchHelper.LEFT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView,
                                   @NonNull RecyclerView.ViewHolder viewHolder,
@@ -83,35 +83,31 @@ public class HistoryFragment extends Fragment {
                 List<HistorySong> historySongs = adapter.getHistorySongs();
                 HistorySong song = historySongs.get(position);
 
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
-                if (direction == ItemTouchHelper.LEFT){
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle(getString(R.string.title_dialog));
+                builder.setMessage(getString(R.string.dialog_delete_message));
+                builder.setCancelable(false);
 
-                    builder.setTitle(getString(R.string.title_dialog));
-                    builder.setMessage(getString(R.string.dialog_delete_message));
-                    builder.setCancelable(false);
+                builder.setPositiveButton(getString(R.string.yes_dialog),
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                deleteHistorySong(song.getIdSong());
+                            }
+                        });
 
-                    builder.setPositiveButton(getString(R.string.yes_dialog),
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    deleteHistorySong(song.getIdSong());
-                                }
-                            });
+                builder.setNegativeButton(getString(R.string.no_dialog),
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                viewModel.refreshLiveData();
+                                dialogInterface.cancel();
+                            }
+                        });
 
-                    builder.setNegativeButton(getString(R.string.no_dialog),
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    viewModel.refreshLiveData();
-                                    dialogInterface.cancel();
-                                }
-                            });
-
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
-
-                }
+                AlertDialog dialog = builder.create();
+                dialog.show();
             }
         }).attachToRecyclerView(binding.fragmentLibraryHistoryRvHistory);
     }
@@ -122,11 +118,11 @@ public class HistoryFragment extends Fragment {
         repository.deleteHistorySong(idSong).enqueue(new Callback<BaseResponse>() {
             @Override
             public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
-                if (response.body().getIsSuccess().equals(Constants.successfully)){
+                if (response.body().getIsSuccess().equals(Constants.successfully)) {
                     StyleableToast.makeText(getContext(), getString(R.string.delete_success),
                             Toast.LENGTH_LONG, R.style.myToast).show();
                     viewModel.refreshLiveData();
-                }else {
+                } else {
                     StyleableToast.makeText(getContext(), getString(R.string.delete_failed),
                             Toast.LENGTH_LONG, R.style.myToast).show();
                 }

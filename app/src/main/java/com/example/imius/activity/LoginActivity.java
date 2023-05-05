@@ -50,7 +50,6 @@ public class LoginActivity extends AppCompatActivity {
         binding.activityLoginBtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                login();
             }
         });
@@ -143,8 +142,8 @@ public class LoginActivity extends AppCompatActivity {
                         DataLocalManager.setPassword(user.getPassword());
                         DataLocalManager.setNameData(response.body().getUser().getName());
                         DataLocalManager.setCheckLogin(true);
-
                         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                        finish();
                         startActivity(intent);
 
                      //   callProfileFragment();
@@ -189,5 +188,7 @@ public class LoginActivity extends AppCompatActivity {
         transaction.commit();
 
     }
+
+
 
 }

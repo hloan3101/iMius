@@ -4,7 +4,7 @@
     <string name="login">Đăng nhập</string>
     <string name="signup">Đăng ký</string>
     <string name="password">Mật khẩu</string>
-    <string name="signup_with_email">Đăng nhập với Email</string>
+    <string name="signup_with_email">Đăng ký với Email</string>
     <string name="confirm_password">Xác nhận mật khẩu</string>
     <string name="username">Tên tài khoản</string>
     <string name="get_code">Lấy mã</string>
@@ -19,7 +19,7 @@
     <string name="new_release">Mới phát hành</string>
     <string name="theme">Chủ đề</string>
     <string name="charts">Bảng xếp hạng</string>
-    <string name="enter_name_for_your_playlist">Nhập tên cho danh sách nghe của bạn</string>
+    <string name="enter_name_for_your_playlist">" Tên danh sách nghe"</string>
     <string name="enter_name_of_playlist">Nhập tên danh sách nghe</string>
     <string name="enter">Tạo</string>
     <string name="library">Thư viện</string>

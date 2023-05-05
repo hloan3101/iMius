@@ -28,7 +28,7 @@
     <string name="singer_name" translatable="false">----</string>
     <string name="runtime" translatable="false">--:--</string>
     <string name="total_time" translatable="false">--:--</string>
-    <string name="enter_name_for_your_playlist">Enter a name for your playlist</string>
+    <string name="enter_name_for_your_playlist">The name for your playlist</string>
     <string name="enter_name_of_playlist">Enter a name of playlist</string>
     <string name="enter">Enter</string>
     <string name="library">Library</string>

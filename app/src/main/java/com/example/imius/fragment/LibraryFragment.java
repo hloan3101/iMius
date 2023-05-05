@@ -59,9 +59,9 @@ public class LibraryFragment extends Fragment {
        // checkLogin();
 
         ViewPagerLibrary viewPagerLibrary = new ViewPagerLibrary(getChildFragmentManager());
-        viewPagerLibrary.addFragment(new LibraryPlaylistFragment(), "Playlist");
-        viewPagerLibrary.addFragment(new FavoriteFragment(), "Favorite");
-        viewPagerLibrary.addFragment(new HistoryFragment(), "History");
+        viewPagerLibrary.addFragment(new LibraryPlaylistFragment(), getString(R.string.playlist));
+        viewPagerLibrary.addFragment(new FavoriteFragment(), getString(R.string.favorite));
+        viewPagerLibrary.addFragment(new HistoryFragment(), getString(R.string.history));
 
         viewPager.setAdapter(viewPagerLibrary);
         tabLayout.setupWithViewPager(viewPager);

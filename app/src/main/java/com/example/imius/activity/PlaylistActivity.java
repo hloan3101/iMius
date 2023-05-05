@@ -71,19 +71,15 @@ public class PlaylistActivity extends AppCompatActivity {
         Bundle bundle = intent.getExtras();
 
         binding.activityPlaylistRvPlaylist.setLayoutManager(new LinearLayoutManager(PlaylistActivity.this));
-
-        binding.activityPlaylistRvPlaylist.setAdapter(songLibraryPlaylistAdapter);
         songLibraryPlaylistAdapter = new SongLibraryPlaylistAdapter(PlaylistActivity.this);
+        binding.activityPlaylistRvPlaylist.setAdapter(songLibraryPlaylistAdapter);
 
         if (bundle.getString("nameLibraryPlaylist") != null) {
-
 
             Picasso.get().load(bundle.getString("imgPlaylistLibrary")).into(binding.activityPlaylistIvViewSong);
             binding.activityPlaylistTvSongName.setText(bundle.getString("nameLibraryPlaylist"));
 
             //   getAllSongLibraryPlaylist();
-
-                //    Toast.makeText(getContext(), String.valueOf(adapter.getItemCount()), Toast.LENGTH_LONG).show();
             dataService.getSongLibraryPlaylistList(bundle.getInt("idLibraryPlaylist")).enqueue(new Callback<List<SongLibraryPlaylist>>() {
                 @Override
                 public void onResponse(Call<List<SongLibraryPlaylist>> call, Response<List<SongLibraryPlaylist>> response) {
@@ -250,7 +246,7 @@ public class PlaylistActivity extends AppCompatActivity {
 
     private void deleteSongLibraryPlaylist(int idLibraryPlaylist) {
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
-                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+                ItemTouchHelper.LEFT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView,
                                   @NonNull RecyclerView.ViewHolder viewHolder,
@@ -264,54 +260,52 @@ public class PlaylistActivity extends AppCompatActivity {
                 List<SongLibraryPlaylist> songLibraryPlaylistList = songLibraryPlaylistAdapter.getSongLibraryPlaylistList();
                 SongLibraryPlaylist songLibraryPlaylist = songLibraryPlaylistList.get(position);
 
-                if (direction == ItemTouchHelper.LEFT) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(PlaylistActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(PlaylistActivity.this);
 
-                    builder.setTitle(getString(R.string.title_dialog));
-                    builder.setMessage(getString(R.string.dialog_delete_message));
-                    builder.setCancelable(false);
+                builder.setTitle(getString(R.string.title_dialog));
+                builder.setMessage(getString(R.string.dialog_delete_message));
+                builder.setCancelable(false);
 
-                    builder.setPositiveButton(getString(R.string.yes_dialog),
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    dataService.deleteSongLibraryPlaylist(songLibraryPlaylist.getIdSongLibraryPlaylist())
-                                            .enqueue(new Callback<BaseResponse>() {
-                                                @Override
-                                                public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
-                                                    if (response.body().getIsSuccess().equals(Constants.successfully)) {
-                                                        StyleableToast.makeText(PlaylistActivity.this,
-                                                                getString(R.string.song_library_playlist_delete_success),
-                                                                Toast.LENGTH_LONG, R.style.myToast).show();
-                                                        getAllSongLibraryPlaylist(idLibraryPlaylist);
-                                                    } else {
-                                                        StyleableToast.makeText(PlaylistActivity.this,
-                                                                getString(R.string.song_library_playlist_delete_failed),
-                                                                Toast.LENGTH_LONG, R.style.myToast).show();
-                                                    }
+                builder.setPositiveButton(getString(R.string.yes_dialog),
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dataService.deleteSongLibraryPlaylist(songLibraryPlaylist.getIdSongLibraryPlaylist())
+                                        .enqueue(new Callback<BaseResponse>() {
+                                            @Override
+                                            public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+                                                if (response.body().getIsSuccess().equals(Constants.successfully)) {
+                                                    StyleableToast.makeText(PlaylistActivity.this,
+                                                            getString(R.string.song_library_playlist_delete_success),
+                                                            Toast.LENGTH_LONG, R.style.myToast).show();
+                                                    getAllSongLibraryPlaylist(idLibraryPlaylist);
+                                                } else {
+                                                    StyleableToast.makeText(PlaylistActivity.this,
+                                                            getString(R.string.song_library_playlist_delete_failed),
+                                                            Toast.LENGTH_LONG, R.style.myToast).show();
                                                 }
+                                            }
 
-                                                @Override
-                                                public void onFailure(Call<BaseResponse> call, Throwable t) {
+                                            @Override
+                                            public void onFailure(Call<BaseResponse> call, Throwable t) {
 
-                                                }
-                                            });
-                                }
-                            });
+                                            }
+                                        });
+                            }
+                        });
 
-                    builder.setNegativeButton(getString(R.string.no_dialog),
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    getAllSongLibraryPlaylist(idLibraryPlaylist);
-                                    dialogInterface.cancel();
-                                }
-                            });
+                builder.setNegativeButton(getString(R.string.no_dialog),
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                getAllSongLibraryPlaylist(idLibraryPlaylist);
+                                dialogInterface.cancel();
+                            }
+                        });
 
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
+                AlertDialog dialog = builder.create();
+                dialog.show();
 
-                }
             }
         }).attachToRecyclerView(binding.activityPlaylistRvPlaylist);
     }

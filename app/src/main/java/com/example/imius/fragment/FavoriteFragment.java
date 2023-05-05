@@ -60,7 +60,7 @@ public class FavoriteFragment extends Fragment {
         return view;
     }
 
-    private void initView (){
+    private void initView() {
         binding.fragmentLibraryFavoriteRvFavorite.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new FavoriteSongAdapter(this.getContext());
         binding.fragmentLibraryFavoriteRvFavorite.setAdapter(adapter);
@@ -71,7 +71,7 @@ public class FavoriteFragment extends Fragment {
         });
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
-                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+                ItemTouchHelper.LEFT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView,
                                   @NonNull RecyclerView.ViewHolder viewHolder,
@@ -85,54 +85,52 @@ public class FavoriteFragment extends Fragment {
                 List<FavoriteSong> favoriteSongs = adapter.getFavoriteSongs();
                 FavoriteSong song = favoriteSongs.get(position);
 
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
-                if (direction == ItemTouchHelper.LEFT){
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle(getString(R.string.title_dialog));
+                builder.setMessage(getString(R.string.dialog_delete_message));
+                builder.setCancelable(false);
 
-                    builder.setTitle(getString(R.string.title_dialog));
-                    builder.setMessage(getString(R.string.dialog_delete_message));
-                    builder.setCancelable(false);
+                builder.setPositiveButton(getString(R.string.yes_dialog),
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                MusicRepository repository = new MusicRepository();
 
-                    builder.setPositiveButton(getString(R.string.yes_dialog),
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    MusicRepository repository = new MusicRepository();
-
-                                    repository.updateLikeOfNumber(song.getIdSong())
-                                            .enqueue(new Callback<BaseResponse>() {
-                                                @Override
-                                                public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
-                                                    if (response.body() != null){
-                                                        if (response.body().getIsSuccess().equals(Constants.successfully)){
-                                                            if (response.body().getMessage().equals(Constants.DELETE)){
-                                                                deleteLikeSong(song.getIdSong());
-                                                            }
+                                repository.updateLikeOfNumber(song.getIdSong())
+                                        .enqueue(new Callback<BaseResponse>() {
+                                            @Override
+                                            public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+                                                if (response.body() != null) {
+                                                    if (response.body().getIsSuccess().equals(Constants.successfully)) {
+                                                        if (response.body().getMessage().equals(Constants.DELETE)) {
+                                                            deleteLikeSong(song.getIdSong());
                                                         }
                                                     }
                                                 }
-                                                @Override
-                                                public void onFailure(Call<BaseResponse> call, Throwable t) {
-                                                    StyleableToast.makeText(getContext(), t.getMessage(),
-                                                            Toast.LENGTH_LONG, R.style.myToast).show();
-                                                }
-                                            });
-                                }
-                            });
+                                            }
 
-                    builder.setNegativeButton(getString(R.string.no_dialog),
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    viewModel.refreshLiveData();
-                                    dialogInterface.cancel();
-                                }
-                            });
+                                            @Override
+                                            public void onFailure(Call<BaseResponse> call, Throwable t) {
+                                                StyleableToast.makeText(getContext(), t.getMessage(),
+                                                        Toast.LENGTH_LONG, R.style.myToast).show();
+                                            }
+                                        });
+                            }
+                        });
 
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
+                builder.setNegativeButton(getString(R.string.no_dialog),
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                viewModel.refreshLiveData();
+                                dialogInterface.cancel();
+                            }
+                        });
 
-                }
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
             }
         }).attachToRecyclerView(binding.fragmentLibraryFavoriteRvFavorite);
     }
@@ -144,11 +142,11 @@ public class FavoriteFragment extends Fragment {
         repository.deleteLikeSong(DataLocalManager.getUsernameData(), idSong).enqueue(new Callback<BaseResponse>() {
             @Override
             public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
-                if (response.body().getIsSuccess().equals(Constants.successfully)){
+                if (response.body().getIsSuccess().equals(Constants.successfully)) {
                     StyleableToast.makeText(getContext(), getString(R.string.delete_success),
                             Toast.LENGTH_LONG, R.style.myToast).show();
                     viewModel.refreshLiveData();
-                }else {
+                } else {
                     StyleableToast.makeText(getContext(), getString(R.string.delete_failed),
                             Toast.LENGTH_LONG, R.style.myToast).show();
                 }
