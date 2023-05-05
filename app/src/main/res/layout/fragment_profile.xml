@@ -45,7 +45,7 @@
             android:text="@string/change_password"
             android:textColor="@color/blue_500"
             android:textSize="16dp"
-            android:textStyle="bold"
+            android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.503"

@@ -6,6 +6,7 @@ import com.example.imius.livedata.RefreshLiveData;
 import com.example.imius.model.BaseResponse;
 import com.example.imius.model.LibraryPlaylist;
 import com.example.imius.model.Song;
+import com.example.imius.model.SongLibraryPlaylist;
 import com.example.imius.service.DataService;
 
 import java.util.ArrayList;
@@ -56,6 +57,24 @@ public class MusicRepository {
         });
         return data;
     }
+
+    public RefreshLiveData<List<SongLibraryPlaylist>> getSongLibraryPlaylistList(){
+        RefreshLiveData<List<SongLibraryPlaylist>> data = new RefreshLiveData<>(callback -> {
+            dataService.getSongLibraryPlaylistList(DataLocalManager.getIdLibraryPlaylist()).enqueue(new Callback<List<SongLibraryPlaylist>>() {
+                @Override
+                public void onResponse(Call<List<SongLibraryPlaylist>> call, Response<List<SongLibraryPlaylist>> response) {
+                    callback.onDataLoaded((ArrayList<SongLibraryPlaylist>) response.body());
+                }
+
+                @Override
+                public void onFailure(Call<List<SongLibraryPlaylist>> call, Throwable t) {
+
+                }
+            });
+        });
+        return data;
+    }
+
 
     public RefreshLiveData<List<Song>> getSongTrendingList(String idTrending){
         RefreshLiveData<List<Song>> data = new RefreshLiveData<>(callback -> {

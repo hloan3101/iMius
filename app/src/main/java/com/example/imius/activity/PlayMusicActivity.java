@@ -392,9 +392,14 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
         setLikeSong();
 
         binding.activityPlayMusicIvLoveButton.setOnClickListener(view -> {
-                Animation animation = AnimationUtils.loadAnimation(PlayMusicActivity.this, R.anim.anim_love_click);
-                setBtnLike();
-                view.startAnimation(animation);
+                if (!DataLocalManager.getCheckLogin()){
+                    Intent intent = new Intent(PlayMusicActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                }else {
+                    Animation animation = AnimationUtils.loadAnimation(PlayMusicActivity.this, R.anim.anim_love_click);
+                    setBtnLike();
+                    view.startAnimation(animation);
+                }
             });
 
         binding.activityPlayMusicIbRandomSong.setOnClickListener(new View.OnClickListener() {

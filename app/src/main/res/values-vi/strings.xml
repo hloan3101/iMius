@@ -7,14 +7,14 @@
     <string name="signup_with_email">Đăng nhập với Email</string>
     <string name="confirm_password">Xác nhận mật khẩu</string>
     <string name="username">Tên tài khoản</string>
-    <string name="get_code">Lấy mã xác nhận</string>
+    <string name="get_code">Lấy mã</string>
     <string name="forget_password">Quên mật khẩu?</string>
     <string name="login_account">Bạn đã có tài khoản? Đăng nhập</string>
     <string name="confirm_code">Mã xác nhận</string>
     <string name="skip">BỎ QUA</string>
     <string name="create_an_account">Tạo tài khoản</string>
     <string name="play_list">Danh sách phát</string>
-    <string name="singer">Nghê sĩ</string>
+    <string name="singer">Nghệ sĩ</string>
     <string name="trending">Thịnh hành</string>
     <string name="new_release">Mới phát hành</string>
     <string name="theme">Chủ đề</string>
@@ -76,4 +76,10 @@
     <string name="check_code">Vui lòng xem mã Code trong Email của bạn!</string>
     <string name="username_exist">Username này đã tồn tại</string>
     <string name="dialog_logout">Bạn có chắc chắn muốn đăng xuất?</string>
+    <string name="home">Nhà</string>
+    <string name="search">Tìm kiếm</string>
+    <string name="account">Tài khoản</string>
+    <string name="playlist">Danh sách</string>
+    <string name="favorite">Yêu thích</string>
+    <string name="history">Lịch sử</string>
 </resources>

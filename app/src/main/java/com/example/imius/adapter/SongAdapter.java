@@ -41,6 +41,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
 
     private SearchFragment searchFragment = new SearchFragment();
 
+    private boolean checkChart = false;
     public SongAdapter(Context context) {
         this.context = context;
 
@@ -79,7 +80,9 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         Song song = listSongs.get(position);
 
         holder.setSong(song);
+
         holder.tvIndex.setText(position + 1 + "");
+
         holder.tvNameOfSong.setText(song.getNameSong());
         holder.tvSinger.setText(song.getNameSinger());
         Picasso.get().load(song.getImgSong()).into(holder.imgImageOfSong);
@@ -275,6 +278,10 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
             return listSongs.size();
         }
         return 0;
+    }
+
+    public void setCheckChart(boolean checkChart) {
+        this.checkChart = checkChart;
     }
 
     public ArrayList<Song> getListSongs() {

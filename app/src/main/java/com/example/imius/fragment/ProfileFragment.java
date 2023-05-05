@@ -49,6 +49,12 @@ public class ProfileFragment extends Fragment{
             binding.fragmentProfileTvUsername.setText(DataLocalManager.getNameData());
         }
 
+        if (!DataLocalManager.getCheckLogin()){
+            binding.fragmentProfileBtnLogout.setText(getString(R.string.login));
+            binding.fragmentProfileTvChangePassword.setVisibility(View.GONE);
+            binding.fragmentProfileCivAvatar.setVisibility(View.GONE);
+            binding.fragmentProfileTvUsername.setVisibility(View.GONE);
+        }
 
         binding.fragmentProfileTvUsername.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,11 +89,6 @@ public class ProfileFragment extends Fragment{
 
             }
         });
-
-        if (!DataLocalManager.getCheckLogin()){
-            binding.fragmentProfileBtnLogout.setText(getString(R.string.login));
-            binding.fragmentProfileTvChangePassword.setVisibility(View.GONE);
-        }
 
         binding.fragmentProfileBtnLogout.setOnClickListener(new View.OnClickListener() {
             @Override

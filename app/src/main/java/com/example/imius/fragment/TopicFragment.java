@@ -46,11 +46,9 @@ public class TopicFragment extends Fragment {
         viewModel.getTopic().observe(getViewLifecycleOwner(), topicModelList -> {
             topicAdapter.setTopicModelList(topicModelList);
         });
-        return view;
-    }
-    @Override
-    public void onResume() {
-        super.onResume();
+
         viewModel.refreshLiveData();
+
+        return view;
     }
 }

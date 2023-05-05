@@ -45,13 +45,9 @@ public class TrendingFragment extends Fragment {
         viewModel.getTrending().observe(getViewLifecycleOwner(), trendingList -> {
             trendingAdapter.setTrendingList(trendingList);
         });
+
+        viewModel.refreshLiveData();
         return view;
     }
-    @Override
-    public void onResume() {
-        super.onResume();
-        viewModel.refreshLiveData();
-    }
-
 
 }
