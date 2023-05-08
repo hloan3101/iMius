@@ -2,6 +2,7 @@ package com.example.imius.fragment;
 
 import android.os.Bundle;
 
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -17,6 +18,7 @@ import com.example.imius.adapter.PlaylistPlayMusicLibraryAdapter;
 import com.example.imius.databinding.FragmentPlayMusicPlaylistBinding;
 
 import com.example.imius.R;
+import com.example.imius.network.AppUtil;
 
 public class PlayMusicPlaylistFragment extends Fragment {
     private FragmentPlayMusicPlaylistBinding binding;
@@ -41,6 +43,8 @@ public class PlayMusicPlaylistFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentPlayMusicPlaylistBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+
+        loadData();
 
         if (PlayMusicActivity.songArrayList.size() > 0 ){
             adapter = new PlaylistPlayMusicAdapter(getActivity(), PlayMusicActivity.songArrayList);
@@ -73,4 +77,17 @@ public class PlayMusicPlaylistFragment extends Fragment {
 
         return view;
     }
+
+    private void loadData() {
+        if (!AppUtil.isNetworkAvailable(getContext())) {
+            DialogFragment dialogFragment = NoInternetDialog.newInstance();
+            dialogFragment.show(getActivity().getSupportFragmentManager(), "NoInternetDialog");
+        }
+    }
+
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        loadData();
+//    }
 }

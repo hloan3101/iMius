@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -22,6 +23,7 @@ import com.example.imius.constants.Constants;
 import com.example.imius.databinding.FragmentHistoryBinding;
 import com.example.imius.model.BaseResponse;
 import com.example.imius.model.HistorySong;
+import com.example.imius.network.AppUtil;
 import com.example.imius.repository.MusicRepository;
 import com.example.imius.viewmodel.HistorySongViewModel;
 
@@ -51,6 +53,8 @@ public class HistoryFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentHistoryBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+
+        loadData();
 
         initView();
 
@@ -140,7 +144,16 @@ public class HistoryFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+     //   loadData();
         viewModel.refreshLiveData();
     }
+
+    private void loadData() {
+        if (!AppUtil.isNetworkAvailable(getContext())) {
+            DialogFragment dialogFragment = NoInternetDialog.newInstance();
+            dialogFragment.show(getActivity().getSupportFragmentManager(), "NoInternetDialog");
+        }
+    }
+
 
 }

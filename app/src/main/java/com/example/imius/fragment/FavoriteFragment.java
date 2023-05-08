@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -24,6 +25,7 @@ import com.example.imius.databinding.FragmentFavoriteBinding;
 import com.example.imius.model.BaseResponse;
 import com.example.imius.model.FavoriteSong;
 
+import com.example.imius.network.AppUtil;
 import com.example.imius.repository.MusicRepository;
 import com.example.imius.viewmodel.FavoriteSongViewModel;
 ;
@@ -54,6 +56,8 @@ public class FavoriteFragment extends Fragment {
 
         binding = FragmentFavoriteBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+
+        loadData();
 
         initView();
 
@@ -163,6 +167,15 @@ public class FavoriteFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+  //      loadData();
         viewModel.refreshLiveData();
     }
+
+    private void loadData() {
+        if (!AppUtil.isNetworkAvailable(getContext())) {
+            DialogFragment dialogFragment = NoInternetDialog.newInstance();
+            dialogFragment.show(getActivity().getSupportFragmentManager(), "NoInternetDialog");
+        }
+    }
+
 }

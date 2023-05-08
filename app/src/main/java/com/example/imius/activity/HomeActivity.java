@@ -2,6 +2,7 @@ package com.example.imius.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import android.content.Intent;
@@ -15,11 +16,12 @@ import com.example.imius.R;
 import com.example.imius.adapter.ViewPagerAdapter;
 import com.example.imius.data.DataLocalManager;
 import com.example.imius.databinding.ActivityHomeBinding;
+import com.example.imius.fragment.NoInternetDialog;
+import com.example.imius.network.AppUtil;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity {
     private ActivityHomeBinding binding;
-    private PlayMusicActivity playMusicActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +72,5 @@ public class HomeActivity extends AppCompatActivity {
         binding.activityHomeViewPager.setAdapter(viewPagerAdapter);
 
     }
-
 
 }

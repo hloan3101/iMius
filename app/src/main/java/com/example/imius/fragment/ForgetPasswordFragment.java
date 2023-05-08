@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
@@ -20,6 +21,7 @@ import com.example.imius.databinding.FragmentForgetPasswordBinding;
 import com.example.imius.R;
 import com.example.imius.model.BaseResponse;
 import com.example.imius.model.User;
+import com.example.imius.network.AppUtil;
 import com.example.imius.viewmodel.UserViewModel;
 
 import io.github.muddz.styleabletoast.StyleableToast;
@@ -43,6 +45,8 @@ public class ForgetPasswordFragment extends Fragment{
                              Bundle savedInstanceState) {
         binding = FragmentForgetPasswordBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+
+        loadData();
 
         viewModel = new ViewModelProvider(getActivity()).get(UserViewModel.class);
 
@@ -122,5 +126,18 @@ public class ForgetPasswordFragment extends Fragment{
         transaction.commit();
 
     }
+
+    private void loadData() {
+        if (!AppUtil.isNetworkAvailable(getContext())) {
+            DialogFragment dialogFragment = NoInternetDialog.newInstance();
+            dialogFragment.show(getActivity().getSupportFragmentManager(), "NoInternetDialog");
+        }
+    }
+
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        loadData();
+//    }
 
 }

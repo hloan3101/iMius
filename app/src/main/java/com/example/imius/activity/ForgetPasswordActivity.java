@@ -2,10 +2,12 @@ package com.example.imius.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -15,6 +17,8 @@ import com.example.imius.databinding.ActivityForgetPasswordBinding;
 import com.example.imius.R;
 import com.example.imius.fragment.ChangePasswordFragment;
 import com.example.imius.fragment.ForgetPasswordFragment;
+import com.example.imius.fragment.NoInternetDialog;
+import com.example.imius.network.AppUtil;
 import com.example.imius.viewmodel.UserViewModel;
 
 import java.util.Properties;
@@ -46,6 +50,7 @@ public class ForgetPasswordActivity extends AppCompatActivity{
         binding = ActivityForgetPasswordBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+        loadData();
 
         binding.activityForgetPasswordEtEmail.setText(DataLocalManager.getEmail());
 
@@ -183,5 +188,18 @@ public class ForgetPasswordActivity extends AppCompatActivity{
         transaction.commit();
 
     }
+
+    private void loadData() {
+        if (!AppUtil.isNetworkAvailable(this)) {
+            DialogFragment dialogFragment = NoInternetDialog.newInstance();
+            dialogFragment.show(getSupportFragmentManager(), "NoInternetDialog");
+        }
+    }
+
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        loadData();
+//    }
 
 }

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
@@ -23,6 +24,7 @@ import com.example.imius.databinding.FragmentChangePasswordBinding;
 import com.example.imius.R;
 import com.example.imius.model.BaseResponse;
 import com.example.imius.model.User;
+import com.example.imius.network.AppUtil;
 import com.example.imius.viewmodel.UserViewModel;
 
 import io.github.muddz.styleabletoast.StyleableToast;
@@ -30,7 +32,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ChangePasswordFragment extends Fragment implements View.OnClickListener{
+public class ChangePasswordFragment extends Fragment{
 
     private FragmentChangePasswordBinding binding;
     private UserViewModel viewModel;
@@ -48,6 +50,8 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
 
         binding = FragmentChangePasswordBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+
+        loadData();
 
         viewModel = new ViewModelProvider(getActivity()).get(UserViewModel.class);
 
@@ -173,8 +177,16 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
         binding.fragmentChangePasswordEtConfirmNewPassword.setError(null);
     }
 
-    @Override
-    public void onClick(View view) {
-
+    private void loadData() {
+        if (!AppUtil.isNetworkAvailable(getContext())) {
+            DialogFragment dialogFragment = NoInternetDialog.newInstance();
+            dialogFragment.show(getActivity().getSupportFragmentManager(), "NoInternetDialog");
+        }
     }
+
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        loadData();
+//    }
 }

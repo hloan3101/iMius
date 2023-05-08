@@ -17,6 +17,7 @@ import com.example.imius.data.DataLocalManager;
 import com.example.imius.databinding.FragmentProfileBinding;
 
 import com.example.imius.R;
+import com.example.imius.network.AppUtil;
 
 public class ProfileFragment extends Fragment{
     public FragmentProfileBinding binding;
@@ -34,6 +35,8 @@ public class ProfileFragment extends Fragment{
         binding = FragmentProfileBinding.inflate(inflater, container, false);
 
         View view = binding.getRoot();
+
+        loadData();
 
         init();
         binding.fragmentProfileTvUsername.setText(DataLocalManager.getNameData());
@@ -163,4 +166,17 @@ public class ProfileFragment extends Fragment{
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
+    private void loadData() {
+        if (!AppUtil.isNetworkAvailable(getContext())) {
+            DialogFragment dialogFragment = NoInternetDialog.newInstance();
+            dialogFragment.show(getActivity().getSupportFragmentManager(), "NoInternetDialog");
+        }
+    }
+
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        loadData();
+//    }
 }

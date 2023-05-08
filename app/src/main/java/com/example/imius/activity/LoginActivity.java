@@ -1,6 +1,7 @@
 package com.example.imius.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -16,9 +17,11 @@ import com.example.imius.data.DataLocalManager;
 import com.example.imius.databinding.ActivityLoginBinding;
 import com.example.imius.fragment.ChangePasswordFragment;
 import com.example.imius.fragment.HomeFragment;
+import com.example.imius.fragment.NoInternetDialog;
 import com.example.imius.fragment.ProfileFragment;
 import com.example.imius.model.BaseResponse;
 import com.example.imius.model.User;
+import com.example.imius.network.AppUtil;
 import com.example.imius.viewmodel.UserViewModel;
 
 import io.github.muddz.styleabletoast.StyleableToast;
@@ -35,6 +38,8 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+
+        loadData();
 
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         if (DataLocalManager.getCheckFromLogout()){
@@ -189,6 +194,18 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    private void loadData() {
+        if (!AppUtil.isNetworkAvailable(this)) {
+            DialogFragment dialogFragment = NoInternetDialog.newInstance();
+            dialogFragment.show(getSupportFragmentManager(), "NoInternetDialog");
+        }
+    }
+
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        loadData();
+//    }
 
 
 }
