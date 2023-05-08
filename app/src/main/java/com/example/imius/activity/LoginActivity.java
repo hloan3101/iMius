@@ -158,8 +158,7 @@ public class LoginActivity extends AppCompatActivity {
                         StyleableToast.makeText(LoginActivity.this, getResources().getString
                                 (R.string.login_failed), Toast.LENGTH_LONG,
                                 R.style.myToast).show();
-                        binding.activityLoginTilUsername.setError(" ");
-                        binding.activityLoginTilPassword.setError(" ");
+                        resetError();
                         progressDialog.dismiss();
                     }
                 }
