@@ -24,6 +24,7 @@ import com.example.imius.constants.Constants;
 import com.example.imius.databinding.FragmentLibraryPlaylistBinding;
 import com.example.imius.model.BaseResponse;
 import com.example.imius.model.LibraryPlaylist;
+import com.example.imius.network.AppUtil;
 import com.example.imius.viewmodel.LibraryPlaylistViewModel;
 
 import java.util.List;
@@ -49,6 +50,8 @@ public class LibraryPlaylistFragment extends Fragment {
 
         binding = FragmentLibraryPlaylistBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+
+        loadData();
 
         initView();
 
@@ -162,6 +165,15 @@ public class LibraryPlaylistFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+   //     loadData();
         viewModel.refreshLiveData();
     }
+
+    private void loadData() {
+        if (!AppUtil.isNetworkAvailable(getContext())) {
+            DialogFragment dialogFragment = NoInternetDialog.newInstance();
+            dialogFragment.show(getActivity().getSupportFragmentManager(), "NoInternetDialog");
+        }
+    }
+
 }

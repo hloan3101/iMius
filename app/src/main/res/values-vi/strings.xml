@@ -57,7 +57,7 @@
     <string name="dialog_delete_message">Bạn có chắc chắn muốn xóa?</string>
     <string name="yes_dialog">Có</string>
     <string name="no_dialog">Không</string>
-    <string name="enter_new_name_for_your_playlist">Nhập một tên mới cho danh sách phát</string>
+    <string name="enter_new_name_for_your_playlist">Tên mới cho danh sách phát</string>
     <string name="delete_success">Xóa bài hát thành công!</string>
     <string name="library_playlist_update_success">Cập nhật danh sách phát thành công!</string>
     <string name="library_playlist_update_failed">Cập nhật danh sách phát không thành công!</string>
@@ -82,4 +82,8 @@
     <string name="playlist">Danh sách</string>
     <string name="favorite">Yêu thích</string>
     <string name="history">Lịch sử</string>
+    <string name="enter_your_name">Nhập tên của bạn</string>
+    <string name="signup_failed">Đăng ký thất bại</string>
+    <string name="no_internet">Không có kết nối Internet</string>
+    <string name="no_internet_message">Vui lòng kiểm tra kết nối Internet của bạn và thử lại lần nữa</string>
 </resources>

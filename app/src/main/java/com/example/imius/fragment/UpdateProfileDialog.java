@@ -24,6 +24,7 @@ import com.example.imius.R;
 import com.example.imius.data.DataLocalManager;
 import com.example.imius.databinding.DialogUpdateProfileBinding;
 import com.example.imius.model.BaseResponse;
+import com.example.imius.network.AppUtil;
 import com.example.imius.viewmodel.UserViewModel;
 
 import io.github.muddz.styleabletoast.StyleableToast;
@@ -47,7 +48,7 @@ public class UpdateProfileDialog extends DialogFragment{
         View view = binding.getRoot();
 
         viewModel = new ViewModelProvider(getActivity()).get(UserViewModel.class);
-
+        loadData();
         init();
         setCancelable(false);
 
@@ -158,11 +159,20 @@ public class UpdateProfileDialog extends DialogFragment{
     public void onResume() {
         super.onResume();
 
+    //    loadData();
+
         ViewGroup.LayoutParams layoutParams = getDialog().getWindow().getAttributes();
         layoutParams.width = LinearLayout.LayoutParams.WRAP_CONTENT;
         layoutParams.height = LinearLayout.LayoutParams.WRAP_CONTENT;
         getDialog().getWindow().setAttributes((WindowManager.LayoutParams) layoutParams);
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(TRANSPARENT));
+    }
+
+    private void loadData() {
+        if (!AppUtil.isNetworkAvailable(getContext())) {
+            DialogFragment dialogFragment = NoInternetDialog.newInstance();
+            dialogFragment.show(getActivity().getSupportFragmentManager(), "NoInternetDialog");
+        }
     }
 
 }

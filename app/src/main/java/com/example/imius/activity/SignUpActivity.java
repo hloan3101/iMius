@@ -1,6 +1,7 @@
 package com.example.imius.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.app.ProgressDialog;
@@ -16,8 +17,10 @@ import com.example.imius.constants.Constants;
 import com.example.imius.data.DataLocalManager;
 import com.example.imius.databinding.ActivitySignUpBinding;
 import com.example.imius.databinding.ActivityWelcomeBinding;
+import com.example.imius.fragment.NoInternetDialog;
 import com.example.imius.model.BaseResponse;
 import com.example.imius.model.User;
+import com.example.imius.network.AppUtil;
 import com.example.imius.viewmodel.UserViewModel;
 
 import java.util.Properties;
@@ -51,6 +54,8 @@ public class SignUpActivity extends AppCompatActivity {
 
         View view  = binding.getRoot();
         setContentView(view);
+
+        loadData();
 
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
@@ -317,5 +322,18 @@ public class SignUpActivity extends AppCompatActivity {
 
         finish();
     }
+
+    private void loadData() {
+        if (!AppUtil.isNetworkAvailable(this)) {
+            DialogFragment dialogFragment = NoInternetDialog.newInstance();
+            dialogFragment.show(getSupportFragmentManager(), "NoInternetDialog");
+        }
+    }
+
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        loadData();
+//    }
 
 }

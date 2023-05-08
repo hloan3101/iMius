@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -25,11 +26,13 @@ import com.example.imius.adapter.SongLibraryPlaylistAdapter;
 import com.example.imius.api.API;
 import com.example.imius.constants.Constants;
 import com.example.imius.databinding.ActivityPlaylistBinding;
+import com.example.imius.fragment.NoInternetDialog;
 import com.example.imius.fragment.SearchFragment;
 import com.example.imius.model.BaseResponse;
 
 import com.example.imius.model.Song;
 import com.example.imius.model.SongLibraryPlaylist;
+import com.example.imius.network.AppUtil;
 import com.example.imius.service.DataService;
 import com.squareup.picasso.Picasso;
 
@@ -54,6 +57,8 @@ public class PlaylistActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityPlaylistBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
+
+        loadData();
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -341,9 +346,17 @@ public class PlaylistActivity extends AppCompatActivity {
         });
     }
 
+    private void loadData() {
+        if (!AppUtil.isNetworkAvailable(this)) {
+            DialogFragment dialogFragment = NoInternetDialog.newInstance();
+            dialogFragment.show(getSupportFragmentManager(), "NoInternetDialog");
+        }
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
+     //   loadData();
         setAdapter();
     }
 }

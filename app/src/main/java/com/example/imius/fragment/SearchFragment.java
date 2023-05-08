@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -25,6 +26,7 @@ import com.example.imius.R;
 import com.example.imius.data.DataLocalManager;
 import com.example.imius.databinding.FragmentSearchBinding;
 import com.example.imius.model.Song;
+import com.example.imius.network.AppUtil;
 import com.example.imius.viewmodel.SongViewModel;
 
 import java.util.ArrayList;
@@ -53,6 +55,8 @@ public class SearchFragment extends Fragment{
                              Bundle savedInstanceState) {
         binding = FragmentSearchBinding.inflate(inflater,container,false);
         View view = binding.getRoot();
+
+        loadData();
 
         songViewModel = new ViewModelProvider(getActivity()).get(SongViewModel.class);
 
@@ -138,5 +142,18 @@ public class SearchFragment extends Fragment{
             }
         });
     }
+
+    private void loadData() {
+        if (!AppUtil.isNetworkAvailable(getContext())) {
+            DialogFragment dialogFragment = NoInternetDialog.newInstance();
+            dialogFragment.show(getActivity().getSupportFragmentManager(), "NoInternetDialog");
+        }
+    }
+
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        loadData();
+//    }
 
 }

@@ -1,6 +1,7 @@
 package com.example.imius.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.palette.graphics.Palette;
@@ -33,6 +34,7 @@ import com.example.imius.databinding.ActivityPlayMusicBinding;
 import com.example.imius.R;
 import com.example.imius.fragment.LibraryPlaylistFragment;
 import com.example.imius.fragment.MusicDiscFragment;
+import com.example.imius.fragment.NoInternetDialog;
 import com.example.imius.fragment.PlayMusicPlaylistFragment;
 import com.example.imius.model.BaseResponse;
 import com.example.imius.model.FavoriteSong;
@@ -40,6 +42,7 @@ import com.example.imius.model.HistorySong;
 import com.example.imius.model.Song;
 import com.example.imius.model.SongLibraryPlaylist;
 import com.example.imius.model.User;
+import com.example.imius.network.AppUtil;
 import com.example.imius.repository.MusicRepository;
 import com.example.imius.viewmodel.SongViewModel;
 import com.example.imius.widget.DiscViewPager;
@@ -111,6 +114,8 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
         View view = binding.getRoot();
         setContentView(view);
         viewModel = new ViewModelProvider(this).get(SongViewModel.class);
+
+        loadData();
 
         LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver,
                 new IntentFilter(getResources().getString(R.string.send_data_to_activity)));
@@ -635,5 +640,18 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
         }
         sendActionToService(ForegroundServiceControl.ACTION_REPEAT);
     }
+
+    private void loadData() {
+        if (!AppUtil.isNetworkAvailable(this)) {
+            DialogFragment dialogFragment = NoInternetDialog.newInstance();
+            dialogFragment.show(getSupportFragmentManager(), "NoInternetDialog");
+        }
+    }
+//
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        loadData();
+//    }
 
 }

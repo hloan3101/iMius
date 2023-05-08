@@ -23,6 +23,7 @@ import com.example.imius.constants.Constants;
 import com.example.imius.databinding.DialogAddToLibraryPlaylistBinding;
 import com.example.imius.model.BaseResponse;
 import com.example.imius.model.LibraryPlaylist;
+import com.example.imius.network.AppUtil;
 import com.example.imius.viewmodel.LibraryPlaylistViewModel;
 
 import java.util.ArrayList;
@@ -48,6 +49,8 @@ public class DialogAddToLibraryPlaylist extends DialogFragment {
                              @Nullable Bundle savedInstanceState) {
         binding = DialogAddToLibraryPlaylistBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+
+        loadData();
 
         initView();
 
@@ -191,6 +194,7 @@ public class DialogAddToLibraryPlaylist extends DialogFragment {
     @Override
     public void onResume() {
         super.onResume();
+     //   loadData();
         viewModel.refreshLiveData();
 
         ViewGroup.LayoutParams layoutParams = getDialog().getWindow().getAttributes();
@@ -199,5 +203,12 @@ public class DialogAddToLibraryPlaylist extends DialogFragment {
         getDialog().getWindow().setAttributes((WindowManager.LayoutParams) layoutParams);
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(TRANSPARENT));
 
+    }
+
+    private void loadData() {
+        if (!AppUtil.isNetworkAvailable(getContext())) {
+            DialogFragment dialogFragment = NoInternetDialog.newInstance();
+            dialogFragment.show(getActivity().getSupportFragmentManager(), "NoInternetDialog");
+        }
     }
 }

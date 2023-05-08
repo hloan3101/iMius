@@ -85,4 +85,5 @@ public class LibraryFragment extends Fragment {
 
         dialogFragment.show(getActivity().getSupportFragmentManager(), "DialogAddToLibraryPlaylist");
     }
+
 }
