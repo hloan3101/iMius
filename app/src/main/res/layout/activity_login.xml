@@ -32,7 +32,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/activity_login_til_username"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="300dp"
             android:layout_height="85dp"
             android:layout_gravity="center"
@@ -44,13 +44,13 @@
             app:boxCornerRadiusTopStart="30dp"
             app:boxStrokeColor="@color/colorPrimary"
             app:boxStrokeWidth="2dp"
-            app:endIconMode="clear_text"
+            app:errorEnabled="true"
             app:passwordToggleTint="@color/colorPrimary">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/activity_login_et_username"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="58dp"
                 android:hint="@string/username"
                 android:paddingLeft="20dp"
                 android:textColor="@color/colorPrimary" />
@@ -62,6 +62,7 @@
             android:layout_width="300dp"
             android:layout_height="85dp"
             android:layout_gravity="center"
+            android:layout_marginTop="2dp"
             android:hint="@string/password"
             android:textColorHint="@color/colorPrimary"
             app:boxCornerRadiusBottomEnd="30dp"
@@ -75,7 +76,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/activity_login_et_password"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="58dp"
                 android:inputType="textPassword"
                 android:paddingLeft="20dp"
                 android:textColor="@color/colorPrimary" />

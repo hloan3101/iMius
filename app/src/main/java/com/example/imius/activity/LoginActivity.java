@@ -155,11 +155,16 @@ public class LoginActivity extends AppCompatActivity {
                     //    callChangePasswordFragment();
                         progressDialog.dismiss();
                     }else {
+
                         StyleableToast.makeText(LoginActivity.this, getResources().getString
                                 (R.string.login_failed), Toast.LENGTH_LONG,
                                 R.style.myToast).show();
-                        resetError();
+
                         progressDialog.dismiss();
+
+                        binding.activityLoginTilUsername.setError(getResources().getString(R.string.username_error));
+                        binding.activityLoginTilPassword.setError(getResources().getString(R.string.password_error));
+
                     }
                 }
             }

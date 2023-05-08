@@ -65,8 +65,8 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
     private ActivityPlayMusicBinding binding;
     private SongViewModel viewModel;
 
-    private int index = 0, position = 0, duration = 0, timeValue = 0, durationToService = 0;
-
+    private int index = 0,  duration = 0, timeValue = 0, durationToService = 0;
+    public int position = 0;
     private boolean repeat = false;
     private boolean random = false;
     private boolean checkRandom = false;
@@ -76,6 +76,10 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
     private static DiscViewPager discViewPager;
 
     private PlayMusicPlaylistFragment playMusicPlaylistFragment;
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
 
     public static ArrayList<Song> songArrayList = new ArrayList<>();
     public static ArrayList<SongLibraryPlaylist> songLibraryPlaylistArrayList = new ArrayList<>();

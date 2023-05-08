@@ -1,15 +1,18 @@
 package com.example.imius.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.imius.R;
+import com.example.imius.activity.PlayMusicActivity;
 import com.example.imius.model.SongLibraryPlaylist;
 
 import java.util.ArrayList;
@@ -41,6 +44,11 @@ public class PlaylistPlayMusicLibraryAdapter extends RecyclerView.Adapter<Playli
         holder.tvNameSong.setText(song.getNameSong());
         holder.tvNameSinger.setText(song.getNameSinger());
 
+//        holder.relativeLayout.setOnClickListener(view -> {
+//            PlayMusicActivity playMusicActivity = new PlayMusicActivity();
+//            playMusicActivity.setPosition(position);
+//        });
+
     }
 
     @Override
@@ -53,6 +61,7 @@ public class PlaylistPlayMusicLibraryAdapter extends RecyclerView.Adapter<Playli
         private TextView tvNumber;
         private TextView tvNameSong;
         private TextView tvNameSinger;
+        private RelativeLayout relativeLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -60,6 +69,7 @@ public class PlaylistPlayMusicLibraryAdapter extends RecyclerView.Adapter<Playli
             tvNumber = itemView.findViewById(R.id.item_play_music_number);
             tvNameSong = itemView.findViewById(R.id.item_play_music_name_of_song);
             tvNameSinger = itemView.findViewById(R.id.item_play_music_name_of_singer);
+            relativeLayout = itemView.findViewById(R.id.item_play_music_relative_layout);
         }
     }
 }

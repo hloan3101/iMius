@@ -124,4 +124,5 @@
     <string name="signup_failed">Signup failed</string>
     <string name="no_internet">No Internet Connection</string>
     <string name="no_internet_message">Please check your internet connection and than enjoy this app</string>
+    <string name="username_error">Username is invalidate!</string>
 </resources>

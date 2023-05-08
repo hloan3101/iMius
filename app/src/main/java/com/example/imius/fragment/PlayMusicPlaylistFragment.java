@@ -57,6 +57,8 @@ public class PlayMusicPlaylistFragment extends Fragment {
         if (PlayMusicActivity.songLibraryPlaylistArrayList.size() > 0){
             adapterLibrary = new PlaylistPlayMusicLibraryAdapter(getActivity(), PlayMusicActivity.songLibraryPlaylistArrayList);
 
+
+
             binding.fragmentPlayMusicPlaylistRvPlayMusic.setLayoutManager(new LinearLayoutManager(getActivity()));
             binding.fragmentPlayMusicPlaylistRvPlayMusic.setAdapter(adapterLibrary);
         }
