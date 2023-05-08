@@ -24,6 +24,8 @@ import com.example.imius.model.User;
 import com.example.imius.network.AppUtil;
 import com.example.imius.viewmodel.UserViewModel;
 
+import java.util.regex.Pattern;
+
 import io.github.muddz.styleabletoast.StyleableToast;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -103,6 +105,12 @@ public class LoginActivity extends AppCompatActivity {
         if (binding.activityLoginEtUsername.getText().toString().trim().isEmpty()){
             binding.activityLoginTilUsername.setError(getResources().getString(R.string.require));
             check = false;
+        }else {
+            if (!Pattern.matches(getString(R.string.special_character),
+                    binding.activityLoginEtUsername.getText().toString().trim())){
+                binding.activityLoginTilUsername.setError(getResources().getString(R.string.username_special_character));
+                check = false;
+            }
         }
 
         if (binding.activityLoginEtPassword.getText().toString().trim().isEmpty()){

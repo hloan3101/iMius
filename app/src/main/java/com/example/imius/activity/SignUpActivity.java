@@ -181,15 +181,23 @@ public class SignUpActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(binding.activitySignupEtUsername.getText().toString().trim())){
             binding.activitySignupTilUsername.setError(getResources().getString(R.string.require));
             check = false;
+        }else {
+            if (!Pattern.matches(getString(R.string.special_character),
+                    binding.activitySignupEtUsername.getText().toString().trim())){
+                binding.activitySignupTilUsername.setError(getResources().getString(R.string.username_special_character));
+                check = false;
+            }
         }
 
         if (TextUtils.isEmpty(binding.activitySignupEtEmail.getText().toString().trim())){
             binding.activitySignupTilEmail.setError(getResources().getString(R.string.require));
             check = false;
-       } else if (!Pattern.matches(getResources().getString(R.string.email_pattern),
-                binding.activitySignupEtEmail.getText().toString().trim())) {
-            binding.activitySignupTilEmail.setError(getResources().getString(R.string.format_error));
-            check = false;
+        }else {
+            if (!Pattern.matches(getResources().getString(R.string.email_pattern),
+                    binding.activitySignupEtEmail.getText().toString().trim())) {
+                binding.activitySignupTilEmail.setError(getResources().getString(R.string.format_error));
+                check = false;
+            }
         }
 
         if (TextUtils.isEmpty(binding.activitySignupEtPassword.getText().toString().trim())){
@@ -211,9 +219,14 @@ public class SignUpActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(binding.activitySignupEtConfirmCode.getText().toString().trim())){
             binding.activitySignupTilConfirmCode.setError(getResources().getString(R.string.require));
             check = false;
-        }else{
-            if(Integer.parseInt(binding.activitySignupEtConfirmCode.getText().toString().trim()) != code) {
-                binding.activitySignupTilConfirmCode.setError(getResources().getString(R.string.code_error));
+        }else {
+            try {
+                if(Integer.parseInt(binding.activitySignupEtConfirmCode.getText().toString().trim()) != code) {
+                    binding.activitySignupTilConfirmCode.setError(getResources().getString(R.string.code_error));
+                    check = false;
+                }
+            }catch (Exception e){
+                binding.activitySignupTilConfirmCode.setError(getResources().getString(R.string.number_error));
                 check = false;
             }
         }

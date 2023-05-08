@@ -66,6 +66,10 @@
     <string name="format_error">Format Error</string>
     <string name="email_pattern" translatable="false">[a-zA-Z][\\w-]+@([\\w]+\\.[\\w]+|[\\w]+\\.[\\w]{2,}\\.[\\w]{2,})
     </string>
+    <string name="special_character" translatable="false">[a-zA-Z]+</string>
+    <string name="is_number" translatable="false">[\\d+]</string>
+    <string name="number_error">The code is the number</string>
+    <string name="username_special_character">The username cannot contain special characters</string>
     <string name="email_server" translatable="false">imiusg@gmail.com</string>
     <string name="password_email_server" translatable="false">cwoaqfrumgvhqnsz</string>
 
