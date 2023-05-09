@@ -19,8 +19,8 @@
     <string name="new_release">Mới phát hành</string>
     <string name="theme">Chủ đề</string>
     <string name="charts">Bảng xếp hạng</string>
-    <string name="enter_name_for_your_playlist">" Tên danh sách nghe"</string>
-    <string name="enter_name_of_playlist">Nhập tên danh sách nghe</string>
+    <string name="enter_name_for_your_playlist">"Tên danh sách nghe"</string>
+    <string name="enter_name_of_playlist">Nhập tên</string>
     <string name="enter">Tạo</string>
     <string name="library">Thư viện</string>
     <string name="search_in_library">Nhập tên bài hát....</string>
@@ -48,7 +48,7 @@
     <string name="code_error">Mã code không đúng</string>
     <string name="email_format_error">Email không đúng định dạng</string>
     <string name="username_special_character">Tên tài khoản không chứa ký tự đặc biệt</string>
-    <string name="library_playlist_name_exits">Tên danh sách phát đã tồn tại!</string>
+    <string name="library_playlist_name_exits">Tên danh sách đã tồn tại!</string>
     <string name="library_playlist_insert_success">Thêm danh sách phát thành công!</string>
     <string name="library_playlist_insert_failed">Thêm danh sách phát không thành công!</string>
     <string name="library_playlist_delete_success">Xóa danh sách phát thành công!</string>
@@ -58,7 +58,7 @@
     <string name="dialog_delete_message">Bạn có chắc chắn muốn xóa?</string>
     <string name="yes_dialog">Có</string>
     <string name="no_dialog">Không</string>
-    <string name="enter_new_name_for_your_playlist">Tên mới cho danh sách phát</string>
+    <string name="enter_new_name_for_your_playlist">Tên mới cho danh sách</string>
     <string name="delete_success">Xóa bài hát thành công!</string>
     <string name="library_playlist_update_success">Cập nhật danh sách phát thành công!</string>
     <string name="library_playlist_update_failed">Cập nhật danh sách phát không thành công!</string>
@@ -90,4 +90,5 @@
     <string name="username_error">Sai tên tài khoản!</string>
     <string name="number_error">Mã xác nhận là số</string>
     <string name="update_name_playlist">Cập nhật</string>
+    <string name="ok">Đóng</string>
 </resources>
