@@ -65,7 +65,7 @@ public class DialogAddToLibraryPlaylist extends DialogFragment {
             binding.dialogAddToLibraryPlaylistTvContent.setText(getString(R.string.enter_new_name_for_your_playlist));
             binding.dialogAddToLibraryPlaylistEtPlaylistName.setText(getArguments()
                     .getString(getString(R.string.nameLibraryPlaylist)));
-
+            binding.dialogAddToLibraryPlaylistBtnEnter.setText(getString(R.string.update_name_playlist));
         }
 
         binding.dialogAddToLibraryPlaylistIvClose.setOnClickListener(new View.OnClickListener() {

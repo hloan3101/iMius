@@ -89,5 +89,4 @@
     <string name="no_internet_message">Vui lòng kiểm tra kết nối Internet của bạn và thử lại lần nữa</string>
     <string name="username_error">Sai tên tài khoản!</string>
     <string name="number_error">Mã xác nhận là số</string>
-    <string name="email_not_match">Email không trùng khớp!!</string>
 </resources>
