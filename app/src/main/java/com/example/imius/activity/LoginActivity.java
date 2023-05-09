@@ -170,8 +170,8 @@ public class LoginActivity extends AppCompatActivity {
 
                         progressDialog.dismiss();
 
-                        binding.activityLoginTilUsername.setError("");
-                        binding.activityLoginTilPassword.setError("");
+                        binding.activityLoginTilUsername.setError(" ");
+                        binding.activityLoginTilPassword.setError(" ");
 
                     }
                 }
