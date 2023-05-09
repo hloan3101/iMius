@@ -96,6 +96,7 @@
     <string name="check_update" translatable="false">checkUpdate</string>
     <string name="nameLibraryPlaylist" translatable="false">nameLibraryPlaylist</string>
     <string name="update" translatable="false">update</string>
+    <string name="update_name_playlist">Update</string>
     <string name="insert" translatable="false">insert</string>
 
     <string name="status_player" translatable="false">status_player</string>
