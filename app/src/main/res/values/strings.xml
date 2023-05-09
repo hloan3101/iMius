@@ -64,6 +64,7 @@
     <string name="code_error">Code error</string>
     <string name="email_format_error">Email invalidate</string>
     <string name="format_error">Format Error</string>
+    <string name="update_name_playlist">Update</string>
     <string name="email_pattern" translatable="false">[a-zA-Z][\\w-]+@([\\w]+\\.[\\w]+|[\\w]+\\.[\\w]{2,}\\.[\\w]{2,})
     </string>
     <string name="special_character" translatable="false">[a-zA-Z]+</string>

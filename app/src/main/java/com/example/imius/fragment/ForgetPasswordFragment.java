@@ -117,7 +117,7 @@ public class ForgetPasswordFragment extends Fragment{
 
                         DataLocalManager.setPassword(user.getPassword());
 
-           //                 callProfileFragment();
+                        //                 callProfileFragment();
 
                         Intent intent = new Intent(getActivity(), LoginActivity.class);
                         startActivity(intent);
