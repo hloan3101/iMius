@@ -43,7 +43,7 @@
         android:visibility="gone"
         android:text="@string/cant_find"
         android:gravity="center"
-        android:textSize="27sp"
+        android:textSize="24sp"
         android:textColor="@color/black"/>
 
 </RelativeLayout>

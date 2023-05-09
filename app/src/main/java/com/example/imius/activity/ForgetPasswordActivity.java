@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.imius.constants.Constants;
 import com.example.imius.data.DataLocalManager;
 import com.example.imius.databinding.ActivityForgetPasswordBinding;
 
@@ -18,6 +20,7 @@ import com.example.imius.R;
 import com.example.imius.fragment.ChangePasswordFragment;
 import com.example.imius.fragment.ForgetPasswordFragment;
 import com.example.imius.fragment.NoInternetDialog;
+import com.example.imius.model.BaseResponse;
 import com.example.imius.network.AppUtil;
 import com.example.imius.viewmodel.UserViewModel;
 
@@ -35,14 +38,16 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import io.github.muddz.styleabletoast.StyleableToast;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class ForgetPasswordActivity extends AppCompatActivity{
 
     private ActivityForgetPasswordBinding binding;
     private UserViewModel viewModel;
     private int code;
-
-    private boolean check = true;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,73 +73,30 @@ public class ForgetPasswordActivity extends AppCompatActivity{
             }
         });
 
-        binding.activityForgetPasswordBtnGetCode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (TextUtils.isEmpty(binding.activityForgetPasswordEtEmail.getText().toString().trim())){
-                    binding.activityForgetPasswordTilEmail.setError(getResources().getString(R.string.require));
-                    return;
-                } else if (!Pattern.matches(getResources().getString(R.string.email_pattern),
-                        binding.activityForgetPasswordEtEmail.getText().toString().trim())) {
-                    binding.activityForgetPasswordTilEmail.setError(getResources().getString(R.string.format_error));
-                    return;
-                }
-
-
-                if (check){
-                    Random random = new Random();
-                    code = random.nextInt(8999)+1000;
-
-                    String stringHost = "smtp.gmail.com";
-
-                    Properties properties = System.getProperties();
-                    properties.put("mail.smtp.host", stringHost);
-                    properties.put("mail.smtp.port", "465");
-                    properties.put("mail.smtp.ssl.enable", "true");
-                    properties.put("mail.smtp.auth", "true");
-
-                    javax.mail.Session session = Session.getInstance(properties, new Authenticator() {
-                        @Override
-                        protected PasswordAuthentication getPasswordAuthentication() {
-                            return new PasswordAuthentication("imiusg@gmail.com",
-                                    getResources().getString(R.string.password_email_server));
-                        }
-                    });
-
-                    MimeMessage mimeMessage = new MimeMessage(session);
-
-                    try {
-                        mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(
-                                binding.activityForgetPasswordEtEmail.getText().toString().trim()));
-
-//                        mimeMessage.setSubject("IMIUS CODE VERIFICATION");
-//                        mimeMessage.setText("Hello, "+ "\n\n" +
-//                                "iMius sent you an OTP for email verification: " +  code + "\n\n" +
-//                                "Thank you!");
-
-                        mimeMessage.setSubject(getResources().getString(R.string.subject_email));
-                        mimeMessage.setText(getResources().getString(R.string.hello_email)+ "\n\n" +
-                                getResources().getString(R.string.content_email) +  code + "\n\n" +
-                                getResources().getString(R.string.end_email));
-
-                        Thread thread = new Thread(new Runnable() {
+        binding.activityForgetPasswordBtnGetCode.setOnClickListener(v -> {
+            resetError();
+            if (checkEmailForm()){
+                viewModel.checkEmail(binding.activityForgetPasswordEtEmail.getText().toString().trim())
+                        .enqueue(new Callback<BaseResponse>() {
                             @Override
-                            public void run() {
-                                try {
-                                    //Transport.send(mimeMessage);
-                                    javax.mail.Transport.send(mimeMessage);
-                                } catch (MessagingException e) {
-                                    throw new RuntimeException(e);
+                            public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+                                BaseResponse baseResponse = response.body();
+                                if (baseResponse != null){
+                                    if(baseResponse.getIsSuccess().equals(Constants.failed)){
+                                        binding.activityForgetPasswordTilEmail.setError(getResources().getString(R.string.email_not_match));
+                                    }else {
+                                        sendEmail();
+                                    }
                                 }
                             }
-                        });
 
-                        thread.start();
-                    } catch (MessagingException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
+                            @Override
+                            public void onFailure(Call<BaseResponse> call, Throwable t) {
+
+                            }
+                        });
             }
+
         });
 
 
@@ -147,6 +109,60 @@ public class ForgetPasswordActivity extends AppCompatActivity{
         });
     }
 
+    private void sendEmail(){
+        resetError();
+        Random random = new Random();
+        code = random.nextInt(8999)+1000;
+
+        String stringHost = "smtp.gmail.com";
+
+        Properties properties = System.getProperties();
+        properties.put("mail.smtp.host", stringHost);
+        properties.put("mail.smtp.port", "465");
+        properties.put("mail.smtp.ssl.enable", "true");
+        properties.put("mail.smtp.auth", "true");
+
+        javax.mail.Session session = Session.getInstance(properties, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("imiusg@gmail.com",
+                        getResources().getString(R.string.password_email_server));
+            }
+        });
+
+        MimeMessage mimeMessage = new MimeMessage(session);
+
+        try {
+            mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(
+                    binding.activityForgetPasswordEtEmail.getText().toString().trim()));
+
+            mimeMessage.setSubject(getResources().getString(R.string.subject_email));
+            mimeMessage.setText(getResources().getString(R.string.hello_email)+ "\n\n" +
+                    getResources().getString(R.string.content_email) +  code + "\n\n" +
+                    getResources().getString(R.string.end_email));
+
+            Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        //Transport.send(mimeMessage);
+                        javax.mail.Transport.send(mimeMessage);
+                    } catch (MessagingException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            });
+
+            thread.start();
+
+            StyleableToast.makeText(ForgetPasswordActivity.this,
+                    getResources().getString(R.string.check_code),
+                    Toast.LENGTH_LONG, R.style.myToast).show();
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private boolean checkInput(){
         resetError();
 
@@ -157,18 +173,44 @@ public class ForgetPasswordActivity extends AppCompatActivity{
                 binding.activityForgetPasswordEtEmail.getText().toString().trim())) {
             binding.activityForgetPasswordTilEmail.setError(getResources().getString(R.string.format_error));
             return false;
+        } else if (binding.activityForgetPasswordEtEmail.getText().toString().trim().equals(DataLocalManager.getEmail())){
+            binding.activityForgetPasswordTilEmail.setError(getResources().getString(R.string.email_not_match));
         }
 
         if (TextUtils.isEmpty(binding.activityForgetPasswordEtConfirmCode.getText().toString().trim())){
             binding.activityForgetPasswordTilConfirmCode.setError(getResources().getString(R.string.require));
             return false;
         }else{
-            if(Integer.parseInt(binding.activityForgetPasswordEtConfirmCode.getText().toString().trim()) != code) {
-                binding.activityForgetPasswordTilConfirmCode.setError(getResources().getString(R.string.code_error));
+            try {
+                if(Integer.parseInt(binding.activityForgetPasswordEtConfirmCode.getText().toString().trim()) != code) {
+                    binding.activityForgetPasswordTilConfirmCode.setError(getResources().getString(R.string.code_error));
+                    return false;
+                }
+            }catch (Exception e){
+                binding.activityForgetPasswordTilConfirmCode.setError(getResources().getString(R.string.number_error));
                 return false;
             }
         }
         return true;
+    }
+
+    private boolean checkEmailForm(){
+        if (TextUtils.isEmpty(binding.activityForgetPasswordEtEmail.getText().toString().trim())){
+            binding.activityForgetPasswordTilEmail.setError(getResources().getString(R.string.require));
+            return false;
+        } else if (!Pattern.matches(getResources().getString(R.string.email_pattern),
+                binding.activityForgetPasswordEtEmail.getText().toString().trim())) {
+            binding.activityForgetPasswordTilEmail.setError(getResources().getString(R.string.format_error));
+            return false;
+        }
+        return true;
+    }
+
+    private boolean checkEmail(){
+
+
+        return true;
+
     }
 
     private void resetError(){
@@ -196,10 +238,5 @@ public class ForgetPasswordActivity extends AppCompatActivity{
         }
     }
 
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        loadData();
-//    }
 
 }

@@ -3,6 +3,7 @@ package com.example.imius.fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,20 +61,44 @@ public class ForgetPasswordFragment extends Fragment{
         binding.fragmentForgetPasswordBtnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (binding.fragmentForgetPasswordEtConfirmNewPassword.getText().toString()
-                        .equals(binding.fragmentForgetPasswordEtNewPassword.getText().toString())){
-
-                    forgetPassword();
-                } else {
-                    binding.fragmentForgetPasswordTilConfirmNewPassword.setError("Password is not match !!");
-                }
+                forgetPassword();
             }
         });
 
         return view;
     }
 
+    private boolean checkInput(){
+        resetError();
+        if (TextUtils.isEmpty(binding.fragmentForgetPasswordEtNewPassword.getText().toString().trim())){
+            binding.fragmentForgetPasswordTilNewPassword.setError(getResources().getString(R.string.require));
+            return false;
+        }
+
+        if (TextUtils.isEmpty(binding.fragmentForgetPasswordEtConfirmNewPassword.getText().toString().trim())){
+            binding.fragmentForgetPasswordTilConfirmNewPassword.setError(getResources().getString(R.string.require));
+            return false;
+        } else {
+            if (! binding.fragmentForgetPasswordEtConfirmNewPassword.getText().toString().trim().equals(binding.fragmentForgetPasswordEtNewPassword.getText().toString().trim())){
+                binding.fragmentForgetPasswordTilConfirmNewPassword.setError(getResources().getString(R.string.compare_password_require));
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private void resetError(){
+        binding.fragmentForgetPasswordTilNewPassword.setError(null);
+        binding.fragmentForgetPasswordTilConfirmNewPassword.setError(null);
+    }
+
     private void forgetPassword(){
+
+        if (!checkInput()){
+            return;
+        }
+
         final ProgressDialog progressDialog = new ProgressDialog(getContext());
         progressDialog.setTitle(getResources().getString(R.string.progressbar_tittle));
         progressDialog.setMessage(getResources().getString(R.string.progressbar_login));

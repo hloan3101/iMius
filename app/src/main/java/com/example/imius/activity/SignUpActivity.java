@@ -74,27 +74,27 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                    if (checkEmail()){
-                        userViewModel.checkEmail(binding.activitySignupEtEmail.getText().toString().trim()).enqueue(new Callback<BaseResponse>() {
-                            @Override
-                            public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
-                                BaseResponse baseResponse = response.body();
-                                if (baseResponse != null){
-                                    if(baseResponse.getIsSuccess().equals(Constants.failed)){
-                                        sendEmail();
-                                    }else {
-                                        binding.activitySignupTilEmail.setError(getResources().getString(R.string.email_exist));
-                                    }
+                if (checkEmail()){
+                    userViewModel.checkEmail(binding.activitySignupEtEmail.getText().toString().trim()).enqueue(new Callback<BaseResponse>() {
+                        @Override
+                        public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+                            BaseResponse baseResponse = response.body();
+                            if (baseResponse != null){
+                                if(baseResponse.getIsSuccess().equals(Constants.failed)){
+                                    sendEmail();
+                                }else {
+                                    binding.activitySignupTilEmail.setError(getResources().getString(R.string.email_exist));
                                 }
                             }
+                        }
 
-                            @Override
-                            public void onFailure(Call<BaseResponse> call, Throwable t) {
+                        @Override
+                        public void onFailure(Call<BaseResponse> call, Throwable t) {
 
-                            }
-                        });
-                    }
+                        }
+                    });
                 }
+            }
         });
 
         binding.activitySignupTvBack.setOnClickListener(new View.OnClickListener() {
@@ -248,24 +248,24 @@ public class SignUpActivity extends AppCompatActivity {
 
         userViewModel.checkUsername(binding.activitySignupEtUsername.getText().toString().trim())
                 .enqueue(new Callback<BaseResponse>() {
-            @Override
-            public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
-                if (response.body().getIsSuccess().equals(Constants.successfully)){
-                    StyleableToast.makeText(SignUpActivity.this,
-                            getResources().getString(R.string.username_exist),
-                            Toast.LENGTH_LONG, R.style.myToast).show();
-                    binding.activitySignupTilUsername.setError(getString(R.string.username_exist));
-                    check = false;
-                }else {
-                    check = true;
-                }
-            }
+                    @Override
+                    public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+                        if (response.body().getIsSuccess().equals(Constants.successfully)){
+                            StyleableToast.makeText(SignUpActivity.this,
+                                    getResources().getString(R.string.username_exist),
+                                    Toast.LENGTH_LONG, R.style.myToast).show();
+                            binding.activitySignupTilUsername.setError(getString(R.string.username_exist));
+                            check = false;
+                        }else {
+                            check = true;
+                        }
+                    }
 
-            @Override
-            public void onFailure(Call<BaseResponse> call, Throwable t) {
+                    @Override
+                    public void onFailure(Call<BaseResponse> call, Throwable t) {
 
-            }
-        });
+                    }
+                });
 
         return check;
     }
