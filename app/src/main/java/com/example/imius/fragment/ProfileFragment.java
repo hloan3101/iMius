@@ -149,6 +149,7 @@ public class ProfileFragment extends Fragment{
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Intent intent = new Intent(getContext(), LoginActivity.class);
                         DataLocalManager.clearDataLocal();
+                        DataLocalManager.setFirstInstall(true);
                         DataLocalManager.setCheckFromLogout(true);
                         getActivity().finish();
                         startActivity(intent);
